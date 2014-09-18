@@ -1,0 +1,26 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Report Builder</title>
+
+    <script src="scripts/lib/jquery.js"></script>
+    <script src="scripts/lib/underscore.js"></script>
+    <script src="scripts/lib/backbone.js"></script>
+    <script>
+        $.getJSON("../api/report/getall", function (data) {
+            var items = [];
+            $.each(data, function (key, val) {
+                items.push("<li id='" + val.ReportId + "'>" + val.Title + " (id=" + val.ReportId + ")</li>");
+            });
+
+            $("<ul/>", {
+                "class": "my-new-list",
+                html: items.join("")
+            }).appendTo("body");
+        });
+    </script>
+</head>
+<body>
+    Here comes stuff from JSON: <div style="display: inline-block; color: green; ">// enjoy</div>
+</body>
+</html>
