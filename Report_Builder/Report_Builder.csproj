@@ -113,6 +113,11 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="FrontEnd\scripts\collections\" />
+    <Folder Include="FrontEnd\scripts\components\" />
+    <Folder Include="FrontEnd\scripts\models\" />
+    <Folder Include="FrontEnd\scripts\routers\" />
+    <Folder Include="FrontEnd\scripts\views\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -148,6 +153,10 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="FrontEnd\index.html" />
+    <Content Include="FrontEnd\scripts\lib\backbone.js" />
+    <Content Include="FrontEnd\scripts\lib\jquery.js" />
+    <Content Include="FrontEnd\scripts\lib\underscore.js" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

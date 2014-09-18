@@ -7,6 +7,7 @@
     <script src="scripts/lib/underscore.js"></script>
     <script src="scripts/lib/backbone.js"></script>
     <script>
+        // TODO: Remove after implementing backbone.js
         $.getJSON("../api/report/getall", function (data) {
             var items = [];
             $.each(data, function (key, val) {
