@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Report Builder</title>
@@ -8,20 +12,19 @@
     <script src="scripts/lib/backbone.js"></script>
     <script>
         // TODO: Remove after implementing backbone.js
-        $.getJSON("../api/report/getall", function (data) {
+        $.getJSON("../api/report/getall", function (json) {
+            console.log(json.data);
             var items = [];
-            $.each(data, function (key, val) {
-                items.push("<li id='" + val.ReportId + "'>" + val.Title + " (id=" + val.ReportId + ")</li>");
+            $.each(json.data, function (key, val) {
+                items.push("<li id='" + val.ReportId + "'>" + val.Title + "</li>");
             });
 
-            $("<ul/>", {
-                "class": "my-new-list",
-                html: items.join("")
-            }).appendTo("body");
+            $("#testlist").append(items);
         });
     </script>
 </head>
 <body>
     Here comes stuff from JSON: <div style="display: inline-block; color: green; ">// enjoy</div>
+    <ul id="testlist"></ul>
 </body>
 </html>

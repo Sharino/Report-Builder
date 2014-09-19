@@ -2,12 +2,15 @@
 using System.Linq;
 using System.Web.Http;
 using Report_Builder.Models;
+using System.Net.Http;
+using System.Net;
+
 
 namespace Report_Builder.Controllers
 {
     public class ReportController : ApiController
     {
-        public IEnumerable<Report> GetAll()
+        public HttpResponseMessage GetAll()
         {
             var TemporaryList = new List<Report>()
             {
@@ -15,7 +18,7 @@ namespace Report_Builder.Controllers
                 new Report(){ReportId = 2, Title = "GetAll : Second Report"}
             };
 
-            return TemporaryList;
+			return Request.CreateResponse(HttpStatusCode.OK, new { data = TemporaryList });
         }
     }
 }

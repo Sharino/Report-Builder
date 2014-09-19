@@ -6,13 +6,13 @@ using System.Web.Mvc;
 
 namespace Report_Builder.Controllers
 {
-    public class HomeController : Controller
+    public class UIController : Controller
     {
+        //
+        // GET: /UI/
         public ActionResult Index()
         {
-            ViewBag.Title = "Home Page";
-
             return View();
         }
-    }
+	}
 }
