@@ -7,7 +7,7 @@ namespace Report_Builder.Models
 {
     public class Report
     {
-        public int ReportId { get; set; }
-        public string Title { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
     }
 }

@@ -7,12 +7,27 @@
 <head>
     <title>Report Builder</title>
 
+    
+
+   
+</head>
+<body>
+    <!--Here comes stuff from JSON: <div style="display: inline-block; color: green; ">// enjoy</div>-->
+    <div id="reports-container">
+        <ul id="testlist"></ul>
+    </div>
+    
+    <div id="app">
+    </div>
+
     <script src="../Scripts/Client/lib/jquery.js"></script>
     <script src="../Scripts/Client/lib/underscore.js"></script>
     <script src="../Scripts/Client/lib/backbone.js"></script>
+    <script src="../Scripts/Client/app.js"></script>
+    
     <script>
         // TODO: Remove after implementing backbone.js
-        $.getJSON("../api/report/getall", function (json) {
+        /*$.getJSON("../api/report/getall", function (json) {
             console.log(json.data);
             var items = [];
             $.each(json.data, function (key, val) {
@@ -20,11 +35,14 @@
             });
 
             $("#testlist").append(items);
-        });
+        });*/
     </script>
-</head>
-<body>
-    Here comes stuff from JSON: <div style="display: inline-block; color: green; ">// enjoy</div>
-    <ul id="testlist"></ul>
+
+    <script id="reportTemplate" type="text/template">
+        <ul>
+            <li><%= title %></li>
+            <li><%= id %></li>
+        </ul>
+    </script>
 </body>
 </html>

@@ -14,11 +14,11 @@ namespace Report_Builder.Controllers
         {
             var TemporaryList = new List<Report>()
             {
-                new Report(){ReportId = 1, Title = "GetAll : First Report"},
-                new Report(){ReportId = 2, Title = "GetAll : Second Report"}
+                new Report(){id = 1, title = "GetAll :yufukfkuf First Report"},
+                new Report(){id = 2, title = "GetAll : Second Report"}
             };
 
-			return Request.CreateResponse(HttpStatusCode.OK, new { data = TemporaryList });
+			return Request.CreateResponse(HttpStatusCode.OK, TemporaryList );
         }
     }
 }
