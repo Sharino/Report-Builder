@@ -1,4 +1,4 @@
-﻿(function ($) {
+﻿/*(function ($) {
 
     // report.js
     var Report = Backbone.Model.extend({
@@ -17,7 +17,7 @@
     });
 
     var Reports = new ReportsList;
-
+    */
     /*
     // reportView.js
     var ReportView = Backbone.View.extend({
@@ -40,7 +40,7 @@
     });
     var App = new AppView;
     */
-    
+   /* 
     Reports.fetch({
         success: function () {
             console.log(Reports.toJSON());
@@ -49,3 +49,39 @@
 
 })(jQuery);
 
+*/
+
+define('App', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'Router',
+    'bootstrap'
+], function ($, _, Backbone) {
+    function initialize() {
+       // var app = new Router();
+        Backbone.history.start();
+    }
+    // TODO: error handling with window.onerror
+    // http://www.slideshare.net/nzakas/enterprise-javascript-error-handling-presentation
+    return {
+        initialize: initialize
+    };
+});
+
+
+var app = initialize();
+/*
+Reports.fetch({
+    success: function () {
+        console.log(Reports.toJSON());
+    }
+});
+*/
+/*
+require(['components/dataService'], function (dataService) {
+    $(document).ready(function () {
+        dataService.getData();
+    });
+});
+*/
