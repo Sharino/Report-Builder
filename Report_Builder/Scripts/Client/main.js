@@ -2,15 +2,15 @@
     //By default load any module IDs from scripts/lib
     baseUrl: 'Scripts/lib',
     paths: {
-        'jquery' : 'lib/jquery',
-        'underscore' : 'lib/underscore',
-        'backbone' : 'lib/backbone',
-        'bootstrap' : 'lib/bootstrap',
-        'App' : 'app',
+        'jquery': '../../Scripts/Client/lib/jquery',
+        'underscore': '../../Scripts/Client/lib/underscore',
+        'backbone': '../../Scripts/Client/lib/backbone',
+        'bootstrap': '../../Scripts/Client/lib/bootstrap',
+        'App': '../../Scripts/Client/app',
         //'Router' : 'router',
-        'ReportModel' : 'models/report',
-        'ReportCollection' : 'collections/reportCollection',
-        'ReportView' : 'views/reportView',
+        'ReportModel': '../../Scripts/Client/models/report',
+        'ReportCollection': '../../Scripts/Client/collections/reportCollection',
+        'ReportView': '../../Scripts/Client/views/reportView',
     },
     shim: {
         'backbone': {
@@ -28,9 +28,10 @@
 });
 
 
-require(['App'], function (App, Client) {
+require(['App', 'ReportCollection'], function (App, ReportCollection) {
     App.initialize();
 
+    console.log("lol");
 
     var Reports = new ReportCollection;
 

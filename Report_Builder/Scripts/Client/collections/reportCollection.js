@@ -3,16 +3,13 @@
     'underscore',
     'backbone',
     'ReportModel'
-], function ($, _, Backbone, Client) {
-    var ReportList = Backbone.Collection.extend({
-        model: ReportModel,
-        localStorage: new Backbone.LocalStorage("reports-backbone"),
+], function ($, _, Backbone, Report) {
+    var ReportCollection;
 
-        nextOrder: function () {
-            if (!this.length) return 1;
-            return this.last().get('order') + 1;
-        },
-
-        comparator: 'order'
+    ReportCollection = Backbone.Collection.extend({
+        model: Report,
+        url: "/api/report/getall"
     });
+
+    return ReportCollection;
 });

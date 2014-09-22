@@ -55,12 +55,12 @@ define('App', [
     'jquery',
     'underscore',
     'backbone',
-    'Router',
     'bootstrap'
 ], function ($, _, Backbone) {
     function initialize() {
        // var app = new Router();
         Backbone.history.start();
+        console.log("app");
     }
     // TODO: error handling with window.onerror
     // http://www.slideshare.net/nzakas/enterprise-javascript-error-handling-presentation
@@ -69,9 +69,9 @@ define('App', [
     };
 });
 
-
-var app = initialize();
 /*
+var app = initialize();
+
 Reports.fetch({
     success: function () {
         console.log(Reports.toJSON());
