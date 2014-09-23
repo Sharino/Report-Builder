@@ -149,7 +149,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Scripts\Client\app.js" />
+    <Content Include="Scripts\Client\models\app.js" />
     <Content Include="Scripts\Client\collections\metricCollection.js" />
     <Content Include="Scripts\Client\collections\reportCollection.js" />
     <Content Include="Scripts\Client\lib\adform-checkbox.js" />

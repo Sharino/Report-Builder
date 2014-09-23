@@ -4,6 +4,7 @@ using System.Web.Http;
 using Report_Builder.Models;
 using System.Net.Http;
 using System.Net;
+using Newtonsoft.Json.Serialization;
 
 
 namespace Report_Builder.Controllers
@@ -20,5 +21,11 @@ namespace Report_Builder.Controllers
 
 			return Request.CreateResponse(HttpStatusCode.OK, TemporaryList );
         }
+ 
+		[HttpPut]
+		public string Add (Report report)
+		{
+			return " " + report.title;
+		}
     }
 }

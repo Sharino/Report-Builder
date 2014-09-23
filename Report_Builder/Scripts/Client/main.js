@@ -6,9 +6,9 @@
         'underscore': '../../Scripts/Client/lib/underscore',
         'backbone': '../../Scripts/Client/lib/backbone',
         'bootstrap': '../../Scripts/Client/lib/bootstrap',
-        'App': '../../Scripts/Client/app',
+        'App': '../../Scripts/Client/models/app',
         //'Router' : 'router',
-        'ReportModel': '../../Scripts/Client/models/report',
+        'Report': '../../Scripts/Client/models/report',
         'ReportCollection': '../../Scripts/Client/collections/reportCollection',
         'ReportView': '../../Scripts/Client/views/reportView',
     },
@@ -28,17 +28,34 @@
 });
 
 
-require(['App', 'ReportCollection'], function (App, ReportCollection) {
+require(['App', 'ReportCollection', 'Report'], function (App, ReportCollection, Report) {
     App.initialize();
-
-    console.log("lol");
 
     var Reports = new ReportCollection;
 
     Reports.fetch({
-        success: function () {
-            console.log(Reports.toJSON());
+        success: function (model, response) {
+            //console.log(Reports.toJSON());
+            console.log("fetch - success", model, response);
+        },
+        error: function (model, response) {
+            console.log("fetch - error", model, response);
         }
     });
+
+    var a = new Report;
+    a.set({"title":"lol", "id":"3"});
+    //console.log(a.toJSON());
+
+    a.save({}, {
+        success: function (model, response) {
+            console.log("save - success", model, response);
+        },
+        error: function (model, response) {
+            console.log("save - error", model, response);
+        }
+    });
+    
+  
     return Reports;
 });

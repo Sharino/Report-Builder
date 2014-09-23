@@ -2,7 +2,7 @@
     'jquery',
     'underscore',
     'backbone',
-    'ReportModel'
+    'Report'
 ], function ($, _, Backbone, Report) {
     var ReportCollection;
 

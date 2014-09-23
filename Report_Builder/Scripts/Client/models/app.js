@@ -1,4 +1,29 @@
-﻿/*(function ($) {
+﻿define('App', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'bootstrap'
+], function ($, _, Backbone) {
+    function initialize() {
+        // var app = new Router();
+        Backbone.history.start();
+    }
+    // TODO: error handling with window.onerror
+    // http://www.slideshare.net/nzakas/enterprise-javascript-error-handling-presentation
+    return {
+        initialize: initialize
+    };
+});
+
+
+
+
+
+
+
+
+
+/*(function ($) {
 
     // report.js
     var Report = Backbone.Model.extend({
@@ -51,23 +76,7 @@
 
 */
 
-define('App', [
-    'jquery',
-    'underscore',
-    'backbone',
-    'bootstrap'
-], function ($, _, Backbone) {
-    function initialize() {
-       // var app = new Router();
-        Backbone.history.start();
-        console.log("app");
-    }
-    // TODO: error handling with window.onerror
-    // http://www.slideshare.net/nzakas/enterprise-javascript-error-handling-presentation
-    return {
-        initialize: initialize
-    };
-});
+
 
 /*
 var app = initialize();
