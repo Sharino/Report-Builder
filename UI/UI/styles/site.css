@@ -1,0 +1,11 @@
+﻿.sortable li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+div .container {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,12 @@
+C:\Users\User\Desktop\UI\UI\bin\UI.dll.config
+C:\Users\User\Desktop\UI\UI\bin\UI.dll
+C:\Users\User\Desktop\UI\UI\bin\UI.pdb
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.dll
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.pdb
+D:\git\Report-Builder-Front-End\UI\UI\bin\UI.dll.config
+D:\git\Report-Builder-Front-End\UI\UI\bin\UI.dll
+D:\git\Report-Builder-Front-End\UI\UI\bin\UI.pdb
+D:\git\Report-Builder-Front-End\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder-Front-End\UI\UI\obj\Debug\UI.dll
+D:\git\Report-Builder-Front-End\UI\UI\obj\Debug\UI.pdb
