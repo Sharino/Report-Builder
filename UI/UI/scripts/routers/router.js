@@ -14,7 +14,7 @@
         routes: {
             "": "index",
             "create": "create",
-            "create/(:id)": "createById",
+            "create/:id": "createById",
             "list": "list",
 
 

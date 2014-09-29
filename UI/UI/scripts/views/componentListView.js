@@ -27,7 +27,7 @@
             var id = $(e.currentTarget).attr("id");
             //var item = this.collection.get(id);
             var routerUrl = "create/".concat(id);
-            Backbone.history.navigate(routerUrl);
+            Backbone.history.navigate(routerUrl, true, true);
         }
 
     });

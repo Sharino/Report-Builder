@@ -46,6 +46,7 @@
             console.log(this.model.toJSON());
 
             this.model.save();
+            Backbone.history.navigate("list", true, true);
             return false;
         },
 
