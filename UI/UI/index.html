@@ -257,7 +257,6 @@
 
     <script type="text/template" id="component-template">
         <div class="form-horizontal well">
-            <h1><%= data.viewTitle %></h1>
             <div class="group-label">
                 <label>General information</label>
                 <hr />
@@ -299,11 +298,24 @@
     </script>
 
     <script type="text/template" id="component-list-template">
-        <ul class="component-listView">
-            <% _.each(Components, function(model) { %>
-                <li id="component-list-item-<%= model.Id %>"><%= model.Title %></li>
-            <% }); %>
-        </ul>
+        <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                </tr>
+            </thead>
+            <tbody>                    
+                <% _.each(Components, function(model) { %>
+                    <tr class="component-list-item" id="<%= model.Id %>">
+                        <td><%= model.Id %></td>
+                        <td><%= model.Title %></td>
+                        <td><%= model.Type %></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
     </script>
 
     

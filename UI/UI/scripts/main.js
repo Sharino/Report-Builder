@@ -50,14 +50,6 @@ require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentL
 
     App.initialize();
 
-    
-
-
-
-
-
-
-
 
     /*var newReport = new Report({ Title: "The new title" });
     newReport.save({}, {
