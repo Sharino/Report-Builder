@@ -5,12 +5,12 @@
     'Component',
     'ComponentCollection',
     'ComponentView',
-    'ComponentListView'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView) {
+    'ComponentListView',
+    'MenuView'
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView) {
     var Router;
     
     Router = Backbone.Router.extend({
-
         routes: {
             "": "index",
             "create": "create",
@@ -22,11 +22,18 @@
             "search/:query/p:page": "search"   // #search/kiwis/p7
         },
 
+        model: new Component(),
+
         index: function(){
-            $(document.body).append("Index route has been called..");
+            var menu = new MenuView({model: this.model});
+            menu.render();
         },
 
         create: function () {
+            var menu = new MenuView({ model: this.model });
+            menu.render();
+            $("#li1").toggleClass("active");
+
             var tempComponentModel = new Component();
 
             var componentView = new ComponentView({
@@ -36,10 +43,11 @@
             componentView.render();
         },
 
+        list: function () {
+            var menu = new MenuView({ model: this.model });
+            menu.render();
+            $("#li2").toggleClass("active");
 
-
-
-        list: function(){
             var compList = new ComponentCollection;
 
             compList.fetch({
@@ -47,6 +55,7 @@
                     console.log(compList.toJSON());
                     console.log("GET fetch GetAll- success", model, response);
                     var componentListView = new ComponentListView({ collection: compList });
+
                     componentListView.render();
                 },
                 error: function (model, response) {

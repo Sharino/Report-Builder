@@ -80,6 +80,7 @@
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\routers\router.js" />
     <Content Include="scripts\views\componentListView.js" />
+    <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
     <Content Include="styles\qunit.css" />

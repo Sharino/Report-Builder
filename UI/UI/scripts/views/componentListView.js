@@ -6,17 +6,14 @@
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
-        el: $('#component-list-form'),
+        el: $('#screen'),
         template: _.template($("#component-list-template").html()),
 
         initialize: function () {
             this.render;
         },
         render: function () {
-            var tmpl = _.template($("#component-list-template").html(), {});
-
-
-            this.$el.html(tmpl({ "Components": this.collection.toJSON() }));
+            this.$el.html(this.template({ "Components": this.collection.toJSON() }));
             return this;
         }
 

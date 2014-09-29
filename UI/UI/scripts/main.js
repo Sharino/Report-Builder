@@ -17,6 +17,8 @@
         'ComponentCollection': 'scripts/collections/componentCollection',
         'ComponentView': 'scripts/views/componentView',
         'ComponentListView': 'scripts/views/componentListView',
+        'MenuView': 'scripts/views/menuView'
+
     },
     shim: {
         'backbone': {
@@ -43,8 +45,8 @@
 });
 
 
-require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentListView'],
-    function (App, Component, ComponentCollection, ComponentView, ComponentListView) {
+require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView'],
+    function (App, Component, ComponentCollection, ComponentView, ComponentListView, MenuView) {
 
     App.initialize();
 

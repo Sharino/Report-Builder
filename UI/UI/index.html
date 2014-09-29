@@ -6,7 +6,10 @@
     <link href="styles/site.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div id="app"></div>
+    <div id="app">
+        <div id="menu"></div>
+        <div id="screen"></div>
+    </div>
 
     <script data-main="scripts/main" src="scripts/lib/require.js"></script>
 
@@ -245,12 +248,14 @@
         </div>
     </div>
     -->
-    <script type="text/template" id="component-template">
+    <script type="text/template" id="menu-template">
         <ul class="wizard-nav">
-            <li <%= data.activeNew %> ><a href="#">Create new</a></li>
-            <li <%= data.activeList %> ><a href="#">List</a></li>
+            <li id="li1" <%= data.activeNew %> ><a href="#create">Create new</a></li>
+            <li id="li2" <%= data.activeList %> ><a href="#list">List</a></li>
         </ul>
+    </script>
 
+    <script type="text/template" id="component-template">
         <div class="form-horizontal well">
             <h1><%= data.viewTitle %></h1>
             <div class="group-label">
@@ -301,14 +306,7 @@
         </ul>
     </script>
 
-    <div id="menu">
-    </div>
-
-    <div id="new-component-form">
-    </div>
-
-    <div id="component-list-form">
-    </div>
+    
 
     <!-- </script> -->
     <!--

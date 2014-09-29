@@ -6,7 +6,7 @@
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
-        el: $('#new-component-form'),
+        el: $('#screen'),
         template: _.template($("#component-template").html()),
         inputTitle: $('#input').val(),
         inputType: function () {
@@ -39,9 +39,10 @@
                 templVariables["data"]["viewTitle"] = "Edit";
             }
 
-            $("body").append( this.template(templVariables) );
+            /*$("body").append( this.template(templVariables) );
             this.$el.html({ data: this.template });
-            console.log(this.model.toJSON());
+            console.log(this.model.toJSON());*/
+            this.$el.html(this.template({ "data": this.model.toJSON() }));
             return this;
         },
 
