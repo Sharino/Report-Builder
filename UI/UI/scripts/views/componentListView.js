@@ -15,7 +15,8 @@
         render: function () {
             var tmpl = _.template($("#component-list-template").html(), {});
 
-            this.$el.html(tmpl(this.model.toJSON()));
+
+            this.$el.html(tmpl({ "Components": this.collection.toJSON() }));
             return this;
         }
 

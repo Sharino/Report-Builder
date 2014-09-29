@@ -295,7 +295,9 @@
 
     <script type="text/template" id="component-list-template">
         <ul class="component-listView">
-        
+            <% _.each(Components, function(model) { %>
+                <li id="component-list-item-<%= model.Id %>"><%= model.Title %></li>
+            <% }); %>
         </ul>
     </script>
 

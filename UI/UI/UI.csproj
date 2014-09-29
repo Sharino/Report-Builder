@@ -78,6 +78,7 @@
     <Content Include="scripts\models\app.js" />
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
+    <Content Include="scripts\routers\router.js" />
     <Content Include="scripts\views\componentListView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />

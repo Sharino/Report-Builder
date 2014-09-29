@@ -1,15 +1,15 @@
-﻿define('ReportCollection', [
+﻿define('ComponentCollection', [
     'jquery',
     'underscore',
     'backbone',
-    'Report'
-], function ($, _, Backbone, Report) {
-    var ReportCollection;
+    'Component'
+], function ($, _, Backbone, Component) {
+    var ComponentCollection;
 
-    ReportCollection = Backbone.Collection.extend({
-        model: Report,
+    ComponentCollection = Backbone.Collection.extend({
+        model: Component,
         url: "http://37.157.0.42:33895/api/ReportComponent"
     });
 
-    return ReportCollection;
+    return ComponentCollection;
 });

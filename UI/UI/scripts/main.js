@@ -12,7 +12,7 @@
         'adform-checkbox': 'scripts/lib/adform-checkbox',
         'adform-select': 'scripts/lib/adform-select',
         'App': 'scripts/models/app',
-        //'Router' : 'router',
+        'Router' : 'scripts/routers/router',
         'Component': 'scripts/models/component',
         'ComponentCollection': 'scripts/collections/componentCollection',
         'ComponentView': 'scripts/views/componentView',
@@ -43,11 +43,10 @@
 });
 
 
-require(['App', 'ComponentCollection', 'Component', 'ComponentView', 'ComponentListView'],
-    function (App, ComponentCollection, Component, ComponentView, ComponentListView) {
-    App.initialize();
+require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentListView'],
+    function (App, Component, ComponentCollection, ComponentView, ComponentListView) {
 
-    
+    App.initialize();
 
     var tempComponentModel = new Component();
 
@@ -57,10 +56,21 @@ require(['App', 'ComponentCollection', 'Component', 'ComponentView', 'ComponentL
 
     componentView.render();
 
-    var componentListView = new ComponentListView({});
-    componentListView.render();
 
+    var compList = new ComponentCollection;
 
+    compList.fetch({
+        success: function (model, response) {
+            console.log(compList.toJSON());
+            console.log("GET fetch GetAll- success", model, response);
+            var componentListView = new ComponentListView({ collection: compList });
+            componentListView.render();
+        },
+        error: function (model, response) {
+            console.log("GET fetch GetAll - error", model, response);
+        }
+    });
+    
 
 
 

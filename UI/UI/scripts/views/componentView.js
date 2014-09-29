@@ -39,8 +39,8 @@
                 templVariables["data"]["viewTitle"] = "Edit";
             }
 
-            $("body").append(this.template(templVariables));
-            this.$el.html(this.template);
+            $("body").append( this.template(templVariables) );
+            this.$el.html({ data: this.template });
             console.log(this.model.toJSON());
             return this;
         },
