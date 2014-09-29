@@ -48,28 +48,6 @@ require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentL
 
     App.initialize();
 
-    var tempComponentModel = new Component();
-
-    var componentView = new ComponentView({
-        model: tempComponentModel
-    });
-
-    componentView.render();
-
-
-    var compList = new ComponentCollection;
-
-    compList.fetch({
-        success: function (model, response) {
-            console.log(compList.toJSON());
-            console.log("GET fetch GetAll- success", model, response);
-            var componentListView = new ComponentListView({ collection: compList });
-            componentListView.render();
-        },
-        error: function (model, response) {
-            console.log("GET fetch GetAll - error", model, response);
-        }
-    });
     
 
 
