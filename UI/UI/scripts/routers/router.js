@@ -14,6 +14,7 @@
         routes: {
             "": "index",
             "create": "create",
+            "create/(:id)": "createById",
             "list": "list",
 
 
@@ -27,6 +28,29 @@
         index: function(){
             var menu = new MenuView({model: this.model});
             menu.render();
+        },
+
+        createById: function (id) {
+            var menu = new MenuView({ model: this.model });
+            menu.render();
+           // $("#li1").toggleClass("active");
+
+            var tempComponentModel = new Component({ Id: id });
+            tempComponentModel.fetch({
+                success: function (model, response) {
+                    console.log("GET fetch GetAll- success", model, response);
+
+                    var componentView = new ComponentView({
+                        model: tempComponentModel
+                    });
+
+                    componentView.render();
+                },
+                error: function (model, response) {
+                    console.log("GET fetch GetAll - error", model, response);
+                }
+            });
+
         },
 
         create: function () {
