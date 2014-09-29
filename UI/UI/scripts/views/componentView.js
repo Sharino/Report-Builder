@@ -8,16 +8,7 @@
     ComponentView = Backbone.View.extend({
         el: $('#screen'),
         template: _.template($("#component-template").html()),
-        inputTitle: $('#input').val(),
-        inputType: function () {
-            var selected = $("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
-            }
-        },
-
+        
         initialize: function () {
             this.$msg = $('[data-msg=' + this.name + ']');
             this.render;
@@ -48,25 +39,31 @@
 
         events: {
             'click #component-submit': 'submit',
-            'blur': 'validate',
         },
 
         submit: function () {
-            this.model.set({ Title: this.inputTitle, Type: this.inputType });
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
             console.log(this.model.toJSON());
 
-            if (this.model.isNew()) {
-                this.model.save();
+            this.model.save();
+            return false;
+        },
+
+
+
+        inputTitle: function () {
+            return $('#input').val();
+        },
+
+        inputType: function () {
+            var selected = $("input:radio[name=type-options]:checked").val();
+            if (selected != undefined) {
+                return parseInt(selected);
             } else {
-                // TODO: update model
+                return 0;
             }
         },
-        
-        validate: function () {
-            this.model.set({ Title: inputTitle, Type: inputType }, { validate: true });
-            this.$msg.text(this.model.errors[this.name] || '')
-        },
-        
+           
     });
 
     return ComponentView;

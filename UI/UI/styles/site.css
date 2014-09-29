@@ -4,8 +4,8 @@
     padding-right: 20px;
 }
 
-div .container {
-    width: 300px;
+.wizard-nav, .component-listView, .form-horizontal.well {
+    width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
