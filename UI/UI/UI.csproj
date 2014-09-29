@@ -58,9 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
-    <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\collections\metricCollection.js" />
-    <Content Include="scripts\collections\reportCollection.js" />
+    <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-select.js" />
     <Content Include="scripts\lib\backbone-forms.min.js" />
@@ -77,12 +76,11 @@
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\models\app.js" />
-    <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\metric.js" />
-    <Content Include="scripts\models\report.js" />
-    <Content Include="scripts\views\componentView.js" />
+    <Content Include="scripts\models\component.js" />
+    <Content Include="scripts\views\componentListView.js" />
     <Content Include="scripts\views\metricListView.js" />
-    <Content Include="scripts\views\reportView.js" />
+    <Content Include="scripts\views\componentView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\site.css" />
     <Content Include="tests.html" />
@@ -100,9 +98,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="NewFolder1\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

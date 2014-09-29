@@ -13,9 +13,10 @@
         'adform-select': 'scripts/lib/adform-select',
         'App': 'scripts/models/app',
         //'Router' : 'router',
-        'Report': 'scripts/models/report',
-        'ReportCollection': 'scripts/collections/reportCollection',
-        'ReportView': 'scripts/views/reportView',
+        'Component': 'scripts/models/component',
+        'ComponentCollection': 'scripts/collections/componentCollection',
+        'ComponentView': 'scripts/views/componentView',
+        'ComponentListView': 'scripts/views/componentListView',
     },
     shim: {
         'backbone': {
@@ -42,10 +43,33 @@
 });
 
 
-require(['App', 'ReportCollection', 'Report', 'ReportView'], function (App, ReportCollection, Report, ReportView) {
+require(['App', 'ComponentCollection', 'Component', 'ComponentView', 'ComponentListView'],
+    function (App, ComponentCollection, Component, ComponentView, ComponentListView) {
     App.initialize();
 
-    var newReport = new Report({ Title: "The new title" });
+    
+
+    var tempComponentModel = new Component();
+
+    var componentView = new ComponentView({
+        model: tempComponentModel
+    });
+
+    componentView.render();
+
+    var componentListView = new ComponentListView({});
+    componentListView.render();
+
+
+
+
+
+
+
+
+
+
+    /*var newReport = new Report({ Title: "The new title" });
     newReport.save({}, {
         success: function (model, response) {
             console.log("a POST save - success", model, response);
@@ -53,7 +77,7 @@ require(['App', 'ReportCollection', 'Report', 'ReportView'], function (App, Repo
         error: function (model, response) {
             console.log("a POST save - error", model, response);
         }
-    });
+    });*/
 
     /*
 	var a = new Report;
@@ -116,18 +140,9 @@ require(['App', 'ReportCollection', 'Report', 'ReportView'], function (App, Repo
 			console.log("a GET fetch - error", model, response);
 		}
 	});
+	*/
 	
-	a.set({id: 3});
-	console.log("a(3) " + a.isNew());
-	a.destroy({wait: true,
-		success: function (model, response) {
-			console.log("a(3) DELETE destroy - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("a(3) DELETE destroy - error", model, response);
-		}
-	});
-
+/*
 	var Reports = new ReportCollection;
     
     Reports.fetch({
