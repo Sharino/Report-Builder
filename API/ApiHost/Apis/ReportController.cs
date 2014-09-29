@@ -1,23 +1,25 @@
-﻿using BussinessLogic.Handlers;
-using Logging;
-using Models.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using BussinessLogic.Handlers;
+using Logging;
+using Models.Models;
 
 namespace ApiHost.Apis
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")] //Unsafe, fix origins
+    [EnableCors(origins: "*", headers: "*", methods: "*")] 
     public class ReportComponentController : ApiController
     {
-        protected ReportComponentHandler ReportHandler;
+        private readonly ReportComponentHandler ReportHandler;
+        private Log Log;
+
         public ReportComponentController()
         {
             ReportHandler = new ReportComponentHandler();
-            Log loggger = new Log("ReportComponentController");
+            Log = new Log("ReportComponentController");
         }
 
         [HttpGet]
@@ -35,7 +37,7 @@ namespace ApiHost.Apis
             var reportComponent = ReportHandler.Get(id);
             if (reportComponent != null)
             {
-                Log.Info("Requested a Report Component", reportComponent);
+                Log.Info("Requested a Report Component");
                 return Request.CreateResponse(HttpStatusCode.OK, reportComponent);
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -49,7 +51,7 @@ namespace ApiHost.Apis
 
             if (report.Id != -1)
             {
-                Log.Info("New report added", report);
+                Log.Info("New report added");
                 return Request.CreateResponse(HttpStatusCode.OK, report);
 
             }
@@ -64,7 +66,7 @@ namespace ApiHost.Apis
 
             if (report.Id != -1)
             {
-                Log.Info("New report added", report);
+                Log.Info("New report added");
                 return Request.CreateResponse(HttpStatusCode.OK, report);
 
             }

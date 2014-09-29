@@ -11,30 +11,37 @@ namespace Logging
         private static readonly ILog Logger =
          LogManager.GetLogger("aa");
 
-        static Log()
+        public readonly string Source;
+
+        public Log(string src)
         {
             XmlConfigurator.Configure();
+            Source = src;
         }
 
-        public static void Info(string logMessage)
+        public void Info(string logMessage)
         {
-            Logger.Info(logMessage);
+            Logger.Info(Source + " : " + logMessage);
         }
 
-        public static void Warn(string logMessage)
+        public void Warn(string logMessage)
         {
-            Logger.Warn(logMessage);
+            Logger.Warn(Source + " : " + logMessage);
         }
 
-        public static void Error(string logMessage)
+        public void Error(string logMessage)
         {
-            Logger.Error(logMessage);
+            Logger.Error(Source + " : " + logMessage);
         }
 
-        public static void Debug(string logMessage)
+        public void Debug(string logMessage)
         {
-            Logger.Debug(logMessage);
+            Logger.Debug(Source + " : " + logMessage);
         }
 
+        public void Fatal(string logMessage)
+        {
+            Logger.Fatal(Source + " : " + logMessage);
+        }
     }
 }

@@ -7,10 +7,12 @@ namespace BussinessLogic.Handlers
 {
     public class ReportComponentHandler
     {
-        protected ComponentRepository ComponentRepository;
+        private ComponentRepository ComponentRepository;
+        private Log Log;
 
         public ReportComponentHandler()
         {
+            Log = new Log("ReportComponentHandler");
             ComponentRepository = new ComponentRepository();
         }
  
@@ -43,7 +45,7 @@ namespace BussinessLogic.Handlers
 
         public ReportComponent Get(int id)
         {
-            Log.Debug("Saying hi from ReportHandler at namespace BussinessLogic");
+            Log.Debug("Saying hi from ReportHandler");
             var item = ComponentRepository.Get(id);
 
             return item;
