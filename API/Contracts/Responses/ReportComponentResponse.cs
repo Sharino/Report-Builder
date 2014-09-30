@@ -4,6 +4,9 @@ using Models.DTO;
 
 namespace Contracts.Responses
 {
+    /// <summary>
+    /// This response should contain either ErrorDTO (code, msg, timestamp) or ReportComponent(s) if the operation is successful
+    /// </summary>
     public class ReportComponentResponse
     {
         public ReportComponentResponse(List<ReportComponentDTO> reportComponentDtos)
@@ -32,7 +35,12 @@ namespace Contracts.Responses
             ReportComponentDtos = null;
         }
 
+
         public List<ErrorDTO> Errors { get; set; }
+
+        /// <summary>
+        /// Access: objectName.ReportComponentDtos[0] if singular
+        /// </summary>
         public List<ReportComponentDTO> ReportComponentDtos { get; set; }
     }
 }

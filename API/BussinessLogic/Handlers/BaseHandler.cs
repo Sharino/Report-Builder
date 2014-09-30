@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Contracts.Responses;
+﻿using Contracts.Responses;
 
 namespace BussinessLogic.Handlers
 {
+    /// <summary>
+    /// Abstract class from which all the handlers are derived. All methods must be implemented.
+    /// </summary>
+    /// <todo>
+    /// Chain of Responsibility design pattern
+    /// </todo>
     public abstract class BaseHandler<TRequest>
     {
         public BaseHandler<TRequest> Successor { protected get; set; }
@@ -15,6 +16,5 @@ namespace BussinessLogic.Handlers
         public abstract ReportComponentResponse GetAll();
         public abstract ReportComponentResponse Add(TRequest reportComponentDto);
         public abstract ReportComponentResponse Remove(int id);
-
     }
 }

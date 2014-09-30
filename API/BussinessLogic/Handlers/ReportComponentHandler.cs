@@ -81,7 +81,6 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse Remove(int id)
         {
-            ComponentRepository.Remove(id);
             throw new NotImplementedException();
         }
     }
