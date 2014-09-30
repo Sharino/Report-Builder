@@ -12,11 +12,13 @@
         'adform-checkbox': 'scripts/lib/adform-checkbox',
         'adform-select': 'scripts/lib/adform-select',
         'App': 'scripts/models/app',
-        //'Router' : 'router',
+        'Router' : 'scripts/routers/router',
         'Component': 'scripts/models/component',
         'ComponentCollection': 'scripts/collections/componentCollection',
         'ComponentView': 'scripts/views/componentView',
         'ComponentListView': 'scripts/views/componentListView',
+        'MenuView': 'scripts/views/menuView'
+
     },
     shim: {
         'backbone': {
@@ -43,30 +45,10 @@
 });
 
 
-require(['App', 'ComponentCollection', 'Component', 'ComponentView', 'ComponentListView'],
-    function (App, ComponentCollection, Component, ComponentView, ComponentListView) {
+require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView'],
+    function (App, Component, ComponentCollection, ComponentView, ComponentListView, MenuView) {
+
     App.initialize();
-
-    
-
-    var tempComponentModel = new Component();
-
-    var componentView = new ComponentView({
-        model: tempComponentModel
-    });
-
-    componentView.render();
-
-    var componentListView = new ComponentListView({});
-    componentListView.render();
-
-
-
-
-
-
-
-
 
 
     /*var newReport = new Report({ Title: "The new title" });
