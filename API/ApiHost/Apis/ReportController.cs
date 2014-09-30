@@ -1,95 +1,79 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using BussinessLogic.Handlers;
 using Logging;
-using Models.Models;
+using Models.DTO;
 
 namespace ApiHost.Apis
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")] 
     public class ReportComponentController : ApiController
     {
-        private readonly ReportComponentHandler ReportHandler;
         private Log Log;
+        private BaseHandler<ReportComponentDTO> ReportComponentHandler;
 
         public ReportComponentController()
         {
-            ReportHandler = new ReportComponentHandler();
+            ReportComponentHandler = new ReportComponentHandler();
             Log = new Log("ReportComponentController");
         }
 
         [HttpGet]
         public HttpResponseMessage GetAll()
-        {//todo 
-            IEnumerable<ReportComponent> reportComponents = new List<ReportComponent>();
-            reportComponents = ReportHandler.GetAll().OrderBy(x => x.Id);
-            Log.Info("All Report Components were requested");
-            return Request.CreateResponse(HttpStatusCode.OK, reportComponents);
+        {
+            var response = ReportComponentHandler.GetAll();
+            if (response.Errors == null)
+            {
+                IEnumerable<ReportComponentDTO> reportComponentDtos = response.ReportComponentDtos;
+                return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
+            }
+            return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
         }
 
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            var reportComponent = ReportHandler.Get(id);
-            if (reportComponent != null)
+            var response = ReportComponentHandler.Get(id);
+            if (response.Errors == null)
             {
-                Log.Info("Requested a Report Component");
-                return Request.CreateResponse(HttpStatusCode.OK, reportComponent);
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.NotFound, response.Errors);
         }
 
         [HttpPut]
-        public HttpResponseMessage AddPut(ReportComponent report)
+        public HttpResponseMessage AddPut(ReportComponentDTO reportDTO)
         {
-
-            report.Id = ReportHandler.Add(report);
-
-            if (report.Id != -1)
+            var response = ReportComponentHandler.Add(reportDTO);
+            if (response.Errors == null)
             {
-                Log.Info("New report added");
-                return Request.CreateResponse(HttpStatusCode.OK, report);
-
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
 
         [HttpPost]
-        public HttpResponseMessage AddPost(ReportComponent report)
+        public HttpResponseMessage AddPost(ReportComponentDTO reportDTO)
         {
-
-            report.Id = ReportHandler.Add(report);
-
-            if (report.Id != -1)
+            var response = ReportComponentHandler.Add(reportDTO);
+            if (response.Errors == null)
             {
-                Log.Info("New report added");
-                return Request.CreateResponse(HttpStatusCode.OK, report);
-
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
 
         [HttpDelete]
         public HttpResponseMessage Remove(int id)
         {
-            ReportHandler.Remove(id);
-            Log.Info("Entry with id " + id.ToString() + " removed");
-            return Request.CreateResponse(HttpStatusCode.OK, -1);
+            throw new NotImplementedException();
+            //ReportHandler.Remove(id);
+            //Log.Info("Entry with id " + id + " removed");
+            //return Request.CreateResponse(HttpStatusCode.OK, -1);
         }
     }
 }
-
-
-
-
-
-
-
-
-/*
-           
-*/
