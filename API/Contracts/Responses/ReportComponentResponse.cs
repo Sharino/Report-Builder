@@ -18,8 +18,7 @@ namespace Contracts.Responses
         public ReportComponentResponse(ReportComponentDTO reportComponent)
         {
             Errors = null;
-            ReportComponentDtos = new List<ReportComponentDTO>();
-            ReportComponentDtos.Add(reportComponent);
+            ReportComponentDtos = new List<ReportComponentDTO> {reportComponent};
         }
 
         public ReportComponentResponse(List<ErrorDTO> errors)
@@ -30,8 +29,7 @@ namespace Contracts.Responses
 
         public ReportComponentResponse(ErrorDTO error)
         {
-            Errors = new List<ErrorDTO>();
-            Errors.Add(error);
+            Errors = new List<ErrorDTO> {error};
             ReportComponentDtos = null;
         }
 
@@ -39,7 +37,7 @@ namespace Contracts.Responses
         public List<ErrorDTO> Errors { get; set; }
 
         /// <summary>
-        /// Access: objectName.ReportComponentDtos[0] if singular
+        /// Access: objectName.ReportComponentDtos[0] if singular (e.g. Get)
         /// </summary>
         public List<ReportComponentDTO> ReportComponentDtos { get; set; }
     }

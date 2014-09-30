@@ -28,11 +28,15 @@ namespace BussinessLogic.Handlers
         {
             Mapper.CreateMap<ReportComponent, ReportComponentDTO>()
                 .ForMember(dest => dest.Title,
-                    m => m.MapFrom(src => src.Title));
+                    m => m.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Id,
+                    m => m.MapFrom(src => src.Id));
 
             Mapper.CreateMap<ReportComponentDTO, ReportComponent>()
                 .ForMember(dest => dest.Title,
-                    m => m.MapFrom(src => src.Title));
+                    m => m.MapFrom(src => src.Title))
+                .ForMember(dest => dest.Id,
+                    m => m.MapFrom(src => src.Id));
         }
 
         public override ReportComponentResponse Add(ReportComponentDTO reportComponentDto)
@@ -40,7 +44,8 @@ namespace BussinessLogic.Handlers
             try
             {
                 ReportComponent reportComponent = Mapper.Map<ReportComponentDTO, ReportComponent>(reportComponentDto);
-                int id = ComponentRepository.Add(reportComponent); //TODO Front-end solution
+                int id = ComponentRepository.Add(reportComponent);
+                reportComponentDto.Id = id;
                 return new ReportComponentResponse(reportComponentDto);
             }
             catch (Exception exception)
@@ -69,7 +74,7 @@ namespace BussinessLogic.Handlers
         {
             try
             {
-                var reportComponents = ComponentRepository.GetAll();
+                var reportComponents = ComponentRepository.GetAll().OrderBy(x => x.Id);
                 IEnumerable<ReportComponentDTO> reportComponentDtos = Mapper.Map<IEnumerable<ReportComponent>, IEnumerable<ReportComponentDTO>>(reportComponents);
                 return new ReportComponentResponse(reportComponentDtos.ToList());
             }
@@ -81,7 +86,16 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse Remove(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                ReportComponentDTO target = Mapper.Map<ReportComponent, ReportComponentDTO>(ComponentRepository.Get(id));
+                ComponentRepository.Remove(id);
+                return new ReportComponentResponse(target);
+            }
+            catch (Exception exception)
+            {
+                return new ReportComponentResponse(new ErrorDTO(exception.ToString(), "Unable to remove Report Component with id " + id, DateTime.Now));
+            }
         }
     }
 }

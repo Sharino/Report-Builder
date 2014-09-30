@@ -55,7 +55,7 @@ namespace ApiHost
         private static void Start(string[] args) // "http://172.22.3.236:33894/";
         {
             //TODO move to config
-            const string baseUrl = "http://localhost:5000/";
+            const string baseUrl = "http://172.22.3.236:33894/";
 
             _webHost = WebApp.Start<Startup>(baseUrl);
         }

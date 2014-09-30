@@ -70,10 +70,12 @@ namespace ApiHost.Apis
         [HttpDelete]
         public HttpResponseMessage Remove(int id)
         {
-            throw new NotImplementedException();
-            //ReportHandler.Remove(id);
-            //Log.Info("Entry with id " + id + " removed");
-            //return Request.CreateResponse(HttpStatusCode.OK, -1);
+            var response = ReportComponentHandler.Remove(id);
+            if (response.Errors == null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound, response.Errors);
         }
     }
 }
