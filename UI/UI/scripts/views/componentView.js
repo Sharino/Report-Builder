@@ -24,10 +24,9 @@
             };
 
             if (this.model.isNew()) {
-                templVariables["data"]["viewTitle"] = "Create a New Component";
-                templVariables["data"]["activeNew"] = 'class="active"';
+                $(".form-horizontal.well").prepend("<h1>Create a New Component</h1>");
             } else {
-                templVariables["data"]["viewTitle"] = "Edit";
+                $(".form-horizontal.well").prepend("<h1>Edit</h1>");
             }
 
             /*$("body").append( this.template(templVariables) );
@@ -45,8 +44,16 @@
             this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
             console.log(this.model.toJSON());
 
-            this.model.save();
-            Backbone.history.navigate("list", true, true);
+            this.model.save({}, {
+                success: function (model, response) {
+                    console.log("a POST save - success", model, response);
+                    Backbone.history.navigate("list", true, true);
+                },
+                error: function (model, response) {
+                    alert(response);
+                    console.log("a POST save - error", model, response);
+                }
+            });
             return false;
         },
 
