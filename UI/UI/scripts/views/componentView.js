@@ -31,6 +31,7 @@
                 } else {
                     templVariables["data"]["viewTitle"] = "Edit";
                 }
+                console.log({ "data": this.model.toJSON() });
 
                 this.$el.html(this.template({ "data": this.model.toJSON() }));
             }
@@ -53,13 +54,12 @@
             this.model.save({}, {
                 success: function (result) {
                     console.log("Save OK", result);
+                    Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function () {
                     console.log("Save FAIL");
                 }
             });
-
-            Backbone.history.navigate("list", true, true);
 
             return false;
         },

@@ -27,20 +27,35 @@
         },
 
         list: function () {
-            var that = this; // To use Router methods in callback function.
+            var self = this; // To use Router methods in callback function.
 
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
                 success: function (result) {
                     console.log("fetch OK", result.toJSON());
-                    that.showView("#screen", new ComponentListView({ collection: result }));
+                    self.showView("#screen", new ComponentListView({ collection: result }));
                 },
                 error: function () {
                     console.log("fetch FAIL");
-                    that.showView("#screen", new ComponentListView({ collection: null }));
+                    self.showView("#screen", new ComponentListView({ collection: null }));
 
                 }
             });
+        },
+
+        createById: function (id) {
+            var self = this;
+            var tempComponentModel = new Component({ Id: id });
+            tempComponentModel.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#screen", new ComponentView({model: tempComponentModel}));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
+                }
+            });
+
         },
 
         showView: function(selector, view) {
