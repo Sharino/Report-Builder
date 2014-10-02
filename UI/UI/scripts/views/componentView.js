@@ -12,6 +12,7 @@
         
         initialize: function () {
             //this.render;
+
         },
 
         render: function () {
@@ -58,7 +59,7 @@
                 }
             });
 
-            Backbone.history.navigate("list", true);
+            Backbone.history.navigate("list", true, true);
 
             return false;
         },
