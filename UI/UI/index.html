@@ -293,6 +293,7 @@
                 </div>
             </div>
             <button class="btn" type="submit" id="component-submit">Submit</button>
+            <a class="alert close" data-dismiss="alert" href="#">&times;</a>
         </div>
 
     </script>
@@ -304,14 +305,16 @@
                     <th>Id</th>
                     <th>Title</th>
                     <th>Type</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>                    
                 <% _.each(Components, function(model) { %>
-                    <tr class="component-list-item" id="<%= model.Id %>">
-                        <td><%= model.Id %></td>
-                        <td><%= model.Title %></td>
-                        <td><%= model.Type %></td>
+                    <tr class="component-list-item">
+                        <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
+                        <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
+                        <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
+                        <td class="del" id="<%= model.Id %>"><i class="adf-icon-small-close"></i></td>
                     </tr>
                 <% }); %>
             </tbody>
