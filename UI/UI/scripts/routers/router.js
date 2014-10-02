@@ -15,88 +15,41 @@
             "": "index",
             "create": "create",
             "create/:id": "createById",
-            "list": "list",
-
-
-            "help": "help",                    // #help
-            "search/:query":        "search",  // #search/kiwis
-            "search/:query/p:page": "search"   // #search/kiwis/p7
+            "list": "list"
         },
 
-        model: new Component(),
-
-        index: function(){
-            var menu = new MenuView({model: this.model});
-            menu.render();
-        },
-
-        createById: function (id) {
-            var menu = new MenuView({ model: this.model });
-            menu.render();
-           // $("#li1").toggleClass("active");
-
-            var tempComponentModel = new Component({ Id: id });
-            tempComponentModel.fetch({
-                success: function (model, response) {
-                    console.log("GET fetch GetAll- success", model, response);
-
-                    var componentView = new ComponentView({
-                        model: tempComponentModel
-                    });
-
-                    componentView.render();
-                },
-                error: function (model, response) {
-                    console.log("GET fetch GetAll - error", model, response);
-                }
-            });
-
+        index: function () {
+            
         },
 
         create: function () {
-            var menu = new MenuView({ model: this.model });
-            menu.render();
-            $("#li1").toggleClass("active");
-
-            var tempComponentModel = new Component();
-
-            var componentView = new ComponentView({
-                model: tempComponentModel
-            });
-
-            componentView.render();
+            this.showView("#screen", new ComponentView());
         },
 
         list: function () {
-            var menu = new MenuView({ model: this.model });
-            menu.render();
-            $("#li2").toggleClass("active");
+            var that = this; // To use Router methods in callback function.
 
-            var compList = new ComponentCollection;
-
-            compList.fetch({
-                success: function (model, response) {
-                    console.log(compList.toJSON());
-                    console.log("GET fetch GetAll- success", model, response);
-                    var componentListView = new ComponentListView({ collection: compList });
-
-                    componentListView.render();
+            this.ComponentsCollection = new ComponentCollection();
+            this.ComponentsCollection.fetch({
+                success: function (result) {
+                    console.log("fetch OK", result.toJSON());
+                    that.showView("#screen", new ComponentListView({ collection: result }));
                 },
-                error: function (model, response) {
-                    console.log("GET fetch GetAll - error", model, response);
+                error: function () {
+                    console.log("fetch FAIL");
+                    that.showView("#screen", new ComponentListView({ collection: null }));
+
                 }
             });
         },
 
-
-        help: function() {
-           // ...
-        },
-
-        search: function(query, page) {
-           // ...
+        showView: function(selector, view) {
+            if (this.currentView)
+                this.currentView.close();
+            $(selector).html(view.render().el);
+            this.currentView = view;
+            return view;
         }
-
     });
 
     return Router;

@@ -1,17 +1,17 @@
 ﻿define('ComponentView', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone, tpl) {
+    'backbone',
+    'Component'
+], function ($, _, Backbone, Component) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
-        el: $('#screen'),
         template: _.template($("#component-template").html()),
+        model: new Component(),
         
         initialize: function () {
-            this.$msg = $('[data-msg=' + this.name + ']');
-            this.render;
+            //this.render;
         },
 
         render: function () {
@@ -23,17 +23,21 @@
                 }
             };
 
-            if (this.model.isNew()) {
+            if (this.model) {       // Model exists
+                if (this.model.isNew()) {
+                    templVariables["data"]["viewTitle"] = "Create a New Component";
+                    templVariables["data"]["activeNew"] = 'class="active"';
+                } else {
+                    templVariables["data"]["viewTitle"] = "Edit";
+                }
+
+                this.$el.html(this.template({ "data": this.model.toJSON() }));
+            }
+            else {                  // Model does not exist
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
-            } else {
-                templVariables["data"]["viewTitle"] = "Edit";
+                this.$el.html(this.template({ "data": [] }));
             }
-
-            /*$("body").append( this.template(templVariables) );
-            this.$el.html({ data: this.template });
-            console.log(this.model.toJSON());*/
-            this.$el.html(this.template({ "data": this.model.toJSON() }));
             return this;
         },
 
@@ -45,12 +49,19 @@
             this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
             console.log(this.model.toJSON());
 
-            this.model.save();
-            Backbone.history.navigate("list", true, true);
+            this.model.save({}, {
+                success: function (result) {
+                    console.log("Save OK", result);
+                },
+                error: function () {
+                    console.log("Save FAIL");
+                }
+            });
+
+            Backbone.history.navigate("list", true);
+
             return false;
         },
-
-
 
         inputTitle: function () {
             return $('#input').val();
@@ -63,7 +74,7 @@
             } else {
                 return 0;
             }
-        },
+        }
            
     });
 

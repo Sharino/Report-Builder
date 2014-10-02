@@ -1,21 +1,28 @@
 ﻿define('ComponentListView', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone, tpl) {
+    'backbone',
+    'ComponentCollection'
+], function ($, _, Backbone, ComponentCollection) {
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
-        el: $('#screen'),
         template: _.template($("#component-list-template").html()),
 
         initialize: function () {
-            this.render;
+            //this.render;
         },
         render: function () {
-            this.$el.html(this.template({ "Components": this.collection.toJSON() }));
+            if (this.collection) {
+                this.$el.html(this.template({ "Components": this.collection.toJSON() }));
+            }
+            else {
+                this.$el.html(this.template({ "Components": [] }));
+            }
             return this;
-        },
+        }
+
+        /*,
 
         events: {
             'click .component-list-item': 'onClick',
@@ -29,7 +36,7 @@
             var routerUrl = "create/".concat(id);
             Backbone.history.navigate(routerUrl, true, true);
         }
-
+        */
     });
 
     return ComponentListView;

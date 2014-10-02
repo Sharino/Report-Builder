@@ -45,179 +45,19 @@
 });
 
 
-require(['App', 'Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView'],
-    function (App, Component, ComponentCollection, ComponentView, ComponentListView, MenuView) {
-
-    App.initialize();
-
-
-    /*var newReport = new Report({ Title: "The new title" });
-    newReport.save({}, {
-        success: function (model, response) {
-            console.log("a POST save - success", model, response);
-        },
-        error: function (model, response) {
-            console.log("a POST save - error", model, response);
-        }
-    });*/
-
-    /*
-	var a = new Report;
-    a.set({Title:"Test Obj1"});
-
-	a.save({}, {
-		success: function (model, response) {
-			console.log("a POST save - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("a POST save - error", model, response);
-		}
-	});
-	a.save({}, {
-		success: function (model, response) {
-			console.log("a POST save - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("a POST save - error", model, response);
-		}
-	});
-    //console.log(a.toJSON());
-	//a.save();
-	/*
-	console.log("a isNew() " + a.isNew());
+require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView', 'Router'],
+    function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router) {
     
-	a.save({}, {
-		success: function (model, response) {
-			console.log("a POST save - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("a POST save - error", model, response);
-		}
-	});
-	
-	var b = new Report;
-    b.set({title:"Test Obj2", id: 0});
-    //console.log(a.toJSON());
-	//a.save();
-	
-	console.log("b isNew() " + b.isNew());
-    
-	b.save({}, {
-		success: function (model, response) {
-			console.log("b PUT save - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("b PUT save - error", model, response);
-		}
-	});
-	
-	
-	
-	a.set({id: 9});
-	a.fetch({
-		success: function (model, response) {
-			console.log("a GET fetch - success", model, response);
-		},
-		error: function (model, response) {
-			console.log("a GET fetch - error", model, response);
-		}
-	});
-	*/
-	
-/*
-	var Reports = new ReportCollection;
-    
-    Reports.fetch({
-        success: function (model, response) {
-            //console.log(Reports.toJSON());
-            console.log("GET fetch GetAll- success", model, response);
-        },
-        error: function (model, response) {
-            console.log("GET fetch GetAll - error", model, response);
+    Backbone.View.prototype.close = function () {
+        console.log('Closing view', this);
+        if (this.beforeClose) {
+            this.beforeClose();
         }
-    });
-    
-	var c = new Report({title: "012345678901234567890123456789perilgas"});
-	
-	c.save({}, {
-        success: function (model, response) {
-            console.log("save TOO LONG - success", model, response);
-        },
-        error: function (model, response) {
-            console.log("save TOO LONG - error", model, response);
-        }
-    });
-	
-	/*var reportView = new ReportView({
-        el: 'body',
-        model: a
-    });
+        this.remove();
+        this.unbind();
+    };
 
-    reportView.render();
-	/*
-	var form = new Backbone.Form({
-				template: _.template($("#reportTemplate").html()),
-				model: a, //defined elsewhere
-				templateData: {title: 'Edit profile'}
-			});
-    
-	form.render();
-	*/
- /*
-    setTimeout(function () {
-       console.log(Reports.toJSON());
-    }, 5000);
-    */
-	
-/*
-    a.save({}, {
-        success: function (model, response) {
-            console.log("save - success", model, response);
-        },
-        error: function (model, response) {
-            console.log("save - error", model, response);
-        }
-    });
-	
-    //return Reports;
-	/*
-	var a = new Report();
-			a = this.model;
-			console.log(a.toJSON());
-			
-			a.save(a.toJSON(), {
-				success: function (model, response) {
-					console.log("save - success", model, response);
-				},
-				error: function (model, response) {
-					console.log("save - error", model, response);
-				}
-			});
-	*/
-	
-	//var a = new Report;
-    //a.set({"id":"666"});
-    //console.log(a.toJSON());
-    
-    /*a.save({}, {
-        success: function (model, response) {
-            console.log("save - success", model, response);
-        },
-        error: function (model, response) {
-            console.log("save - error", model, response);
-        }
-    });*/
-	
-	/*a.fetch({
-        success: function (model, response) {
-            console.log("fetch - success", model, response);
-			console.log(a.toJSON());
-        },
-        error: function (model, response) {
-            console.log("fetch - error", model, response);
-			console.log(a.toJSON());
-        }
-    });*/
-	
-	
+    var app = new Router();
+    app.initialize();
+    Backbone.history.start();
 });
