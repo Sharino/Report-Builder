@@ -27,8 +27,11 @@
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
                     templVariables["data"]["activeNew"] = 'class="active"';
+                    templVariables["data"]["activeList"] = '';
                 } else {
                     templVariables["data"]["viewTitle"] = "Edit";
+                    templVariables["data"]["activeNew"] = '';
+                    templVariables["data"]["activeList"] = '';
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
                 //console.log(templVariables);
@@ -38,6 +41,7 @@
             else {                  // Model does not exist
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
+                templVariables["data"]["activeList"] = '';
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
             }
@@ -63,6 +67,7 @@
                         content: 'Successfully saved!',
                         timeout: 5000
                     });
+                    this.model = new Component();
                     Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
                 },
                 // Error callback. NOTE: model and response SHOULD be taken.

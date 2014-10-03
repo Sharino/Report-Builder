@@ -23,11 +23,30 @@
             //this.render;
         },
         render: function () {
+
+            var templVariables = {
+                "data": {
+                    "viewTitle": "",
+                    "activeNew": "",
+                    "activeList": ""
+                }
+            };
+
             if (this.collection) {
-                this.$el.html(this.template({ "Components": this.collection.toJSON() }));
+                templVariables["activeNew"] = '';
+                templVariables["activeList"] = 'class="active"';
+                this.$el.html(this.template({
+                    "Components": this.collection.toJSON(),
+                    "data": templVariables
+                }));
             }
             else {
-                this.$el.html(this.template({ "Components": [] }));
+                templVariables["activeNew"] = '';
+                templVariables["activeList"] = 'class="active"';
+                this.$el.html(this.template({
+                    "Components": [],
+                    "data": templVariables
+                }));
             }
             return this;
         },

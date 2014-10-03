@@ -12,7 +12,7 @@
     
     Router = Backbone.Router.extend({
         routes: {
-            "": "index",
+            "": "list",
             "create": "create",
             "create/:id": "createById",
             "list": "list"
@@ -23,7 +23,7 @@
         },
 
         create: function () {
-            this.showView("#screen", new ComponentView());
+            this.showView("#screen", new ComponentView({ model: new Component() }));
         },
 
         list: function () {

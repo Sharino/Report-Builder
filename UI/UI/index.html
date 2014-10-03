@@ -7,12 +7,7 @@
 </head>
 <body>
     <div id="app">
-        <div id="menu">
-            <ul class="wizard-nav">
-                <li><a href="#create">Create new</a></li>
-                <li><a href="#list">List</a></li>
-            </ul>
-        </div>
+        
         <div id="screen"></div>
     </div>
 
@@ -254,13 +249,18 @@
     </div>
     -->
     <script type="text/template" id="menu-template">
-        <ul class="wizard-nav">
-            <li id="li1"><a href="#create">Create new</a></li>
-            <li id="li2"><a href="#list">List</a></li>
-        </ul>
+
     </script>
 
     <script type="text/template" id="component-template">
+
+        <div id="menu">
+            <ul class="wizard-nav">
+                <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+                <li <%= data.activeList %>><a href="#list">List</a></li>
+            </ul>
+        </div>
+        
         <div class="form-horizontal well">
             <h1><%= data.viewTitle %></h1>
             <div class="group-label">
@@ -306,6 +306,15 @@
     </script>
 
     <script type="text/template" id="component-list-template">
+
+
+        <div id="menu">
+            <ul class="wizard-nav">
+                <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+                <li <%= data.activeList %>><a href="#list">List</a></li>
+            </ul>
+        </div>
+
         <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
             <thead>
                 <tr>
