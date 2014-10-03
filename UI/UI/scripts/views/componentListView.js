@@ -2,8 +2,9 @@
     'jquery',
     'underscore',
     'backbone',
-    'ComponentCollection'
-], function ($, _, Backbone, ComponentCollection) {
+    'ComponentCollection',
+    'adform-notifications'
+], function ($, _, Backbone, ComponentCollection, AdformNotification) {
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
@@ -54,12 +55,24 @@
             var item = this.collection.get(id);
 
             item.destroy({
-                success: function () {
-                    console.log("a DELETE - success");
+                success: function (model, response) {
+                    console.log("Delete OK", model, response);
+                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+                        type: 'success',
+                        content: 'Successfully deleted!',
+                        timeout: 5000
+                    });
                 },
                 error: function (model, response) {
-                    alert(response.status + ": " + response.statusText);
-                    console.log("a DELETE - error", model, response);
+                    console.log("Delete Fail", model, response);
+                    // For each error message entry display notification with message.
+                    response.responseJSON.forEach(function (entry) {
+                        AdformNotification.display({       // Show Adform notification.
+                            type: 'error',
+                            content: entry.Message,        // Shows message from server
+                            timeout: 5000
+                        });
+                    });
                 }
             });
         }

@@ -69,10 +69,13 @@
                 error: function (model, response) {         // If validation pass, but server responds with failure.
                     console.log("Save FAIL", response);
 
-                    AdformNotification.display({            // Show Adform notification.
-                        type: 'error',
-                        content: $.parseJSON(response.responseText).Message, // Shows message from server
-                        timeout: 5000
+                    // For each error message entry display notification with message.
+                    response.responseJSON.forEach(function(entry){
+                        AdformNotification.display({       // Show Adform notification.
+                            type: 'error',
+                            content: entry.Message,         // Shows message from server
+                            timeout: 5000
+                        });
                     });
                 }
             });
