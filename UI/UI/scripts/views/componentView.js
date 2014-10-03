@@ -31,14 +31,16 @@
                 } else {
                     templVariables["data"]["viewTitle"] = "Edit";
                 }
-                console.log({ "data": this.model.toJSON() });
+                templVariables["data"]["model"] = this.model.toJSON();
+                //console.log(templVariables);
 
-                this.$el.html(this.template({ "data": this.model.toJSON() }));
+                this.$el.html(this.template(templVariables));
             }
             else {                  // Model does not exist
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
-                this.$el.html(this.template({ "data": [] }));
+                templVariables["data"]["model"] = [];
+                this.$el.html(this.template(templVariables));
             }
             return this;
         },
@@ -75,7 +77,7 @@
             } else {
                 return 0;
             }
-        }
+        },
            
     });
 

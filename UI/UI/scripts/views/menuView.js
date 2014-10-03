@@ -22,12 +22,12 @@
             };
 
             if (this.model.isNew()) {
-                //templVariables["data"]["activeNew"] = 'class="active"';
+                templVariables["data"]["activeNew"] = 'class="active"';
             } else {
                 // TODO:
             }
 
-            this.$el.html(this.template({ "data": this }));
+            this.$el.html(this.template(templVariables));
             return this;
         }
     });
