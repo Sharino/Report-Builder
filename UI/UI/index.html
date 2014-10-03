@@ -255,13 +255,14 @@
     -->
     <script type="text/template" id="menu-template">
         <ul class="wizard-nav">
-            <li id="li1" <%= data.activeNew %> ><a href="#create">Create new</a></li>
-            <li id="li2" <%= data.activeList %> ><a href="#list">List</a></li>
+            <li id="li1"><a href="#create">Create new</a></li>
+            <li id="li2"><a href="#list">List</a></li>
         </ul>
     </script>
 
     <script type="text/template" id="component-template">
         <div class="form-horizontal well">
+            <h1><%= data.viewTitle %></h1>
             <div class="group-label">
                 <label>General information</label>
                 <hr />
@@ -269,8 +270,9 @@
             <div class="control-group">
                 <label class="control-label">Title</label>
                 <div class="controls">
-                    <input class="input-large" type="text" id="input" value="<%=data.Title%>">
-                    <span  data-msg="title"></span>
+                    <input class="input-large" type="text" id="input" data-validate="required" value="<%=data.model.Title%>" required>
+                    <span  data-msg="title"></span> 
+                    <span class="help-inline"></span>
                 </div>
             </div>
             <div class="control-group">
@@ -295,6 +297,7 @@
                         </div>
                     </div>
                     <span data-msg="type"></span>
+                    <span class="help-inline"></span>
                 </div>
             </div>
             <button class="btn" type="submit" id="component-submit">Submit</button>
