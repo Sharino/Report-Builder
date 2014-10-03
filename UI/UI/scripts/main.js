@@ -11,6 +11,7 @@
         'jquery-sortable': 'scripts/lib/jquery.sortable',
         'adform-checkbox': 'scripts/lib/adform-checkbox',
         'adform-select': 'scripts/lib/adform-select',
+        'adform-notifications': 'scripts/lib/adform-notifications',
         'App': 'scripts/models/app',
         'Router' : 'scripts/routers/router',
         'Component': 'scripts/models/component',

@@ -61,6 +61,7 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
+    <Content Include="scripts\lib\adform-notifications.js" />
     <Content Include="scripts\lib\adform-select.js" />
     <Content Include="scripts\lib\backbone-forms.min.js" />
     <Content Include="scripts\lib\backbone-forms.min.js%281%29.htm" />

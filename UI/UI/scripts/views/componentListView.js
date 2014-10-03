@@ -10,9 +10,15 @@
         template: _.template($("#component-list-template").html()),
 
         initialize: function () {
-            this.collection.on('remove', this.render, this);
-            this.collection.on('fetch', this.render, this);
-
+            if (this.collection) {
+                this.collection.on('remove', this.render, this);
+                this.collection.on('fetch', this.render, this);
+            }
+            else {
+                this.collection = new ComponentCollection();
+                this.collection.on('remove', this.render, this);
+                this.collection.on('fetch', this.render, this);
+            }
             //this.render;
         },
         render: function () {

@@ -31,11 +31,11 @@
 
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
-                success: function (result) {
-                    console.log("fetch OK", result.toJSON());
-                    self.showView("#screen", new ComponentListView({ collection: result }));
+                success: function (model, response) {
+                    console.log("fetch OK", model.toJSON());
+                    self.showView("#screen", new ComponentListView({ collection: model }));
                 },
-                error: function () {
+                error: function (model, response) {
                     console.log("fetch FAIL");
                     self.showView("#screen", new ComponentListView({ collection: null }));
 
@@ -49,13 +49,14 @@
             tempComponentModel.fetch({
                 success: function (model, response) {
                     console.log("GET", id, "Success", model, response);
-                    self.showView("#screen", new ComponentView({model: tempComponentModel}));
+                    self.showView("#screen", new ComponentView({model: model}));
                 },
                 error: function (model, response) {
                     console.log("GET", id, "Fail", model, response);
                 }
             });
 
+            tempComponentModel = null;
         },
 
         showView: function(selector, view) {
