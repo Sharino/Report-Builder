@@ -86,10 +86,6 @@
                     timeout: 5000
                 });
             }
-
-            this.model = null;
-
-
             return false;
         },
 
