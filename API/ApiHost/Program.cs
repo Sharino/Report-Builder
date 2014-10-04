@@ -52,10 +52,10 @@ namespace ApiHost
         }
 
         //TODO: http://stackoverflow.com/questions/2456819/how-can-i-set-up-net-unhandledexception-handling-in-a-windows-service
-        private static void Start(string[] args) // "http://172.22.3.236:33894/";
+        private static void Start(string[] args) 
         {
             //TODO move to config
-            const string baseUrl = "http://172.22.3.236:33894/";
+            const string baseUrl = "http://localhost/";
 
             _webHost = WebApp.Start<Startup>(baseUrl);
         }

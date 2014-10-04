@@ -1,26 +1,34 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
 using Owin;
+using Controllers;
 
 namespace ApiHost
 {
     public class Startup
     {
+        //  Hack from http://stackoverflow.com/a/17227764/19020 to load controllers in another assembly. 
+        System.Type valuesControllerType = typeof(ReportComponentController);
+
         public void Configuration(IAppBuilder appBuilder)
         {
             // Setup WebAPI configuration  
             var configuration = new HttpConfiguration();
 
+            // http://localhost/swagger
+            // https://github.com/domaindrivendev/Swashbuckle
+            Swashbuckle.Bootstrapper.Init(configuration);
+
             //http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api
             configuration.EnableCors();
 
-            //configuration.Routes.Add("API Default", new HttpRoute("{Controller}"));
+           
             configuration.Routes.MapHttpRoute(
                 name: "API",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
 
-
+  
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             // Register the WebAPI to the pipeline  
