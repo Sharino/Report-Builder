@@ -1,0 +1,11 @@
+﻿.sortable li {
+    display: inline;
+    list-style-type: none;
+    padding-right: 20px;
+}
+
+.wizard-nav, .component-listView, .form-horizontal.well {
+    width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}

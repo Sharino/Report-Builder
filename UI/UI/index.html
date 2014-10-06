@@ -1,0 +1,362 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Report Builder</title>
+    <link href="http://localhost/media/_adform/bootstrap/css/adform_base.css" rel="stylesheet" type="text/css" />
+    <link href="styles/site.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="app">
+        
+        <div id="screen"></div>
+    </div>
+
+    <script data-main="scripts/main" src="scripts/lib/require.js"></script>
+
+
+    <script>
+        // TODO: Remove after implementing backbone.js
+        /*$.getJSON("../api/report/getall", function (json) {
+            console.log(json.data);
+            var items = [];
+            $.each(json.data, function (key, val) {
+                items.push("<li id='" + val.ReportId + "'>" + val.Title + "</li>");
+            });
+
+            $("#testlist").append(items);
+        });*/
+    </script>
+
+    <!-- <script id="reportTemplate" type="text/template">-->
+    <!--
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span12"><h1>Create Report</h1></div>
+                </div>
+                <div class="row">
+                    <div class="span12"><h3>General Information</h3><hr></div>
+
+                </div>
+                <div class="row">
+                    <div class="span1">Title</div>
+                    <div class="span11">
+                        <div class="controls">
+                            <input class="input-large" type="text" id="input comp-input">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span1">Type</div>
+                    <div class="span11">
+                        <div class="control-group">
+                            <div class="controls">
+                                <div class="radio-buttons horizontal">
+                                    <div class="radio-group">
+                                        <input type="radio" name="g1" id="rb1 comp-input">
+                                        <label for="rb1">KPI</label>
+                                    </div>
+                                    <div class="radio-group">
+                                        <input type="radio" name="g1" id="rb2 comp-input">
+                                        <label for="rb2">Table</label>
+                                    </div>
+                                    <div class="radio-group">
+                                        <input type="radio" name="g1" id="rb3 comp-input">
+                                        <label for="rb3">Timeline</label>
+                                    </div>
+                                    <div class="radio-group">
+                                        <input type="radio" name="g1" id="rb4 comp-input">
+                                        <label for="rb4">Chart</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12"><h3>Report</h3><hr></div>
+                </div>
+                <div class="row">
+                    <div class="span1">Metrics</div>
+                    <div class="span11">
+                        <div class="form-horizontal well">
+                            <ul class="sortable">
+                                <li>
+                                    <div class="controls">
+                                        <select class="adf-select1 input-large" placeholder="Select item" data-no-results="No results">
+                                            <option></option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="controls">
+                                        <select class="adf-select1 input-large" placeholder="Select item" data-no-results="No results">
+                                            <option></option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="controls">
+                                        <select class="adf-select1 input-large" placeholder="Select item" data-no-results="No results">
+                                            <option></option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="controls">
+                                        <select class="adf-select1 input-large" placeholder="Select item" data-no-results="No results">
+                                            <option></option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                            <option value="1">AMS incubator - Tracking</option>
+                                            <option value="2">Deivydas Sabaras</option>
+                                            <option value="3">Donatas Kozlovskis</option>
+                                            <option value="4">Dovile Zernyte</option>
+                                            <option value="5">Egle Lapiene</option>
+                                            <option value="6">Erika Jasenovic</option>
+                                            <option value="7">Gedgaudas Gironcikas</option>
+                                        </select>
+                                    </div>
+                                </li>
+                                <button type="button" class="btn btn-transparent btn-add"><i class="adf-icon-small-add-circle blue-icon"></i> Add Metric</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span1">Dimensions</div>
+                    <div class="span11">
+                        <div class="form-horizontal well">
+                            <ul class="sortable">
+                                <li>
+                                    <div class="btn-group">
+                                        <a class="btn single-btn" data-toggle="dropdown" href="#">
+                                            1 dimensions
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="">Consectetur adipiscing elit</a></li>
+                                            <li><a href="">Integer molestie lorem at massa</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <a class="btn single-btn" data-toggle="dropdown" href="#">
+                                            2 dimensions
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="">Consectetur adipiscing elit</a></li>
+                                            <li><a href="">Integer molestie lorem at massa</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <a class="btn single-btn" data-toggle="dropdown" href="#">
+                                            3 dimensions
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="">Consectetur adipiscing elit</a></li>
+                                            <li><a href="">Integer molestie lorem at massa</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="btn-group">
+                                        <a class="btn single-btn" data-toggle="dropdown" href="#">
+                                            1 metric
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                                            <li><a href="">Consectetur adipiscing elit</a></li>
+                                            <li><a href="">Integer molestie lorem at massa</a></li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <button type="button" class="btn btn-transparent btn-add"><i class="adf-icon-small-add-circle blue-icon"></i> Add Dimension</button>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span12"><h3>Filters</h3><hr></div>
+                </div>
+                <div class="row">
+                    <div class="span1">.</div>
+                    <div class="span11">
+                        <ul class="sortable">
+                            <li><button type="button" class="btn btn-transparent btn-add"><i class="adf-icon-small-add-circle blue-icon"></i> Add Filter</button>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <script type="text/template" id="menu-template">
+
+    </script>
+
+    <script type="text/template" id="component-template">
+
+        <div id="menu">
+            <ul class="wizard-nav">
+                <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+                <li <%= data.activeList %>><a href="#list">List</a></li>
+            </ul>
+        </div>
+        
+        <div class="form-horizontal well">
+            <h1><%= data.viewTitle %></h1>
+            <div class="group-label">
+                <label>General information</label>
+                <hr />
+            </div>
+            <div class="control-group">
+                <label class="control-label">Title</label>
+                <div class="controls">
+                    <input class="input-large" type="text" id="input" data-validate="required" value="<%=data.model.Title%>" required>
+                    <span  data-msg="title"></span> 
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label">Type</label>
+                <div class="controls">
+                    <div class="radio-buttons horizontal">
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb1 comp-input" value="1">
+                            <label for="rb1">KPI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb2 comp-input" value="2">
+                            <label for="rb2">Table</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb3 comp-input" value="3">
+                            <label for="rb3">Timeline</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb4 comp-input" value="4">
+                            <label for="rb4">Chart</label>
+                        </div>
+                    </div>
+                    <span data-msg="type"></span>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+            <button class="btn" type="submit" id="component-submit">Submit</button>
+        </div>
+
+    </script>
+
+    <script type="text/template" id="component-list-template">
+
+
+        <div id="menu">
+            <ul class="wizard-nav">
+                <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+                <li <%= data.activeList %>><a href="#list">List</a></li>
+            </ul>
+        </div>
+
+        <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>                    
+                <% _.each(Components, function(model) { %>
+                    <tr class="component-list-item">
+                        <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
+                        <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
+                        <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
+                        <td class="del" id="<%= model.Id %>"><i class="adf-icon-small-close"></i></td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </script>
+
+    
+
+    <!-- </script> -->
+    <!--
+
+    <script src="scripts/lib/bootstrap.js"></script>
+    <script src="scripts/lib/bootstrap-tooltip.js"></script>
+    <script src="scripts/lib/handlebars.js"></script>
+    <script src="scripts/lib/underscore.js"></script>
+        -->
+    <!--<script src="scripts/lib/require.js"></script>-->
+    <!--   <script src="scripts/lib/backbone.js"></script>
+        <script src="scripts/lib/adform-select.js"></script>
+       <script src="scripts/lib/adform-checkbox.js"></script>   -->
+    <!--<script src="scripts/lib/adform-multi-level-select-0.2.0.js"></script>
+    <script src="scripts/lib/jquery.js"></script>
+    <script src="scripts/lib/jquery.sortable.js"></script>
+    <script>
+        $('.sortable').sortable();
+    </script>
+        -->
+</body>
+</html>

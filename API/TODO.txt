@@ -1,0 +1,44 @@
+
+
+
+TODO:
+
+
+1. XML Parameters (server IP)
+2. Service Installer
+3. Connection string encoding
+4. SQL command parameters (to prevent injections)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

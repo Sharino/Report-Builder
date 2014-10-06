@@ -1,0 +1,6 @@
+C:\Users\User\Desktop\UI\UI\bin\UI.dll.config
+C:\Users\User\Desktop\UI\UI\bin\UI.dll
+C:\Users\User\Desktop\UI\UI\bin\UI.pdb
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.dll
+C:\Users\User\Desktop\UI\UI\obj\Debug\UI.pdb
