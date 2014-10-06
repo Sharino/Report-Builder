@@ -8,9 +8,7 @@
 <body>
     <div id="app">
         <div id="menu"></div>
-        <div id="component">
-            <div id="metric"></div>
-        </div>
+        <div id="component"></div>
         <div id="list"></div>
     </div>
 
@@ -20,19 +18,19 @@
 
     <script type="text/template" id="metric-template">
         <div class="btn-group">
-			<a class="btn single-btn" data-toggle="dropdown" href="#">
-				1 metric
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li><a href="">Lorem ipsum dolor sit amet</a></li>
-				<li><a href="">Consectetur adipiscing elit</a></li>
-				<li><a href="">Integer molestie lorem at massa</a></li>
-			</ul>
-		</div>
+            <a class="btn single-btn" data-toggle="dropdown" href="#">
+                1 metric
+                <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+                <li><a href="">Lorem ipsum dolor sit amet</a></li>
+                <li><a href="">Consectetur adipiscing elit</a></li>
+                <li><a href="">Integer molestie lorem at massa</a></li>
+            </ul>
+        </div>
     </script>
 
-
+    
     <script type="text/template" id="component-template">
 
         <div id="menu">
@@ -41,7 +39,7 @@
                 <li <%= data.activeList %>><a href="#list">List</a></li>
             </ul>
         </div>
-        
+
         <div class="form-horizontal well">
             <h1><%= data.viewTitle %></h1>
             <div class="group-label">
@@ -52,7 +50,7 @@
                 <label class="control-label">Title</label>
                 <div class="controls">
                     <input class="input-large" type="text" id="input" data-validate="required" value="<%=data.model.Title%>" required>
-                    <span  data-msg="title"></span> 
+                    <span data-msg="title"></span>
                     <span class="help-inline"></span>
                 </div>
             </div>
@@ -81,14 +79,35 @@
                     <span class="help-inline"></span>
                 </div>
             </div>
-            <button class="btn" type="submit" id="component-submit">Submit</button>
+        </div>
+        <div id="metric-list" class="form-horizontal well">
+
+        </div>
+        <div class="form-horizontal well">
+            <button class="btn pull-right" type="submit" id="component-submit">Submit</button>
         </div>
 
     </script>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     <script type="text/template" id="component-list-template">
-
-
         <div id="menu">
             <ul class="wizard-nav">
                 <li <%= data.activeNew %>><a href="#create">Create new</a></li>
@@ -118,12 +137,13 @@
         </table>
     </script>
 
-    
+    <script src="scripts/lib/jquery.js"></script>
+    <script src="scripts/lib/jquery.sortable.js"></script>
+    <script src="http://localhost/media/_adform/bootstrap/js/bootstrap-dropdown.js"></script>
 
     <!-- </script> -->
     <!--
 
-    <script src="scripts/lib/bootstrap.js"></script>
     <script src="scripts/lib/bootstrap-tooltip.js"></script>
     <script src="scripts/lib/handlebars.js"></script>
     <script src="scripts/lib/underscore.js"></script>
@@ -133,8 +153,7 @@
         <script src="scripts/lib/adform-select.js"></script>
        <script src="scripts/lib/adform-checkbox.js"></script>   -->
     <!--<script src="scripts/lib/adform-multi-level-select-0.2.0.js"></script>
-    <script src="scripts/lib/jquery.js"></script>
-    <script src="scripts/lib/jquery.sortable.js"></script>
+    
     <script>
         $('.sortable').sortable();
     </script>
