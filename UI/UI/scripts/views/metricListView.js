@@ -6,7 +6,6 @@
     var MetricListView;
 
     MetricListView = Backbone.View.extend({
-        tagName: "li",
 
     });
 
