@@ -16,3 +16,12 @@ C:\Users\Administrator\Desktop\NewLipdau\Logging\bin\Debug\log4net.xml
 C:\Users\Administrator\Desktop\NewLipdau\Logging\obj\Debug\Logging.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\NewLipdau\Logging\obj\Debug\Logging.dll
 C:\Users\Administrator\Desktop\NewLipdau\Logging\obj\Debug\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\log4net.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\bin\Debug\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\obj\Debug\Logging.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\obj\Debug\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Logging\obj\Debug\Logging.pdb

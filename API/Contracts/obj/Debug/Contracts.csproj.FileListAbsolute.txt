@@ -7,3 +7,7 @@ C:\Users\Administrator\Desktop\NewLipdau\Contracts\bin\Debug\Contracts.dll
 C:\Users\Administrator\Desktop\NewLipdau\Contracts\bin\Debug\Contracts.pdb
 C:\Users\Administrator\Desktop\NewLipdau\Contracts\obj\Debug\Contracts.dll
 C:\Users\Administrator\Desktop\NewLipdau\Contracts\obj\Debug\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\bin\Debug\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\bin\Debug\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\obj\Debug\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\obj\Debug\Contracts.pdb
