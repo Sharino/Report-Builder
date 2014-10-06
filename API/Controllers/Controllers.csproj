@@ -69,9 +69,17 @@
       <Project>{ff379a77-489d-419c-b5b7-7f4bf3be1739}</Project>
       <Name>Contracts</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj">
+      <Project>{6a6a113f-672e-4537-acc0-ea44451faaae}</Project>
+      <Name>DataLayer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Logging\Logging.csproj">
       <Project>{5d679c76-30bd-4be6-b696-fe246d0356bf}</Project>
       <Name>Logging</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Models\Models.csproj">
+      <Project>{c9da6316-3784-43e4-9f25-e72c84b93c9d}</Project>
+      <Name>Models</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

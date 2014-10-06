@@ -7,7 +7,12 @@ using System.Linq;
 
 namespace DataLayer.Base
 {
-    public class ComponentRepository : IBaseRepository
+    public interface IComponentRepository: IBaseRepository
+    {
+    
+    }
+
+    public class ComponentRepository : IComponentRepository
     {
         private SqlConnection Connection;
         private IEnumerable<ReportComponent> Reports { get; set; }
@@ -94,6 +99,40 @@ namespace DataLayer.Base
                 Connection.Open();
                 command.ExecuteNonQuery();
                 Connection.Close();
+            }
+        }
+
+        public bool Exists(int id)
+        {
+            string sql = @"SELECT COUNT(*) FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
+            using (var command = new SqlCommand(sql, Connection))
+            {
+                Connection.Open();
+
+                command.Parameters.AddWithValue("@reportId", id);
+                int count = (int) command.ExecuteScalar();
+
+                Connection.Close();
+                if (count > 0)
+                    return true;
+                return false;
+            }
+        }
+
+        public int Update(ReportComponent report)
+        {
+            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = '" + report.Title + "' WHERE [ReportId] = " + report.Id;
+            using (var command = new SqlCommand(sql, Connection))
+            {
+                Connection.Open();
+                int id = 0;
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    id = Convert.ToInt32(result);
+                }
+                Connection.Close();
+                return 0;
             }
         }
     }

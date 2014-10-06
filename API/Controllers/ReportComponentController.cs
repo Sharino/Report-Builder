@@ -1,31 +1,33 @@
-﻿﻿using BussinessLogic.Handlers;
-using Logging;
-using Models.DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using BussinessLogic.Handlers;
+using BussinessLogic.Handlers.Base;
+using Contracts.Responses;
+using Logging;
+using Models.DTO;
 
-namespace Controllers
+
+namespace ApiHost.Apis
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ReportComponentController : ApiController
     {
         private Log Log;
-        private BaseHandler<ReportComponentDTO> ReportComponentHandler;
 
         public ReportComponentController()
         {
-            ReportComponentHandler = new ReportComponentHandler();
             Log = new Log("ReportComponentController");
         }
 
         [HttpGet]
         public HttpResponseMessage GetAll()
-        {
-            var response = ReportComponentHandler.GetAll();
-            if (response.Errors == null)
+        {            //TODO
+            BaseHandler<int, ReportComponentResponse> Handler = new GetAllHandler();
+            var response = Handler.Handle(0);
+            if (response.ReportComponentDtos != null)
             {
                 IEnumerable<ReportComponentDTO> reportComponentDtos = response.ReportComponentDtos;
                 return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
@@ -36,45 +38,50 @@ namespace Controllers
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            var response = ReportComponentHandler.Get(id);
-            if (response.Errors == null)
+            BaseHandler<int, ReportComponentResponse> Handler = new GetHandler();
+            var response = Handler.Handle(id);
+            if (response.ReportComponentDtos != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.NotFound, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
 
         [HttpPut]
-        public HttpResponseMessage AddPut(ReportComponentDTO reportDTO)
+        public HttpResponseMessage Update(ReportComponentDTO reportDto)
         {
-            var response = ReportComponentHandler.Add(reportDTO);
-            if (response.Errors == null)
+            var Handler = new UpdateHandler();
+            var response = Handler.Handle(reportDto);
+            if (response.ReportComponentDtos != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
+
         [HttpPost]
-        public HttpResponseMessage AddPost(ReportComponentDTO reportDTO)
+        public HttpResponseMessage Add(ReportComponentDTO reportDto)
         {
-            var response = ReportComponentHandler.Add(reportDTO);
-            if (response.Errors == null)
+            BaseHandler<ReportComponentDTO, ReportComponentResponse> Handler = new AddHandler();
+            var response = Handler.Handle(reportDto);
+            //if (response.ReportComponentDtos != null)
+            if (response.ReportComponentDtos == null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
         }
 
         [HttpDelete]
-        public HttpResponseMessage Remove(int id)
+        public HttpResponseMessage Delete(int id)
         {
-            var response = ReportComponentHandler.Remove(id);
-            if (response.Errors == null)
+            BaseHandler<int, ReportComponentResponse> Handler = new DeleteHandler();
+            var response = Handler.Handle(id);
+            if (response.ReportComponentDtos != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.NotFound, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
     }
 }
-

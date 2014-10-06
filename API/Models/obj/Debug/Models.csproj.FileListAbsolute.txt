@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\clone\Report-Builder\API\Models\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\clone\Report-Builder\API\Models\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\clone\Report-Builder\API\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\clone\Report-Builder\API\Models\obj\Debug\Models.dll
+C:\Users\Administrator\Desktop\clone\Report-Builder\API\Models\obj\Debug\Models.pdb
+C:\Users\Administrator\Desktop\NewLipdau\Models\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\NewLipdau\Models\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\NewLipdau\Models\obj\Debug\Models.dll
+C:\Users\Administrator\Desktop\NewLipdau\Models\obj\Debug\Models.pdb

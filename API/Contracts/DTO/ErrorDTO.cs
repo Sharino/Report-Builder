@@ -4,18 +4,11 @@ namespace Contracts.DTO
 {
     public class ErrorDTO
     {
-        public ErrorDTO(string code, string message, string errorNum)
-        {
-            Code = code;
-            Message = message;
-            ErrorNum = errorNum;
-        }
-
         public ErrorDTO(string code, string message, DateTime errorNum)
         {
             Code = code;
             Message = message;
-            ErrorNum = errorNum.ToLongTimeString();
+            ErrorNum = errorNum.ToShortDateString() + " " + errorNum.ToLongTimeString();
         }
 
         public string Code { get; set; }
