@@ -8,6 +8,7 @@
         'backbone':             'scripts/lib/backbone',
         'handlebars':           'scripts/lib/handlebars',
         'bootstrap':            'scripts/lib/bootstrap',
+        'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
         'adform-checkbox':      'scripts/lib/adform-checkbox',
         'adform-select':        'scripts/lib/adform-select',

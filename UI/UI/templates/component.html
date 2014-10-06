@@ -1,0 +1,48 @@
+﻿<div id="menu">
+    <ul class="wizard-nav">
+        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+        <li <%= data.activeList %>><a href="#list">List</a></li>
+    </ul>
+</div>
+
+<div class="form-horizontal well">
+    <h1><%= data.viewTitle %></h1>
+    <div class="group-label">
+        <label>General information</label>
+        <hr />
+    </div>
+    <div class="control-group">
+        <label class="control-label">Title</label>
+        <div class="controls">
+            <input class="input-large" type="text" id="input" data-validate="required" value="<%=data.model.Title%>" required>
+            <span data-msg="title"></span>
+            <span class="help-inline"></span>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Type</label>
+        <div class="controls">
+            <div class="radio-buttons horizontal">
+                <div class="radio-group">
+                    <input type="radio" name="type-options" id="rb1 comp-input" value="1">
+                    <label for="rb1">KPI</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" name="type-options" id="rb2 comp-input" value="2">
+                    <label for="rb2">Table</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" name="type-options" id="rb3 comp-input" value="3">
+                    <label for="rb3">Timeline</label>
+                </div>
+                <div class="radio-group">
+                    <input type="radio" name="type-options" id="rb4 comp-input" value="4">
+                    <label for="rb4">Chart</label>
+                </div>
+            </div>
+            <span data-msg="type"></span>
+            <span class="help-inline"></span>
+        </div>
+    </div>
+    <button class="btn" type="submit" id="component-submit">Submit</button>
+</div>

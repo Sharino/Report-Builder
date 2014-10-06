@@ -74,6 +74,7 @@
     <Content Include="scripts\lib\jquery.sortable.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
+    <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\models\app.js" />
@@ -86,6 +87,8 @@
     <Content Include="scripts\views\componentView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\site.css" />
+    <Content Include="templates\component.html" />
+    <Content Include="templates\componentList.html" />
     <Content Include="tests.html" />
     <Content Include="tests.js" />
     <Content Include="Web.config" />

@@ -4,12 +4,13 @@
     'backbone',
     'Component',
     'MetricView',
+    'text!templates/component.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricView, AdformNotification) {
+], function ($, _, Backbone, Component, MetricView, componentTemplate, AdformNotification) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
-        template: _.template($("#component-template").html()),
+        template: _.template(componentTemplate),
         model: new Component(),
         
         initialize: function () {

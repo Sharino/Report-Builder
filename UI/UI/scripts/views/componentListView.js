@@ -3,12 +3,13 @@
     'underscore',
     'backbone',
     'ComponentCollection',
+    'text!templates/componentList.html',
     'adform-notifications'
-], function ($, _, Backbone, ComponentCollection, AdformNotification) {
+], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification) {
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
-        template: _.template($("#component-list-template").html()),
+        template: _.template(componentListTemplate),
 
         initialize: function () {
             if (this.collection) {
