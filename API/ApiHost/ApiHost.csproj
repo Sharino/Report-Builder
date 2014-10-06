@@ -155,7 +155,7 @@
       <Name>Contracts</Name>
     </ProjectReference>
     <ProjectReference Include="..\Controllers\Controllers.csproj">
-      <Project>{d9f375fd-466b-40f9-a745-212991a1e34f}</Project>
+      <Project>{0046a894-413a-4f2c-80a8-b2948065f1c0}</Project>
       <Name>Controllers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Logging\Logging.csproj">
