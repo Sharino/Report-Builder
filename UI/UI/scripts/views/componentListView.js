@@ -24,7 +24,6 @@
             //this.render;
         },
         render: function () {
-
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -53,8 +52,8 @@
         },
         
         events: {
-        'click .component-list-item>.del': 'onDelete',
-        'click .component-list-item>.click': 'onClick',
+            'click .component-list-item>.del': 'onDelete',
+            'click .component-list-item>.click': 'onClick',
         },
         
         onClick: function (e) {

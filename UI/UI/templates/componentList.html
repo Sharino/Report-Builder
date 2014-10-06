@@ -16,12 +16,12 @@
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
-        <tr class="component-list-item">
-            <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
-            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
-            <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
-            <td class="del" id="<%= model.Id %>"><i class="adf-icon-small-close"></i></td>
-        </tr>
+            <tr class="component-list-item">
+                <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
+                <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
+                <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
+                <td class="del" id="<%= model.Id %>"><i class="adf-icon-small-close"></i></td>
+            </tr>
         <% }); %>
     </tbody>
 </table>

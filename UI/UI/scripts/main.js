@@ -13,6 +13,7 @@
         'adform-checkbox':      'scripts/lib/adform-checkbox',
         'adform-select':        'scripts/lib/adform-select',
         'adform-notifications': 'scripts/lib/adform-notifications',
+        'Sortable':             'scripts/lib/jquery.sortable',
         'Tests':                'tests',
 
         /* Model dependencies */
@@ -22,12 +23,15 @@
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
+        'MetricCollection':     'scripts/collections/metricCollection',
+
 
         /* View dependencies */
         'ComponentView':        'scripts/views/componentView',
         'ComponentListView':    'scripts/views/componentListView',
         'MenuView':             'scripts/views/menuView',
         'MetricView':           'scripts/views/metricView',
+        'MetricListView':       'scripts/views/metricListView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router'

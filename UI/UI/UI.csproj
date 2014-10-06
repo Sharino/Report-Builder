@@ -89,6 +89,7 @@
     <Content Include="styles\site.css" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
+    <Content Include="templates\metricList.html" />
     <Content Include="tests.html" />
     <Content Include="tests.js" />
     <Content Include="Web.config" />

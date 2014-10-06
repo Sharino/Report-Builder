@@ -1,8 +1,9 @@
 ﻿define('MetricCollection', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+    'backbone',
+    'Metric'
+], function ($, _, Backbone, Metric) {
     var MetricCollection;
 
     MetricCollection = Backbone.Collection.extend({

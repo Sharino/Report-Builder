@@ -3,17 +3,34 @@
     'underscore',
     'backbone',
     'Component',
-    'MetricView',
+    'MetricListView',
     'text!templates/component.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricView, componentTemplate, AdformNotification) {
+], function ($, _, Backbone, Component, MetricListView, componentTemplate, AdformNotification) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
         template: _.template(componentTemplate),
         model: new Component(),
-        
+
+        events: {
+            'click #component-submit': 'submit',
+        },
+
         initialize: function () {
+        },
+
+        inputTitle: function () {
+            return $('#input').val();
+        },
+
+        inputType: function () {
+            var selected = $("input:radio[name=type-options]:checked").val();
+            if (selected != undefined) {
+                return parseInt(selected);
+            } else {
+                return 0;
+            }
         },
 
         render: function () {
@@ -49,14 +66,10 @@
             }
 
             this.assign({
-                '#metric-list': new MetricView
+                '#metric-list': new MetricListView
             });
 
             return this;
-        },
-
-        events: {
-            'click #component-submit': 'submit',
         },
 
         submit: function () {
@@ -104,18 +117,6 @@
             return false;
         },
 
-        inputTitle: function () {
-            return $('#input').val();
-        },
-
-        inputType: function () {
-            var selected = $("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
-            }
-        },
         assign: function (selector, view) {
             var selectors;
             if (_.isObject(selector)) {
