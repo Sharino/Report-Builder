@@ -5,7 +5,7 @@
 ], function ($, _, Backbone) {
     var Metric;
 
-    Metric = Backbone.Model.extend
+    Metric = Backbone.Model.extend({
 		// TODO: Add urlRoot for Metric API.
     });
 

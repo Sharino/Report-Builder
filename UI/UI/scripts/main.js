@@ -2,24 +2,34 @@
     //By default load any module IDs from scripts/lib
     baseUrl: '',
     paths: {
-        'jquery': 'scripts/lib/jquery',
-        'underscore': 'scripts/lib/underscore',
-        'backbone': 'scripts/lib/backbone',
-        'handlebars': 'scripts/lib/handlebars',
-        'bootstrap': 'scripts/lib/bootstrap',
-        'Tests': 'tests',
-        'jquery-sortable': 'scripts/lib/jquery.sortable',
-        'adform-checkbox': 'scripts/lib/adform-checkbox',
-        'adform-select': 'scripts/lib/adform-select',
+        /* External dependencies */
+        'jquery':               'scripts/lib/jquery',
+        'underscore':           'scripts/lib/underscore',
+        'backbone':             'scripts/lib/backbone',
+        'handlebars':           'scripts/lib/handlebars',
+        'bootstrap':            'scripts/lib/bootstrap',
+        'jquery-sortable':      'scripts/lib/jquery.sortable',
+        'adform-checkbox':      'scripts/lib/adform-checkbox',
+        'adform-select':        'scripts/lib/adform-select',
         'adform-notifications': 'scripts/lib/adform-notifications',
-        'App': 'scripts/models/app',
-        'Router' : 'scripts/routers/router',
-        'Component': 'scripts/models/component',
-        'ComponentCollection': 'scripts/collections/componentCollection',
-        'ComponentView': 'scripts/views/componentView',
-        'ComponentListView': 'scripts/views/componentListView',
-        'MenuView': 'scripts/views/menuView'
+        'Tests':                'tests',
 
+        /* Model dependencies */
+        'App':                  'scripts/models/app',
+        'Component':            'scripts/models/component',
+        'Metric':               'scripts/models/metric',
+
+        /* Collection dependencies */
+        'ComponentCollection':  'scripts/collections/componentCollection',
+
+        /* View dependencies */
+        'ComponentView':        'scripts/views/componentView',
+        'ComponentListView':    'scripts/views/componentListView',
+        'MenuView':             'scripts/views/menuView',
+        'MetricView':           'scripts/views/metricView',
+
+        /* Router dependencies */
+        'Router':               'scripts/routers/router'
     },
     shim: {
         'backbone': {

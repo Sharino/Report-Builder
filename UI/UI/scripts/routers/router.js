@@ -23,7 +23,7 @@
         },
 
         create: function () {
-            this.showView("#screen", new ComponentView({ model: new Component() }));
+            this.showView("#component", new ComponentView({ model: new Component() }));
         },
 
         list: function () {
@@ -33,11 +33,11 @@
             this.ComponentsCollection.fetch({
                 success: function (model, response) {
                     console.log("fetch OK", model.toJSON());
-                    self.showView("#screen", new ComponentListView({ collection: model }));
+                    self.showView("#list", new ComponentListView({ collection: model }));
                 },
                 error: function (model, response) {
                     console.log("fetch FAIL");
-                    self.showView("#screen", new ComponentListView({ collection: null }));
+                    self.showView("#list", new ComponentListView({ collection: null }));
 
                 }
             });
@@ -49,7 +49,7 @@
             tempComponentModel.fetch({
                 success: function (model, response) {
                     console.log("GET", id, "Success", model, response);
-                    self.showView("#screen", new ComponentView({model: model}));
+                    self.showView("#component", new ComponentView({model: model}));
                 },
                 error: function (model, response) {
                     console.log("GET", id, "Fail", model, response);

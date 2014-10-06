@@ -3,8 +3,9 @@
     'underscore',
     'backbone',
     'Component',
+    'MetricView',
     'adform-notifications'
-], function ($, _, Backbone, Component, AdformNotification) {
+], function ($, _, Backbone, Component, MetricView, AdformNotification) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
@@ -45,6 +46,9 @@
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
             }
+
+            this.assign(new MetricView, "#metrics");
+
             return this;
         },
 
@@ -109,6 +113,9 @@
                 return 0;
             }
         },
+        assign: function (view, selector) {
+            view.setElement(this.$(selector)).render();
+        }
            
     });
 
