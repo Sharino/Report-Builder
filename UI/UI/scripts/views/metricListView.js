@@ -12,14 +12,26 @@
 
     MetricListView = Backbone.View.extend({
         template: _.template(MetricListTemplate),
-        collection: new MetricCollection(),
+
+        events: {
+            'click #addMetric': 'addMetric',
+        },
+
+        initialize: function () {
+            this.collection = new MetricCollection();
+            this.collection.on('add', this.render, this);
+        },
 
         render: function () {
-            this.collection.add([
-               { Title: "Metric 1" },
-               { Title: "Black Pearl" }
-            ]);
             this.$el.html(this.template({ "Metrics": this.collection.toJSON() }));
+        },
+
+        addMetric: function () {
+            this.collection.add([
+               { Title: "Metric" + this.collection.length }
+            ]);
+
+            console.log(this, this.collection.toJSON());
         }
     });
 

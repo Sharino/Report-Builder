@@ -11,6 +11,11 @@
     ComponentListView = Backbone.View.extend({
         template: _.template(componentListTemplate),
 
+        events: {
+            'click .component-list-item>.del': 'onDelete',
+            'click .component-list-item>.click': 'onClick',
+        },
+
         initialize: function () {
             if (this.collection) {
                 this.collection.on('remove', this.render, this);
@@ -49,11 +54,6 @@
                 }));
             }
             return this;
-        },
-        
-        events: {
-            'click .component-list-item>.del': 'onDelete',
-            'click .component-list-item>.click': 'onClick',
         },
         
         onClick: function (e) {

@@ -71,6 +71,14 @@ require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView
         }
         this.remove();
         this.unbind();
+
+        //console.log("this.childViews", this.childViews);
+        _.each(this.childViews, function (childView) {
+            if (childView.close) {
+                childView.close();
+            }
+        });
+        this.childViews = [];
     };
 
     var app = new Router();

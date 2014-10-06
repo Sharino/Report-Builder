@@ -3,21 +3,23 @@
     'underscore',
     'backbone',
     'Component',
+    'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricListView, componentTemplate, AdformNotification) {
+], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
         template: _.template(componentTemplate),
-        model: new Component(),
 
         events: {
             'click #component-submit': 'submit',
         },
 
         initialize: function () {
+            //console.log("componentView.childViews", this.childViews);
+            this.childViews = [];       // Store child views for easy closing.
         },
 
         inputTitle: function () {
@@ -68,7 +70,7 @@
             this.assign({
                 '#metric-list': new MetricListView
             });
-
+            
             return this;
         },
 
@@ -128,8 +130,11 @@
             }
             if (!selectors) return;
             _.each(selectors, function (view, selector) {
+                this.childViews.push(view);
                 view.setElement(this.$(selector)).render();
             }, this);
+            //console.log("componentView.assign this.childViews", this.childViews);
+
         }
            
     });
