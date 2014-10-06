@@ -48,7 +48,9 @@
                 this.$el.html(this.template(templVariables));
             }
 
-            this.assign(new MetricView, "#metrics");
+            this.assign({
+                '#metric-list': new MetricView
+            });
 
             return this;
         },
@@ -114,8 +116,19 @@
                 return 0;
             }
         },
-        assign: function (view, selector) {
-            view.setElement(this.$(selector)).render();
+        assign: function (selector, view) {
+            var selectors;
+            if (_.isObject(selector)) {
+                selectors = selector;
+            }
+            else {
+                selectors = {};
+                selectors[selector] = view;
+            }
+            if (!selectors) return;
+            _.each(selectors, function (view, selector) {
+                view.setElement(this.$(selector)).render();
+            }, this);
         }
            
     });
