@@ -53,10 +53,11 @@ namespace DataLayer.Base
         public ReportComponent Get(int id)
         {
             //TODO command parameter
-            string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [ReportId] = " + id;
+            string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
+                command.Parameters.AddWithValue("@reportId", id);
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
@@ -73,10 +74,11 @@ namespace DataLayer.Base
         /// <returns>Returns the ID of created entry</returns>
         public int Add(ReportComponent reportComponent)
         {
-            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title) VALUES ('" + reportComponent.Title + "'); SELECT @@IDENTITY;";
+            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title) VALUES (@reportTitle); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
+                command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -93,10 +95,11 @@ namespace DataLayer.Base
 
         public void Remove(int id)
         {
-            string sql = @"DELETE FROM [dbo].[ReportComponents] WHERE [ReportId] = " + id;
+            string sql = @"DELETE FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
+                command.Parameters.AddWithValue("@reportId", id);
                 command.ExecuteNonQuery();
                 Connection.Close();
             }
@@ -121,10 +124,12 @@ namespace DataLayer.Base
 
         public int Update(ReportComponent report)
         {
-            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = '" + report.Title + "' WHERE [ReportId] = " + report.Id;
+            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
+                command.Parameters.AddWithValue("@reportTitle", report.Title);
+                command.Parameters.AddWithValue("@reportId", report.Id);
                 int id = 0;
                 object result = command.ExecuteScalar();
                 if (result != null)
