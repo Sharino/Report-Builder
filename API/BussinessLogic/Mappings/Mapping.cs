@@ -33,17 +33,6 @@ namespace BussinessLogic.Mapping
 
             return dtos.AsEnumerable();
         }
-             
-        public shit()
-        {
-            var sth = new List<Metric>() {};
-
-            foreach (var metric in sth)
-            {
-                
-            }
-
-        }
 
         public MetricDTO MetricToDto(Metric metric)
         {
@@ -65,6 +54,8 @@ namespace BussinessLogic.Mapping
             report.Title = dto.Title;
             report.SubmissionDate = DateTime.Now;
             report.ComponentType = 1;
+
+            return report;
         }
 
         public ReportComponentDTO ReportComponentToDto(ReportComponent report)
@@ -73,6 +64,8 @@ namespace BussinessLogic.Mapping
 
             dto.Id = report.Id;
             dto.Title = report.Title;
+
+            return dto;
         }
 
     }
