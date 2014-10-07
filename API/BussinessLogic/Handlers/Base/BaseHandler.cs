@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using Contracts.DTO;
+using Logging;
 
 namespace BussinessLogic.Handlers
 {
     public abstract class BaseHandler<TRequest, TResponse>
     {
         protected TResponse Response;
-
-        public List<ErrorDTO> VAlidationMessages; 
+        private Log Log;
+        public List<ErrorDTO> ValidationMessages; 
 
         public TResponse Handle(TRequest request)
         {
@@ -19,6 +20,7 @@ namespace BussinessLogic.Handlers
             }
             catch (Exception exception)
             {
+                Log.Error(exception.ToString());
                 return Response;
             }
             return Response;

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Contracts.DTO;
 using Models.DTO;
 using Models.Models;
 

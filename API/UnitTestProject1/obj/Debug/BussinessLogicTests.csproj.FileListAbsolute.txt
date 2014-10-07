@@ -34,3 +34,7 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\obj\Debug\BussinessLogicTests.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\obj\Debug\UnitTests.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\obj\Debug\UnitTests.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\bin\Debug\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\bin\Debug\log4net.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\bin\Debug\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\bin\Debug\log4net.xml
