@@ -19,10 +19,3 @@ C:\Users\Administrator\Desktop\Report-Builder\API\DataLayer\bin\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\DataLayer\obj\Debug\DataLayer.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\bin\Debug\DataLayer.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\bin\Debug\DataLayer.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\bin\Debug\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\bin\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\obj\Debug\DataLayer.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\DataLayer\obj\Debug\DataLayer.pdb

@@ -35,10 +35,6 @@ namespace Contracts.Responses
 
 
         public List<ErrorDTO> Errors { get; set; }
-
-        /// <summary>
-        /// Access: objectName.ReportComponentDtos[0] if singular (e.g. Get)
-        /// </summary>
         public List<ReportComponentDTO> ReportComponentDtos { get; set; }
     }
 }
