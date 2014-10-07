@@ -8,6 +8,7 @@ namespace ApiHost
     public class Startup
     {
         //  Hack from http://stackoverflow.com/a/17227764/19020 to load controllers in another assembly. 
+        //TODO place startup.cs at contoller dll
         System.Type valuesControllerType = typeof(ReportComponentController);
 
         public void Configuration(IAppBuilder appBuilder)

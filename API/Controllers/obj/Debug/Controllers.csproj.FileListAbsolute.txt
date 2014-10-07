@@ -56,7 +56,6 @@ C:\Users\Administrator\Desktop\NewLipdau\Controllers\obj\Debug\Controllers.cspro
 C:\Users\Administrator\Desktop\NewLipdau\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\NewLipdau\Controllers\obj\Debug\Controllers.pdb
 C:\Users\Administrator\Desktop\NewLipdau\Controllers\bin\Debug\AutoMapper.Net4.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\Controllers.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\BussinessLogic.dll
@@ -114,3 +113,4 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\log4net.xml
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\obj\Debug\Controllers.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll

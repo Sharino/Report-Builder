@@ -29,33 +29,60 @@ namespace DataLayer.Repositories
 
         public IEnumerable<Metric> GetAll()
         {
-            string sql = @"SELECT * FROM [dbo].[Metrics]";
+            var list = new List<Metric>();
+            Connection.Open();
+            string sql = @" SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
+	                        FROM [dbo].[Metrics] 
+	                        JOIN [dbo].[MetricDescriptions]
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
+	                        JOIN [dbo].[MetricName]
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].NameID
+	                        LEFT JOIN [dbo].[MetricGroupMap]
+		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMap].MetricID
+	                        LEFT JOIN [dbo].[MetricGroups]	
+		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMap].GroupID";
             using (var command = new SqlCommand(sql, Connection))
             {
-                Connection.Open();
+ 
                 using (var reader = command.ExecuteReader())
                 {
-                    var list = new List<Metric>();
                     while (reader.Read())
                     {
                         var component = new Metric();
                         component.MetricId = reader.GetInt32(0);
                         component.Mnemonic = reader.GetString(1);
-                        component.Description = "";
-                        component.Group = new MetricGroup();
-                        component.DisplayName = "TESTINIS";
+                        component.Description = reader.GetString(2);
+                        component.DisplayName = reader.GetString(3);
+                        component.Group = new MetricGroup()
+                        {
+                            GroupId = reader.GetInt32(4),
+                            GroupName = reader.GetString(5)
+                        };
+          
                         list.Add(component);
                     }
-                    Connection.Close();
-                    return list.AsEnumerable();
+           
+  
                 }
             }
+            Connection.Close();
+            return list.AsEnumerable();
         }
 
         public Metric Get(int id)
         {
             //TODO command parameter
-            string sql = @"SELECT * FROM [dbo].[Metrics] WHERE [ID] = @MetricId";
+            string sql = @"SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
+	                        FROM [dbo].[Metrics] 
+	                        JOIN [dbo].[MetricDescriptions]
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
+	                        JOIN [dbo].[MetricName]
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].NameID
+	                        LEFT JOIN [dbo].[MetricGroupMap]
+		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMap].MetricID
+	                        LEFT JOIN [dbo].[MetricGroups]	
+		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMap].GroupID
+	                        WHERE [dbo].[Metrics].ID = @MetricId ";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
@@ -66,11 +93,15 @@ namespace DataLayer.Repositories
                     //TODO: refactor
                     var item = new Metric()
                     {
-                        MetricId = reader.GetInt32(0), 
+                        MetricId = reader.GetInt32(0),
                         Mnemonic = reader.GetString(1),
-                        DisplayName = "TESTINIS",
-                        Description = "",
+                        Description = reader.GetString(2),
+                        DisplayName = reader.GetString(3),
                         Group = new MetricGroup()
+                        {
+                            GroupId = reader.GetInt32(4),
+                            GroupName = reader.GetString(5)
+                        }
                     };
                     Connection.Close();
                     return item;

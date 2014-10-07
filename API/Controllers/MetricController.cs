@@ -1,6 +1,9 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using BussinessLogic.Handlers.MetricHandlers;
+using Contracts.DTO;
 using Logging;
 
 namespace Controllers
@@ -17,15 +20,26 @@ namespace Controllers
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
-            //handler handle
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            var handler = new MetricGetAllHandler();
+            var response = handler.Handle(0);
+            if (response.MetricDtos != null)
+            {
+                IEnumerable<MetricDTO> metricDtos = response.MetricDtos;
+                return Request.CreateResponse(HttpStatusCode.OK, metricDtos);
+            }
+            return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
         }
 
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            //handler handle
-            return new HttpResponseMessage(HttpStatusCode.OK);
+            var handler = new MetricGetHandler();
+            var response = handler.Handle(id);
+            if (response.MetricDtos != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
         }
     }
 }

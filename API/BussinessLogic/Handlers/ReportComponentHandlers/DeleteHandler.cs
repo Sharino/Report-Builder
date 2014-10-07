@@ -1,6 +1,6 @@
 ﻿using System;
 using AutoMapper;
-using BussinessLogic.Mapping;
+using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Base;

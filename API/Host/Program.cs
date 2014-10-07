@@ -64,7 +64,6 @@ namespace ApiHost
                             sw.WriteLine("sc delete \"Report Builder\"");
                             sw.WriteLine("sc create \"Report Builder\" binpath= \"" + location + "\"");
                             sw.WriteLine("sc start \"Report Builder\"");
-                            sw.WriteLine("cls");
                         }
                     }
                 }
@@ -90,7 +89,10 @@ namespace ApiHost
         private static void Start(string[] args)
         {
             var ip = ConfigurationManager.AppSettings["ip"];
-            _webHost = WebApp.Start<Startup>(ip);
+
+            const string baseurl = "http://172.22.3.236:33895/";
+
+            _webHost = WebApp.Start<Startup>(baseurl);
         }
 
         private static void Stop()

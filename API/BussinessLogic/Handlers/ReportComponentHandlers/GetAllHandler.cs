@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using BussinessLogic.Mapping;
+using BussinessLogic.Mappings;
 using Contracts.Responses;
 using DataLayer.Base;
 using DataLayer.Repositories;

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using AutoMapper;
-using BussinessLogic.Mapping;
+using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
@@ -9,11 +9,11 @@ using Models.Models;
 
 namespace BussinessLogic.Handlers.MetricHandlers
 {
-    public partial class GetAllHandler : BaseHandler<int, MetricResponse>
+    public partial class MetricGetAllHandler : BaseHandler<int, MetricResponse>
     {
         private readonly IMetricsRepository _repository;
 
-        public GetAllHandler(IMetricsRepository repository = null)
+        public MetricGetAllHandler(IMetricsRepository repository = null)
         {
             if (repository == null)
                 _repository = new MetricRepository();
@@ -21,10 +21,10 @@ namespace BussinessLogic.Handlers.MetricHandlers
         }
         public override MetricResponse HandleCore(int request)
         {
-            Map.MapReportComponents();
+            var mapper = new Mapping();
             var metrics = _repository.GetAll().OrderBy(x => x.MetricId);
-            var metricDtos = Mapper.Map<IEnumerable<Metric>, IEnumerable<MetricDTO>>(metrics);
-            return new MetricResponse(metricDtos.ToList());
+            var dtos = mapper.MetricToDto(metrics.ToList());
+            return new MetricResponse(dtos.ToList());
         }
 
         public override bool Validate(int request)

@@ -5,7 +5,7 @@ using Contracts.DTO;
 using Models.DTO;
 using Models.Models;
 
-namespace BussinessLogic.Mapping
+namespace BussinessLogic.Mappings
 {
     public class Mapping
     {

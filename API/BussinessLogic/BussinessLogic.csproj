@@ -45,8 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Handlers\MetricHandlers\GetAllHandler.cs" />
-    <Compile Include="Handlers\MetricHandlers\GetHandler.cs" />
+    <Compile Include="Handlers\MetricHandlers\MetricGetAllHandler.cs" />
+    <Compile Include="Handlers\MetricHandlers\MetricGetHandler.cs" />
     <Compile Include="Handlers\ReportComponentHandlers\AddHandler.cs" />
     <Compile Include="Handlers\Base\BaseHandler.cs" />
     <Compile Include="Handlers\ReportComponentHandlers\DeleteHandler.cs" />
