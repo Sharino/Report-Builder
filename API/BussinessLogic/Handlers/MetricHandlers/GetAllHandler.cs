@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using AutoMapper;
-using BussinessLogic.Mappings;
+using BussinessLogic.Mapping;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
-using Models.DTO;
 using Models.Models;
 
 namespace BussinessLogic.Handlers.MetricHandlers

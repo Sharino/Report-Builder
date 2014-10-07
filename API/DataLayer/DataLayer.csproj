@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\MetricRepository.cs" />
     <Compile Include="Repositories\ReportComponentsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

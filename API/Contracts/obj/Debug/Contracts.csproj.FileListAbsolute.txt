@@ -11,3 +11,10 @@ C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\bin\Debug\Contracts.
 C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\bin\Debug\Contracts.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\obj\Debug\Contracts.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\Contracts\obj\Debug\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\bin\Debug\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\bin\Debug\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\obj\Debug\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Contracts\obj\Debug\Contracts.pdb
