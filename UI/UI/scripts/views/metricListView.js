@@ -36,6 +36,7 @@
             var self = this;
             /* Initialize sortable list. */
             $('.sortable').sortable({
+                handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 forcePlaceholderSize: true,
                 placeholder: '<li>Placeholder</li>'

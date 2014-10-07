@@ -5,22 +5,27 @@
     </div>
     <ul class="sortable">
         <% _.each(Metrics, function(model) { %>
-            <li draggable="true" class="" style="display: inline;">
+            <li draggable="true" class="">
                 <div class="btn-group">
                     <label class="btn single-btn" data-toggle="">
+                        <i class="handle adf-icon-alt-drag"></i>
                         <%= model.Title %>
                     </label>
-                    <a class="btn single-btn" data-toggle="dropdown" href="#" style="height: 18px;">
+                    <a class="btn single-btn" data-toggle="dropdown" href="#">
                         <i class="adf-icon-small-dropdown"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        Cia bus metrikos
+                        <li>Cia bus metrikos</li>
                     </ul>
                 </div>
 
             </li>
         <% }); %>
-        <button type="button" id="addMetric" class="btn btn-transparent btn-add"><i class="adf-icon-small-add-circle blue-icon"></i> Add Metric</button>
+        <li>
+            <button type="button" id="addMetric" class="btn btn-transparent btn-add">
+                <i class="adf-icon-small-add-circle blue-icon"></i> Add Metric
+            </button>
+        </li> 
     </ul>
 </div>
 
