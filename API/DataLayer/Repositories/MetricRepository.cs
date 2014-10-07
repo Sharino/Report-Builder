@@ -5,13 +5,13 @@ using Models.Models;
 
 namespace DataLayer.Repositories
 {
-    public interface IMetrics 
+    public interface IMetricsRepository
     {
         IEnumerable<Metric> GetAll();
         Metric Get(int id);
         bool Exists(int id);
     }
-    public class MetricRepository : IMetrics
+    public class MetricRepository : IMetricsRepository
     {
         private SqlConnection Connection;
         private IEnumerable<Metric> Reports { get; set; }
