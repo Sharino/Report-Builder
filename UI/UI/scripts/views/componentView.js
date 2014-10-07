@@ -3,15 +3,36 @@
     'underscore',
     'backbone',
     'Component',
+    'MetricCollection',
+    'MetricListView',
+    'text!templates/component.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, AdformNotification) {
+], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
-        template: _.template($("#component-template").html()),
-        model: new Component(),
-        
+        template: _.template(componentTemplate),
+
+        events: {
+            'click #component-submit': 'submit',
+        },
+
         initialize: function () {
+            //console.log("componentView.childViews", this.childViews);
+            this.childViews = [];       // Store child views for easy closing.
+        },
+
+        inputTitle: function () {
+            return $('#input').val();
+        },
+
+        inputType: function () {
+            var selected = $("input:radio[name=type-options]:checked").val();
+            if (selected != undefined) {
+                return parseInt(selected);
+            } else {
+                return 0;
+            }
         },
 
         render: function () {
@@ -45,11 +66,12 @@
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
             }
-            return this;
-        },
 
-        events: {
-            'click #component-submit': 'submit',
+            this.assign({
+                '#metric-list': new MetricListView
+            });
+            
+            return this;
         },
 
         submit: function () {
@@ -97,18 +119,23 @@
             return false;
         },
 
-        inputTitle: function () {
-            return $('#input').val();
-        },
-
-        inputType: function () {
-            var selected = $("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
+        assign: function (selector, view) {
+            var selectors;
+            if (_.isObject(selector)) {
+                selectors = selector;
             }
-        },
+            else {
+                selectors = {};
+                selectors[selector] = view;
+            }
+            if (!selectors) return;
+            _.each(selectors, function (view, selector) {
+                this.childViews.push(view);
+                view.setElement(this.$(selector)).render();
+            }, this);
+            //console.log("componentView.assign this.childViews", this.childViews);
+
+        }
            
     });
 

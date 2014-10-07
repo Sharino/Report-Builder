@@ -4,6 +4,21 @@
     padding-right: 20px;
 }
 
+.sortable-placeholder{
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px dashed;
+    border-radius: 4px;
+    border-color: #353535;
+}
+
 .wizard-nav, .component-listView, .form-horizontal.well {
     width: 800px;
     margin-left: auto;

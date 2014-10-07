@@ -2,24 +2,39 @@
     //By default load any module IDs from scripts/lib
     baseUrl: '',
     paths: {
-        'jquery': 'scripts/lib/jquery',
-        'underscore': 'scripts/lib/underscore',
-        'backbone': 'scripts/lib/backbone',
-        'handlebars': 'scripts/lib/handlebars',
-        'bootstrap': 'scripts/lib/bootstrap',
-        'Tests': 'tests',
-        'jquery-sortable': 'scripts/lib/jquery.sortable',
-        'adform-checkbox': 'scripts/lib/adform-checkbox',
-        'adform-select': 'scripts/lib/adform-select',
+        /* External dependencies */
+        'jquery':               'scripts/lib/jquery',
+        'underscore':           'scripts/lib/underscore',
+        'backbone':             'scripts/lib/backbone',
+        'handlebars':           'scripts/lib/handlebars',
+        'bootstrap':            'scripts/lib/bootstrap',
+        'text':                 'scripts/lib/text',
+        'jquery-sortable':      'scripts/lib/jquery.sortable',
+        'adform-checkbox':      'scripts/lib/adform-checkbox',
+        'adform-select':        'scripts/lib/adform-select',
         'adform-notifications': 'scripts/lib/adform-notifications',
-        'App': 'scripts/models/app',
-        'Router' : 'scripts/routers/router',
-        'Component': 'scripts/models/component',
-        'ComponentCollection': 'scripts/collections/componentCollection',
-        'ComponentView': 'scripts/views/componentView',
-        'ComponentListView': 'scripts/views/componentListView',
-        'MenuView': 'scripts/views/menuView'
+        'Sortable':             'scripts/lib/jquery.sortable',
+        'Tests':                'tests',
 
+        /* Model dependencies */
+        'App':                  'scripts/models/app',
+        'Component':            'scripts/models/component',
+        'Metric':               'scripts/models/metric',
+
+        /* Collection dependencies */
+        'ComponentCollection':  'scripts/collections/componentCollection',
+        'MetricCollection':     'scripts/collections/metricCollection',
+
+
+        /* View dependencies */
+        'ComponentView':        'scripts/views/componentView',
+        'ComponentListView':    'scripts/views/componentListView',
+        'MenuView':             'scripts/views/menuView',
+        'MetricView':           'scripts/views/metricView',
+        'MetricListView':       'scripts/views/metricListView',
+
+        /* Router dependencies */
+        'Router':               'scripts/routers/router'
     },
     shim: {
         'backbone': {
@@ -56,6 +71,14 @@ require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView
         }
         this.remove();
         this.unbind();
+
+        //console.log("this.childViews", this.childViews);
+        _.each(this.childViews, function (childView) {
+            if (childView.close) {
+                childView.close();
+            }
+        });
+        this.childViews = [];
     };
 
     var app = new Router();

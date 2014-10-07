@@ -3,12 +3,18 @@
     'underscore',
     'backbone',
     'ComponentCollection',
+    'text!templates/componentList.html',
     'adform-notifications'
-], function ($, _, Backbone, ComponentCollection, AdformNotification) {
+], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification) {
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
-        template: _.template($("#component-list-template").html()),
+        template: _.template(componentListTemplate),
+
+        events: {
+            'click .component-list-item>.del': 'onDelete',
+            'click .component-list-item>.click': 'onClick',
+        },
 
         initialize: function () {
             if (this.collection) {
@@ -23,7 +29,6 @@
             //this.render;
         },
         render: function () {
-
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -49,11 +54,6 @@
                 }));
             }
             return this;
-        },
-        
-        events: {
-        'click .component-list-item>.del': 'onDelete',
-        'click .component-list-item>.click': 'onClick',
         },
         
         onClick: function (e) {

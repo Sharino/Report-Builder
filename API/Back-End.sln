@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogic", "BussinessLogic\BussinessLogic.csproj", "{12D1358C-7F1E-41ED-8B8E-031C0FCB5FF1}"
 EndProject
@@ -15,6 +15,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logging", "Logging\Logging.csproj", "{5D679C76-30BD-4BE6-B696-FE246D0356BF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Models", "Models\Models.csproj", "{C9DA6316-3784-43E4-9F25-E72C84B93C9D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1E03B522-D21C-4A62-BAE6-35274DF8C944}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogicTests", "UnitTestProject1\BussinessLogicTests.csproj", "{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{13338875-5B3B-46E1-818F-C8024BB7F077}"
+	ProjectSection(SolutionItems) = preProject
+		CREATE_DROP.sql = CREATE_DROP.sql
+		TABLE-CREATE.sql = TABLE-CREATE.sql
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -50,8 +60,15 @@ Global
 		{C9DA6316-3784-43E4-9F25-E72C84B93C9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9DA6316-3784-43E4-9F25-E72C84B93C9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9DA6316-3784-43E4-9F25-E72C84B93C9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{71CE2041-D58A-42A6-BF42-A1D5C6B29EE2} = {1E03B522-D21C-4A62-BAE6-35274DF8C944}
 	EndGlobalSection
 EndGlobal
