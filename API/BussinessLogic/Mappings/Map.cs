@@ -3,7 +3,7 @@ using Contracts.DTO;
 using Models.DTO;
 using Models.Models;
 
-namespace BussinessLogic.Mappings
+namespace BussinessLogic.Mapping
 {
     public static class Map
     {

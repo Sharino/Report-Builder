@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using AutoMapper;
-using BussinessLogic.Mappings;
+using BussinessLogic.Mapping;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Base;
