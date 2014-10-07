@@ -7,7 +7,8 @@
     var MetricCollection;
 
     MetricCollection = Backbone.Collection.extend({
-        model: Metric
+        model: Metric,
+        comparator: 'Order'
 		// TODO: Add URL for Metric API.
     });
 

@@ -6,8 +6,9 @@
     'ComponentCollection',
     'ComponentView',
     'ComponentListView',
-    'MenuView'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView) {
+    'MenuView',
+    'adform-notifications'
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, AdformNotification) {
     var Router;
     
     Router = Backbone.Router.extend({
@@ -36,9 +37,14 @@
                     self.showView("#list", new ComponentListView({ collection: model }));
                 },
                 error: function (model, response) {
-                    console.log("fetch FAIL");
-                    self.showView("#list", new ComponentListView({ collection: null }));
+                    console.log("fetch FAIL", response);
 
+                    AdformNotification.display({       // Show Adform notification.
+                        type: 'error',
+                        content: "Error fetching from server.",         // Shows message from server
+                        timeout: 5000
+                    });
+                    self.showView("#list", new ComponentListView({ collection: null }));
                 }
             });
         },

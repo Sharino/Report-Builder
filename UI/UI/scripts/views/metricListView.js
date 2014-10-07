@@ -31,19 +31,28 @@
         },
 
         render: function () {
-            this.$el.html(this.template({ "Metrics": this.collection.toJSON() }));
+            this.$el.html(this.template({ "Metrics": this.collection.toJSON() })); // Render Metric list
+
+            var self = this;
+            /* Initialize sortable list. */
             $('.sortable').sortable({
                 items: 'li',
-                placeholder: '<tr><td colspan="7">&nbsp;</td></tr>'
+                forcePlaceholderSize: true,
+                placeholder: '<li>Placeholder</li>'
             }).bind('sortupdate', function (e, ui) {
+                /* Get collection items with changed Order. */
+                var firstItem = self.collection.findWhere({ Order: ui.oldindex });
+                var secondItem = self.collection.findWhere({ Order: ui.item.index() });
 
+                /* Set new Order to selected items. */
+                firstItem.set({ Order: ui.item.index() });
+                secondItem.set({ Order: ui.oldindex });
             });
-
         },
 
         addMetric: function () {
             this.collection.add([
-               { Title: "Metric" + this.collection.length }
+               { Title: "Metric "  + this.collection.length, Order: this.collection.length }
             ]);
 
             console.log(this, this.collection.toJSON());

@@ -1,24 +1,27 @@
 /*
-* HTML5 Sortable jQuery Plugin
-* https://github.com/voidberg/html5sortable
-*
-* Original code copyright 2012 Ali Farhadi.
-* This version is mantained by Alexandru Badiu <andu@ctrlz.ro>
-*
-* Thanks to the following contributors: andyburke, bistoco, daemianmack, drskullster, flying-sheep, OscarGodson, Parikshit N. Samant, rodolfospalenza, ssafejava
-*
-* Released under the MIT license.
-*/
+ * HTML5 Sortable jQuery Plugin
+ * https://github.com/voidberg/html5sortable
+ *
+ * Original code copyright 2012 Ali Farhadi.
+ * This version is mantained by Alexandru Badiu <andu@ctrlz.ro>
+ *
+ * Thanks to the following contributors: andyburke, bistoco, daemianmack, drskullster, flying-sheep, OscarGodson, Parikshit N. Samant, rodolfospalenza, ssafejava
+ *
+ * Released under the MIT license.
+ */
 'use strict';
+
 (function ($) {
     var dragging, draggingHeight, placeholders = $();
     $.fn.sortable = function (options) {
         var method = String(options);
+
         options = $.extend({
             connectWith: false,
             placeholder: null,
             dragImage: null
         }, options);
+
         return this.each(function () {
             if (method === 'reload') {
                 $(this).children(options.items).off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s');
@@ -29,20 +32,24 @@
                     $(this).off('sortupdate');
                     $(this).removeData('opts');
                     citems.add(this).removeData('connectWith items')
-                    .off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s').off('sortupdate');
+                      .off('dragstart.h5s dragend.h5s selectstart.h5s dragover.h5s dragenter.h5s drop.h5s').off('sortupdate');
                 }
                 return;
             }
+
             var soptions = $(this).data('opts');
+
             if (typeof soptions === 'undefined') {
                 $(this).data('opts', options);
             }
             else {
                 options = soptions;
             }
+
             var isHandle, index, items = $(this).children(options.items);
             var startParent, newParent;
             var placeholder = (options.placeholder === null) ? $('<' + (/^ul|ol$/i.test(this.tagName) ? 'li' : 'div') + ' class="sortable-placeholder">') : $(options.placeholder).addClass('sortable-placeholder');
+
             items.find(options.handle).mousedown(function () {
                 isHandle = true;
             }).mouseup(function () {
@@ -53,8 +60,10 @@
             if (options.connectWith) {
                 $(options.connectWith).add(this).data('connectWith', options.connectWith);
             }
+
             items.attr('role', 'option');
             items.attr('aria-grabbed', 'false');
+
             items.attr('draggable', 'true').on('dragstart.h5s', function (e) {
                 e.stopImmediatePropagation();
                 if (options.handle && !isHandle) {
@@ -64,9 +73,11 @@
                 var dt = e.originalEvent.dataTransfer;
                 dt.effectAllowed = 'move';
                 dt.setData('text', '');
+
                 if (options.dragImage && dt.setDragImage) {
                     dt.setDragImage(options.dragImage, 0, 0);
                 }
+
                 index = (dragging = $(this)).addClass('sortable-dragging').attr('aria-grabbed', 'true').index();
                 draggingHeight = dragging.outerHeight();
                 startParent = $(this).parent();
@@ -86,6 +97,7 @@
                 if (options.handle && !isHandle) {
                     return true;
                 }
+
                 if (this.dragDrop) {
                     this.dragDrop();
                 }
@@ -107,6 +119,7 @@
                     if (options.forcePlaceholderSize) {
                         placeholder.height(draggingHeight);
                     }
+
                     // Check if $(this) is bigger than the draggable. If it is, we have to define a dead zone to prevent flickering
                     if (thisHeight > draggingHeight) {
                         // Dead zone?
@@ -118,6 +131,7 @@
                             return false;
                         }
                     }
+
                     dragging.hide();
                     $(this)[placeholder.index() < $(this).index() ? 'after' : 'before'](placeholder);
                     placeholders.not(placeholder).detach();
