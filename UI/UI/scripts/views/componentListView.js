@@ -13,6 +13,7 @@
 
         events: {
             'click .component-list-item>.del': 'onDelete',
+            'click .component-list-item>.gen': 'onGenerate',
             'click .component-list-item>.click': 'onClick',
         },
 
@@ -94,7 +95,17 @@
                     });
                 }
             });
-        }
+        },
+
+        onGenerate: function (e) {
+            console.log(e);
+            e.preventDefault();
+
+            var id = $(e.currentTarget).attr("id");
+            var routerUrl = "generate/".concat(id);
+
+            Backbone.history.navigate(routerUrl, true, true);
+        },
        
     });
 

@@ -83,6 +83,7 @@
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\routers\router.js" />
     <Content Include="scripts\views\componentListView.js" />
+    <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
@@ -90,6 +91,7 @@
     <Content Include="styles\site.css" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
+    <Content Include="templates\generate.html" />
     <Content Include="templates\metricList.html" />
     <Content Include="tests.html" />
     <Content Include="tests.js" />
