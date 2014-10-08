@@ -1,13 +1,21 @@
 ﻿USE [TestDB]
 GO
 
-/****** Object:  Table [dbo].[Metrics]    Script Date: 2014.10.08 13:48:09 ******/
 SET ANSI_NULLS ON
 GO
 
 SET QUOTED_IDENTIFIER ON
 GO
 
+/* RERPORT COMPONENT */
+
+CREATE TABLE [dbo].[ReportComponents](
+	[ReportId] [int] IDENTITY(1,1) NOT NULL,
+	[Title] [nvarchar](30) NOT NULL,
+	[Type] [int] NOT NULL
+) ON [PRIMARY]
+
+GO
 
 /* METRIC */
 SET ANSI_PADDING ON

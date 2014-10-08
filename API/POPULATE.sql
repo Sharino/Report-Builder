@@ -1,5 +1,13 @@
 ﻿USE [TestDB]
 GO
+
+/* REPORT COMPONENT */
+INSERT INTO [dbo].[ReportComponents]([Title],[Type])
+     VALUES ('ComponentOne',1)
+GO
+INSERT INTO [dbo].[ReportComponents]([Title],[Type])
+     VALUES ('ComponentTwo',2)
+GO
 /* METRIC */
 INSERT INTO [dbo].[Metrics]([ID], [Mnemonic])
      VALUES(1, 'm_Impressions')
