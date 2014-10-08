@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using Models.Models;
@@ -13,8 +14,7 @@ namespace DataLayer.Repositories
     }
     public class MetricRepository : IMetricsRepository
     {
-        private SqlConnection Connection;
-        private IEnumerable<Metric> Reports { get; set; }
+        private readonly SqlConnection Connection;
 
         public MetricRepository()
         {
@@ -23,15 +23,15 @@ namespace DataLayer.Repositories
 
         private static SqlConnection CreateDbConnection()
         {
-            //TODO: add to config
-            return new SqlConnection("data source = 172.22.3.236; initial catalog=ReportBuilder; user id = ReportBuilder; password = Katuciai13;");
+            var connectionString = ConfigurationManager.AppSettings["connectionString"];
+            return new SqlConnection(connectionString);
         }
 
         public IEnumerable<Metric> GetAll()
         {
             var list = new List<Metric>();
             Connection.Open();
-            string sql = @" SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
+            const string sql = @" SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
 	                        FROM [dbo].[Metrics] 
 	                        JOIN [dbo].[MetricDescriptions]
 		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
@@ -53,7 +53,7 @@ namespace DataLayer.Repositories
                         component.Mnemonic = reader.GetString(1);
                         component.Description = reader.GetString(2);
                         component.DisplayName = reader.GetString(3);
-                        component.Group = new MetricGroup()
+                        component.Group = new MetricGroup
                         {
                             GroupId = reader.GetInt32(4),
                             GroupName = reader.GetString(5)
@@ -61,8 +61,6 @@ namespace DataLayer.Repositories
           
                         list.Add(component);
                     }
-           
-  
                 }
             }
             Connection.Close();
@@ -91,13 +89,13 @@ namespace DataLayer.Repositories
                 {
                     reader.Read();
                     //TODO: refactor
-                    var item = new Metric()
+                    var item = new Metric
                     {
                         MetricId = reader.GetInt32(0),
                         Mnemonic = reader.GetString(1),
                         Description = reader.GetString(2),
                         DisplayName = reader.GetString(3),
-                        Group = new MetricGroup()
+                        Group = new MetricGroup
                         {
                             GroupId = reader.GetInt32(4),
                             GroupName = reader.GetString(5)
@@ -106,7 +104,6 @@ namespace DataLayer.Repositories
                     Connection.Close();
                     return item;
                 }
-
             }
         }
 

@@ -39,3 +39,4 @@ C:\Users\Administrator\Desktop\Report-Builder\API\UnitTestProject1\bin\Debug\log
 C:\Users\Administrator\Desktop\Report-Builder\API\UnitTestProject1\bin\Debug\Logging.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\UnitTestProject1\bin\Debug\log4net.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\UnitTestProject1\bin\Debug\AutoMapper.Net4.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\UnitTestProject1\bin\Debug\AutoMapper.Net4.dll

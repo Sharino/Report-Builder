@@ -10,7 +10,7 @@ using Logging;
 using Models.DTO;
 
 
-namespace ApiHost.Apis
+namespace Controllers.Apis
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ReportComponentController : ApiController

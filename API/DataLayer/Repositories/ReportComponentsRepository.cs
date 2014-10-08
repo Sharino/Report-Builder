@@ -1,4 +1,5 @@
-﻿using DataLayer.Repositories;
+﻿using System.Configuration;
+using DataLayer.Repositories;
 using Models.Models;
 using System;
 using System.Collections.Generic;
@@ -14,8 +15,7 @@ namespace DataLayer.Base
 
     public class ComponentRepository : IComponentRepository
     {
-        private SqlConnection Connection;
-        private IEnumerable<ReportComponent> Reports { get; set; }
+        private readonly SqlConnection Connection;
 
         public ComponentRepository()
         {
@@ -24,8 +24,8 @@ namespace DataLayer.Base
 
         private static SqlConnection CreateDbConnection()
         {
-            //TODO: add to config
-            return new SqlConnection("data source = 172.22.3.236; initial catalog=ReportBuilder; user id = ReportBuilder; password = Katuciai13;");
+            var connectionString = ConfigurationManager.AppSettings["connectionString"];
+            return new SqlConnection(connectionString);
         }
 
         public IEnumerable<ReportComponent> GetAll()
@@ -72,15 +72,14 @@ namespace DataLayer.Base
             }
         }
 
-        /// <param name="reportComponent"></param>
-        /// <returns>Returns the ID of created entry</returns>
         public int Add(ReportComponent reportComponent)
         {
-            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title) VALUES (@reportTitle); SELECT @@IDENTITY;";
+            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type) VALUES (@reportTitle, @reportType); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
+                command.Parameters.AddWithValue("@reportType", reportComponent.Type);
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -91,6 +90,26 @@ namespace DataLayer.Base
 
                 Connection.Close();
 
+                return id;
+            }
+        }
+
+        public int Update(ReportComponent reportComponent)
+        {
+            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType WHERE [ReportId] = @reportId";
+            using (var command = new SqlCommand(sql, Connection))
+            {
+                Connection.Open();
+                command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
+                command.Parameters.AddWithValue("@reportType", reportComponent.Type);
+                command.Parameters.AddWithValue("@reportId", reportComponent.Id);
+                int id = 0;
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    id = Convert.ToInt32(result);
+                }
+                Connection.Close();
                 return id;
             }
         }
@@ -121,25 +140,6 @@ namespace DataLayer.Base
                 if (count > 0)
                     return true;
                 return false;
-            }
-        }
-
-        public int Update(ReportComponent report)
-        {
-            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle WHERE [ReportId] = @reportId";
-            using (var command = new SqlCommand(sql, Connection))
-            {
-                Connection.Open();
-                command.Parameters.AddWithValue("@reportTitle", report.Title);
-                command.Parameters.AddWithValue("@reportId", report.Id);
-                int id = 0;
-                object result = command.ExecuteScalar();
-                if (result != null)
-                {
-                    id = Convert.ToInt32(result);
-                }
-                Connection.Close();
-                return 0;
             }
         }
     }

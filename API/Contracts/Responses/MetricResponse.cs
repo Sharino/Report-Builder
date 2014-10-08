@@ -11,7 +11,7 @@ namespace Contracts.Responses
         public MetricResponse(MetricDTO metricDto)
         {
             Errors = null;
-            MetricDtos = new List<MetricDTO>(){metricDto};
+            MetricDtos = new List<MetricDTO>{metricDto};
         }
 
         public MetricResponse(List<MetricDTO> metricDtos)
@@ -23,7 +23,7 @@ namespace Contracts.Responses
         public MetricResponse(ErrorDTO errorDto)
         {
             MetricDtos = null;
-            Errors = new List<ErrorDTO>(){errorDto};
+            Errors = new List<ErrorDTO>{errorDto};
         }
 
         public MetricResponse(List<ErrorDTO> errorDtos)

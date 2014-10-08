@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using BussinessLogic.Mappings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -16,7 +15,7 @@ namespace UnitTests
         {
             //Arrange
             Mapping mapping = new Mapping();
-            ReportComponent source = new ReportComponent()
+            ReportComponent source = new ReportComponent
             {
                 Id = 1,
                 SubmissionDate = DateTime.Now,
@@ -40,7 +39,7 @@ namespace UnitTests
         {
             //Arrange
             Mapping mapping = new Mapping();
-            ReportComponentDTO source = new ReportComponentDTO()
+            ReportComponentDTO source = new ReportComponentDTO
             {
                 Id = 1,
                 Title = "Test",
@@ -63,16 +62,16 @@ namespace UnitTests
         {
             //Arrange
             Mapping mapping = new Mapping();
-            IEnumerable<ReportComponent> source = new List<ReportComponent>()
+            IEnumerable<ReportComponent> source = new List<ReportComponent>
             {
-                new ReportComponent()
+                new ReportComponent
                 {
                     Id = 1,
                     SubmissionDate = DateTime.Now,
                     Title = "First Test Item",
                     Type = 1
                 },
-                new ReportComponent()
+                new ReportComponent
                 {
                     Id = 2,
                     SubmissionDate = DateTime.Now,

@@ -136,3 +136,4 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Host\bin\Debug\
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Host\bin\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Host\obj\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Host\obj\Debug\ApiHost.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Host\bin\Debug\WebActivatorEx.dll

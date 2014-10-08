@@ -1,14 +1,11 @@
-﻿using System.Collections.Specialized;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Mime;
-using System.Web.Configuration;
+﻿using System.Diagnostics;
+using Controllers;
 using Microsoft.Owin.Hosting;
 using System;
 using System.ServiceProcess;
 using System.Configuration;
 
-namespace ApiHost
+namespace Host
 {
     public static class Program
     {
@@ -25,7 +22,7 @@ namespace ApiHost
 
             protected override void OnStart(string[] args)
             {
-                Program.Start(args);
+                Program.Start();
             }
 
             protected override void OnStop()
@@ -48,15 +45,17 @@ namespace ApiHost
                     var location = loc.Remove(0, 8); //file:///c:/...
 
                     var process = new Process();
-                    ProcessStartInfo info = new ProcessStartInfo();
-                    info.Verb = "runas";
-                    info.FileName = "cmd.exe";
-                    info.RedirectStandardInput = true;
-                    info.UseShellExecute = false;
+                    var info = new ProcessStartInfo
+                    {
+                        Verb = "runas",
+                        FileName = "cmd.exe",
+                        RedirectStandardInput = true,
+                        UseShellExecute = false
+                    };
 
                     process.StartInfo = info;
                     process.Start();
-                    using (StreamWriter sw = process.StandardInput)
+                    using (var sw = process.StandardInput)
                     {
                         if (sw.BaseStream.CanWrite)
                         {
@@ -78,7 +77,7 @@ namespace ApiHost
             else
             {
                 Console.WriteLine("Running");
-                Start(args);
+                Start();
                 Console.ReadKey();
                 Stop();
             }
@@ -86,7 +85,7 @@ namespace ApiHost
         }
 
         //TODO: http://stackoverflow.com/questions/2456819/how-can-i-set-up-net-unhandledexception-handling-in-a-windows-service
-        private static void Start(string[] args)
+        private static void Start()
         {
             var ip = ConfigurationManager.AppSettings["ip"];
             _webHost = WebApp.Start<Startup>(ip);

@@ -85,7 +85,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\obj\Debug\Controll
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\obj\Debug\Controllers.pdb
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Controllers.pdb
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\BussinessLogic.dll
@@ -112,3 +111,14 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\obj\Debug\Controllers.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Microsoft.Owin.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Owin.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Swashbuckle.Core.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.Owin.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.WebHost.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\WebActivatorEx.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Microsoft.Owin.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.Owin.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.WebHost.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll

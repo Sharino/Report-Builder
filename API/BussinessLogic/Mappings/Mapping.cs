@@ -31,20 +31,24 @@ namespace BussinessLogic.Mappings
 
         public ReportComponent DtoToReportComponent(ReportComponentDTO dto)
         {
-            var report = new ReportComponent();
-            report.Id = dto.Id;
-            report.Title = dto.Title;
-            report.SubmissionDate = DateTime.Now;
-            report.Type = dto.Type;
+            var report = new ReportComponent
+            {
+                Id = dto.Id,
+                Title = dto.Title,
+                SubmissionDate = DateTime.Now,
+                Type = dto.Type
+            };
             return report;
         }
 
         public ReportComponentDTO ReportComponentToDto(ReportComponent report)
         {
-            var dto = new ReportComponentDTO();
-            dto.Id = report.Id;
-            dto.Title = report.Title;
-            dto.Type = report.Type;
+            var dto = new ReportComponentDTO
+            {
+                Id = report.Id, 
+                Title = report.Title, 
+                Type = report.Type
+            };
             return dto;
         }
 
