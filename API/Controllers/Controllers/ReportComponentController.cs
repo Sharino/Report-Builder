@@ -27,12 +27,16 @@ namespace Controllers.Apis
         {            //TODO
             BaseHandler<int, ReportComponentResponse> Handler = new GetAllHandler();
             var response = Handler.Handle(0);
-            if (response.ReportComponentDtos != null)
+            if (response != null)
             {
-                IEnumerable<ReportComponentDTO> reportComponentDtos = response.ReportComponentDtos;
-                return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
+                if (response.ReportComponentDtos != null)
+                {
+                    IEnumerable<ReportComponentDTO> reportComponentDtos = response.ReportComponentDtos;
+                    return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
+                }
+                return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpGet]
@@ -40,11 +44,15 @@ namespace Controllers.Apis
         {
             BaseHandler<int, ReportComponentResponse> Handler = new GetHandler();
             var response = Handler.Handle(id);
-            if (response.ReportComponentDtos != null)
+            if (response != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                if (response.ReportComponentDtos != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         [HttpPut]
@@ -52,11 +60,15 @@ namespace Controllers.Apis
         {
             var Handler = new UpdateHandler();
             var response = Handler.Handle(reportDto);
-            if (response.ReportComponentDtos != null)
+            if (response != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                if (response.ReportComponentDtos != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         [HttpPost]
@@ -64,12 +76,15 @@ namespace Controllers.Apis
         {
             BaseHandler<ReportComponentDTO, ReportComponentResponse> Handler = new AddHandler();
             var response = Handler.Handle(reportDto);
-            //if (response.ReportComponentDtos != null)
-            if (response.ReportComponentDtos == null)
+            if (response != null)
             {
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                if (response.ReportComponentDtos == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                }
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         [HttpDelete]
@@ -77,11 +92,15 @@ namespace Controllers.Apis
         {
             BaseHandler<int, ReportComponentResponse> Handler = new DeleteHandler();
             var response = Handler.Handle(id);
-            if (response.ReportComponentDtos != null)
+            if (response != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                if (response.ReportComponentDtos != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
     }
 }

@@ -121,4 +121,3 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\Microsoft.Owin.xml
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.Owin.xml
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\System.Web.Http.WebHost.xml
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Controllers\bin\Debug\AutoMapper.Net4.dll

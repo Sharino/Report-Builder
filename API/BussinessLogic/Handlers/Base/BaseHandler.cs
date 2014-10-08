@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Contracts.DTO;
+using Contracts.Responses;
 using Logging;
 
 namespace BussinessLogic.Handlers
@@ -9,7 +10,8 @@ namespace BussinessLogic.Handlers
     {
         protected TResponse Response;
         private Log Log;
-        public List<ErrorDTO> ValidationMessages; 
+
+        protected List<ErrorDTO> Errors;
 
         public TResponse Handle(TRequest request)
         {

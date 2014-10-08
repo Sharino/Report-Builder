@@ -37,51 +37,57 @@ namespace Host
 
         private static void Main(string[] args)
         {
-            if (args.Length > 0)
+            try
             {
-                if (args[0].Equals("-install"))
+                if (args.Length > 0)
                 {
-                    var loc = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
-                    var location = loc.Remove(0, 8); //file:///c:/...
-
-                    var process = new Process();
-                    var info = new ProcessStartInfo
+                    if (args[0].Equals("-install"))
                     {
-                        Verb = "runas",
-                        FileName = "cmd.exe",
-                        RedirectStandardInput = true,
-                        UseShellExecute = false
-                    };
+                        var loc = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
+                        var location = loc.Remove(0, 8); //file:///c:/...
 
-                    process.StartInfo = info;
-                    process.Start();
-                    using (var sw = process.StandardInput)
-                    {
-                        if (sw.BaseStream.CanWrite)
+                        var process = new Process();
+                        var info = new ProcessStartInfo
                         {
-                            sw.WriteLine("sc stop \"Report Builder\"");
-                            sw.WriteLine("sc delete \"Report Builder\"");
-                            sw.WriteLine("sc create \"Report Builder\" binpath= \"" + location + "\"");
-                            sw.WriteLine("sc start \"Report Builder\"");
+                            Verb = "runas",
+                            FileName = "cmd.exe",
+                            RedirectStandardInput = true,
+                            UseShellExecute = false
+                        };
+
+                        process.StartInfo = info;
+                        process.Start();
+                        using (var sw = process.StandardInput)
+                        {
+                            if (sw.BaseStream.CanWrite)
+                            {
+                                sw.WriteLine("sc stop \"Report Builder\"");
+                                sw.WriteLine("sc delete \"Report Builder\"");
+                                sw.WriteLine("sc create \"Report Builder\" binpath= \"" + location + "\"");
+                                sw.WriteLine("sc start \"Report Builder\"");
+                            }
                         }
                     }
                 }
+
+                //Launches as console application when Environment.UserInteractive if true. Otherwise it launches as a service.
+                if (!Environment.UserInteractive)
+                {
+                    using (var service = new Service())
+                        ServiceBase.Run(service);
+                }
+                else
+                {
+                    Console.WriteLine("Running");
+                    Start();
+                    Console.ReadKey();
+                    Stop();
+                }
             }
-            
-            //Launches as console application when Environment.UserInteractive if true. Otherwise it launches as a service.
-            if (!Environment.UserInteractive)
+            catch (Exception exception)
             {
-                using (var service = new Service())
-                    ServiceBase.Run(service);
-            }
-            else
-            {
-                Console.WriteLine("Running");
-                Start();
-                Console.ReadKey();
                 Stop();
             }
-
         }
 
         //TODO: http://stackoverflow.com/questions/2456819/how-can-i-set-up-net-unhandledexception-handling-in-a-windows-service
