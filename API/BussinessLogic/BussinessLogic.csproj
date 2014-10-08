@@ -53,7 +53,6 @@
     <Compile Include="Handlers\ReportComponentHandlers\GetAllHandler.cs" />
     <Compile Include="Handlers\ReportComponentHandlers\GetHandler.cs" />
     <Compile Include="Handlers\ReportComponentHandlers\UpdateHandler.cs" />
-    <Compile Include="Mappings\Map.cs" />
     <Compile Include="Mappings\Mapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validation\BaseValidation.cs" />

@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="ReportControllerTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="MappingTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BussinessLogic\BussinessLogic.csproj">

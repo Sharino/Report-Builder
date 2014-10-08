@@ -42,6 +42,7 @@ namespace DataLayer.Base
                         var component = new ReportComponent();
                         component.Id = reader.GetInt32(0);
                         component.Title = reader.GetString(1);
+                        component.Type = reader.GetInt32(2);
                         list.Add(component);
                     }
                     Connection.Close();
@@ -52,7 +53,6 @@ namespace DataLayer.Base
 
         public ReportComponent Get(int id)
         {
-            //TODO command parameter
             string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, Connection))
             {
@@ -61,8 +61,10 @@ namespace DataLayer.Base
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
-                    //TODO: refactor
-                    var item = new ReportComponent() { Id = reader.GetInt32(0), Title = reader.GetString(1) };
+                    var item = new ReportComponent();
+                    item.Id = reader.GetInt32(0);
+                    item.Title = reader.GetString(1);
+                    item.Type = reader.GetInt32(2);
                     Connection.Close();
                     return item;
                 }

@@ -23,7 +23,7 @@ namespace BussinessLogic.Handlers.MetricHandlers
         {
             var mapper = new Mapping();
             var metrics = _repository.GetAll().OrderBy(x => x.MetricId);
-            var dtos = mapper.MetricToDto(metrics.ToList());
+            var dtos = mapper.MetricToDto(metrics);
             return new MetricResponse(dtos.ToList());
         }
 

@@ -20,6 +20,7 @@ namespace BussinessLogic.Handlers
             }
             catch (Exception exception)
             {
+                Log = new Log("Base handler");
                 Log.Error(exception.ToString());
                 return Response;
             }

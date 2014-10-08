@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using AutoMapper;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
@@ -22,8 +20,8 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse HandleCore(ReportComponentDTO request)
         {
-            Map.MapReportComponents();
-            ReportComponent reportComponent = Mapper.Map<ReportComponentDTO, ReportComponent>(request);
+            Mapping mapping = new Mapping();
+            ReportComponent reportComponent = mapping.DtoToReportComponent(request);
             int id = _repository.Update(reportComponent);
             request.Id = id;
             return new ReportComponentResponse(request);
@@ -31,19 +29,16 @@ namespace BussinessLogic.Handlers
 
         public override bool Validate(ReportComponentDTO request)
         {
-            var sth = new List<ErrorDTO>()
-            {
-                new ErrorDTO("LT", "Pir doug simbeliu ividei", DateTime.Now),
-                new ErrorDTO("EN", "The title cannot exceed 30 symbols", DateTime.Now)
-            };
             if (request.Title.Length > 30)
             {
-                base.Response = new ReportComponentResponse(
-                    new List<ErrorDTO>()
-                    {
-                        new ErrorDTO("LT", "Pir doug simbeliu ividei", DateTime.Now),
-                        new ErrorDTO("EN", "The title cannot exceed 30 symbols", DateTime.Now)
-                    });
+                base.Response =
+                    new ReportComponentResponse(new ErrorDTO("EN", "The title cannot exceed 30 symbols", DateTime.Now));
+                return false;
+            }
+            if (request.Type < 1 || request.Type > 4)
+            {
+                base.Response =
+                    new ReportComponentResponse(new ErrorDTO("EN", "Provided Report Componing type is invalid", DateTime.Now));
                 return false;
             }
             return true;

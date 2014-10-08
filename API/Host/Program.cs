@@ -89,10 +89,7 @@ namespace ApiHost
         private static void Start(string[] args)
         {
             var ip = ConfigurationManager.AppSettings["ip"];
-
-            const string baseurl = "http://172.22.3.236:33895/";
-
-            _webHost = WebApp.Start<Startup>(baseurl);
+            _webHost = WebApp.Start<Startup>(ip);
         }
 
         private static void Stop()

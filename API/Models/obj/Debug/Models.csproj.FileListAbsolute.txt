@@ -16,3 +16,4 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Models\bin\Debu
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Models\obj\Debug\Models.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Models\obj\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache

@@ -21,9 +21,9 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse HandleCore(int request)
         {
-            Map.MapReportComponents();
+            Mapping mapping = new Mapping();
             var reportComponent = _repository.Get(request);
-            ReportComponentDTO reportComponentDto = Mapper.Map<ReportComponent, ReportComponentDTO>(reportComponent);
+            ReportComponentDTO reportComponentDto = mapping.ReportComponentToDto(reportComponent);
             return new ReportComponentResponse(reportComponentDto);
         }
 

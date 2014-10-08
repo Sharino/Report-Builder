@@ -12,16 +12,11 @@ namespace Controllers
     {
         private Log Log;
 
-        public MetricController()
-        {
-            
-        }
-
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
-            var handler = new MetricGetAllHandler();
-            var response = handler.Handle(0);
+            var Handler = new MetricGetAllHandler();
+            var response = Handler.Handle(0);
             if (response.MetricDtos != null)
             {
                 IEnumerable<MetricDTO> metricDtos = response.MetricDtos;
@@ -33,8 +28,8 @@ namespace Controllers
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            var handler = new MetricGetHandler();
-            var response = handler.Handle(id);
+            var Handler = new MetricGetHandler();
+            var response = Handler.Handle(id);
             if (response.MetricDtos != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);

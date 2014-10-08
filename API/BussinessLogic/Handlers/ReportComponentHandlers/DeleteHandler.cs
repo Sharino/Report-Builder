@@ -21,10 +21,10 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse HandleCore(int request)
         {
-            Map.MapReportComponents();
-            ReportComponentDTO target = Mapper.Map<ReportComponent, ReportComponentDTO>(_repository.Get(request));
+            Mapping mapping = new Mapping();
+            ReportComponentDTO toDelete = mapping.ReportComponentToDto(_repository.Get(request));
             _repository.Remove(request);
-            return new ReportComponentResponse(target);
+            return new ReportComponentResponse(toDelete);
         }
 
         public override bool Validate(int request)

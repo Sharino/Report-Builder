@@ -21,8 +21,8 @@ namespace BussinessLogic.Handlers
 
         public override ReportComponentResponse HandleCore(ReportComponentDTO request)
         {
-            Map.MapReportComponents();
-            ReportComponent reportComponent = Mapper.Map<ReportComponentDTO, ReportComponent>(request);
+            Mapping mapping = new Mapping();
+            ReportComponent reportComponent = mapping.DtoToReportComponent(request);
             int id = _repository.Add(reportComponent);
             request.Id = id;
             return new ReportComponentResponse(request);
@@ -33,7 +33,12 @@ namespace BussinessLogic.Handlers
             if (request.Title.Length > 30)
             {
                 base.Response = new ReportComponentResponse(new ErrorDTO("EN", "The title cannot exceed 30 symbols", DateTime.Now));
-                //base.VAlidationMessages.Add(new ErrorDTO());
+                //base.ValidationMessages.Add(new ErrorDTO());
+                return false;
+            }
+            if (request.Type < 1 || request.Type > 4)
+            {
+                base.Response = new ReportComponentResponse(new ErrorDTO("EN", "Provided Report Componing type is invalid", DateTime.Now));
                 return false;
             }
             return true;

@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 namespace Models.Models
 {
@@ -8,6 +7,6 @@ namespace Models.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public DateTime SubmissionDate { get; set; }
-        public int ComponentType { get; set; }
+        public int Type { get; set; }
     }
 }
