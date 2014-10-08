@@ -16,6 +16,9 @@
         'Sortable':             'scripts/lib/jquery.sortable',
         'Tests':                'tests',
 
+        /* Config dependencies */
+        'Config':               'scripts/config/config',
+
         /* Model dependencies */
         'App':                  'scripts/models/app',
         'Component':            'scripts/models/component',
@@ -61,27 +64,30 @@
 });
 
 
-require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView', 'Router'],
-    function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router) {
-    
-    Backbone.View.prototype.close = function () {
-        console.log('Closing view', this);
-        if (this.beforeClose) {
-            this.beforeClose();
-        }
-        this.remove();
-        this.unbind();
+require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView', 'Router', 'Config'],
+    function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router, Config) {
+        console.log(Config);
 
-        //console.log("this.childViews", this.childViews);
-        _.each(this.childViews, function (childView) {
-            if (childView.close) {
-                childView.close();
+
+
+        Backbone.View.prototype.close = function () {
+            console.log('Closing view', this);
+            if (this.beforeClose) {
+                this.beforeClose();
             }
-        });
-        this.childViews = [];
-    };
+            this.remove();
+            this.unbind();
 
-    var app = new Router();
-    app.initialize();
-    Backbone.history.start();
+            //console.log("this.childViews", this.childViews);
+            _.each(this.childViews, function (childView) {
+                if (childView.close) {
+                    childView.close();
+                }
+            });
+            this.childViews = [];
+        };
+
+        var app = new Router();
+        app.initialize();
+        Backbone.history.start();
 });

@@ -2,13 +2,14 @@
     'jquery',
     'underscore',
     'backbone',
-    'Component'
-], function ($, _, Backbone, Component) {
+    'Component',
+    'Config'
+], function ($, _, Backbone, Component, Config) {
     var ComponentCollection;
 
     ComponentCollection = Backbone.Collection.extend({
         model: Component,
-        url: "http://37.157.0.42:33895/api/ReportComponent"
+        url: Config.ComponentSettings.ComponentURL
     });
 
     return ComponentCollection;

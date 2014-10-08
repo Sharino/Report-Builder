@@ -60,6 +60,7 @@
     <Content Include="index.html" />
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
+    <Content Include="scripts\config\config.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
     <Content Include="scripts\lib\adform-select.js" />

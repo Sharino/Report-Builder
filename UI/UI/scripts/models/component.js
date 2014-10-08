@@ -1,12 +1,13 @@
 ﻿define('Component', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+    'backbone',
+    'Config'
+], function ($, _, Backbone, Config) {
     var Component;
 
     Component = Backbone.Model.extend({
-        urlRoot: "http://37.157.0.42:33895/api/ReportComponent",
+        urlRoot: Config.ComponentSettings.ComponentURL,
         idAttribute: "Id",
 		defaults: {
             Title: "",
