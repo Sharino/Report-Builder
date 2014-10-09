@@ -68,8 +68,6 @@ require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView
     function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router, Config) {
         console.log(Config);
 
-
-
         Backbone.View.prototype.close = function () {
             console.log('Closing view', this);
             if (this.beforeClose) {
