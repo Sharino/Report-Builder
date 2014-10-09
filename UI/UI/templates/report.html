@@ -1,0 +1,41 @@
+﻿<div id="menu">
+    <ul class="wizard-nav">
+        <ul class="pull-right">
+            <li <%= data.activeReport %>><a href="#report">My Report</a></li>
+        </ul>
+        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+        <li <%= data.activeList %>><a href="#list">List</a></li>
+    </ul>
+</div>
+
+<div class="report-list table table-striped heading-separation table-hover selectable-rows">
+
+        <% _.each(_.filter(Components, function(model){ return model.isGenerated }), function(model) { %>
+            <ul class="report-item sparklines">
+                <li>
+                    <span class="headline">Impressions</span>
+                    <span class="numbers">64 768 661</span>
+                </li>
+                <li>
+                    <span class="headline">In-screen</span>
+                    <span class="numbers">56 221 280</span>
+                </li>
+                <li>
+                    <span class="headline">Clicks</span>
+                    <span class="numbers">95 491</span>
+                </li>
+                <li>
+                    <span class="headline">CTR</span>
+                    <span class="numbers">0.15%</span>
+                </li>
+                <li>
+                    <span class="headline">Leads</span>
+                    <span class="numbers">295</span>
+                </li>
+                <li>
+                    <span class="headline">COV</span>
+                    <span class="numbers">0.31%</span>
+                </li>
+            </ul>
+        <% }); %>
+</div>

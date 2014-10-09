@@ -7,8 +7,10 @@
     'ComponentView',
     'ComponentListView',
     'MenuView',
+    'GenerateView',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, AdformNotification) {
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
+             ComponentListView, MenuView, GenerateView, AdformNotification) {
     var Router;
     
     Router = Backbone.Router.extend({
@@ -16,7 +18,8 @@
             "": "list",
             "create": "create",
             "create/:id": "createById",
-            "list": "list"
+            "list": "list",
+            "generate/:id": "generateById"
         },
 
         index: function () {
@@ -64,6 +67,22 @@
 
             tempComponentModel = null;
         },
+
+        generateById: function (id) {
+            var self = this;
+            var tempComponentModel = new Component({ Id: id });
+            tempComponentModel.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#generate", new GenerateView({ model: model }));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
+                }
+            });
+
+            tempComponentModel = null;
+        },  
 
         showView: function(selector, view) {
             if (this.currentView)
