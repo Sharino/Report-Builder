@@ -1,4 +1,4 @@
-﻿IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'TestDB')
+﻿IF EXISTS (SELECT name FROM master.sys.databases WHERE name = N'ReportBuilder')
 BEGIN
 	PRINT 'Database exists > DROP USER > DROP DATABASE'
 	DROP USER [TestUser]
@@ -9,7 +9,7 @@ END
 ELSE
 BEGIN	
 	PRINT 'Database does not exist > CREATE DATABASE'
-	CREATE DATABASE [TestDB]
+	CREATE DATABASE [ReportBuilder]
 
 	PRINT 'CREATING LOGIN AND USER'
 	PRINT 'LOGIN: TestLogin, PASS: Katuciai13'
