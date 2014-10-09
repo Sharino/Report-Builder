@@ -1,6 +1,7 @@
 API/WebApi.sln
 API/WebApi.sln
-
+**/bin/Debug/
+**/bin/Release/
 
 #OS junk files
 [Tt]humbs.db
