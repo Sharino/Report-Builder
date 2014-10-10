@@ -39,9 +39,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DTO\ErrorDTO.cs" />
-    <Compile Include="DTO\MetricDTO.cs" />
-    <Compile Include="DTO\ReportComponentDTO.cs" />
+    <Compile Include="DTO\ErrorDto.cs" />
+    <Compile Include="DTO\MetricDto.cs" />
+    <Compile Include="DTO\ReportComponentDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses\MetricResponse.cs" />
     <Compile Include="Responses\ReportComponentResponse.cs" />

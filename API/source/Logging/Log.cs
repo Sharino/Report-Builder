@@ -5,14 +5,14 @@ namespace Logging
 {
     public class Log
     {
-        private static readonly ILog Logger =
-         LogManager.GetLogger("aa");
+        public ILog Logger { get; set; }
 
         public readonly string Source;
 
         public Log(string src)
         {
             XmlConfigurator.Configure();
+            Logger = LogManager.GetLogger("aa");
             Source = src;
         }
 
