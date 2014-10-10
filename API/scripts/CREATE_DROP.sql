@@ -3,8 +3,8 @@ BEGIN
 	PRINT 'Database exists > DROP USER > DROP DATABASE'
 	DROP USER [TestUser]
 	DROP LOGIN [TestLogin]
-	alter database [TestDB] set single_user with rollback immediate
-	DROP DATABASE [TestDB]
+	alter database [ReportBuilder] set single_user with rollback immediate
+	DROP DATABASE [ReportBuilder]
 END
 ELSE
 BEGIN	

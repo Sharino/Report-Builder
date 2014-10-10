@@ -3,17 +3,17 @@ GO
 
 /* REPORT COMPONENT */
 INSERT INTO [dbo].[ReportComponents]([Title],[Type],[Data])
-     VALUES ('ComponentOne',1,'asdasdasdasd')
+     VALUES ('ComponentOne',1,'{"Metrics":[],"Dimensions":[],"Filters":[]}')
 GO
 INSERT INTO [dbo].[ReportComponents]([Title],[Type],[Data])
-     VALUES ('ComponentTwo',2,'asddghgahrh')
+     VALUES ('ComponentTwo',2,'{"Metrics":[],"Dimensions":[],"Filters":[]}')
 GO
 /* METRIC */
-INSERT INTO [dbo].[Metrics]([ID], [Mnemonic])
-     VALUES(1, 'm_Impressions')
+INSERT INTO [dbo].[Metrics]([ID], [Mnemonic], [DataType])
+     VALUES(1, 'm_Impressions','int')
 GO
-INSERT INTO [dbo].[Metrics]([ID], [Mnemonic])
-     VALUES(2, 'm_Clicks')
+INSERT INTO [dbo].[Metrics]([ID], [Mnemonic], [DataType])
+     VALUES(2, 'm_Clicks','float')
 GO
 
 /* METRIC GROUPS */

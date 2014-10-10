@@ -24,6 +24,7 @@ GO
 CREATE TABLE [dbo].[Metrics](
 	[ID] [int] NOT NULL,
 	[Mnemonic] [varchar](50) NOT NULL,
+	[DataType] [varchar](12) NOT NULL,
  CONSTRAINT [PK_Metrics] PRIMARY KEY CLUSTERED 
 (
 	[ID] ASC
