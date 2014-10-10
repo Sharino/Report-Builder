@@ -9,12 +9,13 @@
         'handlebars':           'scripts/lib/handlebars',
         'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
-        'jquery-sortable':      'scripts/lib/jquery.sortable',
+        'Sortable':             'scripts/lib/jquery.sortable',
+        'Tests':                'tests',
+
+        /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
         'adform-select':        'scripts/lib/adform-select',
         'adform-notifications': 'scripts/lib/adform-notifications',
-        'Sortable':             'scripts/lib/jquery.sortable',
-        'Tests':                'tests',
 
         /* Config dependencies */
         'Config':               'scripts/config/config',
@@ -54,13 +55,15 @@
         'jquery-sortable': {
             deps: ['jquery']
         },
-        'adform-select': {
-            deps: ['backbone', 'handlebars']
+        'handlebars': {
+            exports: 'Handlebars'
         },
         'backbone-forms': {
             deps: ['backbone', 'jquery']
         }
-    }
+    },
+    urlArgs: "bust=" + (new Date()).getTime()
+
 });
 
 

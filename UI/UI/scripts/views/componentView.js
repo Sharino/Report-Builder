@@ -6,8 +6,9 @@
     'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
-    'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
+    'adform-notifications',
+    'Config'
+], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification, Config) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
@@ -48,6 +49,7 @@
 
         /* Render method. Renders ComponentView to screen. */
         render: function () {
+
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -67,9 +69,9 @@
                     templVariables["data"]["activeList"] = '';
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
                 this.$el.html(this.template(templVariables));
+
+                
             }
             else {                  // Model does not exist
                 templVariables["data"]["viewTitle"] = "Create a New Component";
@@ -78,11 +80,19 @@
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
             }
+            
 
             this.assign({
                 '#metric-list': new MetricListView
             });
             
+            /* DOM is Ready.*/
+           
+            var self = this;
+            _(function () {
+                $("#rb" + self.model.get("Type")).prop("checked", true);
+                var adfSelectReference3 = new AdformSelect($('select.adf-select1'), { adjustDropperWidth: true, search: true, footer: true, width: 'container' });
+            }).defer();
             return this;
         },
 
@@ -91,7 +101,6 @@
         Validates it, tries to save it, acts accordingly.
         Returns nothing. */
         submit: function () {
-            this.inputMetrics();
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             console.log(this.model.toJSON());
             
@@ -99,39 +108,61 @@
             var validationSuccess = this.model.save({}, {
                 // Success callback. NOTE: model and response SHOULD be taken.
                 success: function (model, response) {       // If FrontEnd Validation pass and API responds with OK.
-                    console.log("Save OK", model);
+                    console.log("Save OK", model, response);
 
                     AdformNotification.display({            
                         type: 'success',
                         content: 'Successfully saved!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
                     //this.model = new Component(); // #WTF? Seems like it's not really needed here. Let's keep it for a while in case sth happens.
                     Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
                 },
                 // Error callback. NOTE: model and response SHOULD be taken.
                 error: function (model, response) {         // If FrontEnd Validation passed, but server responds with failure.
-                    console.log("Save FAIL", response);
+                    console.log("Save FAIL", model, response);
 
-                    // For each error message entry from API display notification message.
-                    response.responseJSON.forEach(function(entry){
-                        AdformNotification.display({       
-                            type: 'error',
-                            content: entry.Message,        
-                            timeout: 5000
+                    if (response.responseJSON) {
+                        // For each error message entry from API display notification message.
+                        response.responseJSON.forEach(function (error) {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: error.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
                         });
-                    });
-                }
+                    }
+                    else {
+                        if (response.statusText) {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: response.statusText,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        } else {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: Config.ErrorSettings.ErrorMessages.NoResponse,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        }
+                    }
+                },
+                timeout: Config.NetworkSettings.Timeout
             });
              
             if (!validationSuccess) {   // FrontEnd Validation FAILED.
-                console.log("Validation failed!");
+                console.log("Validation failed!", this.model.errors);
 
-                AdformNotification.display({            
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
-                });
+                if (this.model.errors) {
+                    this.model.errors.forEach(function (error) {
+                        AdformNotification.display({
+                            type: 'error',
+                            content: error.message,
+                            timeout: Config.NotificationSettings.Timeout
+                        });
+                    });
+                }
             }
             return false;
         },
