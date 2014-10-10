@@ -39,7 +39,7 @@
             $('.sortable').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
-                forcePlaceholderSize: true,
+                //forcePlaceholderSize: true,
                 placeholder: '<li>Placeholder</li>'
             }).bind('sortupdate', function (e, ui) {
                 var draggedItem = self.collection.findWhere({ Order: ui.oldindex }); // The item user dragged

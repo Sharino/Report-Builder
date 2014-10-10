@@ -1,1 +1,39 @@
-﻿
+﻿<div class="form-horizontal well">
+    <div class="group-label">
+        <label><%= model.Title %></label>
+        <hr />
+    </div>
+    <ul class="sparklines">
+        <% _.each(Metrics, function(metric) { %>
+        <li>
+            <span class="headline"><%= metric.DisplayName %></span>
+            <span class="numbers">
+                <% if (metric.DisplayName.indexOf("%") > -1) { %>
+                <%= (Math.random() * 100 + 1).toFixed(3) %>
+                <% } else { %>
+                <%= (Math.random() * 100000 + 1).toFixed(3) %>
+                <% } %>
+            </span>
+        </li>
+        <% }); %>
+        <li>
+            <span class="headline">Impressions</span>
+            <span class="numbers">
+                <%= (Math.random() * 100000 + 1).toFixed(3) %>
+            </span>
+        </li>
+        <li>
+            <span class="headline">In-screen</span>
+            <span class="numbers">
+                <%= (Math.random() * 100000 + 1).toFixed(3) %>
+            </span>
+        </li>
+        <li>
+            <span class="headline">CTR (%)</span>
+            <span class="numbers">
+                <%= (Math.random() * 100 + 1).toFixed(2) %>
+            </span>
+        </li>
+    </ul>
+</div>
+

@@ -49,3 +49,8 @@ li {
    -webkit-flex-wrap: wrap;
    flex-wrap: wrap;
 }
+
+i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
+    height: 10px;
+}
+

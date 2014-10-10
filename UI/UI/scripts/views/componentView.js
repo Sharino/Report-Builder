@@ -44,15 +44,21 @@
                 }
             };
 
+            var radioSelector = 1;
+
             if (this.model) {       // Model exists
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
                     templVariables["data"]["activeNew"] = 'class="active"';
                     templVariables["data"]["activeList"] = '';
+                    radioSelector = 1;
+                    console.log(radioSelector);
                 } else {
                     templVariables["data"]["viewTitle"] = "Edit";
                     templVariables["data"]["activeNew"] = '';
                     templVariables["data"]["activeList"] = '';
+                    radioSelector = this.model.get("Type");
+                    console.log(radioSelector);
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
                 //console.log(templVariables);
@@ -64,18 +70,36 @@
                 templVariables["data"]["activeNew"] = 'class="active"';
                 templVariables["data"]["activeList"] = '';
                 templVariables["data"]["model"] = [];
+                radioSelector = 1;
+                console.log(radioSelector);
                 this.$el.html(this.template(templVariables));
             }
 
             this.assign({
                 '#metric-list': new MetricListView
             });
-            
+
+            console.log('input[name=type-options][value=' + radioSelector + ']');
+            $('input[name=type-options][value=' + radioSelector + ']').prop('checked', true);
             return this;
         },
 
         submit: function () {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
+            this.model.set({
+                Title: this.inputTitle(),
+                Type: this.inputType(),
+                Metrics: new MetricCollection([
+                    {
+                        DisplayName: "Fug XD"
+                    },
+                    {
+                        DisplayName: "Fug XD"
+                    },
+                    {
+                        DisplayName: "Fug XD"
+                    },
+                ])
+            });
             console.log(this.model.toJSON());
             
             // var which gets false on Validation error during .save()

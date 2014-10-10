@@ -5,34 +5,23 @@
     'Component',
     'MetricCollection',
     'MetricListView',
-    'text!templates/component.html',
+    'ComponentGeneratedView',
+    'text!templates/generate.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
+], function ($, _, Backbone, Component, MetricCollection, MetricListView,
+             ComponentGeneratedView, generateTemplate, AdformNotification) {
     var GenerateView;
 
     GenerateView = Backbone.View.extend({
-        template: _.template(componentTemplate),
+        template: _.template(generateTemplate),
 
         events: {
-            'click #component-submit': 'submit',
+            'click #generate-submit': 'submit',
         },
 
         initialize: function () {
             //console.log("componentView.childViews", this.childViews);
             this.childViews = [];       // Store child views for easy closing.
-        },
-
-        inputTitle: function () {
-            return $('#input').val();
-        },
-
-        inputType: function () {
-            var selected = $("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
-            }
         },
 
         render: function () {
@@ -68,54 +57,17 @@
             }
 
             this.assign({
-                '#metric-list': new MetricListView
+                '#component-by-type': new ComponentGeneratedView({
+                    model: this.model,
+                    collection: this.model.get("Metrics")
+                })
             });
-
+            
             return this;
         },
 
         submit: function () {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
             console.log(this.model.toJSON());
-
-            // var which gets false on Validation error during .save()
-            var validationSuccess = this.model.save({}, {
-                // Success callback. NOTE: model and response SHOULD be taken.
-                success: function (model, response) {       // If validation pass and server responds with OK.
-                    console.log("Save OK", model);
-
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
-                        type: 'success',
-                        content: 'Successfully saved!',
-                        timeout: 5000
-                    });
-                    this.model = new Component();
-                    Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
-                },
-                // Error callback. NOTE: model and response SHOULD be taken.
-                error: function (model, response) {         // If validation pass, but server responds with failure.
-                    console.log("Save FAIL", response);
-
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function (entry) {
-                        AdformNotification.display({       // Show Adform notification.
-                            type: 'error',
-                            content: entry.Message,         // Shows message from server
-                            timeout: 5000
-                        });
-                    });
-                }
-            });
-            // Deeper validation error check.
-            if (!validationSuccess) {   // If save returns false we can check what went wrong.
-                console.log("Validation failed!");
-
-                AdformNotification.display({                // And show notifications.
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
-                });
-            }
             return false;
         },
 

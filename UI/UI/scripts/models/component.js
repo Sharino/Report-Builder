@@ -2,8 +2,9 @@
     'jquery',
     'underscore',
     'backbone',
-    'Config'
-], function ($, _, Backbone, Config) {
+    'Config',
+    'MetricCollection'
+], function ($, _, Backbone, Config, MetricCollection) {
     var Component;
 
     Component = Backbone.Model.extend({
@@ -12,10 +13,14 @@
 		defaults: {
             Title: "",
 			Type: 0,
-			Metrics: [],
 			Dimensions: [],
 			Filters: []
 		},
+
+		initialize: function(){
+		    this.Metrics = new MetricCollection();
+		},
+
 		validate: function (attrs) {
             // TODO: use Backbone.validateAll
 		    var errors = this.errors = [];

@@ -1,6 +1,8 @@
 ﻿requirejs.config({
     //By default load any module IDs from scripts/lib
     baseUrl: '',
+    // REMOVE FOR PRODUCTION?
+    urlArgs: "bust=" + (new Date()).getTime(),
     paths: {
         /* External dependencies */
         'jquery':               'scripts/lib/jquery',
@@ -35,6 +37,8 @@
         'MenuView':             'scripts/views/menuView',
         'MetricView':           'scripts/views/metricView',
         'MetricListView':       'scripts/views/metricListView',
+        'GenerateView':         'scripts/views/generateView',
+        'ComponentGeneratedView':'scripts/views/componentGeneratedView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router'
