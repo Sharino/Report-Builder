@@ -1,0 +1,13 @@
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\log4net.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Release\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Release\Logging.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Release\Logging.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Release\Logging.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Release\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Release\Logging.pdb

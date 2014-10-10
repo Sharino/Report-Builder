@@ -12,6 +12,7 @@ namespace DataLayer.Repositories
         Metric Get(int id);
         bool Exists(int id);
     }
+
     public class MetricRepository : IMetricsRepository
     {
         private readonly SqlConnection Connection;
@@ -64,12 +65,11 @@ namespace DataLayer.Repositories
                 }
             }
             Connection.Close();
-            return list.AsEnumerable();
+            return list.OrderBy(x => x.Group.GroupId).AsEnumerable();
         }
 
         public Metric Get(int id)
         {
-            //TODO command parameter
             string sql = @"SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
 	                        FROM [dbo].[Metrics] 
 	                        JOIN [dbo].[MetricDescriptions]
@@ -88,7 +88,6 @@ namespace DataLayer.Repositories
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
-                    //TODO: refactor
                     var item = new Metric
                     {
                         MetricId = reader.GetInt32(0),

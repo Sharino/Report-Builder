@@ -1,0 +1,9 @@
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\DataLayer.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\DataLayer.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\bin\Release\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\obj\Release\DataLayer.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\obj\Release\DataLayer.dll
+C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\DataLayer\obj\Release\DataLayer.pdb

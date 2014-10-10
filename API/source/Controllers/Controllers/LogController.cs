@@ -50,7 +50,7 @@ namespace Controllers.Controllers
                         log.Debug(content.Message);
                         break;
                 }
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return Request.CreateResponse(HttpStatusCode.OK, content);
             }
             catch (Exception exception)
             {

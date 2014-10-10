@@ -3,6 +3,7 @@ using Controllers;
 using System;
 using System.ServiceProcess;
 using System.Configuration;
+using Logging;
 using Microsoft.Owin.Hosting;
 
 
@@ -87,6 +88,8 @@ namespace Host
             }
             catch (Exception exception)
             {
+                Log log = new Log("Program.cs");
+                log.Fatal(exception.ToString());
                 Stop();
             }
         }

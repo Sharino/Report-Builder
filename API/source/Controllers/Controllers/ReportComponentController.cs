@@ -24,7 +24,7 @@ namespace Controllers.Apis
 
         [HttpGet]
         public HttpResponseMessage GetAll()
-        {            //TODO
+        {            
             BaseHandler<int, ReportComponentResponse> Handler = new GetAllHandler();
             var response = Handler.Handle(0);
             if (response != null)
