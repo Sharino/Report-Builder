@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.Linq;
 using BussinessLogic.Mappings;
 using Contracts.Responses;
 using DataLayer.Base;
-using DataLayer.Repositories;
-using Models.DTO; 
-using Models.Models;
 
 namespace BussinessLogic.Handlers.Base
 {
@@ -24,7 +20,6 @@ namespace BussinessLogic.Handlers.Base
         {
             Mapping mapping = new Mapping();
             var reportComponents = _repository.GetAll().OrderBy(x => x.Id);
-            mapping.ReportComponentToDto(reportComponents);
             var reportComponentDtos = mapping.ReportComponentToDto(reportComponents);
             return new ReportComponentResponse(reportComponentDtos.ToList());
         }

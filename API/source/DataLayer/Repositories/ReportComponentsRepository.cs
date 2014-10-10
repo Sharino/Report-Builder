@@ -5,20 +5,23 @@ using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Web.Script.Serialization;
 
 namespace DataLayer.Base
 {
-    public interface IComponentRepository: IBaseRepository
+    public interface IComponentRepository : IBaseRepository
     {
-    
+
     }
 
     public class ComponentRepository : IComponentRepository
     {
         private readonly SqlConnection Connection;
+        private readonly JavaScriptSerializer jsonSerialiser;
 
         public ComponentRepository()
         {
+            jsonSerialiser = new JavaScriptSerializer();
             Connection = CreateDbConnection();
         }
 
@@ -43,6 +46,10 @@ namespace DataLayer.Base
                         component.Id = reader.GetInt32(0);
                         component.Title = reader.GetString(1);
                         component.Type = reader.GetInt32(2);
+
+                        var json = new JavaScriptSerializer();
+                        var data = json.Deserialize<ReportComponentData>(reader.GetString(3));
+                        component.Data = data;
                         list.Add(component);
                     }
                     Connection.Close();
@@ -61,12 +68,17 @@ namespace DataLayer.Base
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
-                    var item = new ReportComponent();
-                    item.Id = reader.GetInt32(0);
-                    item.Title = reader.GetString(1);
-                    item.Type = reader.GetInt32(2);
+                    var component = new ReportComponent();
+                    component.Id = reader.GetInt32(0);
+                    component.Title = reader.GetString(1);
+                    component.Type = reader.GetInt32(2);
+
+                    var json = new JavaScriptSerializer();
+                    var data = json.Deserialize<ReportComponentData>(reader.GetString(3));
+                    component.Data = data;
+
                     Connection.Close();
-                    return item;
+                    return component;
                 }
 
             }
@@ -74,12 +86,13 @@ namespace DataLayer.Base
 
         public int Add(ReportComponent reportComponent)
         {
-            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type) VALUES (@reportTitle, @reportType); SELECT @@IDENTITY;";
+            string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Data) VALUES (@reportTitle, @reportType, @data); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
+                command.Parameters.AddWithValue("@data", jsonSerialiser.Serialize(reportComponent.Data));
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -96,12 +109,13 @@ namespace DataLayer.Base
 
         public int Update(ReportComponent reportComponent)
         {
-            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType WHERE [ReportId] = @reportId";
+            string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Data] = @data WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, Connection))
             {
                 Connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
+                command.Parameters.AddWithValue("@data", jsonSerialiser.Serialize(reportComponent.Data));
                 command.Parameters.AddWithValue("@reportId", reportComponent.Id);
                 int id = 0;
                 object result = command.ExecuteScalar();
@@ -134,7 +148,7 @@ namespace DataLayer.Base
                 Connection.Open();
 
                 command.Parameters.AddWithValue("@reportId", id);
-                int count = (int) command.ExecuteScalar();
+                int count = (int)command.ExecuteScalar();
 
                 Connection.Close();
                 if (count > 0)

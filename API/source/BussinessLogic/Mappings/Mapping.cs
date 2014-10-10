@@ -36,7 +36,8 @@ namespace BussinessLogic.Mappings
                 Id = dto.Id,
                 Title = dto.Title,
                 SubmissionDate = DateTime.Now,
-                Type = dto.Type
+                Type = dto.Type,
+                Data = new ReportComponentData(){ Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = dto.Metrics }
             };
             return report;
         }
@@ -47,7 +48,10 @@ namespace BussinessLogic.Mappings
             {
                 Id = report.Id, 
                 Title = report.Title, 
-                Type = report.Type
+                Type = report.Type,
+                Metrics = report.Data.Metrics,
+                Dimensions = report.Data.Dimensions,
+                Filters = report.Data.Filters
             };
             return dto;
         }
