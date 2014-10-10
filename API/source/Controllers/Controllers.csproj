@@ -83,7 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
-    <Compile Include="Controllers\GarbageController.cs" />
+    <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MetricController.cs" />
     <Compile Include="Controllers\ReportComponentController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -2,16 +2,16 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using BussinessLogic.Handlers.MetricHandlers;
 using Contracts.DTO;
 using Logging;
 
 namespace Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MetricController : ApiController
     {
-        private Log Log;
-
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
