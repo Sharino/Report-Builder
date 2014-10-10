@@ -1,14 +1,11 @@
 API/WebApi.sln
 API/WebApi.sln
-**/bin/Debug/
-**/bin/Release/
 
 #OS junk files
 [Tt]humbs.db
 *.DS_Store
 
 #Visual Studio files
-*.[Oo]bj
 *.user
 *.aps
 *.pch
@@ -29,11 +26,6 @@ API/WebApi.sln
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
-ipch/
-[Oo]bj/
-[Bb]in
-[Dd]ebug*/
-[Rr]elease*/
 Ankh.NoLoad
 
 #MonoDevelop
