@@ -36,11 +36,11 @@ namespace DataLayer.Repositories
 	                        JOIN [dbo].[MetricDescriptions]
 		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
 	                        JOIN [dbo].[MetricName]
-		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].NameID
-	                        LEFT JOIN [dbo].[MetricGroupMap]
-		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMap].MetricID
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].MetricID
+	                        LEFT JOIN [dbo].[MetricGroupMetric]
+		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMetric].MetricID
 	                        LEFT JOIN [dbo].[MetricGroups]	
-		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMap].GroupID";
+		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMetric].GroupID";
             using (var command = new SqlCommand(sql, Connection))
             {
  
@@ -75,11 +75,11 @@ namespace DataLayer.Repositories
 	                        JOIN [dbo].[MetricDescriptions]
 		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
 	                        JOIN [dbo].[MetricName]
-		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].NameID
-	                        LEFT JOIN [dbo].[MetricGroupMap]
-		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMap].MetricID
+		                        ON [dbo].[Metrics].ID = [dbo].[MetricName].MetricID
+	                        LEFT JOIN [dbo].[MetricGroupMetric]
+		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMetric].MetricID
 	                        LEFT JOIN [dbo].[MetricGroups]	
-		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMap].GroupID
+		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMetric].GroupID
 	                        WHERE [dbo].[Metrics].ID = @MetricId ";
             using (var command = new SqlCommand(sql, Connection))
             {
