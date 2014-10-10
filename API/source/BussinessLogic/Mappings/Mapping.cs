@@ -20,6 +20,7 @@ namespace BussinessLogic.Mappings
             var dto = new MetricDto();
             dto.Description = metric.Description;
             dto.DisplayName = metric.DisplayName;
+            dto.DataType = metric.DataType;
             dto.MetricId = metric.MetricId;
             dto.Group = metric.Group;
             return dto;
