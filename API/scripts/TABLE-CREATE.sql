@@ -1,4 +1,4 @@
-﻿USE [TestDB]
+﻿USE [ReportBuilder]
 GO
 
 SET ANSI_NULLS ON
@@ -12,9 +12,9 @@ GO
 CREATE TABLE [dbo].[ReportComponents](
 	[ReportId] [int] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](30) NOT NULL,
-	[Type] [int] NOT NULL
+	[Type] [int] NOT NULL,
+	[Data] [nvarchar](2000) NOT NULL
 ) ON [PRIMARY]
-
 GO
 
 /* METRIC */
@@ -54,7 +54,7 @@ SET ANSI_PADDING OFF
 GO
 
 /* METRIC GROUPS <MAP> METRIC */
-CREATE TABLE [dbo].[MetricGroupMap](
+CREATE TABLE [dbo].[MetricGroupMetric](
 	[ID] [int] NOT NULL,
 	[GroupID] [int] NOT NULL,
 	[MetricID] [int] NOT NULL,
@@ -81,7 +81,8 @@ GO
 
 CREATE TABLE [dbo].[MetricName](
 	[ID] [int] NOT NULL,
-	[NameID] [int] NOT NULL,
+	[MetricID] [int] NOT NULL,
+	[Language] [varchar](50) NOT NULL,
 	[DisplayName] [varchar](50) NOT NULL,
  CONSTRAINT [PK_MetricName] PRIMARY KEY CLUSTERED 
 (
@@ -122,25 +123,25 @@ GO
 ALTER TABLE [dbo].[MetricDescriptions] CHECK CONSTRAINT [FK_MetricDescriptions_Metrics]
 GO
 
-ALTER TABLE [dbo].[MetricName]  WITH CHECK ADD  CONSTRAINT [FK_Metric_MetricName] FOREIGN KEY([NameID])
+ALTER TABLE [dbo].[MetricName]  WITH CHECK ADD  CONSTRAINT [FK_Metric_MetricName] FOREIGN KEY([MetricID])
 REFERENCES [dbo].[Metrics] ([ID])
 GO
 
 ALTER TABLE [dbo].[MetricName] CHECK CONSTRAINT [FK_Metric_MetricName]
 GO
 
-ALTER TABLE [dbo].[MetricGroupMap]  WITH CHECK ADD  CONSTRAINT [FK_MetricGroupMap_MetricGroups] FOREIGN KEY([GroupID])
+ALTER TABLE [dbo].[MetricGroupMetric]  WITH CHECK ADD  CONSTRAINT [FK_MetricGroupMap_MetricGroups] FOREIGN KEY([GroupID])
 REFERENCES [dbo].[MetricGroups] ([ID])
 GO
 
-ALTER TABLE [dbo].[MetricGroupMap] CHECK CONSTRAINT [FK_MetricGroupMap_MetricGroups]
+ALTER TABLE [dbo].[MetricGroupMetric] CHECK CONSTRAINT [FK_MetricGroupMap_MetricGroups]
 GO
 
-ALTER TABLE [dbo].[MetricGroupMap]  WITH CHECK ADD  CONSTRAINT [FK_MetricGroupMap_Metrics] FOREIGN KEY([MetricID])
+ALTER TABLE [dbo].[MetricGroupMetric]  WITH CHECK ADD  CONSTRAINT [FK_MetricGroupMap_Metrics] FOREIGN KEY([MetricID])
 REFERENCES [dbo].[Metrics] ([ID])
 GO
 
-ALTER TABLE [dbo].[MetricGroupMap] CHECK CONSTRAINT [FK_MetricGroupMap_Metrics]
+ALTER TABLE [dbo].[MetricGroupMetric] CHECK CONSTRAINT [FK_MetricGroupMap_Metrics]
 GO
 
 ALTER TABLE [dbo].[MetricGroups]  WITH CHECK ADD  CONSTRAINT [FK_MetricGroups_MetricGroups] FOREIGN KEY([ID])

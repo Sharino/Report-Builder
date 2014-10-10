@@ -1,12 +1,12 @@
-﻿USE [TestDB]
+﻿USE [ReportBuilder]
 GO
 
 /* REPORT COMPONENT */
-INSERT INTO [dbo].[ReportComponents]([Title],[Type])
-     VALUES ('ComponentOne',1)
+INSERT INTO [dbo].[ReportComponents]([Title],[Type],[Data])
+     VALUES ('ComponentOne',1,'asdasdasdasd')
 GO
-INSERT INTO [dbo].[ReportComponents]([Title],[Type])
-     VALUES ('ComponentTwo',2)
+INSERT INTO [dbo].[ReportComponents]([Title],[Type],[Data])
+     VALUES ('ComponentTwo',2,'asddghgahrh')
 GO
 /* METRIC */
 INSERT INTO [dbo].[Metrics]([ID], [Mnemonic])
@@ -25,19 +25,19 @@ INSERT INTO [dbo].[MetricGroups] ([ID], [GroupName])
 GO
 
 /* METRIC GROUPS MAP */
-INSERT INTO [dbo].[MetricGroupMap] ([ID], [GroupID], [MetricID])
+INSERT INTO [dbo].[MetricGroupMetric] ([ID], [GroupID], [MetricID])
      VALUES (1, 1, 1)
 GO
-INSERT INTO [dbo].[MetricGroupMap] ([ID], [GroupID], [MetricID])
+INSERT INTO [dbo].[MetricGroupMetric] ([ID], [GroupID], [MetricID])
      VALUES (2, 2, 2)
 GO
 
 /* METRIC NAME */
-INSERT INTO [dbo].[MetricName] ([ID], [NameID], [DisplayName])
-     VALUES (1,1,'Impressions')
+INSERT INTO [dbo].[MetricName] ([ID], [MetricID], [Language], [DisplayName])
+     VALUES (1,1,'EN','Impressions')
 GO
-INSERT INTO [dbo].[MetricName] ([ID], [NameID], [DisplayName])
-     VALUES (2,2,'Clicks')
+INSERT INTO [dbo].[MetricName] ([ID], [MetricID], [Language], [DisplayName])
+     VALUES (2,2,'US','Clicks')
 GO
 /* METRIC DISCRIPTION */
 INSERT INTO [dbo].[MetricDescriptions] ([ID], [MetricID], [Description])

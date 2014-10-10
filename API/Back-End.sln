@@ -4,15 +4,15 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{1E03B522-D21C-4A62-BAE6-35274DF8C944}"
 	ProjectSection(SolutionItems) = preProject
+		tests\BussinesLogicTests\MappingTests.cs = tests\BussinesLogicTests\MappingTests.cs
 		tests\BussinesLogicTests\ReportControllerTests.cs = tests\BussinesLogicTests\ReportControllerTests.cs
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{13338875-5B3B-46E1-818F-C8024BB7F077}"
 	ProjectSection(SolutionItems) = preProject
-		CREATE_DROP.sql = CREATE_DROP.sql
-		CREATE_USER.sql = CREATE_USER.sql
-		POPULATE.sql = POPULATE.sql
-		TABLE-CREATE.sql = TABLE-CREATE.sql
+		scripts\CREATE_DROP.sql = scripts\CREATE_DROP.sql
+		scripts\POPULATE.sql = scripts\POPULATE.sql
+		scripts\TABLE-CREATE.sql = scripts\TABLE-CREATE.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{C3834CBF-4C21-4CD3-9BFE-A81BB754E4F9}"
