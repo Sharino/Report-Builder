@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using Models.Models;
 
-namespace Models.DTO
+namespace Contracts.DTO
 {
-    public class ReportComponentDTO
+    public class ReportComponentDto
     {
         public string Title { get; set; }
         public int Id { get; set; }

@@ -5,5 +5,3 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contract
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Debug\Contracts.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Debug\Contracts.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Debug\Newtonsoft.Json.xml

@@ -13,5 +13,3 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Bussines
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\BussinessLogic\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\BussinessLogic\bin\Debug\Newtonsoft.Json.xml

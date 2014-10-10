@@ -15,11 +15,11 @@ namespace DataLayer.Repositories
 
     public class MetricRepository : IMetricsRepository
     {
-        private readonly SqlConnection Connection;
+        private readonly SqlConnection _connection;
 
         public MetricRepository()
         {
-            Connection = CreateDbConnection();
+            _connection = CreateDbConnection();
         }
 
         private static SqlConnection CreateDbConnection()
@@ -31,7 +31,7 @@ namespace DataLayer.Repositories
         public IEnumerable<Metric> GetAll()
         {
             var list = new List<Metric>();
-            Connection.Open();
+            _connection.Open();
             const string sql = @" SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
 	                        FROM [dbo].[Metrics] 
 	                        JOIN [dbo].[MetricDescriptions]
@@ -42,7 +42,7 @@ namespace DataLayer.Repositories
 		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMetric].MetricID
 	                        LEFT JOIN [dbo].[MetricGroups]	
 		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMetric].GroupID";
-            using (var command = new SqlCommand(sql, Connection))
+            using (var command = new SqlCommand(sql, _connection))
             {
  
                 using (var reader = command.ExecuteReader())
@@ -64,13 +64,13 @@ namespace DataLayer.Repositories
                     }
                 }
             }
-            Connection.Close();
+            _connection.Close();
             return list.OrderBy(x => x.Group.GroupId).AsEnumerable();
         }
 
         public Metric Get(int id)
         {
-            string sql = @"SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
+            const string sql = @"SELECT [dbo].[Metrics].*, [dbo].[MetricDescriptions].Description, [dbo].[MetricName].DisplayName, [dbo].[MetricGroups].*
 	                        FROM [dbo].[Metrics] 
 	                        JOIN [dbo].[MetricDescriptions]
 		                        ON [dbo].[Metrics].ID = [dbo].[MetricDescriptions].MetricID
@@ -81,9 +81,9 @@ namespace DataLayer.Repositories
 	                        LEFT JOIN [dbo].[MetricGroups]	
 		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMetric].GroupID
 	                        WHERE [dbo].[Metrics].ID = @MetricId ";
-            using (var command = new SqlCommand(sql, Connection))
+            using (var command = new SqlCommand(sql, _connection))
             {
-                Connection.Open();
+                _connection.Open();
                 command.Parameters.AddWithValue("@MetricId", id);
                 using (var reader = command.ExecuteReader())
                 {
@@ -100,7 +100,7 @@ namespace DataLayer.Repositories
                             GroupName = reader.GetString(5)
                         }
                     };
-                    Connection.Close();
+                    _connection.Close();
                     return item;
                 }
             }
@@ -108,18 +108,16 @@ namespace DataLayer.Repositories
 
         public bool Exists(int id)
         {
-            string sql = @"SELECT COUNT(*) FROM [dbo].[Metrics] WHERE [ID] = @MetricId";
-            using (var command = new SqlCommand(sql, Connection))
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Metrics] WHERE [ID] = @MetricId";
+            using (var command = new SqlCommand(sql, _connection))
             {
-                Connection.Open();
+                _connection.Open();
 
                 command.Parameters.AddWithValue("@MetricId", id);
                 int count = (int)command.ExecuteScalar();
 
-                Connection.Close();
-                if (count > 0)
-                    return true;
-                return false;
+                _connection.Close();
+                return count > 0;
             }
         }
     }

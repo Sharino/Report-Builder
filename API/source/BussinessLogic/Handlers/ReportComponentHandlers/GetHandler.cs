@@ -1,28 +1,25 @@
 ﻿using System;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
-using DataLayer.Base;
-using Models.DTO;
-using Models.Models;
+using DataLayer.Repositories;
 
-namespace BussinessLogic.Handlers
+namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class GetHandler : BaseHandler<int, ReportComponentResponse>
     {
         private readonly IComponentRepository _repository;
         public GetHandler(IComponentRepository repository = null)
         {
-            if (repository == null)
-                _repository = new ComponentRepository();
-            else _repository = repository;
+            _repository = repository ?? new ComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(int request)
         {
-            Mapping mapping = new Mapping();
+            var mapping = new Mapping();
             var reportComponent = _repository.Get(request);
-            ReportComponentDTO reportComponentDto = mapping.ReportComponentToDto(reportComponent);
+            var reportComponentDto = mapping.ReportComponentToDto(reportComponent);
             return new ReportComponentResponse(reportComponentDto);
         }
 
@@ -30,11 +27,8 @@ namespace BussinessLogic.Handlers
         {
             if (_repository.Exists(request))
                 return true;
-            else
-            {
-                base.Response = new ReportComponentResponse(new ErrorDTO("EN", "A report component with such id does not exist", DateTime.Now));
-                return false;
-            }
+            Response = new ReportComponentResponse(new ErrorDto("EN", "A report component with such id does not exist", DateTime.Now));
+            return false;
         }
     }
 }

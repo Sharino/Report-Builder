@@ -2,9 +2,9 @@
 
 namespace Contracts.DTO
 {
-    public class ErrorDTO
+    public class ErrorDto
     {
-        public ErrorDTO(string code, string message, DateTime errorNum)
+        public ErrorDto(string code, string message, DateTime errorNum)
         {
             Code = code;
             Message = message;

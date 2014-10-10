@@ -1,5 +1,4 @@
-﻿
-using Models.DTO;
+﻿using Contracts.DTO;
 using Models.Models;
 
 namespace BussinessLogic.Validation
@@ -13,7 +12,7 @@ namespace BussinessLogic.Validation
             return false;
         }
 
-        public static bool IsValid(ReportComponentDTO reportComponentDto)
+        public static bool IsValid(ReportComponentDto reportComponentDto)
         {
             if (reportComponentDto != null)
                 return true;

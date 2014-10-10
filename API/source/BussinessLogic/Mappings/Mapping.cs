@@ -2,26 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using Contracts.DTO;
-using Models.DTO;
 using Models.Models;
 
 namespace BussinessLogic.Mappings
 {
     public class Mapping
     {
-        public IEnumerable<MetricDTO> MetricToDto(IEnumerable<Metric> metrics)
+        public IEnumerable<MetricDto> MetricToDto(IEnumerable<Metric> metrics)
         {
-            var dtos = new List<MetricDTO>() {};
-            foreach (var metric in metrics)
-            {
-                dtos.Add(MetricToDto(metric));
-            }
+            var dtos = new List<MetricDto>();
+            dtos.AddRange(metrics.Select(MetricToDto));
             return dtos.AsEnumerable();
         }
 
-        public MetricDTO MetricToDto(Metric metric)
+        public MetricDto MetricToDto(Metric metric)
         {
-            var dto = new MetricDTO();
+            var dto = new MetricDto();
             dto.Description = metric.Description;
             dto.DisplayName = metric.DisplayName;
             dto.MetricId = metric.MetricId;
@@ -29,7 +25,7 @@ namespace BussinessLogic.Mappings
             return dto;
         }
 
-        public ReportComponent DtoToReportComponent(ReportComponentDTO dto)
+        public ReportComponent DtoToReportComponent(ReportComponentDto dto)
         {
             var report = new ReportComponent
             {
@@ -37,14 +33,14 @@ namespace BussinessLogic.Mappings
                 Title = dto.Title,
                 SubmissionDate = DateTime.Now,
                 Type = dto.Type,
-                Data = new ReportComponentData(){ Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = dto.Metrics }
+                Data = new ReportComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = dto.Metrics }
             };
             return report;
         }
 
-        public ReportComponentDTO ReportComponentToDto(ReportComponent report)
+        public ReportComponentDto ReportComponentToDto(ReportComponent report)
         {
-            var dto = new ReportComponentDTO
+            var dto = new ReportComponentDto
             {
                 Id = report.Id, 
                 Title = report.Title, 
@@ -56,13 +52,10 @@ namespace BussinessLogic.Mappings
             return dto;
         }
 
-        public IEnumerable<ReportComponentDTO> ReportComponentToDto(IEnumerable<ReportComponent> components)
+        public IEnumerable<ReportComponentDto> ReportComponentToDto(IEnumerable<ReportComponent> components)
         {
-            var dtos = new List<ReportComponentDTO>() { };
-            foreach (var component in components)
-            {
-                dtos.Add(ReportComponentToDto(component));
-            }
+            var dtos = new List<ReportComponentDto>();
+            dtos.AddRange(components.Select(ReportComponentToDto));
             return dtos.AsEnumerable();
         }
 

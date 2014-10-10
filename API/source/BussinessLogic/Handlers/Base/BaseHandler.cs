@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using Contracts.DTO;
-using Contracts.Responses;
 using Logging;
 
-namespace BussinessLogic.Handlers
+namespace BussinessLogic.Handlers.Base
 {
     public abstract class BaseHandler<TRequest, TResponse>
     {
         protected TResponse Response;
-        private Log Log;
+        private Log _log;
 
-        protected List<ErrorDTO> Errors;
+        protected List<ErrorDto> Errors;
 
         public TResponse Handle(TRequest request)
         {
@@ -22,8 +21,8 @@ namespace BussinessLogic.Handlers
             }
             catch (Exception exception)
             {
-                Log = new Log("Base handler");
-                Log.Error(exception.ToString());
+                _log = new Log("Base handler");
+                _log.Error(exception.ToString());
                 return Response;
             }
             return Response;

@@ -1,11 +1,12 @@
-﻿using System.Diagnostics;
-using Controllers;
-using System;
-using System.ServiceProcess;
+﻿using System;
 using System.Configuration;
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
+using System.ServiceProcess;
+using Controllers;
 using Logging;
 using Microsoft.Owin.Hosting;
-
 
 namespace Host
 {
@@ -14,6 +15,8 @@ namespace Host
         #region Nested classes to support running as service
 
         public const string ServiceName = "Adform.ReportBuilder.IAPI.Host";
+
+        private static IDisposable _webHost;
 
         public class Service : ServiceBase
         {
@@ -24,7 +27,7 @@ namespace Host
 
             protected override void OnStart(string[] args)
             {
-                Program.Start();
+                Start();
             }
 
             protected override void OnStop()
@@ -32,8 +35,6 @@ namespace Host
                 Program.Stop();
             }
         }
-
-        private static IDisposable _webHost;
 
         #endregion
 
@@ -45,8 +46,8 @@ namespace Host
                 {
                     if (args[0].Equals("-install"))
                     {
-                        var loc = System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase;
-                        var location = loc.Remove(0, 8); //file:///c:/...
+                        string loc = Assembly.GetExecutingAssembly().GetName().CodeBase;
+                        string location = loc.Remove(0, 8); //file:///c:/...
 
                         var process = new Process();
                         var info = new ProcessStartInfo
@@ -59,7 +60,7 @@ namespace Host
 
                         process.StartInfo = info;
                         process.Start();
-                        using (var sw = process.StandardInput)
+                        using (StreamWriter sw = process.StandardInput)
                         {
                             if (sw.BaseStream.CanWrite)
                             {
@@ -80,7 +81,7 @@ namespace Host
                 }
                 else
                 {
-                    Console.WriteLine("Running");
+                    Console.WriteLine(@"Running");
                     Start();
                     Console.ReadKey();
                     Stop();
@@ -88,7 +89,7 @@ namespace Host
             }
             catch (Exception exception)
             {
-                Log log = new Log("Program.cs");
+                var log = new Log("Program.cs");
                 log.Fatal(exception.ToString());
                 Stop();
             }

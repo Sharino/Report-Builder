@@ -3,35 +3,26 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using BussinessLogic.Handlers;
 using BussinessLogic.Handlers.Base;
+using BussinessLogic.Handlers.ReportComponentHandlers;
+using Contracts.DTO;
 using Contracts.Responses;
-using Logging;
-using Models.DTO;
 
-
-namespace Controllers.Apis
+namespace Controllers.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ReportComponentController : ApiController
     {
-        private Log Log;
-
-        public ReportComponentController()
-        {
-            Log = new Log("ReportComponentController");
-        }
-
         [HttpGet]
         public HttpResponseMessage GetAll()
         {            
-            BaseHandler<int, ReportComponentResponse> Handler = new GetAllHandler();
-            var response = Handler.Handle(0);
+            BaseHandler<int, ReportComponentResponse> handler = new GetAllHandler();
+            var response = handler.Handle(0);
             if (response != null)
             {
                 if (response.ReportComponentDtos != null)
                 {
-                    IEnumerable<ReportComponentDTO> reportComponentDtos = response.ReportComponentDtos;
+                    IEnumerable<ReportComponentDto> reportComponentDtos = response.ReportComponentDtos;
                     return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
                 }
                 return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
@@ -42,8 +33,8 @@ namespace Controllers.Apis
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            BaseHandler<int, ReportComponentResponse> Handler = new GetHandler();
-            var response = Handler.Handle(id);
+            BaseHandler<int, ReportComponentResponse> handler = new GetHandler();
+            var response = handler.Handle(id);
             if (response != null)
             {
                 if (response.ReportComponentDtos != null)
@@ -56,10 +47,10 @@ namespace Controllers.Apis
         }
 
         [HttpPut]
-        public HttpResponseMessage Update(ReportComponentDTO reportDto)
+        public HttpResponseMessage Update(ReportComponentDto reportDto)
         {
-            var Handler = new UpdateHandler();
-            var response = Handler.Handle(reportDto);
+            var handler = new UpdateHandler();
+            var response = handler.Handle(reportDto);
             if (response != null)
             {
                 if (response.ReportComponentDtos != null)
@@ -72,10 +63,10 @@ namespace Controllers.Apis
         }
 
         [HttpPost]
-        public HttpResponseMessage Add(ReportComponentDTO reportDto)
+        public HttpResponseMessage Add(ReportComponentDto reportDto)
         {
-            BaseHandler<ReportComponentDTO, ReportComponentResponse> Handler = new AddHandler();
-            var response = Handler.Handle(reportDto);
+            BaseHandler<ReportComponentDto, ReportComponentResponse> handler = new AddHandler();
+            var response = handler.Handle(reportDto);
             if (response != null)
             {
                 if (response.ReportComponentDtos == null)
@@ -90,8 +81,8 @@ namespace Controllers.Apis
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-            BaseHandler<int, ReportComponentResponse> Handler = new DeleteHandler();
-            var response = Handler.Handle(id);
+            BaseHandler<int, ReportComponentResponse> handler = new DeleteHandler();
+            var response = handler.Handle(id);
             if (response != null)
             {
                 if (response.ReportComponentDtos != null)

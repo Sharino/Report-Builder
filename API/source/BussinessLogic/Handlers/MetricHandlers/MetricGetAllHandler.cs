@@ -1,23 +1,20 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
-using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
-using Models.Models;
 
 namespace BussinessLogic.Handlers.MetricHandlers
 {
-    public partial class MetricGetAllHandler : BaseHandler<int, MetricResponse>
+    public class MetricGetAllHandler : BaseHandler<int, MetricResponse>
     {
         private readonly IMetricsRepository _repository;
 
         public MetricGetAllHandler(IMetricsRepository repository = null)
         {
-            if (repository == null)
-                _repository = new MetricRepository();
-            else _repository = repository;
+            _repository = repository ?? new MetricRepository();
         }
+
         public override MetricResponse HandleCore(int request)
         {
             var mapper = new Mapping();

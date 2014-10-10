@@ -5,9 +5,8 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using BussinessLogic.Handlers.MetricHandlers;
 using Contracts.DTO;
-using Logging;
 
-namespace Controllers
+namespace Controllers.Controllers
 {
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class MetricController : ApiController
@@ -15,11 +14,11 @@ namespace Controllers
         [HttpGet]
         public HttpResponseMessage GetAll()
         {
-            var Handler = new MetricGetAllHandler();
-            var response = Handler.Handle(0);
+            var handler = new MetricGetAllHandler();
+            var response = handler.Handle(0);
             if (response.MetricDtos != null)
             {
-                IEnumerable<MetricDTO> metricDtos = response.MetricDtos;
+                IEnumerable<MetricDto> metricDtos = response.MetricDtos;
                 return Request.CreateResponse(HttpStatusCode.OK, metricDtos);
             }
             return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
@@ -28,8 +27,8 @@ namespace Controllers
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            var Handler = new MetricGetHandler();
-            var response = Handler.Handle(id);
+            var handler = new MetricGetHandler();
+            var response = handler.Handle(id);
             if (response.MetricDtos != null)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);

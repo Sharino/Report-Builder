@@ -34,7 +34,7 @@ namespace Controllers
 
             // let's keep the old stuff too....   
             // Those who are familier with HttpContext, owinContext is just a brother from another mother.  
-            appBuilder.Run((owinContext) =>
+            appBuilder.Run(owinContext =>
             {
                 owinContext.Response.ContentType = "text/plain";
                 // here comes the performance, everythign in the Katana is Async. Living in the current century.  

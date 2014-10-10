@@ -26,7 +26,7 @@ namespace Controllers.Controllers
     {
         public HttpResponseMessage Log(LogContent content)
         {
-            Log log = new Log("LogController");
+            var log = new Log("LogController");
             try
             {
                 switch (content.LogType)

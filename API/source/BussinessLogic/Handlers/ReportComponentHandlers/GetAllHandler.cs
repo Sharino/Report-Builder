@@ -1,24 +1,22 @@
-﻿
-using System.Linq;
+﻿using System.Linq;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.Responses;
-using DataLayer.Base;
+using DataLayer.Repositories;
 
-namespace BussinessLogic.Handlers.Base
+namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class GetAllHandler : BaseHandler<int, ReportComponentResponse>
     {
-        
         private readonly IComponentRepository _repository;
         public GetAllHandler(IComponentRepository repository = null)
         {
-            if (repository == null) 
-                _repository = new ComponentRepository();
-            else _repository = repository;
+            _repository = repository ?? new ComponentRepository();
         }
+
         public override ReportComponentResponse HandleCore(int request)
         {
-            Mapping mapping = new Mapping();
+            var mapping = new Mapping();
             var reportComponents = _repository.GetAll().OrderBy(x => x.Id);
             var reportComponentDtos = mapping.ReportComponentToDto(reportComponents);
             return new ReportComponentResponse(reportComponentDtos.ToList());

@@ -7,7 +7,5 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.Properties.Resources.resources
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.csproj.GenerateResource.Cache

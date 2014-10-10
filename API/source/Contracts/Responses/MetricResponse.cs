@@ -8,32 +8,32 @@ namespace Contracts.Responses
     /// </summary>
     public class MetricResponse
     {
-        public MetricResponse(MetricDTO metricDto)
+        public MetricResponse(MetricDto metricDto)
         {
             Errors = null;
-            MetricDtos = new List<MetricDTO>{metricDto};
+            MetricDtos = new List<MetricDto>{metricDto};
         }
 
-        public MetricResponse(List<MetricDTO> metricDtos)
+        public MetricResponse(List<MetricDto> metricDtos)
         {
             Errors = null;
             MetricDtos = metricDtos;
         }
 
-        public MetricResponse(ErrorDTO errorDto)
+        public MetricResponse(ErrorDto errorDto)
         {
             MetricDtos = null;
-            Errors = new List<ErrorDTO>{errorDto};
+            Errors = new List<ErrorDto>{errorDto};
         }
 
-        public MetricResponse(List<ErrorDTO> errorDtos)
+        public MetricResponse(List<ErrorDto> errorDtos)
         {
             MetricDtos = null;
             Errors = errorDtos;
         }
 
 
-        public List<ErrorDTO> Errors { get; set; }
-        public List<MetricDTO> MetricDtos { get; set; }
+        public List<ErrorDto> Errors { get; set; }
+        public List<MetricDto> MetricDtos { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Contracts.DTO
 {
-    public class MetricDTO
+    public class MetricDto
     {
         public int MetricId { get; set; }
         public MetricGroup Group { get; set; }

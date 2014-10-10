@@ -1,27 +1,24 @@
 ﻿using System;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
-using DataLayer.Base;
-using Models.DTO;
-using Models.Models;
+using DataLayer.Repositories;
 
-namespace BussinessLogic.Handlers
+namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class DeleteHandler : BaseHandler<int, ReportComponentResponse>
     {
         private readonly IComponentRepository _repository;
         public DeleteHandler(IComponentRepository repository = null)
         {
-            if (repository == null)
-                _repository = new ComponentRepository();
-            else _repository = repository;
+            _repository = repository ?? new ComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(int request)
         {
             Mapping mapping = new Mapping();
-            ReportComponentDTO toDelete = mapping.ReportComponentToDto(_repository.Get(request));
+            ReportComponentDto toDelete = mapping.ReportComponentToDto(_repository.Get(request));
             _repository.Remove(request);
             return new ReportComponentResponse(toDelete);
         }
@@ -30,11 +27,8 @@ namespace BussinessLogic.Handlers
         {
             if (_repository.Exists(request))
                 return true;
-            else
-            {
-                base.Response = new ReportComponentResponse(new ErrorDTO("EN", "A report component with such id does not exist", DateTime.Now));
-                return false;
-            }
+            Response = new ReportComponentResponse(new ErrorDto("EN", "A report component with such id does not exist", DateTime.Now));
+            return false;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using Contracts.DTO;
-using Models.DTO;
 
 namespace Contracts.Responses
 {
@@ -9,32 +8,32 @@ namespace Contracts.Responses
     /// </summary>
     public class ReportComponentResponse
     {
-        public ReportComponentResponse(List<ReportComponentDTO> reportComponentDtos)
+        public ReportComponentResponse(List<ReportComponentDto> reportComponentDtos)
         {
             Errors = null;
             ReportComponentDtos = reportComponentDtos;
         }
 
-        public ReportComponentResponse(ReportComponentDTO reportComponent)
+        public ReportComponentResponse(ReportComponentDto reportComponent)
         {
             Errors = null;
-            ReportComponentDtos = new List<ReportComponentDTO> {reportComponent};
+            ReportComponentDtos = new List<ReportComponentDto> {reportComponent};
         }
 
-        public ReportComponentResponse(List<ErrorDTO> errors)
+        public ReportComponentResponse(List<ErrorDto> errors)
         {
             Errors = errors;
             ReportComponentDtos = null;
         }
 
-        public ReportComponentResponse(ErrorDTO error)
+        public ReportComponentResponse(ErrorDto error)
         {
-            Errors = new List<ErrorDTO> {error};
+            Errors = new List<ErrorDto> {error};
             ReportComponentDtos = null;
         }
 
 
-        public List<ErrorDTO> Errors { get; set; }
-        public List<ReportComponentDTO> ReportComponentDtos { get; set; }
+        public List<ErrorDto> Errors { get; set; }
+        public List<ReportComponentDto> ReportComponentDtos { get; set; }
     }
 }

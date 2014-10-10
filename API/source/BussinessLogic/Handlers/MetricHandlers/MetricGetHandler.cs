@@ -1,4 +1,5 @@
 ﻿using System;
+using BussinessLogic.Handlers.Base;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
@@ -6,14 +7,12 @@ using BussinessLogic.Mappings;
 
 namespace BussinessLogic.Handlers.MetricHandlers
 {
-    public partial class MetricGetHandler : BaseHandler<int, MetricResponse>
+    public class MetricGetHandler : BaseHandler<int, MetricResponse>
     {
         private readonly IMetricsRepository _repository;
         public MetricGetHandler(IMetricsRepository repository = null)
         {
-            if (repository == null)
-                _repository = new MetricRepository();
-            else _repository = repository;
+            _repository = repository ?? new MetricRepository();
         }
 
         public override MetricResponse HandleCore(int request)
@@ -27,11 +26,8 @@ namespace BussinessLogic.Handlers.MetricHandlers
         {
             if (_repository.Exists(request))
                 return true;
-            else
-            {
-                base.Response = new MetricResponse(new ErrorDTO("EN", "A metric with such id does not exist", DateTime.Now));
-                return false;
-            }
+            Response = new MetricResponse(new ErrorDto("EN", "A metric with such id does not exist", DateTime.Now));
+            return false;
         }
     }
 }
