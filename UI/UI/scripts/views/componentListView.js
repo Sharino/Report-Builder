@@ -4,8 +4,9 @@
     'backbone',
     'ComponentCollection',
     'text!templates/componentList.html',
-    'adform-notifications'
-], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification) {
+    'adform-notifications',
+    'Config'
+], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification, Config) {
     var ComponentListView;
 
     ComponentListView = Backbone.View.extend({
@@ -80,19 +81,22 @@
                     AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
                         type: 'success',
                         content: 'Successfully deleted!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
                 },
                 error: function (model, response) {
                     console.log("Delete Fail", model, response);
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function (entry) {
-                        AdformNotification.display({       // Show Adform notification.
-                            type: 'error',
-                            content: entry.Message,        // Shows message from server
-                            timeout: 5000
+                    
+                    if (response.responseJSON) {
+                        // For each error message entry display notification with message.
+                        response.responseJSON.forEach(function (entry) {
+                            AdformNotification.display({       // Show Adform notification.
+                                type: 'error',
+                                content: entry.Message,        // Shows message from server
+                                timeout: Config.NotificationSettings.Timeout
+                            });
                         });
-                    });
+                    }
                 }
             });
         },

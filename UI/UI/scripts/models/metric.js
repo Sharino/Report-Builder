@@ -8,7 +8,7 @@
     Metric = Backbone.Model.extend({
         // TODO: Add urlRoot for Metric API.
         defaults: {
-            Title: "Test Metric"
+            DisplayName: "Test Metric"
         }
     });
 

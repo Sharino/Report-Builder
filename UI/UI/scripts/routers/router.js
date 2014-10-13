@@ -8,7 +8,8 @@
     'ComponentListView',
     'MenuView',
     'GenerateView',
-    'adform-notifications'
+    'adform-notifications',
+    'Config'
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
              ComponentListView, MenuView, GenerateView, AdformNotification) {
     var Router;
@@ -45,7 +46,7 @@
                     AdformNotification.display({       // Show Adform notification.
                         type: 'error',
                         content: "Error fetching from server.",         // Shows message from server
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
                     self.showView("#list", new ComponentListView({ collection: null }));
                 }

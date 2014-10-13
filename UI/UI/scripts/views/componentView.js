@@ -6,26 +6,32 @@
     'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
-    'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
+    'adform-notifications',
+    'Config'
+], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification, Config) {
     var ComponentView;
 
     ComponentView = Backbone.View.extend({
         template: _.template(componentTemplate),
 
+        /* ComponentView events */
         events: {
-            'click #component-submit': 'submit',
+            'click #component-submit': 'submit'         // Submit button click calls this.submit()
         },
 
+        /* Initializing basic properties */
         initialize: function () {
-            //console.log("componentView.childViews", this.childViews);
-            this.childViews = [];       // Store child views for easy closing.
+            this.childViews = [];                       // Create empty array of childViews for easy access
         },
 
+        /* Form input title return method.
+        Returns: string */
         inputTitle: function () {
             return $('#input').val();
         },
 
+        /* Form input type return method.
+        Returns: int */
         inputType: function () {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
@@ -35,7 +41,15 @@
             }
         },
 
+        /* Form input metrics return method.
+        Returns: Metric[] */
+        inputMetrics: function () {
+            return this.childViews[0].collection.toJSON();
+        },
+
+        /* Render method. Renders ComponentView to screen. */
         render: function () {
+
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -61,9 +75,9 @@
                     console.log(radioSelector);
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
                 this.$el.html(this.template(templVariables));
+
+                
             }
             else {                  // Model does not exist
                 templVariables["data"]["viewTitle"] = "Create a New Component";
@@ -74,16 +88,26 @@
                 console.log(radioSelector);
                 this.$el.html(this.template(templVariables));
             }
+            
 
             this.assign({
                 '#metric-list': new MetricListView
             });
 
-            console.log('input[name=type-options][value=' + radioSelector + ']');
-            $('input[name=type-options][value=' + radioSelector + ']').prop('checked', true);
+            /* DOM is Ready.*/
+           
+            var self = this;
+            _(function () {
+                $("#rb" + self.model.get("Type")).prop("checked", true);
+                var adfSelectReference3 = new AdformSelect($('select.adf-select1'), { adjustDropperWidth: true, search: true, footer: true, width: 'container' });
+            }).defer();
             return this;
         },
 
+        /* Form Submit method.
+        Takes required data from the form.
+        Validates it, tries to save it, acts accordingly.
+        Returns nothing. */
         submit: function () {
             this.model.set({
                 Title: this.inputTitle(),
@@ -105,44 +129,70 @@
             // var which gets false on Validation error during .save()
             var validationSuccess = this.model.save({}, {
                 // Success callback. NOTE: model and response SHOULD be taken.
-                success: function (model, response) {       // If validation pass and server responds with OK.
-                    console.log("Save OK", model);
+                success: function (model, response) {       // If FrontEnd Validation pass and API responds with OK.
+                    console.log("Save OK", model, response);
 
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+                    AdformNotification.display({            
                         type: 'success',
                         content: 'Successfully saved!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
-                    this.model = new Component();
+                    //this.model = new Component(); // #WTF? Seems like it's not really needed here. Let's keep it for a while in case sth happens.
                     Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
                 },
                 // Error callback. NOTE: model and response SHOULD be taken.
-                error: function (model, response) {         // If validation pass, but server responds with failure.
-                    console.log("Save FAIL", response);
+                error: function (model, response) {         // If FrontEnd Validation passed, but server responds with failure.
+                    console.log("Save FAIL", model, response);
 
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function(entry){
-                        AdformNotification.display({       // Show Adform notification.
+                    if (response.responseJSON) {
+                        // For each error message entry from API display notification message.
+                        response.responseJSON.forEach(function (error) {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: error.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        });
+                    }
+                    else {
+                        if (response.statusText) {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: response.statusText,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        } else {
+                            AdformNotification.display({
+                                type: 'error',
+                                content: Config.ErrorSettings.ErrorMessages.NoResponse,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        }
+                    }
+                },
+                timeout: Config.NetworkSettings.Timeout
+            });
+             
+            if (!validationSuccess) {   // FrontEnd Validation FAILED.
+                console.log("Validation failed!", this.model.errors);
+
+                if (this.model.errors) {
+                    this.model.errors.forEach(function (error) {
+                        AdformNotification.display({
                             type: 'error',
-                            content: entry.Message,         // Shows message from server
-                            timeout: 5000
+                            content: error.message,
+                            timeout: Config.NotificationSettings.Timeout
                         });
                     });
                 }
-            });
-            // Deeper validation error check.
-            if (!validationSuccess) {   // If save returns false we can check what went wrong.
-                console.log("Validation failed!");
-
-                AdformNotification.display({                // And show notifications.
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
-                });
             }
             return false;
         },
 
+        /* Assign Child View.
+        Takes selector and view array.
+        Pushes View references to ChildView[] and renders them.
+        Returns nothing. */
         assign: function (selector, view) {
             var selectors;
             if (_.isObject(selector)) {

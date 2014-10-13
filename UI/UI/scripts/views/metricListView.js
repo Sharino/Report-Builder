@@ -6,8 +6,11 @@
     'Metric',
     'MetricCollection',
     'text!templates/metricList.html',
-
-], function ($, _, Backbone, Sortable, Metric, MetricCollection, MetricListTemplate) {
+    'Config',
+    'adform-checkbox',
+    'handlebars',
+    'adform-select'
+], function ($, _, Backbone, Sortable, Metric, MetricCollection, MetricListTemplate, Config, ac, h, as) {
     var MetricListView;
 
     MetricListView = Backbone.View.extend({
@@ -28,12 +31,23 @@
                 this.collection.on('fetch', this.render, this);
             }
             this.collection.on('add', this.render, this);
+
+            this.allMetrics = new MetricCollection();
+            this.allMetrics.fetch({
+                success: function (model, response) {
+                    console.log("allMetric.fetch OK", model, response);
+                },
+                error: function (model, response) {
+                    console.log("allMetric.fetch FAIL", model, response);
+                }
+            });
         },
 
         render: function () {
-            this.collection.sort();                                                // DEBUG: Sorting might not be required later as we implement features.
-            this.$el.html(this.template({ "Metrics": this.collection.toJSON() })); // Render Metric list
-
+            this.collection.sort();
+            // DEBUG: Sorting might not be required later as we implement features.
+            this.$el.html(this.template({ "Metrics": this.collection.toJSON(), "AllMetrics": this.allMetrics.toJSON() })); // Render Metric list
+            
             var self = this;
             /* Initialize sortable list. */
             $('.sortable').sortable({
@@ -60,11 +74,12 @@
                 }
                 self.render();                                                       // DEBUG: Rerender list. Currently we show order in braces, ex.: {Metric title}{Position} ({Order})
             });
+
         },
 
         addMetric: function () {
             this.collection.add([
-               { Title: "Metric "  + this.collection.length, Order: this.collection.length }
+               { DisplayName: "Metric "  + this.collection.length, Order: this.collection.length }
             ]);
 
             console.log(this, this.collection.toJSON());

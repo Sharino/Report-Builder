@@ -9,13 +9,16 @@
                 <div class="btn-group">
                     <label class="btn single-btn" data-toggle="">
                         <i class="handle adf-icon-alt-drag"></i>
-                        <%= model.Title %> (<%= model.Order %>)
+                        <%= model.DisplayName %> (<%= model.Order %>)
+                        <% console.log(AllMetrics) %>
                     </label>
                     <a class="btn single-btn" data-toggle="dropdown" href="#">
                         <i class="adf-icon-small-dropdown"></i>
                     </a>
                     <ul class="dropdown-menu">
-                        <li>Cia bus metrikos</li>
+                        <% _.each(AllMetrics, function(Metric){ %>
+                            <li><a href=""><%= Metric.DisplayName %></a></li>
+                        <% }); %>
                     </ul>
                 </div>
 
@@ -28,4 +31,27 @@
         </li> 
     </ul>
 </div>
-
+<div class="form-horizontal well">
+    <div class="control-group">
+        <label class="control-label">Single select</label>
+        <div class="controls">
+            <select class="adf-select1 input-large" placeholder="Select item" data-no-results="No results">
+                <option></option>
+                <option value="1">AMS incubator - Tracking</option>
+                <option value="2">Deivydas Sabaras</option>
+                <option value="3">Donatas Kozlovskis</option>
+                <option value="4">Dovile Zernyte</option>
+                <option value="5">Egle Lapiene</option>
+                <option value="6">Erika Jasenovic</option>
+                <option value="7">Gedgaudas Gironcikas</option>
+                <option value="1">AMS incubator - Tracking</option>
+                <option value="2">Deivydas Sabaras</option>
+                <option value="3">Donatas Kozlovskis</option>
+                <option value="4">Dovile Zernyte</option>
+                <option value="5">Egle Lapiene</option>
+                <option value="6">Erika Jasenovic</option>
+                <option value="7">Gedgaudas Gironcikas</option>
+            </select>
+        </div>
+    </div>
+</div>
