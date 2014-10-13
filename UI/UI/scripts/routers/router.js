@@ -11,7 +11,7 @@
     'adform-notifications',
     'Config'
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
-             ComponentListView, MenuView, GenerateView, AdformNotification) {
+             ComponentListView, MenuView, GenerateView, AdformNotification, Config) {
     var Router;
     
     Router = Backbone.Router.extend({
