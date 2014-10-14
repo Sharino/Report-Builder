@@ -46,6 +46,7 @@
     <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Metric.cs" />
+    <Compile Include="Models\Dashboard.cs" />
     <Compile Include="Models\ReportComponent.cs" />
     <Compile Include="Models\ReportComponentData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

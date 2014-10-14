@@ -20,6 +20,7 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
         public override ReportComponentResponse HandleCore(ReportComponentDto request)
         {
             var mapping = new Mapping();
+            request.SubmissionDate = DateTime.UtcNow.ToString();
             ReportComponent reportComponent = mapping.DtoToReportComponent(request);
             int id = _repository.Add(reportComponent);
             request.Id = id;

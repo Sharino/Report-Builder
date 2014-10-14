@@ -9,5 +9,6 @@ namespace Contracts.DTO
         public string DisplayName { get; set; }
         public string Description { get; set; }
         public string DataType { get; set; }
+        public string Mnemonic { get; set; }
     }
 }

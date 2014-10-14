@@ -51,7 +51,7 @@ namespace UnitTests
             var source = new ReportComponent
             {
                 Id = 1,
-                SubmissionDate = DateTime.Now,
+                SubmissionDate = "Gimtadienis",
                 Title = "Test",
                 Type = 1,
                 Data = new ReportComponentData
@@ -121,12 +121,12 @@ namespace UnitTests
             //Arrange
             var mapping = new Mapping();
             #region var source
-            IEnumerable<ReportComponent> source = new List<ReportComponent>
+            var source = new List<ReportComponent>
             {
                 new ReportComponent
                 {
                     Id = 1,
-                    SubmissionDate = DateTime.Now,
+                    SubmissionDate = "Gimtadienis",
                     Title = "Test",
                     Type = 1,
                     Data = new ReportComponentData
@@ -155,7 +155,7 @@ namespace UnitTests
                 new ReportComponent
                 {
                     Id = 2,
-                    SubmissionDate = DateTime.Now,
+                    SubmissionDate = "Gimtadienis",
                     Title = "Test2",
                     Type = 1,
                     Data = new ReportComponentData
@@ -184,11 +184,11 @@ namespace UnitTests
             };
             #endregion
             //Act
-            IEnumerable<ReportComponentDto> destination = mapping.ReportComponentToDto(source);
+            List<ReportComponentDto> destination = mapping.ReportComponentToDto(source);
 
             //Assert
             Assert.AreNotSame(source, destination);
-            Assert.IsInstanceOfType(destination, typeof(IEnumerable<ReportComponentDto>));
+            Assert.IsInstanceOfType(destination, typeof(List<ReportComponentDto>));
         }
     }
 }

@@ -55,7 +55,7 @@ namespace BussinessLogicTests
                 },
                 Title = "Test",
                 Id = 1,
-                SubmissionDate = DateTime.Now,
+                SubmissionDate = "Gimtadienis",
                 Type = 1
             };
             repository.Setup(x => x.Get(It.IsAny<int>())).Returns(report);
@@ -91,7 +91,7 @@ namespace BussinessLogicTests
                     },
                     Title = "Test",
                     Id = 1,
-                    SubmissionDate = DateTime.Now,
+                    SubmissionDate = "Gimtadienis",
                     Type = 1
                 },
                 new ReportComponent
@@ -104,7 +104,7 @@ namespace BussinessLogicTests
                     },
                     Title = "Test",
                     Id = 2,
-                    SubmissionDate = DateTime.Now,
+                    SubmissionDate = "Gimtadienis",
                     Type = 2
                 }
             };

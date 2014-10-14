@@ -18,7 +18,7 @@ namespace BussinessLogic.Handlers.MetricHandlers
         public override MetricResponse HandleCore(int request)
         {
             var mapper = new Mapping();
-            var metrics = _repository.GetAll().OrderBy(x => x.MetricId);
+            var metrics = _repository.GetAll().OrderBy(x => x.MetricId).ToList();
             var dtos = mapper.MetricToDto(metrics);
             return new MetricResponse(dtos.ToList());
         }

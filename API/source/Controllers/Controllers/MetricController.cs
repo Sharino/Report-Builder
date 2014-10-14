@@ -16,12 +16,16 @@ namespace Controllers.Controllers
         {
             var handler = new MetricGetAllHandler();
             var response = handler.Handle(0);
-            if (response.MetricDtos != null)
+            if (response != null)
             {
-                IEnumerable<MetricDto> metricDtos = response.MetricDtos;
-                return Request.CreateResponse(HttpStatusCode.OK, metricDtos);
+                if (response.MetricDtos != null)
+                {
+                    IEnumerable<MetricDto> metricDtos = response.MetricDtos;
+                    return Request.CreateResponse(HttpStatusCode.OK, metricDtos);
+                }
+                return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.NoContent);
         }
 
         [HttpGet]
@@ -29,11 +33,15 @@ namespace Controllers.Controllers
         {
             var handler = new MetricGetHandler();
             var response = handler.Handle(id);
-            if (response.MetricDtos != null)
+            if (response != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);
+                if (response.MetricDtos != null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);
+                }
+                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
     }
 }

@@ -8,11 +8,35 @@ namespace BussinessLogic.Mappings
 {
     public class Mapping
     {
-        public IEnumerable<MetricDto> MetricToDto(IEnumerable<Metric> metrics)
+        public List<Dashboard> DtoToDashboard(List<DashboardDto> dtos)
         {
-            var dtos = new List<MetricDto>();
-            dtos.AddRange(metrics.Select(MetricToDto));
-            return dtos.AsEnumerable();
+            return dtos.Select(DtoToDashboard).ToList();
+        }
+
+        public List<DashboardDto> ReportToDto(List<Dashboard> dashboards)
+        {
+            return dashboards.Select(DashboardToDto).ToList();
+        }
+
+        public Dashboard DtoToDashboard(DashboardDto dto)
+        {
+            var dashboard = new Dashboard {ReportComponents = DtoToReportComponent(dto.ReportComponentDtos)};
+            dashboard.Id = dto.Id;
+            dashboard.Title = dto.Title;
+            return dashboard;
+        }
+
+        public DashboardDto DashboardToDto(Dashboard dashboard)
+        {
+            var dashboardDto = new DashboardDto {ReportComponentDtos = ReportComponentToDto(dashboard.ReportComponents)};
+            dashboardDto.Id = dashboard.Id;
+            dashboardDto.Title = dashboard.Title;
+            return dashboardDto;
+        }
+
+        public List<MetricDto> MetricToDto(List<Metric> metrics)
+        {
+            return metrics.Select(MetricToDto).ToList();
         }
 
         public MetricDto MetricToDto(Metric metric)
@@ -21,9 +45,27 @@ namespace BussinessLogic.Mappings
             dto.Description = metric.Description;
             dto.DisplayName = metric.DisplayName;
             dto.DataType = metric.DataType;
+            dto.Mnemonic = metric.Mnemonic;
             dto.MetricId = metric.MetricId;
             dto.Group = metric.Group;
             return dto;
+        }
+
+        public List<Metric> DtoToMetric(List<MetricDto> dtos)
+        {
+            return dtos.Select(DtoToMetric).ToList();
+        }
+
+        public Metric DtoToMetric(MetricDto dto)
+        {
+            var metric = new Metric();
+            metric.DataType = dto.DataType;
+            metric.DisplayName = dto.DisplayName;
+            metric.Description = dto.Description;
+            metric.Group = dto.Group;
+            metric.MetricId = dto.MetricId;
+            metric.Mnemonic = dto.Mnemonic;
+            return metric;
         }
 
         public ReportComponent DtoToReportComponent(ReportComponentDto dto)
@@ -32,33 +74,36 @@ namespace BussinessLogic.Mappings
             {
                 Id = dto.Id,
                 Title = dto.Title,
-                SubmissionDate = DateTime.Now,
+                SubmissionDate = dto.SubmissionDate,
                 Type = dto.Type,
-                Data = new ReportComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = dto.Metrics }
+                Data = new ReportComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = DtoToMetric(dto.Metrics)}
             };
             return report;
         }
 
         public ReportComponentDto ReportComponentToDto(ReportComponent report)
-        {
+        {     
             var dto = new ReportComponentDto
             {
                 Id = report.Id, 
                 Title = report.Title, 
                 Type = report.Type,
-                Metrics = report.Data.Metrics,
+                Metrics = MetricToDto(report.Data.Metrics),
+                SubmissionDate = report.SubmissionDate,
                 Dimensions = report.Data.Dimensions,
                 Filters = report.Data.Filters
             };
             return dto;
         }
 
-        public IEnumerable<ReportComponentDto> ReportComponentToDto(IEnumerable<ReportComponent> components)
+        public List<ReportComponent> DtoToReportComponent(List<ReportComponentDto> dtos)
         {
-            var dtos = new List<ReportComponentDto>();
-            dtos.AddRange(components.Select(ReportComponentToDto));
-            return dtos.AsEnumerable();
+            return dtos.Select(DtoToReportComponent).ToList();
         }
 
+        public List<ReportComponentDto> ReportComponentToDto(List<ReportComponent> components)
+        {
+            return components.Select(ReportComponentToDto).ToList();
+        }
     }
 }
