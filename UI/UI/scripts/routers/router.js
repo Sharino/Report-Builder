@@ -68,7 +68,7 @@
 
         showView: function(selector, view) {
             if (this.currentView)
-                this.currentView.close();
+                this.currentView.destroy();
             $(selector).html(view.render().el);
             this.currentView = view;
             return view;

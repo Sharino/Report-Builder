@@ -1,14 +1,18 @@
 ﻿define('Metric', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+    'backbone',
+    'Config'
+], function ($, _, Backbone, Config) {
     var Metric;
 
     Metric = Backbone.Model.extend({
-        // TODO: Add urlRoot for Metric API.
-        defaults: {
-            DisplayName: "Test Metric"
+        idAttribute: "MetricId",
+
+        urlRoot: Config.MetricSettings.URL,
+
+        toString: function () {
+            return this.DisplayName;
         }
     });
 

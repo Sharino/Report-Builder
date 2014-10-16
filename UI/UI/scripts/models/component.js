@@ -28,7 +28,6 @@
 		    if (!attrs.Type || attrs.Type === 0) {
 		        errors.push({ name: 'Type', message: 'Type is required' });
 		    }
-
 		    if (attrs.Metrics.length === 0) {
 		        errors.push({ name: 'Metrics', message: 'At least one metric is required.' });
 		    }

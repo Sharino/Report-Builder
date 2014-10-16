@@ -20,6 +20,10 @@
         /* Config dependencies */
         'Config':               'scripts/config/config',
 
+        /* Base Views */
+        'BaseDestructableView': 'scripts/views/baseDestructableView',
+        'BaseCompositeView':    'scripts/views/baseCompositeView',
+
         /* Model dependencies */
         'App':                  'scripts/models/app',
         'Component':            'scripts/models/component',
@@ -62,7 +66,7 @@
             deps: ['backbone', 'jquery']
         }
     },
-    urlArgs: "bust=" + (new Date()).getTime()
+    //urlArgs: "bust=" + (new Date()).getTime()
 
 });
 
@@ -71,24 +75,8 @@ require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView
     function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router, Config) {
         console.log(Config);
 
-        Backbone.View.prototype.close = function () {
-            console.log('Closing view', this);
-            if (this.beforeClose) {
-                this.beforeClose();
-            }
-            this.remove();
-            this.unbind();
-
-            //console.log("this.childViews", this.childViews);
-            _.each(this.childViews, function (childView) {
-                if (childView.close) {
-                    childView.close();
-                }
-            });
-            this.childViews = [];
-        };
-
         var app = new Router();
         app.initialize();
         Backbone.history.start();
+
 });

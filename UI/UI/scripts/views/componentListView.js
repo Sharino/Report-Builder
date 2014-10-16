@@ -2,14 +2,15 @@
     'jquery',
     'underscore',
     'backbone',
+    'BaseCompositeView',
     'ComponentCollection',
     'text!templates/componentList.html',
     'adform-notifications',
     'Config'
-], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification, Config) {
+], function ($, _, Backbone, BaseCompositeView, ComponentCollection, componentListTemplate, AdformNotification, Config) {
     var ComponentListView;
 
-    ComponentListView = Backbone.View.extend({
+    ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
 
         events: {
@@ -18,18 +19,16 @@
         },
 
         initialize: function () {
-            if (this.collection) {
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
-            }
-            else {
+            if (!this.collection) {
                 this.collection = new ComponentCollection();
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
             }
-            //this.render;
+
+            this.collection.on('remove', this.render, this);
+            this.collection.on('fetch', this.render, this);
         },
         render: function () {
+            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
+
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -77,7 +76,7 @@
             item.destroy({
                 success: function (model, response) {
                     console.log("Delete OK", model, response);
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+                    AdformNotification.display({           
                         type: 'success',
                         content: 'Successfully deleted!',
                         timeout: Config.NotificationSettings.Timeout
@@ -87,11 +86,10 @@
                     console.log("Delete Fail", model, response);
                     
                     if (response.responseJSON) {
-                        // For each error message entry display notification with message.
                         response.responseJSON.forEach(function (entry) {
-                            AdformNotification.display({       // Show Adform notification.
+                            AdformNotification.display({       
                                 type: 'error',
-                                content: entry.Message,        // Shows message from server
+                                content: entry.Message,      
                                 timeout: Config.NotificationSettings.Timeout
                             });
                         });

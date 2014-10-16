@@ -2,6 +2,7 @@
     'jquery',
     'underscore',
     'backbone',
+    'BaseCompositeView',
     'Sortable',
     'Metric',
     'MetricCollection',
@@ -10,80 +11,140 @@
     'adform-checkbox',
     'handlebars',
     'adform-select'
-], function ($, _, Backbone, Sortable, Metric, MetricCollection, MetricListTemplate, Config, ac, h, as) {
+], function ($, _, Backbone, BaseCompositeView, Sortable, Metric, MetricCollection, MetricListTemplate, Config, ac, h, as) {
     var MetricListView;
 
-    MetricListView = Backbone.View.extend({
+    MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
 
         events: {
-            'click #addMetric': 'addMetric'
+            'click #addMetric': 'metricAddedAction',
+            'AdformSelect:selectionChanged': 'metricSelectedAction'
         },
 
-        initialize: function () {
-            if (this.collection) {
-                this.collection.on('add', this.render, this);
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
-            } else {
-                this.collection = new MetricCollection();
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
-            }
-            this.collection.on('add', this.render, this);
+        initialize: function (parentModel, allMetrics) {
+            var self = this;
 
-            this.allMetrics = new MetricCollection();
-            this.allMetrics.fetch({
-                success: function (model, response) {
-                    console.log("allMetric.fetch OK", model, response);
-                },
-                error: function (model, response) {
-                    console.log("allMetric.fetch FAIL", model, response);
-                }
-            });
+            this.selectReferences = [];
+
+            this.model = parentModel;
+       
+            this.metricArray = this.model.get("Metrics");
+
+            for (var i = 0; i < this.metricArray.length; i++) {
+                this.metricArray[i].Order = i;
+            }
+
+            this.allMetrics = allMetrics;
         },
 
         render: function () {
-            this.collection.sort();
-            // DEBUG: Sorting might not be required later as we implement features.
-            this.$el.html(this.template({ "Metrics": this.collection.toJSON(), "AllMetrics": this.allMetrics.toJSON() })); // Render Metric list
-            
             var self = this;
-            /* Initialize sortable list. */
+
+            this.metricArray.sort(function (a, b) {
+                return a.Order - b.Order;
+            });
+
+            this.$el.html(this.template({ "Metrics": this.metricArray, "AllMetrics": this.allMetrics.toJSON() })); // Render Metric list
+
+            this.initializeMetricSelects();
+
+            this.initializeSortableList();
+
+            return this;
+        },
+
+        metricAddedAction: function () {
+            this.metricArray.push({ Placeholder: true });
+            this.render();
+        },
+
+        initializeMetricSelects: function () {
+            var self = this;
+
+            var metricSelectArray = this.$el.find('select.metric-select').get();
+
+            if (metricSelectArray.length !== 0) {
+                var singleMetricSelectReference = new AdformSelect(metricSelectArray, { adjustDropperWidth: true, search: true, footer: false, width: 'container' });
+
+                if (metricSelectArray.length === 1) {
+                    // Strange approach, I know, but if Select element array has only one element, object reference is saved in the variable, not in $selector.data
+                    // So we push that value to its $.data and later use general forEach
+                    $(metricSelectArray[0]).data("AdformSelect", singleMetricSelectReference);
+                }
+
+                this.selectReferences = [];
+
+                metricSelectArray.forEach(function (singleMetricSelect) {
+                    var reference = $(singleMetricSelect).data("AdformSelect");
+                    self.selectReferences.push(reference);
+                });
+
+                for (var i = 0; i < this.metricArray.length; i++) {
+                    if (!this.metricArray[i].Placeholder) {
+                        this.selectReferences[i].setValues([this.metricArray[i].MetricId]);
+                    }
+                }
+            }
+        },
+
+        metricSelectedAction: function (e) {
+            var reference = $(e.target).data("AdformSelect");
+
+            var selectReferenceID = null;
+            for (var i = 0; i < this.selectReferences.length; i++) {
+                if (this.selectReferences[i] === reference) {
+                    selectReferenceID = i;
+                    break;
+                }
+            }
+
+            var selectedValue = parseInt(reference.getValues());
+            var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
+
+            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
+            delete this.metricArray[selectReferenceID].Placeholder;
+        },
+
+        initializeSortableList: function () {
+            var self = this;
+
             $('.sortable').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 //forcePlaceholderSize: true,
                 placeholder: '<li>Placeholder</li>'
             }).bind('sortupdate', function (e, ui) {
-                var draggedItem = self.collection.findWhere({ Order: ui.oldindex }); // The item user dragged
-
-                if (ui.oldindex > ui.item.index()) {                                 // User dragged left
-                    for (var i = ui.item.index(); i < ui.oldindex; i++) {            // For every item in between new id and old id we increase Order, because it shifted right by 1
-                        var item = self.collection.at(i);                            // Get item at array position [i]. Position is NOT Order, it is just insert position.
-                        item.set({ Order: i + 1 });                                  // Increase order by 1
-                    }
-                    draggedItem.set({ Order: ui.item.index() });                     // Set new Order to dragged item.
-                }
-                else {                                                               // User dragged right
-                    for (var i = ui.oldindex + 1; i <= ui.item.index() ; i++) {      // Same idea all over, just decrease the order cuz items shifted left.
-                        var item = self.collection.at(i);
-                        item.set({ Order: i - 1 });
-                    }
-                    draggedItem.set({ Order: ui.item.index() });
-                }
-                self.render();                                                       // DEBUG: Rerender list. Currently we show order in braces, ex.: {Metric title}{Position} ({Order})
+                self.metricDraggedAction(e, ui);
             });
-
         },
 
-        addMetric: function () {
-            this.collection.add([
-               { DisplayName: "Metric "  + this.collection.length, Order: this.collection.length }
-            ]);
+        metricDraggedAction: function (e, ui) {
+            var draggedItem = null;
+            for (var i = 0; i < this.metricArray.length; i++) {
+                if (this.metricArray[i].Order == ui.oldindex) {
+                    draggedItem = this.metricArray[i];
+                }
+            }
 
-            console.log(this, this.collection.toJSON());
+
+            if (ui.oldindex > ui.item.index()) {                                    // User dragged left
+                for (var i = ui.item.index() ; i < ui.oldindex; i++) {              // For every item in between new id and old id we increase Order, because it shifted right by 1
+                    var item = this.metricArray[i];
+                    item.Order = i + 1;                                             // Increase order by 1
+                }
+                draggedItem.Order = ui.item.index();                                // Set new Order to dragged item.
+            }
+            else {                                                                  // User dragged right
+                for (var i = ui.oldindex + 1; i <= ui.item.index() ; i++) {         // Same idea all over, just decrease the order cuz items shifted left.
+                    var item = this.metricArray[i];
+                    item.Order = i - 1;
+                }
+                draggedItem.Order = ui.item.index();
+            }
+            this.render();
         }
+
     });
 
     return MetricListView;
