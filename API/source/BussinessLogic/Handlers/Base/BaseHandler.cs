@@ -10,12 +10,13 @@ namespace BussinessLogic.Handlers.Base
         protected TResponse Response;
         private Log _log;
 
-        protected List<ErrorDto> Errors;
+        public List<ErrorDto> Errors;
 
         public TResponse Handle(TRequest request)
         {
             try
             {
+                Errors = new List<ErrorDto>();
                 if (Validate(request))
                     return HandleCore(request);
             }
@@ -24,7 +25,7 @@ namespace BussinessLogic.Handlers.Base
                 _log = new Log("Base handler");
                 _log.Error(exception.ToString());
 
-                Errors.Add(new ErrorDto("generalerror","General error happens please contact support",DateTime.UtcNow));
+                Errors.Add(new ErrorDto("GenericError", "Generic error happened. Please contact customer support", DateTime.UtcNow));
                 return Response;
             }
             return Response;

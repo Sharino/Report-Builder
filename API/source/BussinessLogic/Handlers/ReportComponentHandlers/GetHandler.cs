@@ -9,10 +9,10 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class GetHandler : BaseHandler<int, ReportComponentResponse>
     {
-        private readonly IComponentRepository _repository;
-        public GetHandler(IComponentRepository repository = null)
+        private readonly IReportComponentRepository _repository;
+        public GetHandler(IReportComponentRepository repository = null)
         {
-            _repository = repository ?? new ComponentRepository();
+            _repository = repository ?? new ReportComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(int request)

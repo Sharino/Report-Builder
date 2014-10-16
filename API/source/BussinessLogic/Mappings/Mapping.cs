@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
+using System.Web.Script.Serialization;
 using Contracts.DTO;
 using Models.Models;
 
@@ -8,6 +8,50 @@ namespace BussinessLogic.Mappings
 {
     public class Mapping
     {
+        #region Dashboard Component
+
+        public DashboardComponent ReportComponentToDashboardComponent(ReportComponent reportComponent)
+        {
+            var dashboardComponent = new DashboardComponent();
+            dashboardComponent.Title = reportComponent.Title;
+            dashboardComponent.Type = reportComponent.Type;
+
+            var serializer = new JavaScriptSerializer();
+            dashboardComponent.Definition = serializer.Serialize(reportComponent.Data);
+
+            return dashboardComponent;
+        }
+
+        public DashboardComponent DtoToDashboardComponent(DashboardComponentDto dto)
+        {
+            var component = new DashboardComponent();
+            component.DashboardId = dto.DashboardId;
+            component.Definition = dto.Definition;
+            component.Id = dto.Id;
+            component.CreationDate = dto.CreationDate;
+            component.Title = dto.Title;
+            component.Type = dto.Type;
+
+            return component;
+        }
+
+        public DashboardComponentDto DashboardComponentToDto(DashboardComponent component)
+        {
+            var dto = new DashboardComponentDto();
+            dto.DashboardId = component.DashboardId;
+            dto.Definition = component.Definition;
+            dto.Id = component.Id;
+            dto.CreationDate = component.CreationDate;
+            dto.Title = component.Title;
+            dto.Type = component.Type;
+
+            return dto;
+        }
+
+        #endregion
+
+        #region Dashboard
+
         public List<Dashboard> DtoToDashboard(List<DashboardDto> dtos)
         {
             return dtos.Select(DtoToDashboard).ToList();
@@ -33,6 +77,10 @@ namespace BussinessLogic.Mappings
             dashboardDto.Title = dashboard.Title;
             return dashboardDto;
         }
+
+        #endregion
+
+        #region Metric
 
         public List<MetricDto> MetricToDto(List<Metric> metrics)
         {
@@ -68,15 +116,19 @@ namespace BussinessLogic.Mappings
             return metric;
         }
 
+        #endregion
+
+        #region Report Component
+
         public ReportComponent DtoToReportComponent(ReportComponentDto dto)
         {
             var report = new ReportComponent
             {
                 Id = dto.Id,
                 Title = dto.Title,
-                SubmissionDate = dto.SubmissionDate,
+                CreationDate = dto.SubmissionDate,
                 Type = dto.Type,
-                Data = new ReportComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = DtoToMetric(dto.Metrics)}
+                Data = new ComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = DtoToMetric(dto.Metrics)}
             };
             return report;
         }
@@ -89,7 +141,7 @@ namespace BussinessLogic.Mappings
                 Title = report.Title, 
                 Type = report.Type,
                 Metrics = MetricToDto(report.Data.Metrics),
-                SubmissionDate = report.SubmissionDate,
+                SubmissionDate = report.CreationDate,
                 Dimensions = report.Data.Dimensions,
                 Filters = report.Data.Filters
             };
@@ -105,5 +157,7 @@ namespace BussinessLogic.Mappings
         {
             return components.Select(ReportComponentToDto).ToList();
         }
+
+        #endregion
     }
 }

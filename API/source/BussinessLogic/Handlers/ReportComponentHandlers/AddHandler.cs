@@ -11,10 +11,10 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class AddHandler : BaseHandler<ReportComponentDto, ReportComponentResponse>
     {
-        private readonly IComponentRepository _repository;
-        public AddHandler(IComponentRepository repository = null)
+        private readonly IReportComponentRepository _repository;
+        public AddHandler(IReportComponentRepository repository = null)
         {
-            _repository = repository ?? new ComponentRepository();
+            _repository = repository ?? new ReportComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(ReportComponentDto request)

@@ -6,8 +6,8 @@ namespace Models.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public string SubmissionDate { get; set; }
+        public string CreationDate { get; set; }
         public int Type { get; set; }
-        public ReportComponentData Data { get; set; }
+        public ComponentData Data { get; set; }
     }
 }

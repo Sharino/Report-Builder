@@ -10,10 +10,10 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class UpdateHandler : BaseHandler<ReportComponentDto, ReportComponentResponse>
     {
-        private readonly IComponentRepository _repository;
-        public UpdateHandler(IComponentRepository repository = null)
+        private readonly IReportComponentRepository _repository;
+        public UpdateHandler(IReportComponentRepository repository = null)
         {
-            _repository = repository ?? new ComponentRepository();
+            _repository = repository ?? new ReportComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(ReportComponentDto request)

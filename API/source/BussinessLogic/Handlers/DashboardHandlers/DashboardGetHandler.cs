@@ -17,9 +17,9 @@ namespace BussinessLogic.Handlers.DashboardHandlers
         public override DashboardResponse HandleCore(int request)
         {
             var mapping = new Mapping();
-            var report = _repository.Get(request);
-            var reportDto = mapping.DashboardToDto(report);
-            return new DashboardResponse(reportDto);
+            var dashboard = _repository.Get(request);
+            var dashboardDto = mapping.DashboardToDto(dashboard);
+            return new DashboardResponse(dashboardDto);
         }
 
         public override bool Validate(int request)
