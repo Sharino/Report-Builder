@@ -39,20 +39,25 @@ namespace DataLayer.Repositories
 
         public IEnumerable<Dashboard> GetAll()
         {
-            const string sql = "";
+            const string sql = @"SELECT * FROM [dbo].[Dashboard]";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 using (var reader = command.ExecuteReader())
                 {
+                    var list = new List<Dashboard>();
                     while (reader.Read())
                     {
-                        
+                        var item = new Dashboard();
+                        item.Id = reader.GetInt32(0);
+                        item.Title = reader.GetString(1);
+                        item.ReportComponents = _serializer.Deserialize<List<ReportComponent>>(reader.GetString(2));
+                        list.Add(item);
                     }
+                    _connection.Close();
+                    return list;
                 }
             }
-            _connection.Close();
-            return null;
         }
 
         public Dashboard Get(int id)
@@ -68,8 +73,7 @@ namespace DataLayer.Repositories
                     var dashboard = new Dashboard();
                     dashboard.Id = reader.GetInt32(0);
                     dashboard.Title = reader.GetString(1);
-                    var components = _serializer.Deserialize<List<ReportComponent>>(reader.GetString(2));
-                    dashboard.ReportComponents = components;
+                    dashboard.ReportComponents = _serializer.Deserialize<List<ReportComponent>>(reader.GetString(2));
 
                     _connection.Close();
                     return dashboard;
@@ -98,55 +102,41 @@ namespace DataLayer.Repositories
 
         public void Remove(int id)
         {
-            const string sql = "";
+            const string sql = @"DELETE FROM [dbo].[Dashboard] WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                    }
-                }
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+                _connection.Close();
             }
-            _connection.Close();
         }
 
         public int Update(Dashboard report)
         {
-            const string sql = "";
+            const string sql = @"UPDATE [dbo].[Dashboard] SET [Title] = @title, [Definition] = @definition WHERE [Id] = id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                    }
-                }
+                command.Parameters.AddWithValue("@title", report.Title);
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(report.ReportComponents));
+                command.Parameters.AddWithValue("@id", report.Id);
+                _connection.Close();
+                return report.Id;
             }
-            _connection.Close();
-            return 0;
         }
 
         public bool Exists(int id)
         {
-            const string sql = "";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboard] WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                using (var reader = command.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-
-                    }
-                }
+                command.Parameters.AddWithValue("@id", id);
+                int count = (int) command.ExecuteScalar();
+                _connection.Close();
+                return count > 0;
             }
-            _connection.Close();
-            return false;
         }
     }
 }

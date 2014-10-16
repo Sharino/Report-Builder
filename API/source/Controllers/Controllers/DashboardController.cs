@@ -1,11 +1,13 @@
 ﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using BussinessLogic.Handlers.DashboardHandlers;
 using Contracts.DTO;
 
 namespace Controllers.Controllers
 {
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class DashboardController : ApiController
     {
         [HttpGet]
@@ -31,7 +33,7 @@ namespace Controllers.Controllers
             var response = handler.Handle(id);
             if (response != null)
             {
-                if (response.DashboardDtos != null)
+                if (response.Errors != null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
                 }

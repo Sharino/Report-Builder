@@ -98,7 +98,7 @@ namespace Host
         //TODO: http://stackoverflow.com/questions/2456819/how-can-i-set-up-net-unhandledexception-handling-in-a-windows-service
         private static void Start()
         {
-            var ip = ConfigurationManager.AppSettings["ip"];
+            string ip = ConfigurationManager.AppSettings["ip"];
             _webHost = WebApp.Start<Startup>(ip);
         }
 

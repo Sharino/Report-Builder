@@ -23,6 +23,8 @@ namespace BussinessLogic.Handlers.Base
             {
                 _log = new Log("Base handler");
                 _log.Error(exception.ToString());
+
+                Errors.Add(new ErrorDto("generalerror","General error happens please contact support",DateTime.UtcNow));
                 return Response;
             }
             return Response;

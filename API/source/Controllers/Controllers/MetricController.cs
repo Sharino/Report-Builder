@@ -5,6 +5,7 @@ using System.Web.Http;
 using System.Web.Http.Cors;
 using BussinessLogic.Handlers.MetricHandlers;
 using Contracts.DTO;
+using DataLayer.Repositories;
 
 namespace Controllers.Controllers
 {

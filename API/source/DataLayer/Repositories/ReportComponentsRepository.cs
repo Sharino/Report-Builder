@@ -85,13 +85,13 @@ namespace DataLayer.Repositories
 
         public int Add(ReportComponent reportComponent)
         {
-            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Data) VALUES (@reportTitle, @reportType, @data); SELECT @@IDENTITY;";
+            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Definition) VALUES (@reportTitle, @reportType, @definition); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
-                command.Parameters.AddWithValue("@data", _jsonSerialiser.Serialize(reportComponent.Data));
+                command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -108,13 +108,13 @@ namespace DataLayer.Repositories
 
         public int Update(ReportComponent reportComponent)
         {
-            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Data] = @data WHERE [ReportId] = @reportId";
+            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Definition] = @definition WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
-                command.Parameters.AddWithValue("@data", _jsonSerialiser.Serialize(reportComponent.Data));
+                command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
                 command.Parameters.AddWithValue("@reportId", reportComponent.Id);
                 int id = 0;
                 object result = command.ExecuteScalar();
