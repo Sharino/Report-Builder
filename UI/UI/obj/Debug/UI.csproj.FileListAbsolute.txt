@@ -4,8 +4,6 @@ C:\Users\User\Desktop\UI\UI\bin\UI.pdb
 C:\Users\User\Desktop\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
 C:\Users\User\Desktop\UI\UI\obj\Debug\UI.dll
 C:\Users\User\Desktop\UI\UI\obj\Debug\UI.pdb
-<<<<<<< HEAD
-=======
 D:\git\Report-Builder\UI\UI\bin\UI.dll.config
 D:\git\Report-Builder\UI\UI\bin\UI.dll
 D:\git\Report-Builder\UI\UI\bin\UI.pdb
@@ -18,4 +16,3 @@ C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.pdb
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.dll
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.pdb
->>>>>>> a680b101fdc86ebb544f3e994937332453256c37

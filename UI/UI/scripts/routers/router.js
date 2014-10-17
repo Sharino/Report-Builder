@@ -7,28 +7,11 @@
     'ComponentView',
     'ComponentListView',
     'MenuView',
-<<<<<<< HEAD
-<<<<<<< HEAD
     'GenerateView',
-    'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
-             ComponentListView, MenuView, GenerateView, AdformNotification) {
-=======
-    'GenerateView',
-    'adform-notifications',
-    'Config'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
-             ComponentListView, MenuView, GenerateView, AdformNotification, Config) {
->>>>>>> a680b101fdc86ebb544f3e994937332453256c37
-    var Router;
-    
-    Router = Backbone.Router.extend({
-=======
     'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Config) {
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, GenerateView, Config) {
     var Router = Backbone.Router.extend({
->>>>>>> origin/MetricComponent
         routes: {
             "": "list",
             "create": "create",

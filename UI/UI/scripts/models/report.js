@@ -4,11 +4,11 @@
     'backbone',
     'Config'
 ], function ($, _, Backbone, Config) {
-    var Report;
+    var Report = Backbone.Model.extend({
+        urlRoot: Config.ReportSettings.URL,
 
-    Report = Backbone.Model.extend({
-        urlRoot: Config.ReportSettings.ReportURL,
         idAttribute: "Id",
+
         defaults: {
             Title: "",
             Type: 0,
@@ -16,6 +16,7 @@
             Dimensions: [],
             Filters: []
         },
+
         validate: function (attrs) {
             // TODO: use Backbone.validateAll
             var errors = this.errors = [];

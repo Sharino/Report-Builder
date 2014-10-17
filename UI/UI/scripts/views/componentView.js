@@ -11,7 +11,7 @@
         template: _.template(componentTemplate),
 
         events: {
-            'click #component-submit': 'submit'         
+            'click #component-submit': 'submit'
         },
 
         inputTitle: function () {
@@ -26,7 +26,7 @@
                 return 0;
             }
         },
-    
+
         inputMetrics: function () {
             var result = [];
 
@@ -49,29 +49,19 @@
                 }
             };
 
-<<<<<<< HEAD
-            var radioSelector = 1;
-
-            if (this.model) {       // Model exists
-=======
             var allMetrics = new MetricCollection();
 
             var self = this;
 
-            if (this.model) {       
->>>>>>> origin/MetricComponent
+            if (this.model) {
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
                     templVariables["data"]["activeNew"] = 'class="active"';
                     templVariables["data"]["activeList"] = '';
-                    radioSelector = 1;
-                    console.log(radioSelector);
                 } else {
                     templVariables["data"]["viewTitle"] = "Edit";
                     templVariables["data"]["activeNew"] = '';
                     templVariables["data"]["activeList"] = '';
-                    radioSelector = this.model.get("Type");
-                    console.log(radioSelector);
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
                 this.$el.html(this.template(templVariables));
@@ -85,15 +75,13 @@
                         console.log("allMetric.fetch FAIL", allMetrics, response);
                     }
                 });
-                
+
             }
-            else {                  
+            else {
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
                 templVariables["data"]["activeList"] = '';
                 templVariables["data"]["model"] = [];
-                radioSelector = 1;
-                console.log(radioSelector);
                 this.$el.html(this.template(templVariables));
 
                 allMetrics.fetch({
@@ -107,55 +95,28 @@
                 });
             }
 
-<<<<<<< HEAD
-            this.assign({
-                '#metric-list': new MetricListView
-            });
-
-            console.log('input[name=type-options][value=' + radioSelector + ']');
-            $('input[name=type-options][value=' + radioSelector + ']').prop('checked', true);
-=======
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
->>>>>>> origin/MetricComponent
             return this;
         },
 
-     
+
         submit: function () {
-<<<<<<< HEAD
-            this.model.set({
-                Title: this.inputTitle(),
-                Type: this.inputType(),
-                Metrics: new MetricCollection([
-                    {
-                        DisplayName: "Fug XD"
-                    },
-                    {
-                        DisplayName: "Fug XD"
-                    },
-                    {
-                        DisplayName: "Fug XD"
-                    },
-                ])
-            });
-=======
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
->>>>>>> origin/MetricComponent
             console.log(this.model.toJSON());
-            
+
             var validationSuccess = this.model.save({}, {
-                success: function (model, response) {      
+                success: function (model, response) {
                     console.log("Save OK", model, response);
 
-                    $.notifications.display({            
+                    $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    Backbone.history.navigate("list", { trigger: true }); 
+                    Backbone.history.navigate("list", { trigger: true });
                 },
-                error: function (model, response) {         
+                error: function (model, response) {
                     console.log("Save FAIL", model, response);
 
                     if (response.responseJSON) {
@@ -185,7 +146,7 @@
                 },
                 timeout: Config.NetworkSettings.Timeout
             });
-             
+
             if (!validationSuccess) {
                 console.log("Validation failed!", this.model.errors);
 
@@ -200,7 +161,7 @@
                 }
             }
             return false;
-        }        
+        }
     });
 
     return ComponentView;

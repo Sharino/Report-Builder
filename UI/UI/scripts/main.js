@@ -1,8 +1,9 @@
 ﻿requirejs.config({
     //By default load any module IDs from scripts/lib
     baseUrl: '',
-    // REMOVE FOR PRODUCTION?
-    urlArgs: "bust=" + (new Date()).getTime(),
+
+    //urlArgs: "bust=" + (new Date()).getTime(),
+
     paths: {
         /* External dependencies */
         'jquery':               'scripts/lib/jquery',
@@ -27,7 +28,6 @@
         'BaseCompositeView':    'scripts/views/baseCompositeView',
 
         /* Model dependencies */
-        'App':                  'scripts/models/app',
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
 
@@ -89,8 +89,7 @@
             deps: ['jquery', 'backbone', 'underscore']
         },
         
-    },
-    //urlArgs: "bust=" + (new Date()).getTime()
+    }
 
 });
 

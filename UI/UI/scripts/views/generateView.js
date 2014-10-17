@@ -1,27 +1,17 @@
 ﻿define('GenerateView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'Component',
     'MetricCollection',
     'MetricListView',
     'ComponentGeneratedView',
     'text!templates/generate.html',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView,
-             ComponentGeneratedView, generateTemplate, AdformNotification) {
-    var GenerateView;
-
-    GenerateView = Backbone.View.extend({
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, ComponentGeneratedView, generateTemplate) {
+    var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
 
         events: {
             'click #generate-submit': 'submit',
-        },
-
-        initialize: function () {
-            //console.log("componentView.childViews", this.childViews);
-            this.childViews = [];       // Store child views for easy closing.
         },
 
         render: function () {
@@ -56,12 +46,14 @@
                 this.$el.html(this.template(templVariables));
             }
 
-            this.assign({
-                '#component-by-type': new ComponentGeneratedView({
-                    model: this.model,
-                    collection: this.model.get("Metrics")
-                })
-            });
+            this.renderSubview('#component-by-type', new ComponentGeneratedView(this.model));
+
+            //this.assign({
+            //    '#component-by-type': new ComponentGeneratedView({
+            //        model: this.model,
+            //        collection: this.model.get("Metrics")
+            //    })
+            //});
             
             return this;
         },
@@ -69,26 +61,7 @@
         submit: function () {
             console.log(this.model.toJSON());
             return false;
-        },
-
-        assign: function (selector, view) {
-            var selectors;
-            if (_.isObject(selector)) {
-                selectors = selector;
-            }
-            else {
-                selectors = {};
-                selectors[selector] = view;
-            }
-            if (!selectors) return;
-            _.each(selectors, function (view, selector) {
-                this.childViews.push(view);
-                view.setElement(this.$(selector)).render();
-            }, this);
-            //console.log("componentView.assign this.childViews", this.childViews);
-
         }
-
     });
 
     return GenerateView;
