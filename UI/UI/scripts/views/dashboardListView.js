@@ -1,12 +1,10 @@
 ﻿define('DashboardListView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'DashboardCollection',
     'text!templates/dashboardList.html',
     'adform-notifications',
     'Config'
-], function ($, _, Backbone, DashboardCollection, dashboardListTemplate, AdformNotification, Config) {
+], function (BaseCompositeView, DashboardCollection, dashboardListTemplate, AdformNotification, Config) {
     var DashboardListView;
 
     DashboardListView = Backbone.View.extend({

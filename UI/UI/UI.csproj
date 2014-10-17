@@ -77,6 +77,7 @@
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\models\dashboard.js" />
+    <Content Include="scripts\models\dashboardComponent.js" />
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
@@ -86,6 +87,7 @@
     <Content Include="scripts\views\baseDestructableView.js" />
     <Content Include="scripts\views\componentListView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
+    <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />

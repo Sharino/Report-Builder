@@ -6,13 +6,15 @@
     'ComponentCollection',
     'ComponentView',
     'ComponentListView',
+    'Dashboard',
+    'DashboardComponent',
     'DashboardCollection',
     'DashboardListView',
     'MenuView',
     'GenerateView',
     'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
     var Router = Backbone.Router.extend({
         routes: {
             "": "list",

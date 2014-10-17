@@ -31,12 +31,13 @@
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
         'Dashboard':            'scripts/models/dashboard',
+        'DashboardComponent':   'scripts/models/dashboardComponent',
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
         'MetricCollection':     'scripts/collections/metricCollection',
-        'DashboardCollection':  'scripts/collections/dashboardCollection',
-
+        'DashboardCollection': 'scripts/collections/dashboardCollection',
+        
 
         /* View dependencies */
         'ComponentView':        'scripts/views/componentView',
@@ -47,6 +48,7 @@
         'GenerateView':         'scripts/views/generateView',
         'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
         'DashboardListView':    'scripts/views/dashboardListView',
+        'DashboardView':        'scripts/views/dashboardView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router'

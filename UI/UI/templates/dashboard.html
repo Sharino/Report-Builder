@@ -1,9 +1,24 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-</head>
-<body>
+﻿<div id="menu">
+    <ul class="wizard-nav">
+        <ul class="pull-right">
+            <li<%= data.activeReport %>><a href="#report">My Report</a></li>
+        </ul>
+        <li<%= data.activeNew %>><a href="#create">Create new</a></li>
+        <li<%= data.activeList %>><a href="#list">List</a></li>
+    </ul>
+</div>
 
-</body>
-</html>
+<table class="wizard-nav table table-striped heading-separation table-hover selectable-rows">
+    <thead>
+        <tr>
+            <th>RIP IN RIPORT</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% _.each(DashboardComponents, function(model) { %>
+        <tr class="dashboardComponent-list-item">
+            GENERATE HERE
+        </tr>
+        <% }); %>
+    </tbody>
+</table>
