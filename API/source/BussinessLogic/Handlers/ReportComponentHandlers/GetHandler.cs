@@ -27,7 +27,7 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
         {
             if (_repository.Exists(request))
                 return true;
-            Response = new ReportComponentResponse(new ErrorDto("EN", "A report component with such id does not exist", DateTime.Now));
+            Errors.Add(new ErrorDto("EN", "A Report Component with such ID does not exist", DateTime.Now));
             return false;
         }
     }

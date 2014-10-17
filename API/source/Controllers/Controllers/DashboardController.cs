@@ -15,15 +15,11 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardGetAllHandler();
             var response = handler.Handle(0);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.DashboardDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos);
-                }
-                return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos);
             }
-            return Request.CreateResponse(HttpStatusCode.NoContent);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpGet]
@@ -31,15 +27,12 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardGetHandler();
             var response = handler.Handle(id);
-            if (response != null)
+
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.Errors != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpPost]
@@ -47,15 +40,11 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardAddHandler();
             var response = handler.Handle(dashboardDto);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.DashboardDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpPut]
@@ -63,15 +52,11 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardUpdateHandler();
             var response = handler.Handle(reportDto);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.DashboardDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpDelete]
@@ -79,15 +64,11 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardDeleteHandler();
             var response = handler.Handle(id);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.DashboardDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.DashboardDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
     }
 }

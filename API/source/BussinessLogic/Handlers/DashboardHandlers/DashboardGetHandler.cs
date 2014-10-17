@@ -1,5 +1,7 @@
-﻿using BussinessLogic.Handlers.Base;
+﻿using System;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
+using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
 
@@ -24,7 +26,10 @@ namespace BussinessLogic.Handlers.DashboardHandlers
 
         public override bool Validate(int request)
         {
-            return true;
+            if (_repository.Exists(request))
+                return true;
+            Errors.Add(new ErrorDto("404", "A Dashboard with such ID does not exist", DateTime.UtcNow));
+            return false;
         }
     }
 }

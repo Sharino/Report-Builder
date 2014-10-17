@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using BussinessLogic.Mappings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models.Models;
@@ -51,10 +49,9 @@ namespace UnitTests
             var source = new ReportComponent
             {
                 Id = 1,
-                SubmissionDate = "Gimtadienis",
                 Title = "Test",
                 Type = 1,
-                Data = new ReportComponentData
+                Data = new ComponentData
                 {
                     Dimensions = new List<Dimension> {new Dimension {DimensionId = 1}},
                     Filters = new List<Filter> {new Filter {FilterId = 1}},
@@ -126,10 +123,9 @@ namespace UnitTests
                 new ReportComponent
                 {
                     Id = 1,
-                    SubmissionDate = "Gimtadienis",
                     Title = "Test",
                     Type = 1,
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension> {new Dimension {DimensionId = 1}},
                         Filters = new List<Filter> {new Filter {FilterId = 1}},
@@ -155,10 +151,9 @@ namespace UnitTests
                 new ReportComponent
                 {
                     Id = 2,
-                    SubmissionDate = "Gimtadienis",
                     Title = "Test2",
                     Type = 1,
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension> {new Dimension {DimensionId = 2}},
                         Filters = new List<Filter> {new Filter {FilterId = 2}},

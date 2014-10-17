@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
@@ -19,10 +20,12 @@ namespace DataLayer.Repositories
 
     public class DashboardComponentRepository : IDashboardComponentRepository
     {
+        private readonly JavaScriptSerializer _serializer;
         private readonly SqlConnection _connection;
 
         public DashboardComponentRepository()
         {
+            _serializer = new JavaScriptSerializer();
             _connection = CreateDbConnection();
         }
 
@@ -54,7 +57,34 @@ namespace DataLayer.Repositories
                     _connection.Close();
                     return component;
                 }
+            }
+        }
 
+        public void UpdateDashboard(DashboardComponent component)
+        {
+            var componentDefinition = new List<int>();
+            const string sql = @"SELECT Definition FROM [dbo].[Dashboard] WHERE [Id] = @dashboardId";
+            using (var command = new SqlCommand(sql, _connection))
+            {
+                _connection.Open();
+                command.Parameters.AddWithValue("@dashboardId", component.DashboardId);
+                using (var reader = command.ExecuteReader())
+                {
+                    reader.Read(); 
+                    componentDefinition = _serializer.Deserialize<List<int>>(reader.GetString(0));
+                    componentDefinition.Add(component.Id);
+                }
+                _connection.Close();
+            }
+
+            const string update = @"UPDATE [dbo].[Dashboard] SET [Definition] = @definition WHERE [Id] = @id";
+            using (var command = new SqlCommand(update, _connection))
+            {
+                _connection.Open();
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(componentDefinition));
+                command.Parameters.AddWithValue("@id", component.DashboardId);
+                command.ExecuteNonQuery();
+                _connection.Close();
             }
         }
 
@@ -77,22 +107,10 @@ namespace DataLayer.Repositories
                 {
                     id = Convert.ToInt32(result);
                 }
-                component.Id = id;
-
-                return component;
+                component.Id = id;           
+                UpdateDashboard(component);
             }
-        }
-
-        public void Remove(int id)
-        {
-            const string sql = @"DELETE FROM [dbo].[DashboardComponents] WHERE [Id] = @id";
-            using (var command = new SqlCommand(sql, _connection))
-            {
-                _connection.Open();
-                command.Parameters.AddWithValue("@id", id);
-                command.ExecuteNonQuery();
-                _connection.Close();
-            }
+            return component;
         }
 
         public int Update(DashboardComponent component)
@@ -109,7 +127,21 @@ namespace DataLayer.Repositories
                 command.Parameters.AddWithValue("@id", component.Id);
 
                 command.ExecuteNonQuery();
+                _connection.Close();
                 return component.Id;
+            }
+        }
+
+
+        public void Remove(int id)
+        {
+            const string sql = @"DELETE FROM [dbo].[DashboardComponents] WHERE [Id] = @id";
+            using (var command = new SqlCommand(sql, _connection))
+            {
+                _connection.Open();
+                command.Parameters.AddWithValue("@id", id);
+                command.ExecuteNonQuery();
+                _connection.Close();
             }
         }
 

@@ -1,4 +1,5 @@
-﻿using BussinessLogic.Handlers.Base;
+﻿using System;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
@@ -27,7 +28,17 @@ namespace BussinessLogic.Handlers.DashboardHandlers
 
         public override bool Validate(DashboardDto request)
         {
-            return true;
+            var componentRepository = new DashboardComponentRepository();
+            foreach (var component in request.Components)
+            {
+                if (componentRepository.Exists(component))
+                    continue;
+                Errors.Add(new ErrorDto("404", "A provided Dashboard Component with ID " + component + " does not exist", DateTime.UtcNow));
+            }
+
+            if (Errors.Count == 0)
+                return true;
+            return false;
         }
     }
 }

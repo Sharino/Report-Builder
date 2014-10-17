@@ -18,7 +18,7 @@ namespace BussinessLogicTests
         public void AddHandler_ValidatesData()
         {
             //Arrange
-            var repository = new Mock<IComponentRepository>();
+            var repository = new Mock<IReportComponentRepository>();
             repository.Setup(x => x.Add(It.IsAny<ReportComponent>())).Returns(1);
 
             var reportDto = new ReportComponentDto
@@ -36,7 +36,6 @@ namespace BussinessLogicTests
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Errors);
             Assert.AreEqual(reportDto.Title, result.ReportComponentDtos[0].Title);
             Assert.IsInstanceOfType(result, typeof(ReportComponentResponse));
         }
@@ -44,10 +43,10 @@ namespace BussinessLogicTests
         public void GetHandler_ValidatesData()
         {
             //Arrange
-            var repository = new Mock<IComponentRepository>();
+            var repository = new Mock<IReportComponentRepository>();
             var report = new ReportComponent
             {
-                Data = new ReportComponentData
+                Data = new ComponentData
                 {
                     Dimensions = new List<Dimension> { new Dimension { DimensionId = 1 } },
                     Metrics = new List<Metric> { new Metric { MetricId = 1 } },
@@ -55,7 +54,6 @@ namespace BussinessLogicTests
                 },
                 Title = "Test",
                 Id = 1,
-                SubmissionDate = "Gimtadienis",
                 Type = 1
             };
             repository.Setup(x => x.Get(It.IsAny<int>())).Returns(report);
@@ -66,7 +64,6 @@ namespace BussinessLogicTests
 
             //Assert
             Assert.IsNotNull(result);
-            Assert.IsNull(result.Errors);
             Assert.IsNotNull(result.ReportComponentDtos[0]);
             Assert.AreEqual(report.Title, result.ReportComponentDtos[0].Title);
             Assert.AreEqual(report.Id, result.ReportComponentDtos[0].Id);
@@ -77,13 +74,13 @@ namespace BussinessLogicTests
         public void GetAllHandler_ValidatesData()
         {
             //Arrange
-            var repository = new Mock<IComponentRepository>(MockBehavior.Strict);
+            var repository = new Mock<IReportComponentRepository>(MockBehavior.Strict);
 
             IEnumerable<ReportComponent> list = new List<ReportComponent>()
             {
                 new ReportComponent
                 {
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension>{new Dimension { DimensionId = 1}},
                         Metrics = new List<Metric>{new Metric { MetricId = 1}},
@@ -91,12 +88,11 @@ namespace BussinessLogicTests
                     },
                     Title = "Test",
                     Id = 1,
-                    SubmissionDate = "Gimtadienis",
                     Type = 1
                 },
                 new ReportComponent
                 {
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension>{new Dimension { DimensionId = 2}},
                         Metrics = new List<Metric>{new Metric { MetricId = 2}},
@@ -104,7 +100,6 @@ namespace BussinessLogicTests
                     },
                     Title = "Test",
                     Id = 2,
-                    SubmissionDate = "Gimtadienis",
                     Type = 2
                 }
             };
@@ -120,7 +115,6 @@ namespace BussinessLogicTests
             Assert.IsNotNull(result);
             Assert.IsNotNull(result.ReportComponentDtos[0]);
             Assert.IsNotNull(result.ReportComponentDtos[1]);
-            Assert.IsNull(result.Errors);
         }
     }
 }

@@ -6,6 +6,6 @@ namespace Contracts.DTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<ReportComponentDto> ReportComponentDtos { get; set; } 
+        public List<int> Components { get; set; } 
     }
 }

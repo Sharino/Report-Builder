@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Web.Script.Serialization;
+using System.Web.UI.WebControls;
 using Models.Models;
-using Newtonsoft.Json;
 
 namespace DataLayer.Repositories
 {
@@ -12,17 +12,16 @@ namespace DataLayer.Repositories
     {
         IEnumerable<Dashboard> GetAll();
         Dashboard Get(int id);
-        int Add(Dashboard report);
+        int Add(Dashboard dashboard);
         void Remove(int id);
-        int Update(Dashboard report);
+        int Update(Dashboard dashboard);
         bool Exists(int id);
     }
 
     public class DashboardRepository : IDashboardRepository
     {
-
-        private readonly SqlConnection _connection;
         private readonly JavaScriptSerializer _serializer;
+        private readonly SqlConnection _connection;
 
         public DashboardRepository()
         {
@@ -51,7 +50,7 @@ namespace DataLayer.Repositories
                         var item = new Dashboard();
                         item.Id = reader.GetInt32(0);
                         item.Title = reader.GetString(1);
-                        item.ReportComponents = _serializer.Deserialize<List<ReportComponent>>(reader.GetString(2));
+                        item.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
                         list.Add(item);
                     }
                     _connection.Close();
@@ -73,7 +72,7 @@ namespace DataLayer.Repositories
                     var dashboard = new Dashboard();
                     dashboard.Id = reader.GetInt32(0);
                     dashboard.Title = reader.GetString(1);
-                    dashboard.ReportComponents = _serializer.Deserialize<List<ReportComponent>>(reader.GetString(2));
+                    dashboard.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
 
                     _connection.Close();
                     return dashboard;
@@ -88,12 +87,12 @@ namespace DataLayer.Repositories
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@title", dashboard.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.ReportComponents));
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
                 object result = command.ExecuteScalar();
                 int id = 0;
                 if (result != null)
                 {
-                    id = (int) result;
+                    id = Convert.ToInt32(result);
                 }
                 _connection.Close();
                 return id;
@@ -112,17 +111,18 @@ namespace DataLayer.Repositories
             }
         }
 
-        public int Update(Dashboard report)
+        public int Update(Dashboard dashboard)
         {
-            const string sql = @"UPDATE [dbo].[Dashboard] SET [Title] = @title, [Definition] = @definition WHERE [Id] = id";
+            const string sql = @"UPDATE [dbo].[Dashboard] SET [Title] = @title, [Definition] = @definition WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                command.Parameters.AddWithValue("@title", report.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(report.ReportComponents));
-                command.Parameters.AddWithValue("@id", report.Id);
+                command.Parameters.AddWithValue("@title", dashboard.Title);
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
+                command.Parameters.AddWithValue("@id", dashboard.Id);
+                command.ExecuteNonQuery();
                 _connection.Close();
-                return report.Id;
+                return dashboard.Id;
             }
         }
 

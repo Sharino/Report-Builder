@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using BussinessLogic.Handlers.MetricHandlers;
-using Contracts.DTO;
-using DataLayer.Repositories;
 
 namespace Controllers.Controllers
 {
@@ -17,16 +14,12 @@ namespace Controllers.Controllers
         {
             var handler = new MetricGetAllHandler();
             var response = handler.Handle(0);
-            if (response != null)
+
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.MetricDtos != null)
-                {
-                    IEnumerable<MetricDto> metricDtos = response.MetricDtos;
-                    return Request.CreateResponse(HttpStatusCode.OK, metricDtos);
-                }
-                return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos);
             }
-            return Request.CreateResponse(HttpStatusCode.NoContent);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpGet]
@@ -34,15 +27,11 @@ namespace Controllers.Controllers
         {
             var handler = new MetricGetHandler();
             var response = handler.Handle(id);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.MetricDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.MetricDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
     }
 }

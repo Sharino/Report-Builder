@@ -20,3 +20,14 @@ C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.csproj.GenerateResource.Cache
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Logging\obj\Debug\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\Logging.pdb
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\log4net.dll
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\bin\Debug\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\obj\Debug\Logging.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\obj\Debug\Logging.Properties.Resources.resources
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\obj\Debug\Logging.csproj.GenerateResource.Cache
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\obj\Debug\Logging.dll
+C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Logging\obj\Debug\Logging.pdb

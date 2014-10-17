@@ -18,7 +18,7 @@ namespace Controllers.Controllers
             {
                 response = handler.HandleCore(dashboardId, reportComponentId);
             }
-            if (handler.Errors != null || handler.Errors.Count < 1)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
                 if (response != null) return Request.CreateResponse(HttpStatusCode.OK, response.ComponetDtos[0]);
             }
@@ -30,7 +30,7 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardComponentGetHandler();
             var response = handler.Handle(dashboardComponentId);
-            if (handler.Errors == null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ComponetDtos[0]);
             }
@@ -42,7 +42,7 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardComponentUpdateHandler();
             var response = handler.Handle(component);
-            if (handler.Errors == null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ComponetDtos[0]);
             }
@@ -54,7 +54,7 @@ namespace Controllers.Controllers
         {
             var handler = new DashboardComponentDeleteHandler();
             var response = handler.Handle(componentId);
-            if (handler.Errors == null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
                 return Request.CreateResponse(HttpStatusCode.OK, response.ComponetDtos[0]);
             }

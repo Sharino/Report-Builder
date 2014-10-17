@@ -6,6 +6,6 @@ namespace Models.Models
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<ReportComponent> ReportComponents { get; set; }
+        public List<int> Components { get; set; }
     }
 }

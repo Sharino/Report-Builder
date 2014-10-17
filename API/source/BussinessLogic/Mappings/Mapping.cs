@@ -64,7 +64,8 @@ namespace BussinessLogic.Mappings
 
         public Dashboard DtoToDashboard(DashboardDto dto)
         {
-            var dashboard = new Dashboard {ReportComponents = DtoToReportComponent(dto.ReportComponentDtos)};
+            var dashboard = new Dashboard();
+            dashboard.Components = dto.Components;
             dashboard.Id = dto.Id;
             dashboard.Title = dto.Title;
             return dashboard;
@@ -72,10 +73,11 @@ namespace BussinessLogic.Mappings
 
         public DashboardDto DashboardToDto(Dashboard dashboard)
         {
-            var dashboardDto = new DashboardDto {ReportComponentDtos = ReportComponentToDto(dashboard.ReportComponents)};
-            dashboardDto.Id = dashboard.Id;
-            dashboardDto.Title = dashboard.Title;
-            return dashboardDto;
+            var dto = new DashboardDto();
+            dto.Components = dashboard.Components;
+            dto.Id = dashboard.Id;
+            dto.Title = dashboard.Title;
+            return dto;
         }
 
         #endregion

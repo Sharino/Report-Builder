@@ -26,7 +26,7 @@ namespace BussinessLogic.Handlers.MetricHandlers
         {
             if (_repository.Exists(request))
                 return true;
-            Response = new MetricResponse(new ErrorDto("EN", "A metric with such id does not exist", DateTime.Now));
+            Errors.Add(new ErrorDto("EN", "A metric with such id does not exist", DateTime.Now));
             return false;
         }
     }
