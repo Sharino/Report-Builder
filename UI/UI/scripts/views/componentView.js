@@ -1,33 +1,23 @@
 ﻿define('ComponentView', [
-    'jquery',
-    'underscore',
-    'backbone',
     'BaseCompositeView',
     'Component',
     'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
-    'adform-notifications',
-    'Config'
-], function ($, _, Backbone, BaseCompositeView ,Component, MetricCollection, MetricListView, componentTemplate, AdformNotification, Config) {
-    var ComponentView;
-
-    ComponentView = BaseCompositeView.extend({
+    'Config',
+    'adform-notifications'
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, componentTemplate, Config) {
+    var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
             'click #component-submit': 'submit'         
         },
 
-        initialize: function () {
-        },
-
-
         inputTitle: function () {
             return $('#input').val();
         },
 
-   
         inputType: function () {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
@@ -59,6 +49,10 @@
                 }
             };
 
+            var allMetrics = new MetricCollection();
+
+            var self = this;
+
             if (this.model) {       
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
@@ -72,6 +66,15 @@
                 templVariables["data"]["model"] = this.model.toJSON();
                 this.$el.html(this.template(templVariables));
 
+                allMetrics.fetch({
+                    success: function (allMetrics, response) {
+                        console.log("allMetric.fetch OK", allMetrics, response);
+                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
                 
             }
             else {                  
@@ -80,22 +83,17 @@
                 templVariables["data"]["activeList"] = '';
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
+
+                allMetrics.fetch({
+                    success: function (allMetrics, response) {
+                        console.log("allMetric.fetch OK", allMetrics, response);
+                        self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
             }
-            
-            var allMetrics = new MetricCollection();
-
-            var self = this;
-
-            allMetrics.fetch({
-                success: function (allMetrics, response) {
-                    console.log("allMetric.fetch OK", allMetrics, response);
-                    self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
-                },
-                error: function (allMetrics, response) {
-                    console.log("allMetric.fetch FAIL", allMetrics, response);
-                }
-            });
-
 
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
@@ -111,7 +109,7 @@
                 success: function (model, response) {      
                     console.log("Save OK", model, response);
 
-                    AdformNotification.display({            
+                    $.notifications.display({            
                         type: 'success',
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
@@ -123,7 +121,7 @@
 
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (error) {
-                            AdformNotification.display({
+                            $.notifications.display({
                                 type: 'error',
                                 content: error.Message,
                                 timeout: Config.NotificationSettings.Timeout
@@ -132,13 +130,13 @@
                     }
                     else {
                         if (response.statusText) {
-                            AdformNotification.display({
+                            $.notifications.display({
                                 type: 'error',
                                 content: response.statusText,
                                 timeout: Config.NotificationSettings.Timeout
                             });
                         } else {
-                            AdformNotification.display({
+                            $.notifications.display({
                                 type: 'error',
                                 content: Config.ErrorSettings.ErrorMessages.NoResponse,
                                 timeout: Config.NotificationSettings.Timeout
@@ -154,7 +152,7 @@
 
                 if (this.model.errors) {
                     this.model.errors.forEach(function (error) {
-                        AdformNotification.display({
+                        $.notifications.display({
                             type: 'error',
                             content: error.message,
                             timeout: Config.NotificationSettings.Timeout

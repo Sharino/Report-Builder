@@ -9,7 +9,7 @@
         'handlebars':           'scripts/lib/handlebars',
         'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
-        'Sortable':             'scripts/lib/jquery.sortable',
+        'jquery-sortable':      'scripts/lib/jquery.sortable',
         'Tests':                'tests',
 
         /* Adform dependencies */
@@ -44,35 +44,55 @@
         /* Router dependencies */
         'Router':               'scripts/routers/router'
     },
+
     shim: {
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'backbone'
+        'jquery': {
+            exports: '$'
         },
+
+        'backbone': {
+            deps: ['jquery', 'underscore'],
+            exports: 'Backbone'
+        },
+
         'underscore': {
             exports: '_'
         },
+
         'bootstrap': {
             deps: ['jquery'],
             exports: 'bootstrap'
         },
-        'jquery-sortable': {
-            deps: ['jquery']
-        },
+
         'handlebars': {
             exports: 'Handlebars'
         },
-        'backbone-forms': {
-            deps: ['backbone', 'jquery']
-        }
+
+        'jquery-sortable': {
+            deps: ['jquery']
+        },
+        
+        'adform-checkbox': {
+            deps: ['jquery']
+        },
+
+        'adform-select': {
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
+            exports: 'AdformSelect'
+        },
+
+        'adform-notifications': {
+            deps: ['jquery', 'backbone', 'underscore']
+        },
+        
     },
     //urlArgs: "bust=" + (new Date()).getTime()
 
 });
 
 
-require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView', 'Router', 'Config'],
-    function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router, Config) {
+require(['Router', 'Config'],
+    function (Router, Config) {
         console.log(Config);
 
         var app = new Router();

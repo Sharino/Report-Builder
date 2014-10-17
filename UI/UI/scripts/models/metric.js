@@ -4,9 +4,7 @@
     'backbone',
     'Config'
 ], function ($, _, Backbone, Config) {
-    var Metric;
-
-    Metric = Backbone.Model.extend({
+    var Metric = Backbone.Model.extend({
         idAttribute: "MetricId",
 
         urlRoot: Config.MetricSettings.URL,

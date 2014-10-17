@@ -1,20 +1,13 @@
 ﻿define('MetricListView', [
-    'jquery',
-    'underscore',
-    'backbone',
     'BaseCompositeView',
-    'Sortable',
     'Metric',
     'MetricCollection',
     'text!templates/metricList.html',
     'Config',
-    'adform-checkbox',
-    'handlebars',
-    'adform-select'
-], function ($, _, Backbone, BaseCompositeView, Sortable, Metric, MetricCollection, MetricListTemplate, Config, ac, h, as) {
-    var MetricListView;
-
-    MetricListView = BaseCompositeView.extend({
+    'adform-select',
+    'jquery-sortable'
+], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, AdformSelect) {
+    var MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
 
         events: {
@@ -24,6 +17,8 @@
 
         initialize: function (parentModel, allMetrics) {
             var self = this;
+
+            this.metricArray = [];
 
             this.selectReferences = [];
 

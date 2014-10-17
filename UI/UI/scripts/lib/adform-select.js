@@ -1,29 +1,23 @@
-define('adform-select', [
-    'jquery',
-    'backbone',
-    'handlebars',
-    'bootstrap'
-], function ($, Backbone, Handlebars, Bootstrap) {
 /*exported _SelectTemplates*/
 var _SelectTemplates = {
-	ulItems: '{{#each items}}<li class="select-list-item {{#if selected}}selected{{/if}}" data-id="{{value}}"><div class="adform-checkbox{{#if disabled}} disabled{{/if}} {{#if selected}}checked{{/if}}" data-value="{{value}}"></div><label data-placement="top" data-title="{{title}}">{{title}}</label></li>{{/each}}',
-	itemList: '<div class="list {{#if single}}adform-select-single{{/if}}"><ul></ul><div class="no-results">{{noResults}}</div></div>',
-	search: '<div class="head-search"><input type="text"><i class="adf-icon-small-search search-icon"></i><i class="adf-icon-small-reset reset-icon"></i></div>',
-	footer: '<div class="footer"><div class="checkbox-group pull-right"><div class="adform-checkbox select-all {{#selectAllChkSelected}}checked{{/selectAllChkSelected}}"></div><label class="footer-label select-all-label">{{selectAllLabel}}</label></div><div class="dash">|</div><div class="checkbox-group pull-right"><div class="adform-checkbox {{#showSelected}}checked{{/showSelected}} show-selected"></div><label class="show-selected-label footer-label">{{showSelectedLabel}}</label></div></div>',
-	dropdown: '<div class="hide tooltip info bottom-left adform-select-tooltip no-arrow"><div class="tooltip-inner select-container"><div class="adform-select"></div></div></div>',
-	dropper: '<div tabindex="0" class="adform-select-dropper" href="#" draggable="false"><span class="value-holder"></span><i class="adf-icon-small-down pull-right"></i></div>'
+    ulItems: '{{#each items}}<li class="select-list-item {{#if selected}}selected{{/if}}" data-id="{{value}}"><div class="adform-checkbox{{#if disabled}} disabled{{/if}} {{#if selected}}checked{{/if}}" data-value="{{value}}"></div><label data-placement="top" data-title="{{title}}">{{title}}</label></li>{{/each}}',
+    itemList: '<div class="list {{#if single}}adform-select-single{{/if}}"><ul></ul><div class="no-results">{{noResults}}</div></div>',
+    search: '<div class="head-search"><input type="text"><i class="adf-icon-small-search search-icon"></i><i class="adf-icon-small-reset reset-icon"></i></div>',
+    footer: '<div class="footer"><div class="checkbox-group pull-right"><div class="adform-checkbox select-all {{#selectAllChkSelected}}checked{{/selectAllChkSelected}}"></div><label class="footer-label select-all-label">{{selectAllLabel}}</label></div><div class="dash">|</div><div class="checkbox-group pull-right"><div class="adform-checkbox {{#showSelected}}checked{{/showSelected}} show-selected"></div><label class="show-selected-label footer-label">{{showSelectedLabel}}</label></div></div>',
+    dropdown: '<div class="hide tooltip info bottom-left adform-select-tooltip no-arrow"><div class="tooltip-inner select-container"><div class="adform-select"></div></div></div>',
+    dropper: '<div tabindex="0" class="adform-select-dropper" href="#" draggable="false"><span class="value-holder"></span><i class="adf-icon-small-down pull-right"></i></div>'
 };
 /*exported SelectItemModel */
 var SelectItemModel = Backbone.Model.extend({
-	idAttribute: 'value',
-	reset: function () {
-		if (this.get('selected') === this.get('initSelected')) {
-			return;
-		}
-		this.set('selected', this.get('initSelected'));
+    idAttribute: 'value',
+    reset: function () {
+        if (this.get('selected') === this.get('initSelected')) {
+            return;
+        }
+        this.set('selected', this.get('initSelected'));
 
-		this.trigger('change');
-	}
+        this.trigger('change');
+    }
 });
 /*global Handlebars, _SelectTemplates*/
 /*exported SelectDropdownView */
@@ -69,28 +63,28 @@ var SelectDropdownView = Backbone.View.extend({
     handleKeydown: function (e) {
         var stroke = e.keyCode;
         switch (stroke) {
-        case 27:
-            if (!this.options.disableEscape) {
-                var focusDropperOnClose = true;
+            case 27:
+                if (!this.options.disableEscape) {
+                    var focusDropperOnClose = true;
 
-                this.hide(focusDropperOnClose);
-            }
-            break;
-        case 13:
-        case 32:
-            if (this.$el.find('.hover').length > 0) {
-                this.$el.find('.hover label').trigger('click');
+                    this.hide(focusDropperOnClose);
+                }
+                break;
+            case 13:
+            case 32:
+                if (this.$el.find('.hover').length > 0) {
+                    this.$el.find('.hover label').trigger('click');
+                    e.preventDefault();
+                }
+                break;
+            case 38:
                 e.preventDefault();
-            }
-            break;
-        case 38:
-            e.preventDefault();
-            this.handleUpArrow();
-            break;
-        case 40:
-            e.preventDefault();
-            this.handleDownArrow();
-            break;
+                this.handleUpArrow();
+                break;
+            case 40:
+                e.preventDefault();
+                this.handleDownArrow();
+                break;
         }
     },
 
@@ -283,19 +277,19 @@ var SelectDropperView = Backbone.View.extend({
         var key = e.keyCode;
 
         switch (key) {
-        case 27:
-            this.$el.blur();
-            break;
-        case 9:
-        case 16:
-        case 17:
-        case 18:
-        case 20:
-        case 91:
-        case 93:
-            break;
-        default:
-            this.trigger('dropper:toggleDropdown');
+            case 27:
+                this.$el.blur();
+                break;
+            case 9:
+            case 16:
+            case 17:
+            case 18:
+            case 20:
+            case 91:
+            case 93:
+                break;
+            default:
+                this.trigger('dropper:toggleDropdown');
         }
     },
 
@@ -987,650 +981,646 @@ if (!String.prototype.trim) {
     };
 }
 
-    var AdformSelect;
-    AdformSelect = (function () {
+(function () {
 
-        window.AdformSelectComponent = {};
+    window.AdformSelectComponent = {};
 
-        window.AdformSelectComponent.Resourses = {
-            'multipleSelection': 'Multiple selection ({0})',
-            'showSelected': 'Show selected',
-            'showAll': 'Show all',
-            'selectAll': 'Select all',
-            'selectNone': 'Select none'
-        };
+    window.AdformSelectComponent.Resourses = {
+        'multipleSelection': 'Multiple selection ({0})',
+        'showSelected': 'Show selected',
+        'showAll': 'Show all',
+        'selectAll': 'Select all',
+        'selectNone': 'Select none'
+    };
 
-        window.AdformSelectComponent.SearchMechanisms = {
-            'default': function (query, item) {
-                if (item.get('title').toLowerCase().trim().replace(/\s+/g, ' ').indexOf(query.trim().replace(/\s+/g, ' ').toLowerCase()) >= 0) {
-                    return true;
-                }
-                return false;
-            },
-
-            'all': function () {
+    window.AdformSelectComponent.SearchMechanisms = {
+        'default': function (query, item) {
+            if (item.get('title').toLowerCase().trim().replace(/\s+/g, ' ').indexOf(query.trim().replace(/\s+/g, ' ').toLowerCase()) >= 0) {
                 return true;
             }
+            return false;
+        },
+
+        'all': function () {
+            return true;
+        }
+    };
+
+    /* DAS BIST API */
+    var AdformSelect = function (selectElement, userOptions) {
+
+        // extend itself with Backbone.Events
+        _.extend(this, Backbone.Events);
+        if ($(selectElement).length > 1) {
+            var items = $(selectElement);
+            for (var i = 0; i < items.length; i++) {
+                $(items[i]).data('AdformSelect', new AdformSelect(items[i], userOptions));
+            }
+            return;
+        }
+
+        this.$el = $(selectElement);
+        this.el = this.$el.get(0);
+
+        userOptions = userOptions || {};
+
+        this.options = {
+            multiple: typeof (this.$el.attr('multiple')) === 'undefined' ? false : true,
+            search: userOptions.search || false,
+            footer: userOptions.footer || false,
+            searchMechanism: userOptions.searchMechanism || 'default',
+            /* possible values: 'auto' | 'container' | any valid CSS width values */
+            width: userOptions.width || 'auto',
+            templates: userOptions.templates || {},
+            adjustDropperWidth: userOptions.adjustDropperWidth || false,
+            disableOutsideClick: userOptions.disableOutsideClick || false,
+            container: userOptions.container || false,
+            selectAllVisibleHandler: userOptions.selectAllVisibleHandler || false,
+            selectAllVisibleResolver: userOptions.selectAllVisibleResolver || false,
+            adjustToViewport: userOptions.adjustToViewport || false,
+            showSelected: userOptions.showSelected || false,
+            disableEscape: userOptions.disableEscape || false,
+            options: userOptions.options || false,
+            $offsetContainer: typeof (userOptions.offsetContainer) === 'undefined' ? false : $(userOptions.offsetContainer)
         };
 
-        /* DAS BIST API */
-        var AdformSelect = function (selectElement, userOptions) {
+        var noResults = this.$el.attr('data-no-results'),
+            collection = [],
+            allItemsSelected = true,
+            optDefaults = {
+                title: '',
+                value: '',
+                disabled: false,
+                selected: false,
+                display: true,
+                initSelected: false,
+                $selector: false
+            },
+            opt,
+            opts;
 
-            // extend itself with Backbone.Events
-            _.extend(this, Backbone.Events);
-            if ($(selectElement).length > 1) {
-                var items = $(selectElement);
-                for (var i = 0; i < items.length; i++) {
-                    $(items[i]).data('AdformSelect', new AdformSelect(items[i], userOptions));
+        if (this.options.options instanceof Array) {
+
+            this.options.multiple = userOptions.multiple || false;
+            this.options.container = userOptions.container || this.$el;
+
+            var forceSelectedAttribute = true;
+
+            opts = this.options.options;
+
+            for (var i2 = 0; i2 < opts.length; i2++) {
+                opt = _.defaults(opts[i2], optDefaults);
+
+                if (!this.options.multiple && opt.selected) {
+                    opt.selected = forceSelectedAttribute;
+                    forceSelectedAttribute = false;
                 }
-                return;
+
+                if (opt.title !== '') {
+                    collection.push(opt);
+                }
+
+                if (opt.selected === false) {
+                    allItemsSelected = false;
+                }
             }
 
-            this.$el = $(selectElement);
-            this.el = this.$el.get(0);
+        } else {
 
-            userOptions = userOptions || {};
+            opts = $(selectElement).find('option');
 
-            this.options = {
-                multiple: typeof (this.$el.attr('multiple')) === 'undefined' ? false : true,
-                search: userOptions.search || false,
-                footer: userOptions.footer || false,
-                searchMechanism: userOptions.searchMechanism || 'default',
-                /* possible values: 'auto' | 'container' | any valid CSS width values */
-                width: userOptions.width || 'auto',
-                templates: userOptions.templates || {},
-                adjustDropperWidth: userOptions.adjustDropperWidth || false,
-                disableOutsideClick: userOptions.disableOutsideClick || false,
-                container: userOptions.container || false,
-                selectAllVisibleHandler: userOptions.selectAllVisibleHandler || false,
-                selectAllVisibleResolver: userOptions.selectAllVisibleResolver || false,
-                adjustToViewport: userOptions.adjustToViewport || false,
-                showSelected: userOptions.showSelected || false,
-                disableEscape: userOptions.disableEscape || false,
-                options: userOptions.options || false,
-                $offsetContainer: typeof (userOptions.offsetContainer) === 'undefined' ? false : $(userOptions.offsetContainer)
-            };
+            var value, selected, title, disabled;
 
-            var noResults = this.$el.attr('data-no-results'),
-                collection = [],
-                allItemsSelected = true,
-                optDefaults = {
-                    title: '',
-                    value: '',
-                    disabled: false,
-                    selected: false,
+            for (var ii = 0; ii < opts.length; ii++) {
+                opt = $(opts[ii]);
+                value = opt.attr('value');
+                selected = opt.attr('selected');
+                title = opt.text();
+                disabled = opt.attr('disabled');
+
+                selected = typeof (selected) === 'undefined' ? false : true;
+                disabled = typeof (disabled) === 'undefined' ? false : true;
+
+                var obj = {
+                    title: title,
+                    value: value,
+                    disabled: disabled,
+                    selected: selected,
                     display: true,
-                    initSelected: false,
-                    $selector: false
-                },
-                opt,
-                opts;
+                    initSelected: selected,
+                    $selector: opt
+                };
 
-            if (this.options.options instanceof Array) {
-
-                this.options.multiple = userOptions.multiple || false;
-                this.options.container = userOptions.container || this.$el;
-
-                var forceSelectedAttribute = true;
-
-                opts = this.options.options;
-
-                for (var i2 = 0; i2 < opts.length; i2++) {
-                    opt = _.defaults(opts[i2], optDefaults);
-
-                    if (!this.options.multiple && opt.selected) {
-                        opt.selected = forceSelectedAttribute;
-                        forceSelectedAttribute = false;
-                    }
-
-                    if (opt.title !== '') {
-                        collection.push(opt);
-                    }
-
-                    if (opt.selected === false) {
-                        allItemsSelected = false;
+                // set all data attributes
+                var attributes = opt.data();
+                for (var attr in attributes) {
+                    if (attributes.hasOwnProperty(attr)) {
+                        obj[attr] = attributes[attr];
                     }
                 }
 
+                if (title !== '') {
+                    collection.push(obj);
+                }
+
+                if (selected === false) {
+                    allItemsSelected = false;
+                }
+            }
+        }
+
+
+        if (typeof (this.options.search) === 'number') {
+            var threshold = this.options.search;
+            this.options.search = false;
+            if (collection.length > threshold) {
+                this.options.search = true;
+            }
+        }
+
+        var baseCollection = new SelectItemCollection(collection, {
+            model: SelectItemModel
+        });
+
+        baseCollection.selectAllVisibleHandler = this.options.selectAllVisibleHandler;
+        baseCollection.selectAllVisibleResolver = this.options.selectAllVisibleResolver;
+
+        var itemListView = new SelectItemListView({
+            collection: baseCollection,
+            template: this.options.templates.listView || false,
+            noResultsText: noResults,
+            multiple: this.options.multiple
+        });
+
+
+        var searchView = new SelectSearchView({
+            base: baseCollection,
+            template: this.options.templates.searchView || false,
+            searchMechanism: this.options.searchMechanism
+        });
+
+        var footerView = new SelectFooterView({
+            base: baseCollection,
+            list: itemListView,
+            template: this.options.templates.footerView || false,
+            allItemsSelected: allItemsSelected,
+            showSelected: this.options.showSelected
+        });
+
+        var dropperDisabled = (typeof (this.$el.attr('disabled')) === 'undefined' ? false : true);
+
+        var dropperView = new SelectDropperView({
+            base: baseCollection,
+            placeholder: this.$el.attr('placeholder') || '',
+            template: this.options.templates.dropperView || false
+        });
+
+        var dropdownView = new SelectDropdownView({
+            'search': this.options.search ? searchView : false,
+            'list': itemListView,
+            'footer': this.options.footer ? footerView : false,
+            template: this.options.templates.dropdownView || false,
+            multiple: this.options.multiple,
+            dropperHeight: 0,
+            disableEscape: this.options.disableEscape
+        });
+
+
+        if (this.options.showSelected) {
+            var array = [{
+                attribute: 'selected',
+                value: true
+            }];
+            baseCollection.setConstraints(array, true);
+        }
+        if (typeof (this.options.selectAllVisibleHandler) !== typeof (this.options.selectAllVisibleResolver)) {
+            throw 'You must specify both selectAllVisibleHandler and selectAllVisibleResolver';
+        }
+
+        // events are delegated after the view init, so if undelegateEvents
+        // is called during the initialize function, the events are reattached after it.
+        if (dropperDisabled) {
+            dropperView.disable();
+        }
+
+        var $selectContainer = $('<div class="adform-select-control"></div>');
+
+
+        $selectContainer.append(dropperView.$el);
+        $selectContainer.append(dropdownView.$el);
+
+        if (this.options.container) {
+            this.options.container.append($selectContainer);
+        } else {
+            this.$el.after($selectContainer);
+        }
+
+        this.$selectContainer = $selectContainer;
+        this.validation = function (method) {
+            if (method === 'isValid') {
+                return !this.$selectContainer.hasClass('error');
+            }
+            return this.$selectContainer.validation(method, arguments[1]);
+        };
+
+        if (this.options.adjustDropperWidth) {
+            $selectContainer.width(this.$el.outerWidth());
+        } else {
+            $selectContainer.width('100%');
+        }
+
+        dropdownView.setDropperHeight(dropperView.$el.outerHeight());
+
+        if (this.$el.is('select:visible')) {
+            this.$el.addClass('hide');
+        }
+
+        $.proxy(function () {
+            if (this.$el.hasClass('error')) {
+                $selectContainer.addClass('error');
             } else {
+                $selectContainer.removeClass('error');
+            }
+        }, this);
 
-                opts = $(selectElement).find('option');
+        footerView.on('footer:applySearch', searchView.handleInput, searchView);
+        baseCollection.on('collection:allVisibleSelectionChanged', footerView.updateSelectAllLabel, footerView);
+        baseCollection.on('collection:filteringCompleted', itemListView.displayOrHideNoResults, itemListView);
+        baseCollection.on('change:selected', dropperView.handleChange, dropperView);
+        footerView.on('footer:toggleSelectAll', baseCollection.toggleSelectAllVisible, baseCollection);
 
-                var value, selected, title, disabled;
+        dropperView.on('dropper:toggleDropdown', dropdownView.toggleVisibility, dropdownView);
 
-                for (var ii = 0; ii < opts.length; ii++) {
-                    opt = $(opts[ii]);
-                    value = opt.attr('value');
-                    selected = opt.attr('selected');
-                    title = opt.text();
-                    disabled = opt.attr('disabled');
+        dropperView.on('dropper:blur', function () {
 
-                    selected = typeof (selected) === 'undefined' ? false : true;
-                    disabled = typeof (disabled) === 'undefined' ? false : true;
-
-                    var obj = {
-                        title: title,
-                        value: value,
-                        disabled: disabled,
-                        selected: selected,
-                        display: true,
-                        initSelected: selected,
-                        $selector: opt
-                    };
-
-                    // set all data attributes
-                    var attributes = opt.data();
-                    for (var attr in attributes) {
-                        if (attributes.hasOwnProperty(attr)) {
-                            obj[attr] = attributes[attr];
-                        }
-                    }
-
-                    if (title !== '') {
-                        collection.push(obj);
-                    }
-
-                    if (selected === false) {
-                        allItemsSelected = false;
-                    }
-                }
+            if (!dropdownView.visible) {
+                this.$el.blur();
+                // proxyToCheckErrorClass();    
             }
 
+        }, this);
 
-            if (typeof (this.options.search) === 'number') {
-                var threshold = this.options.search;
-                this.options.search = false;
-                if (collection.length > threshold) {
-                    this.options.search = true;
-                }
-            }
+        dropperView.on('dropper:focus', function () {
+            this.$el.trigger('click');
+            // proxyToCheckErrorClass();
+        }, this);
 
-            var baseCollection = new SelectItemCollection(collection, {
-                model: SelectItemModel
-            });
+        this.dropdownView = dropdownView;
 
-            baseCollection.selectAllVisibleHandler = this.options.selectAllVisibleHandler;
-            baseCollection.selectAllVisibleResolver = this.options.selectAllVisibleResolver;
-
-            var itemListView = new SelectItemListView({
-                collection: baseCollection,
-                template: this.options.templates.listView || false,
-                noResultsText: noResults,
-                multiple: this.options.multiple
-            });
-
-
-            var searchView = new SelectSearchView({
-                base: baseCollection,
-                template: this.options.templates.searchView || false,
-                searchMechanism: this.options.searchMechanism
-            });
-
-            var footerView = new SelectFooterView({
-                base: baseCollection,
-                list: itemListView,
-                template: this.options.templates.footerView || false,
-                allItemsSelected: allItemsSelected,
-                showSelected: this.options.showSelected
-            });
-
-            var dropperDisabled = (typeof (this.$el.attr('disabled')) === 'undefined' ? false : true);
-
-            var dropperView = new SelectDropperView({
-                base: baseCollection,
-                placeholder: this.$el.attr('placeholder') || '',
-                template: this.options.templates.dropperView || false
-            });
-
-            var dropdownView = new SelectDropdownView({
-                'search': this.options.search ? searchView : false,
-                'list': itemListView,
-                'footer': this.options.footer ? footerView : false,
-                template: this.options.templates.dropdownView || false,
-                multiple: this.options.multiple,
-                dropperHeight: 0,
-                disableEscape: this.options.disableEscape
-            });
-
-
-            if (this.options.showSelected) {
-                var array = [{
-                    attribute: 'selected',
-                    value: true
-                }];
-                baseCollection.setConstraints(array, true);
-            }
-            if (typeof (this.options.selectAllVisibleHandler) !== typeof (this.options.selectAllVisibleResolver)) {
-                throw 'You must specify both selectAllVisibleHandler and selectAllVisibleResolver';
-            }
-
-            // events are delegated after the view init, so if undelegateEvents
-            // is called during the initialize function, the events are reattached after it.
-            if (dropperDisabled) {
-                dropperView.disable();
-            }
-
-            var $selectContainer = $('<div class="adform-select-control"></div>');
-
-
-            $selectContainer.append(dropperView.$el);
-            $selectContainer.append(dropdownView.$el);
-
-            if (this.options.container) {
-                this.options.container.append($selectContainer);
-            } else {
-                this.$el.after($selectContainer);
-            }
-
-            this.$selectContainer = $selectContainer;
-            this.validation = function (method) {
-                if (method === 'isValid') {
-                    return !this.$selectContainer.hasClass('error');
-                }
-                return this.$selectContainer.validation(method, arguments[1]);
-            };
-
-            if (this.options.adjustDropperWidth) {
-                $selectContainer.width(this.$el.outerWidth());
-            } else {
-                $selectContainer.width('100%');
-            }
-
-            dropdownView.setDropperHeight(dropperView.$el.outerHeight());
-
-            if (this.$el.is('select:visible')) {
-                this.$el.addClass('hide');
-            }
-
-            $.proxy(function () {
-                if (this.$el.hasClass('error')) {
-                    $selectContainer.addClass('error');
+        var inViewFix = function () {
+            if (this.options.$offsetContainer) {
+                var $control = this.$selectContainer,
+                    $dropdown = this.dropdownView.$el,
+                    $container = this.options.$offsetContainer,
+                    offsetTop = $control.offset().top - $container.offset().top,
+                    dropDownLowerBorder = offsetTop + $control.outerHeight() + $dropdown.outerHeight(),
+                    allowedLowerBorder = $container.height(),
+                    dropDownUpperBorder = offsetTop - 6 - ($dropdown.outerHeight());
+                if (dropDownLowerBorder > allowedLowerBorder && dropDownUpperBorder > 0) {
+                    $dropdown.css('margin-top', 6 - ($control.outerHeight() + $dropdown.outerHeight()) + 'px');
                 } else {
-                    $selectContainer.removeClass('error');
+                    $dropdown.css('margin-top', '-5px');
                 }
-            }, this);
+            }
+        };
 
-            footerView.on('footer:applySearch', searchView.handleInput, searchView);
-            baseCollection.on('collection:allVisibleSelectionChanged', footerView.updateSelectAllLabel, footerView);
-            baseCollection.on('collection:filteringCompleted', itemListView.displayOrHideNoResults, itemListView);
-            baseCollection.on('change:selected', dropperView.handleChange, dropperView);
-            footerView.on('footer:toggleSelectAll', baseCollection.toggleSelectAllVisible, baseCollection);
+        itemListView.on('list:closeDropdown', dropdownView.hide, dropdownView);
 
-            dropperView.on('dropper:toggleDropdown', dropdownView.toggleVisibility, dropdownView);
+        dropdownView.on('dropdown:hidden', searchView.resetAndBlur, searchView);
 
-            dropperView.on('dropper:blur', function () {
+        dropdownView.on('dropdown:visible', inViewFix, this);
+        dropdownView.on('dropdown:visible', searchView.focus, searchView);
+        dropdownView.on('dropdown:visible', dropperView.addActiveClass, dropperView);
 
-                if (!dropdownView.visible) {
-                    this.$el.blur();
-                    // proxyToCheckErrorClass();    
-                }
+        dropdownView.on('dropdown:hidden', function (focusDropper) {
 
-            }, this);
+            dropdownView.$el.css('margin-top', dropdownView.$el.data('original-margin') + 'px');
 
-            dropperView.on('dropper:focus', function () {
-                this.$el.trigger('click');
-                // proxyToCheckErrorClass();
-            }, this);
-
-            this.dropdownView = dropdownView;
-
-            var inViewFix = function () {
-                if (this.options.$offsetContainer) {
-                    var $control = this.$selectContainer,
-                        $dropdown = this.dropdownView.$el,
-                        $container = this.options.$offsetContainer,
-                        offsetTop = $control.offset().top - $container.offset().top,
-                        dropDownLowerBorder = offsetTop + $control.outerHeight() + $dropdown.outerHeight(),
-                        allowedLowerBorder = $container.height(),
-                        dropDownUpperBorder = offsetTop - 6 - ($dropdown.outerHeight());
-                    if (dropDownLowerBorder > allowedLowerBorder && dropDownUpperBorder > 0) {
-                        $dropdown.css('margin-top', 6 - ($control.outerHeight() + $dropdown.outerHeight()) + 'px');
-                    } else {
-                        $dropdown.css('margin-top', '-5px');
-                    }
-                }
-            };
-
-            itemListView.on('list:closeDropdown', dropdownView.hide, dropdownView);
-
-            dropdownView.on('dropdown:hidden', searchView.resetAndBlur, searchView);
-
-            dropdownView.on('dropdown:visible', inViewFix, this);
-            dropdownView.on('dropdown:visible', searchView.focus, searchView);
-            dropdownView.on('dropdown:visible', dropperView.addActiveClass, dropperView);
-
-            dropdownView.on('dropdown:hidden', function (focusDropper) {
-
-                dropdownView.$el.css('margin-top', dropdownView.$el.data('original-margin') + 'px');
-
-                if (focusDropper) {
-                    dropperView.$el.focus();
-                }
-
-                dropperView.removeActiveClass();
-
-                // unprefixed events for backward compatibility
-                $(this).trigger('close');
-                this.trigger('close');
-
-                $(this).trigger('AdformSelect:close');
-                this.trigger('AdformSelect:close');
-            }, this);
-
-            dropdownView.on('dropdown:visible', function () {
-
-                this.fitToViewport();
-
-                this.$el.trigger('click');
-                // proxyToCheckErrorClass();
-                this.setWidth(this.options.width);
-
-                // unprefixed events for backward compatibility
-                $(this).trigger('open');
-                this.trigger('open');
-
-                $(this).trigger('AdformSelect:open');
-                this.trigger('AdformSelect:open');
-            }, this);
-
-            footerView.on('footer:askToApplyFilter', function (e) {
-                var array = [{
-                    attribute: e.filter,
-                    value: e.filterValue
-                }];
-                baseCollection.setConstraints(array, true);
-            }, this);
-
-            searchView.on('search:askToApplyFilter', function (e) {
-                baseCollection.saveSearchConstraint(e.term, e.searchMechanism);
-                baseCollection.filterResults(e.term, e.searchMechanism);
-            }, this);
-
-            baseCollection.on('change:selected', function (e) {
-                var passedEvent = e || {};
-                var selectedModels = this.getSelectedModels();
-                this.$el.find('option').removeAttr('selected');
-                _.each(selectedModels, function (model) {
-                    var $selector = model.get('$selector');
-                    if ($selector) {
-                        $selector.attr('selected', 'true');
-                    }
-                });
-                if (!passedEvent.silent) {
-                    // unprefixed events for backward compatibility
-                    $(this).trigger('selectionChanged');
-                    this.trigger('selectionChanged');
-
-                    $(this).trigger('AdformSelect:selectionChanged');
-                    this.trigger('AdformSelect:selectionChanged');
-
-                    // allow to bind to select tag change 
-                    //without having a reference to Adform Select
-                    this.$el.trigger('AdformSelect:selectionChanged');
-                    this.$el.trigger($.Event('change', {
-                        isSelfTriggered: true
-                    }));
-                }
-            }, this);
-
-            var proxyToOutsideClick = $.proxy(function (e) {
-                var $target = $(e.target);
-
-                var clickOnDropper = $target.hasClass(dropperView.searchClass) || $target.parents('.' + dropperView.searchClass).length !== 0;
-                var clickOutside = $target.parents('.' + dropdownView.searchClass).length === 0;
-
-                if (!clickOnDropper && clickOutside) {
-                    this.hideDropdown();
-                }
-            }, this);
-
-            var proxyToSelectElementChange = $.proxy(function (e) {
-
-                if (!e.isSelfTriggered) {
-                    var values = this.$el.val();
-                    if (typeof values === 'string') {
-                        values = [values];
-                    }
-                    this.setValues(values);
-                }
-            }, this);
-
-            this.$el.on('change', proxyToSelectElementChange);
-
-            var proxyToAttributeUpdate = $.proxy(function () {
-                if (typeof (this.$el.attr('disabled')) === 'undefined') {
-                    this.enable();
-                } else {
-                    this.disable();
-                }
-            }, this);
-
-            this.$el.on('AdformSelect:update', proxyToAttributeUpdate);
-
-
-            if (!this.options.disableOutsideClick) {
-                $(document).on('mouseup', proxyToOutsideClick);
+            if (focusDropper) {
+                dropperView.$el.focus();
             }
 
-            this.getValue = function () {
-                return baseCollection.getFirstSelectedValue();
-            };
+            dropperView.removeActiveClass();
 
-            this.getValues = function () {
-                return baseCollection.getValues();
-            };
+            // unprefixed events for backward compatibility
+            $(this).trigger('close');
+            this.trigger('close');
 
-            this.getSelectedModels = function () {
-                return baseCollection.getSelectedModels();
-            };
+            $(this).trigger('AdformSelect:close');
+            this.trigger('AdformSelect:close');
+        }, this);
 
-            this.setValues = function (values, options) {
-                baseCollection.setValues(values, options);
+        dropdownView.on('dropdown:visible', function () {
 
-                return this;
-            };
+            this.fitToViewport();
 
-            this.reset = function () {
-                itemListView.resetSelected();
-                return this;
-            };
+            this.$el.trigger('click');
+            // proxyToCheckErrorClass();
+            this.setWidth(this.options.width);
 
-            this.setSelected = function (val) {
-                baseCollection.setSelectedValueForAll(val);
-            };
+            // unprefixed events for backward compatibility
+            $(this).trigger('open');
+            this.trigger('open');
 
-            this.selectAll = function () {
-                this.setSelected(true);
-                return this;
-            };
+            $(this).trigger('AdformSelect:open');
+            this.trigger('AdformSelect:open');
+        }, this);
 
-            this.selectNone = function () {
-                this.setSelected(false);
-                return this;
-            };
+        footerView.on('footer:askToApplyFilter', function (e) {
+            var array = [{
+                attribute: e.filter,
+                value: e.filterValue
+            }];
+            baseCollection.setConstraints(array, true);
+        }, this);
 
-            this.invertSelect = function () {
-                baseCollection.invertSelection();
-                return this;
-            };
+        searchView.on('search:askToApplyFilter', function (e) {
+            baseCollection.saveSearchConstraint(e.term, e.searchMechanism);
+            baseCollection.filterResults(e.term, e.searchMechanism);
+        }, this);
 
-            this.toggleSelect = function () {
-                var functionToCall = baseCollection.where({
-                    selected: false
-                }).length > 0 ? 'selectAll' : 'selectNone';
-                this[functionToCall]();
-                return this;
-            };
-
-            this.selectAllVisible = function () {
-                baseCollection.selectAllVisible();
-                return this;
-            };
-
-            this.unselectAllVisible = function () {
-                baseCollection.unselectAllVisible();
-                return this;
-            };
-
-            this.toggleSelectVisible = function () {
-                baseCollection.toggleSelectAllVisible();
-                return this;
-            };
-
-            this.showDropdown = function () {
-                dropdownView.show();
-                return this;
-            };
-
-            this.hideDropdown = function () {
-                dropdownView.hide();
-                return this;
-            };
-
-            this.toggleDropdown = function () {
-                dropdownView.toggleVisibility();
-                return this;
-            };
-
-            this.registerCustomFooterHandler = function (selector, event, handler) {
-                if (this.options.footer) {
-                    footerView.registerCustomHandler(selector, event, handler);
+        baseCollection.on('change:selected', function (e) {
+            var passedEvent = e || {};
+            var selectedModels = this.getSelectedModels();
+            this.$el.find('option').removeAttr('selected');
+            _.each(selectedModels, function (model) {
+                var $selector = model.get('$selector');
+                if ($selector) {
+                    $selector.attr('selected', 'true');
                 }
-            };
+            });
+            if (!passedEvent.silent) {
+                // unprefixed events for backward compatibility
+                $(this).trigger('selectionChanged');
+                this.trigger('selectionChanged');
 
-            /*
-                constraintArray must contain objects of form { attribute: a, value: [] }        
-            */
-            this.setDisplayConstraints = function (constraintArray) {
+                $(this).trigger('AdformSelect:selectionChanged');
+                this.trigger('AdformSelect:selectionChanged');
 
-                var filterResults;
+                // allow to bind to select tag change 
+                //without having a reference to Adform Select
+                this.$el.trigger('AdformSelect:selectionChanged');
+                this.$el.trigger($.Event('change', {
+                    isSelfTriggered: true
+                }));
+            }
+        }, this);
 
+        var proxyToOutsideClick = $.proxy(function (e) {
+            var $target = $(e.target);
+
+            var clickOnDropper = $target.hasClass(dropperView.searchClass) || $target.parents('.' + dropperView.searchClass).length !== 0;
+            var clickOutside = $target.parents('.' + dropdownView.searchClass).length === 0;
+
+            if (!clickOnDropper && clickOutside) {
+                this.hideDropdown();
+            }
+        }, this);
+
+        var proxyToSelectElementChange = $.proxy(function (e) {
+
+            if (!e.isSelfTriggered) {
+                var values = this.$el.val();
+                if (typeof values === 'string') {
+                    values = [values];
+                }
+                this.setValues(values);
+            }
+        }, this);
+
+        this.$el.on('change', proxyToSelectElementChange);
+
+        var proxyToAttributeUpdate = $.proxy(function () {
+            if (typeof (this.$el.attr('disabled')) === 'undefined') {
+                this.enable();
+            } else {
+                this.disable();
+            }
+        }, this);
+
+        this.$el.on('AdformSelect:update', proxyToAttributeUpdate);
+
+
+        if (!this.options.disableOutsideClick) {
+            $(document).on('mouseup', proxyToOutsideClick);
+        }
+
+        this.getValue = function () {
+            return baseCollection.getFirstSelectedValue();
+        };
+
+        this.getValues = function () {
+            return baseCollection.getValues();
+        };
+
+        this.getSelectedModels = function () {
+            return baseCollection.getSelectedModels();
+        };
+
+        this.setValues = function (values, options) {
+            baseCollection.setValues(values, options);
+
+            return this;
+        };
+
+        this.reset = function () {
+            itemListView.resetSelected();
+            return this;
+        };
+
+        this.setSelected = function (val) {
+            baseCollection.setSelectedValueForAll(val);
+        };
+
+        this.selectAll = function () {
+            this.setSelected(true);
+            return this;
+        };
+
+        this.selectNone = function () {
+            this.setSelected(false);
+            return this;
+        };
+
+        this.invertSelect = function () {
+            baseCollection.invertSelection();
+            return this;
+        };
+
+        this.toggleSelect = function () {
+            var functionToCall = baseCollection.where({
+                selected: false
+            }).length > 0 ? 'selectAll' : 'selectNone';
+            this[functionToCall]();
+            return this;
+        };
+
+        this.selectAllVisible = function () {
+            baseCollection.selectAllVisible();
+            return this;
+        };
+
+        this.unselectAllVisible = function () {
+            baseCollection.unselectAllVisible();
+            return this;
+        };
+
+        this.toggleSelectVisible = function () {
+            baseCollection.toggleSelectAllVisible();
+            return this;
+        };
+
+        this.showDropdown = function () {
+            dropdownView.show();
+            return this;
+        };
+
+        this.hideDropdown = function () {
+            dropdownView.hide();
+            return this;
+        };
+
+        this.toggleDropdown = function () {
+            dropdownView.toggleVisibility();
+            return this;
+        };
+
+        this.registerCustomFooterHandler = function (selector, event, handler) {
+            if (this.options.footer) {
+                footerView.registerCustomHandler(selector, event, handler);
+            }
+        };
+
+        /*
+            constraintArray must contain objects of form { attribute: a, value: [] }        
+        */
+        this.setDisplayConstraints = function (constraintArray) {
+
+            var filterResults;
+
+            if (searchView.$('input').val() === '') {
+                filterResults = true;
+                baseCollection.setConstraints(constraintArray, filterResults);
+            } else {
+                filterResults = false;
+                baseCollection.setConstraints(constraintArray, filterResults);
+                searchView.handleInput();
+            }
+        };
+
+        this.removeDisplayConstraints = function (filter) {
+
+            if (filter) {
                 if (searchView.$('input').val() === '') {
-                    filterResults = true;
-                    baseCollection.setConstraints(constraintArray, filterResults);
-                } else {
-                    filterResults = false;
-                    baseCollection.setConstraints(constraintArray, filterResults);
-                    searchView.handleInput();
-                }
-            };
-
-            this.removeDisplayConstraints = function (filter) {
-
-                if (filter) {
-                    if (searchView.$('input').val() === '') {
-                        baseCollection.removeConstraints(true);
-                    } else {
-                        baseCollection.removeConstraints(false);
-                        searchView.handleInput();
-                    }
+                    baseCollection.removeConstraints(true);
                 } else {
                     baseCollection.removeConstraints(false);
+                    searchView.handleInput();
                 }
-            };
-
-            this.setHeight = function (height) {
-
-                var searchHeight = this.options.search ? searchView.$el.outerHeight() : 0;
-                var footerHeight = this.options.footer ? footerView.$el.outerHeight() : 0;
-
-                var listHeight = height - searchHeight - footerHeight;
-
-                itemListView.setHeight(listHeight);
-
-            };
-
-            this.setWidth = function (width) {
-                var dropperWidth = dropperView.$el.outerWidth();
-
-                if (width !== this.options.width) {
-                    this.options.width = width;
-                }
-
-                switch (width) {
-                    case 'auto':
-                        break;
-
-                    case 'container':
-                        dropdownView.$el.width(dropperWidth);
-                        break;
-
-                    default:
-                        dropdownView.$el.css('width', width);
-                        break;
-                }
-            };
-
-            this.getWidth = function () {
-                return dropdownView.$el.outerWidth();
-            };
-
-            dropdownView.$el.data('original-margin', parseInt(dropdownView.$el.css('margin-top'), 10));
-
-            this.fitToViewport = function () {
-                if (!this.options.adjustToViewport) {
-                    return false;
-                }
-                var viewPortHeight = $(window).height();
-                var bodyScrollTop = $('body').scrollTop();
-
-                var dropDownRelativePosition = dropdownView.$el.offset().top - bodyScrollTop;
-                var dropDownHeight = dropdownView.$el.outerHeight(true);
-                var dropDownRelativePosition2 = dropDownRelativePosition - dropperView.$el.outerHeight() - dropDownHeight;
-
-                if (dropDownRelativePosition + dropDownHeight + 20 > viewPortHeight && dropDownRelativePosition2 > 20) {
-                    dropdownView.$el.css('margin-top', (dropdownView.$el.data('original-margin') - dropperView.$el.outerHeight() - dropDownHeight) + 'px');
-                } else {
-                    dropdownView.$el.css('margin-top', dropdownView.$el.data('original-margin') + 'px');
-                }
-            };
-
-            this.enable = function () {
-                this.$el.removeAttr('disabled');
-                dropperView.enable();
-            };
-
-            this.disable = function () {
-                this.$el.attr('disabled', '');
-                dropperView.disable();
-            };
-
-            this.destroy = function () {
-                baseCollection.off();
-
-                baseCollection.each(function (model) {
-                    model.off();
-                    model = null;
-                });
-
-                footerView.removeCustomHandlers();
-
-                itemListView.remove();
-                searchView.remove();
-                footerView.remove();
-                dropdownView.remove();
-                dropperView.remove();
-
-                itemListView.off();
-                searchView.off();
-                footerView.off();
-                dropdownView.off();
-                dropperView.off();
-
-                this.$el.off('change', proxyToSelectElementChange);
-                this.$el.off('AdformSelect:update', proxyToAttributeUpdate);
-
-                $(document).off('mouseup', proxyToOutsideClick);
-                $selectContainer.remove();
-                if (searchView.timeout) {
-                    clearTimeout(searchView.timeout);
-                }
-            };
+            } else {
+                baseCollection.removeConstraints(false);
+            }
         };
 
-        window.AdformSelect = AdformSelect;
+        this.setHeight = function (height) {
 
-    })();
+            var searchHeight = this.options.search ? searchView.$el.outerHeight() : 0;
+            var footerHeight = this.options.footer ? footerView.$el.outerHeight() : 0;
 
-    return AdformSelect;
-});
+            var listHeight = height - searchHeight - footerHeight;
+
+            itemListView.setHeight(listHeight);
+
+        };
+
+        this.setWidth = function (width) {
+            var dropperWidth = dropperView.$el.outerWidth();
+
+            if (width !== this.options.width) {
+                this.options.width = width;
+            }
+
+            switch (width) {
+                case 'auto':
+                    break;
+
+                case 'container':
+                    dropdownView.$el.width(dropperWidth);
+                    break;
+
+                default:
+                    dropdownView.$el.css('width', width);
+                    break;
+            }
+        };
+
+        this.getWidth = function () {
+            return dropdownView.$el.outerWidth();
+        };
+
+        dropdownView.$el.data('original-margin', parseInt(dropdownView.$el.css('margin-top'), 10));
+
+        this.fitToViewport = function () {
+            if (!this.options.adjustToViewport) {
+                return false;
+            }
+            var viewPortHeight = $(window).height();
+            var bodyScrollTop = $('body').scrollTop();
+
+            var dropDownRelativePosition = dropdownView.$el.offset().top - bodyScrollTop;
+            var dropDownHeight = dropdownView.$el.outerHeight(true);
+            var dropDownRelativePosition2 = dropDownRelativePosition - dropperView.$el.outerHeight() - dropDownHeight;
+
+            if (dropDownRelativePosition + dropDownHeight + 20 > viewPortHeight && dropDownRelativePosition2 > 20) {
+                dropdownView.$el.css('margin-top', (dropdownView.$el.data('original-margin') - dropperView.$el.outerHeight() - dropDownHeight) + 'px');
+            } else {
+                dropdownView.$el.css('margin-top', dropdownView.$el.data('original-margin') + 'px');
+            }
+        };
+
+        this.enable = function () {
+            this.$el.removeAttr('disabled');
+            dropperView.enable();
+        };
+
+        this.disable = function () {
+            this.$el.attr('disabled', '');
+            dropperView.disable();
+        };
+
+        this.destroy = function () {
+            baseCollection.off();
+
+            baseCollection.each(function (model) {
+                model.off();
+                model = null;
+            });
+
+            footerView.removeCustomHandlers();
+
+            itemListView.remove();
+            searchView.remove();
+            footerView.remove();
+            dropdownView.remove();
+            dropperView.remove();
+
+            itemListView.off();
+            searchView.off();
+            footerView.off();
+            dropdownView.off();
+            dropperView.off();
+
+            this.$el.off('change', proxyToSelectElementChange);
+            this.$el.off('AdformSelect:update', proxyToAttributeUpdate);
+
+            $(document).off('mouseup', proxyToOutsideClick);
+            $selectContainer.remove();
+            if (searchView.timeout) {
+                clearTimeout(searchView.timeout);
+            }
+        };
+    };
+
+    window.AdformSelect = AdformSelect;
+
+})();

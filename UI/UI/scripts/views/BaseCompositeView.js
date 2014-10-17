@@ -1,4 +1,9 @@
-﻿define('BaseCompositeView', ['jquery', 'underscore', 'backbone', 'BaseDestructableView'], function ($, _, Backbone, BaseDestructableView) {
+﻿define('BaseCompositeView', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'BaseDestructableView'
+], function ($, _, Backbone, BaseDestructableView) {
     var BaseCompositeView = BaseDestructableView.extend({
         renderSubview: function (selector, subView) {
             subView.setElement(this.$(selector)).render();

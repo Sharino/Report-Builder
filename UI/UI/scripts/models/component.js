@@ -4,9 +4,7 @@
     'backbone',
     'Config'
 ], function ($, _, Backbone, Config) {
-    var Component;
-
-    Component = Backbone.Model.extend({
+    var Component = Backbone.Model.extend({
         urlRoot: Config.ComponentSettings.URL,
         idAttribute: "Id",
 		defaults: {
@@ -16,6 +14,7 @@
 			Dimensions: [],
 			Filters: []
 		},
+
 		validate: function (attrs) {
 		    var errors = this.errors = [];
 

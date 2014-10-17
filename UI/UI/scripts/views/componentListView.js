@@ -1,16 +1,10 @@
 ﻿define('ComponentListView', [
-    'jquery',
-    'underscore',
-    'backbone',
     'BaseCompositeView',
     'ComponentCollection',
     'text!templates/componentList.html',
-    'adform-notifications',
     'Config'
-], function ($, _, Backbone, BaseCompositeView, ComponentCollection, componentListTemplate, AdformNotification, Config) {
-    var ComponentListView;
-
-    ComponentListView = BaseCompositeView.extend({
+], function (BaseCompositeView, ComponentCollection, componentListTemplate, Config) {
+    var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
 
         events: {
@@ -76,7 +70,7 @@
             item.destroy({
                 success: function (model, response) {
                     console.log("Delete OK", model, response);
-                    AdformNotification.display({           
+                    $.notifications.display({           
                         type: 'success',
                         content: 'Successfully deleted!',
                         timeout: Config.NotificationSettings.Timeout
@@ -87,7 +81,7 @@
                     
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (entry) {
-                            AdformNotification.display({       
+                            $.notifications.display({       
                                 type: 'error',
                                 content: entry.Message,      
                                 timeout: Config.NotificationSettings.Timeout
