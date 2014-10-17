@@ -23,8 +23,11 @@
 		defaults: {
             Title: "",
 			Type: 1,
+<<<<<<< HEAD
 			Metrics: [],
 >>>>>>> origin/MetricComponent
+=======
+>>>>>>> a680b101fdc86ebb544f3e994937332453256c37
 			Dimensions: [],
 			Filters: []
 		},
