@@ -79,12 +79,9 @@
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
     <Content Include="scripts\routers\router.js" />
-<<<<<<< HEAD
     <Content Include="scripts\views\componentGeneratedView.js" />
-=======
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
->>>>>>> origin/MetricComponent
     <Content Include="scripts\views\componentListView.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\reportView.js" />
