@@ -1,25 +1,17 @@
 ﻿define('ComponentView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'Component',
     'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
+    'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
-    var ComponentView;
-
-    ComponentView = Backbone.View.extend({
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, componentTemplate, Config) {
+    var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
-            'click #component-submit': 'submit',
-        },
-
-        initialize: function () {
-            //console.log("componentView.childViews", this.childViews);
-            this.childViews = [];       // Store child views for easy closing.
+            'click #component-submit': 'submit'         
         },
 
         inputTitle: function () {
@@ -34,8 +26,21 @@
                 return 0;
             }
         },
+    
+        inputMetrics: function () {
+            var result = [];
+
+            this.subViews[0].metricArray.forEach(function (metric) {
+                if (!metric.Placeholder) {
+                    result.push(metric);
+                }
+            });
+
+            return result;
+        },
 
         render: function () {
+            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -44,9 +49,17 @@
                 }
             };
 
+<<<<<<< HEAD
             var radioSelector = 1;
 
             if (this.model) {       // Model exists
+=======
+            var allMetrics = new MetricCollection();
+
+            var self = this;
+
+            if (this.model) {       
+>>>>>>> origin/MetricComponent
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
                     templVariables["data"]["activeNew"] = 'class="active"';
@@ -61,11 +74,20 @@
                     console.log(radioSelector);
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
                 this.$el.html(this.template(templVariables));
+
+                allMetrics.fetch({
+                    success: function (allMetrics, response) {
+                        console.log("allMetric.fetch OK", allMetrics, response);
+                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+                
             }
-            else {                  // Model does not exist
+            else {                  
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
                 templVariables["data"]["activeList"] = '';
@@ -73,18 +95,35 @@
                 radioSelector = 1;
                 console.log(radioSelector);
                 this.$el.html(this.template(templVariables));
+
+                allMetrics.fetch({
+                    success: function (allMetrics, response) {
+                        console.log("allMetric.fetch OK", allMetrics, response);
+                        self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
             }
 
+<<<<<<< HEAD
             this.assign({
                 '#metric-list': new MetricListView
             });
 
             console.log('input[name=type-options][value=' + radioSelector + ']');
             $('input[name=type-options][value=' + radioSelector + ']').prop('checked', true);
+=======
+            this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
+
+>>>>>>> origin/MetricComponent
             return this;
         },
 
+     
         submit: function () {
+<<<<<<< HEAD
             this.model.set({
                 Title: this.inputTitle(),
                 Type: this.inputType(),
@@ -100,67 +139,68 @@
                     },
                 ])
             });
+=======
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+>>>>>>> origin/MetricComponent
             console.log(this.model.toJSON());
             
-            // var which gets false on Validation error during .save()
             var validationSuccess = this.model.save({}, {
-                // Success callback. NOTE: model and response SHOULD be taken.
-                success: function (model, response) {       // If validation pass and server responds with OK.
-                    console.log("Save OK", model);
+                success: function (model, response) {      
+                    console.log("Save OK", model, response);
 
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+                    $.notifications.display({            
                         type: 'success',
                         content: 'Successfully saved!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
-                    this.model = new Component();
-                    Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
+                    Backbone.history.navigate("list", { trigger: true }); 
                 },
-                // Error callback. NOTE: model and response SHOULD be taken.
-                error: function (model, response) {         // If validation pass, but server responds with failure.
-                    console.log("Save FAIL", response);
+                error: function (model, response) {         
+                    console.log("Save FAIL", model, response);
 
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function(entry){
-                        AdformNotification.display({       // Show Adform notification.
+                    if (response.responseJSON) {
+                        response.responseJSON.forEach(function (error) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: error.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        });
+                    }
+                    else {
+                        if (response.statusText) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: response.statusText,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        } else {
+                            $.notifications.display({
+                                type: 'error',
+                                content: Config.ErrorSettings.ErrorMessages.NoResponse,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        }
+                    }
+                },
+                timeout: Config.NetworkSettings.Timeout
+            });
+             
+            if (!validationSuccess) {
+                console.log("Validation failed!", this.model.errors);
+
+                if (this.model.errors) {
+                    this.model.errors.forEach(function (error) {
+                        $.notifications.display({
                             type: 'error',
-                            content: entry.Message,         // Shows message from server
-                            timeout: 5000
+                            content: error.message,
+                            timeout: Config.NotificationSettings.Timeout
                         });
                     });
                 }
-            });
-            // Deeper validation error check.
-            if (!validationSuccess) {   // If save returns false we can check what went wrong.
-                console.log("Validation failed!");
-
-                AdformNotification.display({                // And show notifications.
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
-                });
             }
             return false;
-        },
-
-        assign: function (selector, view) {
-            var selectors;
-            if (_.isObject(selector)) {
-                selectors = selector;
-            }
-            else {
-                selectors = {};
-                selectors[selector] = view;
-            }
-            if (!selectors) return;
-            _.each(selectors, function (view, selector) {
-                this.childViews.push(view);
-                view.setElement(this.$(selector)).render();
-            }, this);
-            //console.log("componentView.assign this.childViews", this.childViews);
-
-        }
-           
+        }        
     });
 
     return ComponentView;

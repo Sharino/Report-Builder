@@ -1,14 +1,10 @@
 ﻿define('ComponentListView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'ComponentCollection',
     'text!templates/componentList.html',
-    'adform-notifications'
-], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification) {
-    var ComponentListView;
-
-    ComponentListView = Backbone.View.extend({
+    'Config'
+], function (BaseCompositeView, ComponentCollection, componentListTemplate, Config) {
+    var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
 
         events: {
@@ -18,18 +14,16 @@
         },
 
         initialize: function () {
-            if (this.collection) {
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
-            }
-            else {
+            if (!this.collection) {
                 this.collection = new ComponentCollection();
-                this.collection.on('remove', this.render, this);
-                this.collection.on('fetch', this.render, this);
             }
-            //this.render;
+
+            this.collection.on('remove', this.render, this);
+            this.collection.on('fetch', this.render, this);
         },
         render: function () {
+            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
+
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -77,22 +71,24 @@
             item.destroy({
                 success: function (model, response) {
                     console.log("Delete OK", model, response);
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+                    $.notifications.display({           
                         type: 'success',
                         content: 'Successfully deleted!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
                 },
                 error: function (model, response) {
                     console.log("Delete Fail", model, response);
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function (entry) {
-                        AdformNotification.display({       // Show Adform notification.
-                            type: 'error',
-                            content: entry.Message,        // Shows message from server
-                            timeout: 5000
+                    
+                    if (response.responseJSON) {
+                        response.responseJSON.forEach(function (entry) {
+                            $.notifications.display({       
+                                type: 'error',
+                                content: entry.Message,      
+                                timeout: Config.NotificationSettings.Timeout
+                            });
                         });
-                    });
+                    }
                 }
             });
         },

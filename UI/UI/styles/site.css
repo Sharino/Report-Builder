@@ -1,12 +1,12 @@
 ﻿.sortable>li, .sortable>button {
     display: inline;
     list-style-type: none;
-   // padding-right: 20px;
     float: left;
 }
 
 .sortable .btn {
-    height: 30px;
+    height: 27px;
+    margin-top: 5px;
 }
 
 .sortable-placeholder{
@@ -50,7 +50,41 @@ li {
    flex-wrap: wrap;
 }
 
+<<<<<<< HEAD
 i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     height: 10px;
 }
 
+=======
+
+
+.metric-group{
+    vertical-align: top;
+}
+
+.metric-group > .controls{
+    margin: 0;
+}
+
+.adform-select-control {
+    vertical-align: top;
+}
+i[class*="adf-icon-alt"] {
+    display: inline-block;
+    width: 8px;
+    height: 26px;
+    line-height: 0;
+    vertical-align: -5px;
+}
+
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.invisible {
+  visibility: hidden;
+}
+>>>>>>> origin/MetricComponent

@@ -1,11 +1,9 @@
-﻿define('MenuView', [
-    'jquery',
-    'underscore',
-    'backbone'
-], function ($, _, Backbone, tpl) {
-    var MenuView;
+﻿// TODO: Due to be fully implemented, probably next sprint
 
-    MenuView = Backbone.View.extend({
+define('MenuView', [
+    'BaseCompositeView'
+], function (BaseCompositeView) {
+    var MenuView = BaseCompositeView.extend({
         el: $('#menu'),
         template: _.template($("#menu-template").html()),
 
@@ -24,7 +22,6 @@
             if (this.model.isNew()) {
                 templVariables["data"]["activeNew"] = 'class="active"';
             } else {
-                // TODO:
             }
 
             this.$el.html(this.template(templVariables));

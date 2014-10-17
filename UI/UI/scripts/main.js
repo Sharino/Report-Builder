@@ -12,14 +12,19 @@
         'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
+        'Tests':                'tests',
+
+        /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
         'adform-select':        'scripts/lib/adform-select',
         'adform-notifications': 'scripts/lib/adform-notifications',
-        'Sortable':             'scripts/lib/jquery.sortable',
-        'Tests':                'tests',
 
         /* Config dependencies */
         'Config':               'scripts/config/config',
+
+        /* Base Views */
+        'BaseDestructableView': 'scripts/views/baseDestructableView',
+        'BaseCompositeView':    'scripts/views/baseCompositeView',
 
         /* Model dependencies */
         'App':                  'scripts/models/app',
@@ -43,55 +48,59 @@
         /* Router dependencies */
         'Router':               'scripts/routers/router'
     },
+
     shim: {
-        'backbone': {
-            deps: ['underscore', 'jquery'],
-            exports: 'backbone'
+        'jquery': {
+            exports: '$'
         },
+
+        'backbone': {
+            deps: ['jquery', 'underscore'],
+            exports: 'Backbone'
+        },
+
         'underscore': {
             exports: '_'
         },
+
         'bootstrap': {
             deps: ['jquery'],
             exports: 'bootstrap'
         },
+
+        'handlebars': {
+            exports: 'Handlebars'
+        },
+
         'jquery-sortable': {
             deps: ['jquery']
         },
-        'adform-select': {
-            deps: ['backbone', 'handlebars']
+        
+        'adform-checkbox': {
+            deps: ['jquery']
         },
-        'backbone-forms': {
-            deps: ['backbone', 'jquery']
-        }
-    }
+
+        'adform-select': {
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
+            exports: 'AdformSelect'
+        },
+
+        'adform-notifications': {
+            deps: ['jquery', 'backbone', 'underscore']
+        },
+        
+    },
+    //urlArgs: "bust=" + (new Date()).getTime()
+
 });
 
 
-require(['Component', 'ComponentCollection', 'ComponentView', 'ComponentListView', 'MenuView', 'Router', 'Config'],
-    function (Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Router, Config) {
+require(['Router', 'Config'],
+    function (Router, Config) {
         console.log(Config);
-
-
-
-        Backbone.View.prototype.close = function () {
-            console.log('Closing view', this);
-            if (this.beforeClose) {
-                this.beforeClose();
-            }
-            this.remove();
-            this.unbind();
-
-            //console.log("this.childViews", this.childViews);
-            _.each(this.childViews, function (childView) {
-                if (childView.close) {
-                    childView.close();
-                }
-            });
-            this.childViews = [];
-        };
 
         var app = new Router();
         app.initialize();
         Backbone.history.start();
+
 });

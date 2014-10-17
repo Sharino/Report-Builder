@@ -65,10 +65,7 @@
     <Content Include="scripts\lib\adform-notifications.js" />
     <Content Include="scripts\lib\adform-select.js" />
     <Content Include="scripts\lib\backbone-forms.min.js" />
-    <Content Include="scripts\lib\backbone-forms.min.js%281%29.htm" />
-    <Content Include="scripts\lib\backbone-forms.min.js.htm" />
     <Content Include="scripts\lib\backbone.js" />
-    <Content Include="scripts\lib\bootstrap-tooltip.js" />
     <Content Include="scripts\lib\bootstrap.js" />
     <Content Include="scripts\lib\handlebars.js" />
     <Content Include="scripts\lib\jquery.js" />
@@ -78,12 +75,16 @@
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
-    <Content Include="scripts\models\app.js" />
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
     <Content Include="scripts\routers\router.js" />
+<<<<<<< HEAD
     <Content Include="scripts\views\componentGeneratedView.js" />
+=======
+    <Content Include="scripts\views\baseCompositeView.js" />
+    <Content Include="scripts\views\baseDestructableView.js" />
+>>>>>>> origin/MetricComponent
     <Content Include="scripts\views\componentListView.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\reportView.js" />

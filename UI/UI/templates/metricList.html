@@ -4,28 +4,25 @@
         <hr />
     </div>
     <ul class="sortable">
-        <% _.each(Metrics, function(model) { %>
+        <% _.each(Metrics, function(model) { %>  
             <li draggable="true" class="">
-                <div class="btn-group">
-                    <label class="btn single-btn" data-toggle="">
+                <div class="control-group metric-group">
+                    <div class="controls metric-controls">
                         <i class="handle adf-icon-alt-drag"></i>
-                        <%= model.Title %> (<%= model.Order %>)
-                    </label>
-                    <a class="btn single-btn" data-toggle="dropdown" href="#">
-                        <i class="adf-icon-small-dropdown"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li>Cia bus metrikos</li>
-                    </ul>
+                        <select class="metric-select" placeholder="Select Metric" data-no-results="No results">
+                            <option></option>
+                            <% _.each(AllMetrics, function(Metric){ %>
+                                <option value="<%= Metric.MetricId %>"><%= Metric.DisplayName %></option>
+                            <% }); %>
+                        </select>
+                    </div>
                 </div>
-
             </li>
-        <% }); %>
-        <li>
-            <button type="button" id="addMetric" class="btn btn-transparent btn-add">
-                <i class="adf-icon-small-add-circle blue-icon"></i> Add Metric
-            </button>
-        </li> 
+        <% }); %> 
+
+        <button type="button" id="addMetric" class="btn btn-transparent btn-add">
+            <i class="adf-icon-small-add-circle blue-icon"></i> Add Metric
+        </button>
+         
     </ul>
 </div>
-

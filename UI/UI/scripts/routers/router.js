@@ -7,6 +7,7 @@
     'ComponentView',
     'ComponentListView',
     'MenuView',
+<<<<<<< HEAD
     'GenerateView',
     'adform-notifications'
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView,
@@ -14,6 +15,12 @@
     var Router;
     
     Router = Backbone.Router.extend({
+=======
+    'Config',
+    'adform-notifications'
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, Config) {
+    var Router = Backbone.Router.extend({
+>>>>>>> origin/MetricComponent
         routes: {
             "": "list",
             "create": "create",
@@ -27,11 +34,13 @@
         },
 
         create: function () {
-            this.showView("#component", new ComponentView({ model: new Component() }));
+            var tempComponent = new Component();
+            this.showView("#component", new ComponentView({ model: tempComponent }));
+            tempComponent = null;
         },
 
         list: function () {
-            var self = this; // To use Router methods in callback function.
+            var self = this; 
 
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
@@ -42,10 +51,10 @@
                 error: function (model, response) {
                     console.log("fetch FAIL", response);
 
-                    AdformNotification.display({       // Show Adform notification.
+                    $.notifications.display({       
                         type: 'error',
-                        content: "Error fetching from server.",         // Shows message from server
-                        timeout: 5000
+                        content: "Error fetching from server.",         
+                        timeout: Config.NotificationSettings.Timeout
                     });
                     self.showView("#list", new ComponentListView({ collection: null }));
                 }
@@ -54,8 +63,8 @@
 
         createById: function (id) {
             var self = this;
-            var tempComponentModel = new Component({ Id: id });
-            tempComponentModel.fetch({
+            var tempComponent = new Component({ Id: id });
+            tempComponent.fetch({
                 success: function (model, response) {
                     console.log("GET", id, "Success", model, response);
                     self.showView("#component", new ComponentView({model: model}));
@@ -65,7 +74,7 @@
                 }
             });
 
-            tempComponentModel = null;
+            tempComponent = null;
         },
 
         generateById: function (id) {
@@ -86,9 +95,10 @@
 
         showView: function(selector, view) {
             if (this.currentView)
-                this.currentView.close();
+                this.currentView.destroy();
             $(selector).html(view.render().el);
             this.currentView = view;
+            console.log("Opening view", this.currentView);
             return view;
         }
     });
