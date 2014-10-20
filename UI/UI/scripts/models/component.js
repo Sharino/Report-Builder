@@ -6,16 +6,20 @@
 ], function ($, _, Backbone, Config) {
     var Component = Backbone.Model.extend({
         urlRoot: Config.ComponentSettings.URL,
+
         idAttribute: "Id",
-		defaults: {
-            Title: "",
-			Type: 1,
-			Metrics: [],
-			Dimensions: [],
-			Filters: []
+
+		defaults: function () {
+		    this.set({
+		        Title: "",
+		        Type: 1,
+		        Metrics: [],
+		        Dimensions: [],
+		        Filters: []
+		    });
 		},
 
-		validate: function (attrs) {
+		validate: function (attrs, options) {
 		    var errors = this.errors = [];
 
 		    if (!attrs.Title) {

@@ -9,6 +9,12 @@
 
         urlRoot: Config.MetricSettings.URL,
 
+        defaults: function () {
+            this.set({
+                Title: ""
+            });
+        },
+
         toString: function () {
             return this.DisplayName;
         }

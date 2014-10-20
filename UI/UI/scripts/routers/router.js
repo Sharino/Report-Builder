@@ -29,9 +29,7 @@
         },
 
         create: function () {
-            var tempComponent = new Component();
-            this.showView("#component", new ComponentView({ model: tempComponent }));
-            tempComponent = null;
+            this.showView("#component", new ComponentView({ model: new Component() }));
         },
 
         showDashboard: function (id) {
@@ -100,7 +98,7 @@
             tempComponent.fetch({
                 success: function (model, response) {
                     console.log("GET", id, "Success", model, response);
-                    self.showView("#component", new ComponentView({model: model}));
+                    self.showView("#component", new ComponentView({ model: model }));
                 },
                 error: function (model, response) {
                     console.log("GET", id, "Fail", model, response);
@@ -132,7 +130,7 @@
             $(selector).html(view.render().el);
             this.currentView = view;
             console.log("Opening view", this.currentView);
-            return view;
+            //return view;
         }
     });
 
