@@ -17,11 +17,13 @@
             "create": "create",
             "create/:id": "createById",
             "list": "list",
-            "generate/:id": "generateById"
+            "generate/:id": "generateById",
+            "menu": "menu"
         },
 
-        index: function () {
-            
+        initialize: function () {
+            this.showMenu(new MenuView());
+            this.on("route", this.menu.routeChangedAction);
         },
 
         create: function () {
@@ -83,12 +85,29 @@
         },  
 
         showView: function(selector, view) {
-            if (this.currentView)
+            if (this.currentView) {
                 this.currentView.destroy();
+            }
+
             $(selector).html(view.render().el);
+
             this.currentView = view;
+
             console.log("Opening view", this.currentView);
-            //return view;
+
+            return view;
+        },
+
+        showMenu: function (view) {
+            if (this.menu) {
+                this.menu.destroy();
+            }
+
+            $("#menu").html(view.render().el);
+
+            this.menu = view;
+
+            console.log("Opening Menu", this.menu);
         }
     });
 

@@ -40,6 +40,7 @@
         },
 
         render: function () {
+
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {

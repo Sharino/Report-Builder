@@ -50,12 +50,9 @@ li {
     flex-wrap: wrap;
 }
 
-<<<<<<< HEAD
 i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     height: 10px;
 }
-
-=======
 
 
 .metric-group{
@@ -74,7 +71,11 @@ i[class*="adf-icon-alt"] {
     width: 8px;
     height: 26px;
     line-height: 0;
-    vertical-align: -5px;
+    vertical-align: -5px
+}
+
+.del {
+    vertical-align: -webkit-baseline-middle!important;
 }
 
 .show {
@@ -87,4 +88,3 @@ i[class*="adf-icon-alt"] {
 .invisible {
   visibility: hidden;
 }
->>>>>>> origin/MetricComponent

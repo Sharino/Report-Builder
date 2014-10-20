@@ -99,7 +99,5 @@ require(['Router', 'Config'],
         console.log(Config);
 
         var app = new Router();
-        app.initialize();
         Backbone.history.start();
-
 });

@@ -1,15 +1,16 @@
 ﻿define('ComponentListView', [
     'BaseCompositeView',
     'ComponentCollection',
+    'MenuView',
     'text!templates/componentList.html',
     'Config'
-], function (BaseCompositeView, ComponentCollection, componentListTemplate, Config) {
+], function (BaseCompositeView, ComponentCollection, MenuView, componentListTemplate, Config) {
     var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
 
         events: {
-            'click .component-list-item>.del': 'onDelete',
-            'click .component-list-item>.gen': 'onGenerate',
+            'click .del': 'onDelete',
+            'click .gen': 'onGenerate',
             'click .component-list-item>.click': 'onClick',
         },
 
@@ -22,8 +23,7 @@
             this.collection.on('fetch', this.render, this);
         },
         render: function () {
-            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
-
+            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -65,7 +65,7 @@
             console.log(e);
             e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
+            var id = $(e.currentTarget.parentElement).attr("id");
             var item = this.collection.get(id);
 
             item.destroy({
@@ -97,7 +97,7 @@
             console.log(e);
             e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
+            var id = $(e.currentTarget.parentElement).attr("id");
             var routerUrl = "generate/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
