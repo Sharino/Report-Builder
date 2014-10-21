@@ -28,10 +28,6 @@
 
             this.remove();
             this.unbind();
-
-            if (this.unset) {
-                this.unset();
-            }
         },
 
         destroySubViews: function () {

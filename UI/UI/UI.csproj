@@ -95,6 +95,7 @@
     <Content Include="templates\componentList.html" />
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />
+    <Content Include="templates\menu.html" />
     <Content Include="templates\report.html" />
     <Content Include="templates\metricList.html" />
     <Content Include="templates\table.html" />

@@ -36,9 +36,7 @@
         render: function () {
             var self = this;
 
-            this.metricArray.sort(function (a, b) {
-                return a.Order - b.Order;
-            });
+            this.metricArray.sort(this.compareNumbers);
 
             this.$el.html(this.template({ "Metrics": this.metricArray, "AllMetrics": this.allMetrics.toJSON() })); // Render Metric list
 
@@ -50,7 +48,7 @@
         },
 
         metricAddedAction: function () {
-            this.metricArray.push({ Placeholder: true });
+            this.metricArray.push({ Placeholder: true, Order: this.metricArray.length });
             this.render();
         },
 
@@ -138,6 +136,14 @@
                 draggedItem.Order = ui.item.index();
             }
             this.render();
+        },
+
+        compareNumbers: function (a, b) {
+            console.log(a, b);
+            var x = parseInt(a.Order);
+            var y = parseInt(b.Order);
+
+            return x - y;
         }
 
     });
