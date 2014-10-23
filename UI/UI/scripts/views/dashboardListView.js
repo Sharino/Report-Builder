@@ -5,9 +5,7 @@
     'adform-notifications',
     'Config'
 ], function (BaseCompositeView, DashboardCollection, dashboardListTemplate, AdformNotification, Config) {
-    var DashboardListView;
-
-    DashboardListView = Backbone.View.extend({
+    var DashboardListView = BaseCompositeView.extend({
         template: _.template(dashboardListTemplate),
 
         events: {

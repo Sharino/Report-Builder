@@ -7,6 +7,7 @@
     'ComponentView',
     'ComponentListView',
     'Dashboard',
+    'DashboardView',
     'DashboardComponent',
     'DashboardCollection',
     'DashboardListView',
@@ -14,7 +15,7 @@
     'GenerateView',
     'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
     var Router = Backbone.Router.extend({
         routes: {
             "": "list",
@@ -33,7 +34,6 @@
         create: function () {
             var tempComponent = new Component();
             this.showView("#component", new ComponentView({ model: tempComponent }));
-            tempComponent = null;
         },
 
         showDashboard: function (id) {
@@ -42,33 +42,32 @@
             tempDashboardModel.fetch({
                 success: function (model, response) {
                     console.log("GET", id, "Success", model, response);
-                    self.showView("#generate", new GenerateView({ model: model }));
+                    self.showView("#generate", new DashboardView({ model: model }));
                 },
                 error: function (model, response) {
                     console.log("GET", id, "Fail", model, response);
                 }
             });
-
-            tempDashboardModel = null;
         },
 
         dashboards: function () {
-            var self = this; // To use Router methods in callback function.
+            var self = this; 
 
             this.DashboardCollection = new DashboardCollection();
             this.DashboardCollection.fetch({
-                success: function (model, response) {
-                    console.log("fetch OK", model.toJSON());
-                    self.showView("#list", new DashboardListView({ collection: model }));
+                success: function (collection, response) {
+                    console.log("fetch OK", collection.toJSON());
+                    self.showView("#list", new DashboardListView({ collection: collection }));
                 },
-                error: function (model, response) {
+                error: function (collection, response) {
                     console.log("fetch FAIL", response);
 
-                    AdformNotification.display({       // Show Adform notification.
+                    $.notifications.display({       
                         type: 'error',
-                        content: "Error fetching from server.",         // Shows message from server
+                        content: "Error fetching from server.",         
                         timeout: Config.NotificationSettings.Timeout
                     });
+
                     self.showView("#list", new DashboardListView({ collection: null }));
                 }
             });

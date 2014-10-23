@@ -7,12 +7,14 @@
     var DashboardComponent = Backbone.Model.extend({
         urlRoot: Config.DashboardComponentSettings.URL,
         idAttribute: "Id",
-        defaults: {
-            Title: "",
-            Type: 1,
-            Metrics: [],
-            Dimensions: [],
-            Filters: []
+        defaults: function () {
+            this.set({
+                Title: "",
+                Type: 1,
+                Metrics: [],
+                Dimensions: [],
+                Filters: []
+            });
         },
 
         validate: function (attrs) {

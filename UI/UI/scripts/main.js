@@ -2,7 +2,8 @@
     //By default load any module IDs from scripts/lib
     baseUrl: '',
 
-    //urlArgs: "bust=" + (new Date()).getTime(),
+
+    urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
@@ -36,7 +37,8 @@
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
         'MetricCollection':     'scripts/collections/metricCollection',
-        'DashboardCollection': 'scripts/collections/dashboardCollection',
+        'DashboardCollection':  'scripts/collections/dashboardCollection',
+        'DashboardComponentCollection': 'scripts/collections/dashboardComponentCollection',
         
 
         /* View dependencies */
@@ -49,6 +51,7 @@
         'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
+        'DashboardComponentView': 'scripts/views/dashboardComponentView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router'

@@ -62,6 +62,7 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\lib\adform-accordion.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
     <Content Include="scripts\lib\adform-select.js" />
@@ -86,6 +87,7 @@
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
     <Content Include="scripts\views\componentListView.js" />
+    <Content Include="scripts\views\dashboardComponentView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
     <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\generateView.js" />
@@ -99,6 +101,7 @@
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
     <Content Include="templates\dashboard.html" />
+    <Content Include="templates\dashboardComponent.html" />
     <Content Include="templates\dashboardList.html" />
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />

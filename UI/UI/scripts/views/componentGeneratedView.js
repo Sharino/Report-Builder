@@ -1,23 +1,40 @@
 ﻿define('ComponentGeneratedView', [
     'BaseCompositeView',
-    'Component',
+    'DashboardComponent',
     'Metric',
     'MetricCollection',
+    'ComponentView',
+    'DashboardComponentView',
     'text!templates/kpi.html',
     'text!templates/table.html',
     'text!templates/timeline.html',
     'text!templates/chart.html'
-], function (BaseCompositeView, Component, Metric, MetricCollection, KPITemplate, TableTemplate, TimelineTemplate, ChartTemplate) {
+], function (BaseCompositeView, DashboardComponent, Metric, MetricCollection, ComponentView, DashboardComponentView, KPITemplate, TableTemplate, TimelineTemplate, ChartTemplate) {
 
     var ComponentGeneratedView = BaseCompositeView.extend({
-        model: new Component,
+        model: new DashboardComponent,
 
         events: {
+            'click .component': 'toggle'
+        },
+        
+      
+        toggle: function (e) {
+            $(this.el).trigger('update');
+
+            console.log("ID", this.model.get("Id"));
+            console.log("POS", this.pos);
+            this.renderSubview(("component-edit-" + this.pos), new DashboardComponentView(this.model));
+
+            //this.showView(("component-edit-" + this.pos), new ComponentView({ model: this.model }));
+            //self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+            console.log("" + ("component-edit-" + this.pos));
+            return false;
         },
 
-        initialize: function (parentModel) {
+        initialize: function (parentModel, pos) {
             this.model = parentModel;
-            this.collection = new MetricCollection(parentModel.get("Metrics"));
+            this.pos = pos;
         },
 
         render: function () {
@@ -42,10 +59,12 @@
                     tpl = KPITemplate;
             }
 
+            console.log(this.model);
+
             var template = _.template(tpl);
 
             this.$el.html(template({
-                "Metrics": this.collection.toJSON(),
+                "Metrics": this.model.get('Metrics'),
                 "model": this.model.toJSON()
             })); // Render Metric list      
         },

@@ -1,12 +1,13 @@
 ﻿define('ComponentView', [
     'BaseCompositeView',
     'Component',
+    'DashboardComponent',
     'MetricCollection',
     'MetricListView',
     'text!templates/component.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, MetricListView, componentTemplate, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
@@ -14,11 +15,11 @@
             'click #component-submit': 'submit'
         },
 
-        inputTitle: function () {
+        inputTitle: function() {
             return $('#input').val();
         },
 
-        inputType: function () {
+        inputType: function() {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
                 return parseInt(selected);
@@ -27,10 +28,10 @@
             }
         },
 
-        inputMetrics: function () {
+        inputMetrics: function() {
             var result = [];
 
-            this.subViews[0].metricArray.forEach(function (metric) {
+            this.subViews[0].metricArray.forEach(function(metric) {
                 if (!metric.Placeholder) {
                     result.push(metric);
                 }
@@ -39,7 +40,7 @@
             return result;
         },
 
-        render: function () {
+        render: function() {
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
@@ -67,17 +68,16 @@
                 this.$el.html(this.template(templVariables));
 
                 allMetrics.fetch({
-                    success: function (allMetrics, response) {
+                    success: function(allMetrics, response) {
                         console.log("allMetric.fetch OK", allMetrics, response);
                         self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
-                    error: function (allMetrics, response) {
+                    error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
                     }
                 });
 
-            }
-            else {
+            } else {
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
                 templVariables["data"]["activeList"] = '';
@@ -85,11 +85,11 @@
                 this.$el.html(this.template(templVariables));
 
                 allMetrics.fetch({
-                    success: function (allMetrics, response) {
+                    success: function(allMetrics, response) {
                         console.log("allMetric.fetch OK", allMetrics, response);
                         self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
                     },
-                    error: function (allMetrics, response) {
+                    error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
                     }
                 });
@@ -101,12 +101,12 @@
         },
 
 
-        submit: function () {
+        submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
-                success: function (model, response) {
+                success: function(model, response) {
                     console.log("Save OK", model, response);
 
                     $.notifications.display({
@@ -116,19 +116,18 @@
                     });
                     Backbone.history.navigate("list", { trigger: true });
                 },
-                error: function (model, response) {
+                error: function(model, response) {
                     console.log("Save FAIL", model, response);
 
                     if (response.responseJSON) {
-                        response.responseJSON.forEach(function (error) {
+                        response.responseJSON.forEach(function(error) {
                             $.notifications.display({
                                 type: 'error',
                                 content: error.Message,
                                 timeout: Config.NotificationSettings.Timeout
                             });
                         });
-                    }
-                    else {
+                    } else {
                         if (response.statusText) {
                             $.notifications.display({
                                 type: 'error',
@@ -151,7 +150,7 @@
                 console.log("Validation failed!", this.model.errors);
 
                 if (this.model.errors) {
-                    this.model.errors.forEach(function (error) {
+                    this.model.errors.forEach(function(error) {
                         $.notifications.display({
                             type: 'error',
                             content: error.message,

@@ -6,10 +6,14 @@
 ], function ($, _, Backbone, Config) {
     var Dashboard = Backbone.Model.extend({
         urlRoot: Config.DashboardSettings.URL,
+
         idAttribute: "Id",
-		defaults: {
-            Title: "",
-			Ids: []
+
+		defaults: function() {
+		    this.set({
+		        Title: "",
+		        Components: []
+		    });
 		},
 
 		validate: function (attrs) {

@@ -2,9 +2,8 @@
 ], function () {
     var Config = {
         ComponentSettings: {
-            URL: "http://37.157.0.42:33895/api/ReportComponent",
+            URL: "http://172.22.19.97:33894/api/reportComponent"
         },
-
         ReportSettings: {
             URL: "http://172.22.19.97:33894/api/reportComponent"
         },
