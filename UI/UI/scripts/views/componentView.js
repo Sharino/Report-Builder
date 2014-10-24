@@ -27,6 +27,7 @@
             }
         },
 
+        /* TODO: Should move validation to MetricListView */
         inputMetrics: function () {
             var result = [];
 
@@ -70,6 +71,7 @@
                 allMetrics.fetch({
                     success: function (allMetrics, response) {
                         console.log("allMetric.fetch OK", allMetrics, response);
+
                         self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
                     error: function (allMetrics, response) {

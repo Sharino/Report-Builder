@@ -13,12 +13,15 @@
         'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
-        'Tests':                'tests',
+        'spin':                 'scripts/lib/spin',
 
         /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
         'adform-select':        'scripts/lib/adform-select',
+        'adform-select-group':  'scripts/lib/adform-select-group',
         'adform-notifications': 'scripts/lib/adform-notifications',
+        'adform-loader':        'scripts/lib/adform-loader',
+
 
         /* Config dependencies */
         'Config':               'scripts/config/config',
@@ -46,7 +49,10 @@
         'ComponentGeneratedView':'scripts/views/componentGeneratedView',
 
         /* Router dependencies */
-        'Router':               'scripts/routers/router'
+        'Router':               'scripts/routers/router',
+
+        'Tests': 'tests',
+
     },
 
     shim: {
@@ -68,6 +74,11 @@
             exports: 'bootstrap'
         },
 
+        'spin':{
+            deps: ['jquery'],
+            exports: 'Spinner'
+        },
+
         'handlebars': {
             exports: 'Handlebars'
         },
@@ -76,11 +87,20 @@
             deps: ['jquery']
         },
         
+        'adform-loader': {
+            deps: ['jquery', 'spin']
+        },
+
         'adform-checkbox': {
             deps: ['jquery']
         },
 
         'adform-select': {
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
+            exports: 'AdformSelect'
+        },
+
+        'adform-select-group': {
             deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
             exports: 'AdformSelect'
         },
@@ -94,10 +114,12 @@
 });
 
 
-require(['Router', 'Config'],
+require(['Router', 'Config', 'adform-loader'],
     function (Router, Config) {
-        console.log(Config);
+        //console.log(Config);
 
         var app = new Router();
         Backbone.history.start();
-});
+
+        //$('#list').loader();
+    });

@@ -9,9 +9,9 @@
         template: _.template(componentListTemplate),
 
         events: {
-            'click .del': 'onDelete',
-            'click .gen': 'onGenerate',
-            'click .component-list-item>.click': 'onClick',
+            'click .del': 'handleDeleteAction',
+            'click .gen': 'handleGenerateAction',
+            'click .component-list-item>.click': 'handleClickAction',
         },
 
         initialize: function () {
@@ -51,8 +51,7 @@
             return this;
         },
         
-        onClick: function (e) {
-            console.log(e);
+        handleClickAction: function (e) {
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("id");
@@ -61,8 +60,7 @@
             Backbone.history.navigate(routerUrl, true, true);
         },
 
-        onDelete: function (e) {
-            console.log(e);
+        handleDeleteAction: function (e) {
             e.preventDefault();
 
             var id = $(e.currentTarget.parentElement).attr("id");
@@ -93,8 +91,7 @@
             });
         },
 
-        onGenerate: function (e) {
-            console.log(e);
+        handleGenerateAction: function (e) {
             e.preventDefault();
 
             var id = $(e.currentTarget.parentElement).attr("id");

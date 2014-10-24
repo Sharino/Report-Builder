@@ -10,21 +10,15 @@
 }
 
 .sortable-placeholder{
+   width: 213px;
+    height: 23px;
     display: inline-block;
-    padding: 6px 6px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    border: 1px dashed;
+    background: #dddddd;
+    border: 1px solid;
     border-radius: 4px;
-    border-color: #353535;
-    height: auto;
+    border-color: #ccc;
+    margin: 7px;
 }
-
 
 .wizard-nav, .component-listView, .form-horizontal.well {
     width: 800px;

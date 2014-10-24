@@ -4,15 +4,19 @@
     'MetricCollection',
     'text!templates/metricList.html',
     'Config',
-    'adform-select',
+    'adform-select-group',
     'jquery-sortable'
-], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, AdformSelect) {
+], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, ASG) {
     var MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
 
         events: {
             'click #addMetric': 'metricAddedAction',
             'AdformSelect:selectionChanged': 'metricSelectedAction'
+        },
+
+        fire: function(e){
+            $(e.target.nextElementSibling).toggle();
         },
 
         initialize: function (parentModel, allMetrics) {
@@ -31,6 +35,11 @@
             }
 
             this.allMetrics = allMetrics;
+
+            this.grouped = _.groupBy(allMetrics.toJSON(), function (metric) {
+                return metric.Group.GroupId;
+            });
+
         },
 
         render: function () {
@@ -38,7 +47,9 @@
 
             this.metricArray.sort(this.compareNumbers);
 
-            this.$el.html(this.template({ "Metrics": this.metricArray, "AllMetrics": this.allMetrics.toJSON() })); // Render Metric list
+            this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
+
+            //var adfSelectReference1 = new ASG(this.$el.find('select.adf-select1'), { groups: true, adjustDropperWidth: true, search: 6, width: 'container' });
 
             this.initializeMetricSelects();
 
@@ -58,7 +69,7 @@
             var metricSelectArray = this.$el.find('select.metric-select').get();
 
             if (metricSelectArray.length !== 0) {
-                var singleMetricSelectReference = new AdformSelect(metricSelectArray, { adjustDropperWidth: true, search: true, footer: false, width: 'container' });
+                var singleMetricSelectReference = new ASG(metricSelectArray, { groups: true, adjustDropperWidth: true, search: true, footer: false, width: 'container' });
 
                 if (metricSelectArray.length === 1) {
                     // Strange approach, I know, but if Select element array has only one element, object reference is saved in the variable, not in $selector.data
@@ -78,6 +89,14 @@
                         this.selectReferences[i].setValues([this.metricArray[i].MetricId]);
                     }
                 }
+
+                $('.list-pop').tooltip({
+                    delay: {
+                        show: 50,
+                        hide: 50
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
             }
         },
 
@@ -106,7 +125,7 @@
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 //forcePlaceholderSize: true,
-                placeholder: '<li>Placeholder</li>'
+                placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
             }).bind('sortupdate', function (e, ui) {
                 self.metricDraggedAction(e, ui);
             });
@@ -139,7 +158,6 @@
         },
 
         compareNumbers: function (a, b) {
-            console.log(a, b);
             var x = parseInt(a.Order);
             var y = parseInt(b.Order);
 

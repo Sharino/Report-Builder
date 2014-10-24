@@ -62,7 +62,9 @@
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
+    <Content Include="scripts\lib\adform-loader.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
+    <Content Include="scripts\lib\adform-select-group.js" />
     <Content Include="scripts\lib\adform-select.js" />
     <Content Include="scripts\lib\backbone-forms.min.js" />
     <Content Include="scripts\lib\backbone.js" />
@@ -72,6 +74,7 @@
     <Content Include="scripts\lib\jquery.sortable.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
+    <Content Include="scripts\lib\spin.js" />
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
