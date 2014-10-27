@@ -13,10 +13,12 @@
         
         initialize: function (parentModel) {
             this.model = parentModel;
-            console.log(this.model);
+            console.log("DashboardComponentView > " + this.model);
         },
 
         render: function () {
+            var shit = this.model;
+            console.log("" + shit);
             this.$el.html(this.template({
                 "model": this.model.toJSON()
             }));

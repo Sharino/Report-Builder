@@ -59,6 +59,7 @@
   <ItemGroup>
     <Content Include="index.html" />
     <Content Include="scripts\collections\dashboardCollection.js" />
+    <Content Include="scripts\collections\dashboardComponentCollection.js" />
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
@@ -91,6 +92,7 @@
     <Content Include="scripts\views\dashboardListView.js" />
     <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\generateView.js" />
+    <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />

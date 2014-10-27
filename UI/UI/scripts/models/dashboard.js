@@ -2,8 +2,9 @@
     'jquery',
     'underscore',
     'backbone',
+    'DashboardComponentCollection',
     'Config'
-], function ($, _, Backbone, Config) {
+], function ($, _, Backbone, DashboardComponentCollection, Config) {
     var Dashboard = Backbone.Model.extend({
         urlRoot: Config.DashboardSettings.URL,
 
@@ -12,7 +13,8 @@
 		defaults: function() {
 		    this.set({
 		        Title: "",
-		        Components: []
+		        ComponentIds: [],
+                Components: []
 		    });
 		},
 

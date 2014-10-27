@@ -52,6 +52,8 @@
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
+        'KPIView':              'scripts/views/kpiView',
+
 
         /* Router dependencies */
         'Router':               'scripts/routers/router'

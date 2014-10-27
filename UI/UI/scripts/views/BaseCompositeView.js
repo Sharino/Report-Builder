@@ -7,6 +7,7 @@
     var BaseCompositeView = BaseDestructableView.extend({
         renderSubview: function (selector, subView) {
             subView.setElement(this.$(selector)).render();
+            console.log(this.$(selector), this.$el);
             this.registerSubViewForDestruction(subView);
         },
 

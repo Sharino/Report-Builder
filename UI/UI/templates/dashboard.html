@@ -12,12 +12,11 @@
 
 <div>
     <% for (var i = 0; i < ComponentCount; i++) { %>
-    <ul>
-        <li class="toggable" id="dashboard-component-<%= i %>" style="list-style-type: none;">
-            <div id="component-by-type-<%= i %>">
+        <ul>
+            <li class="editable" id="dashboard-component-<%= i %>" style="list-style-type: none;">
+                <div id="component-<%= i %>"></div>
                 <div id="component-edit-<%= i %>"></div>
-            </div>
-        </li>
-    </ul>
-    <% }; %>
+            </li>
+        </ul>
+    <% } %>
 </div>
