@@ -29,11 +29,18 @@ namespace BussinessLogic.Handlers.DashboardHandlers
         public override bool Validate(DashboardDto request)
         {
             var componentRepository = new DashboardComponentRepository();
-            foreach (var component in request.Components)
+            if (request.ComponentIds != null) 
             {
-                if (componentRepository.Exists(component))
-                    continue;
-                Errors.Add(new ErrorDto("404", "A provided Dashboard Component with ID " + component + " does not exist", DateTime.UtcNow));
+                if (request.ComponentIds.Count > 0)
+                {
+                    foreach (var component in request.ComponentIds)
+                    {
+                        if (componentRepository.Exists(component))
+                            continue;
+                        Errors.Add(new ErrorDto("404",
+                            "A provided Dashboard Component with ID " + component + " does not exist", DateTime.UtcNow));
+                    }   
+                }
             }
 
             if (Errors.Count == 0)

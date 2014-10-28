@@ -50,7 +50,7 @@ namespace DataLayer.Repositories
                         var item = new Dashboard();
                         item.Id = reader.GetInt32(0);
                         item.Title = reader.GetString(1);
-                        item.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                        item.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
                         list.Add(item);
                     }
                     _connection.Close();
@@ -72,7 +72,7 @@ namespace DataLayer.Repositories
                     var dashboard = new Dashboard();
                     dashboard.Id = reader.GetInt32(0);
                     dashboard.Title = reader.GetString(1);
-                    dashboard.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                    dashboard.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
 
                     _connection.Close();
                     return dashboard;
@@ -87,7 +87,7 @@ namespace DataLayer.Repositories
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@title", dashboard.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.ComponentIds));
                 object result = command.ExecuteScalar();
                 int id = 0;
                 if (result != null)
@@ -118,7 +118,7 @@ namespace DataLayer.Repositories
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@title", dashboard.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.ComponentIds));
                 command.Parameters.AddWithValue("@id", dashboard.Id);
                 command.ExecuteNonQuery();
                 _connection.Close();

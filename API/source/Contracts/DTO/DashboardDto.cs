@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Models.Models;
 
 namespace Contracts.DTO
 {
@@ -6,6 +7,6 @@ namespace Contracts.DTO
     {
         public int Id { get; set; }
         public string Title { get; set; }
-        public List<int> Components { get; set; } 
+        public List<int> ComponentIds { get; set; } 
     }
 }

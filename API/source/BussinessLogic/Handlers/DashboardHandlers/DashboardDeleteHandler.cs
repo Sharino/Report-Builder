@@ -24,7 +24,9 @@ namespace BussinessLogic.Handlers.DashboardHandlers
 
         public override bool Validate(int request)
         {
-            return true;
+            if (_repository.Exists(request))
+                return true;
+            return false;
         }
     }
 }

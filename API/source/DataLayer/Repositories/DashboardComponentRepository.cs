@@ -10,12 +10,13 @@ namespace DataLayer.Repositories
     public interface IDashboardComponentRepository
     {
         DashboardComponent Get(int id);
-        DashboardComponent Add(DashboardComponent component);
+        int Add(DashboardComponent component);
         void Remove(int id);
         int Update(DashboardComponent component);
         bool DashboardExists(int id);
         bool ReportComponentExists(int id);
         bool Exists(int id);
+        void UpdateDashboard(DashboardComponent component);
     }
 
     public class DashboardComponentRepository : IDashboardComponentRepository
@@ -70,9 +71,21 @@ namespace DataLayer.Repositories
                 command.Parameters.AddWithValue("@dashboardId", component.DashboardId);
                 using (var reader = command.ExecuteReader())
                 {
-                    reader.Read(); 
-                    componentDefinition = _serializer.Deserialize<List<int>>(reader.GetString(0));
+                    reader.Read();
+                    try
+                    {
+                        componentDefinition = _serializer.Deserialize<List<int>>(reader.GetString(0));
+                    }
+                    finally
+                    {
+                        if (componentDefinition == null)
+                        {
+                            componentDefinition = new List<int>();
+                            
+                        }
+                    }
                     componentDefinition.Add(component.Id);
+                    //componentDefinition.Add(component.Id);
                 }
                 _connection.Close();
             }
@@ -88,7 +101,7 @@ namespace DataLayer.Repositories
             }
         }
 
-        public DashboardComponent Add(DashboardComponent component)
+        public int Add(DashboardComponent component)
         {
             const string sql = @"INSERT INTO [dbo].[DashboardComponents] (DashboardId, Title, CreationDate, Type, Definition) VALUES (@dashboardId, @title, @creationDate, @type, @definition); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, _connection))
@@ -107,15 +120,14 @@ namespace DataLayer.Repositories
                 {
                     id = Convert.ToInt32(result);
                 }
-                component.Id = id;           
-                UpdateDashboard(component);
+                component.Id = id;
+                return id;
             }
-            return component;
         }
 
         public int Update(DashboardComponent component)
         {
-            const string sql = @"UPDATE [dbo].[ReportComponents] SET [DashboardId] = @dashboardId, [Title] = @title, [CreationDate] = @creationDate, [Type] = @type, [Definition] = @definition, WHERE [Id] = @id";
+            const string sql = @"UPDATE [dbo].[DashboardComponents] SET [DashboardId] = @dashboardId, [Title] = @title, [CreationDate] = @creationDate, [Type] = @type, [Definition] = @definition WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();

@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\ComponentId.cs" />
     <Compile Include="Models\DashboardComponent.cs" />
     <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\Filter.cs" />
