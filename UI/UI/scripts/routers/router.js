@@ -15,9 +15,7 @@
     'GenerateView',
     'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, GenerateView, Config) {
     var Router = Backbone.Router.extend({
         routes: {
             "": "list",
@@ -36,8 +34,6 @@
 
         create: function () {
             this.showView("#component", new ComponentView({ model: new Component() }));
-            var tempComponent = new Component();
-            this.showView("#component", new ComponentView({ model: tempComponent }));
         },
 
         showDashboard: function (id) {
@@ -111,8 +107,6 @@
                     console.log("GET", id, "Fail", model, response);
                 }
             });
-
-            tempComponent = null;
         },
 
         generateById: function (id) {
@@ -127,8 +121,6 @@
                     console.log("GET", id, "Fail", model, response);
                 }
             });
-
-            tempComponentModel = null;
         },  
 
         showView: function(selector, view) {

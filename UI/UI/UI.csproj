@@ -64,6 +64,7 @@
     <Content Include="scripts\config\config.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-loader.js" />
+    <Content Include="scripts\lib\adform-modal.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
     <Content Include="scripts\lib\adform-select-group.js" />
     <Content Include="scripts\lib\adform-select.js" />

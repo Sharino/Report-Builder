@@ -22,6 +22,7 @@
         'adform-select-group':  'scripts/lib/adform-select-group',
         'adform-notifications': 'scripts/lib/adform-notifications',
         'adform-loader':        'scripts/lib/adform-loader',
+        'adform-modal':         'scripts/lib/adform-modal',
 
 
         /* Config dependencies */
@@ -118,6 +119,9 @@
             deps: ['jquery', 'backbone', 'underscore']
         },
         
+        'adform-modal': {
+            deps: ['bootstrap', 'spin']
+        },
     }
 
 });

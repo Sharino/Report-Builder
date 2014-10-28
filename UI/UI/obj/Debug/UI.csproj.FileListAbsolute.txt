@@ -15,7 +15,6 @@ C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.dll
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.pdb
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.dll
-<<<<<<< HEAD
 C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.pdb
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\bin\UI.dll.config
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\bin\UI.dll
@@ -23,6 +22,4 @@ C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\bin\UI.pdb
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.dll
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.pdb
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
-=======
-C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.pdb
->>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
+
