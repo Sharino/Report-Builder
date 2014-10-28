@@ -9,6 +9,7 @@
             subView.setElement(this.$(selector)).render();
             console.log(this.$(selector), this.$el);
             this.registerSubViewForDestruction(subView);
+            return subView;
         },
 
         registerSubViewForDestruction: function (subView) {

@@ -20,13 +20,23 @@
 
         toggle: function (e) {
             var rawId = e.target.parentElement.id;
+            console.log("rawid: " + rawId);
             rawId = rawId.replace('component-', '');
 
             var id = parseInt(rawId);
-            this.renderSubview(('#component-edit-' + id), new ComponentView({ model: this.model.get("Components")[id] }));
+            if (this.flag === false) {
+                this.editform = this.renderSubview(('#component-edit-' + id), new ComponentView({ model: this.model.get("Components")[id] }));
+                this.flag = true;
+            } else {
+                this.editform.destroy(); //Lops naikina divus
+                this.flag = false;
+                this.$el.find(".editable").append("<div id='component-edit-" + id + "'></div>");
+            }
         },
 
         initialize: function () {
+            this.flag = new Boolean;
+            this.flag = false;
             this.render();
             for (var i = 0; i < this.model.get('ComponentIds').length; i++) {
                 var id = this.model.get('ComponentIds')[i];
@@ -39,11 +49,9 @@
             var dashboardComponent = new DashboardComponent({ Id: id });
             dashboardComponent.fetch({
                 success: function (model, response) {
-                    //console.log("GET", id, "Success", model, response);
                     model.set(jQuery.parseJSON(model.get('Definition')));
 
                     self.model.get("Components").push(model);
-
 
                     switch (model.get("Type")) {
                         case 0:
