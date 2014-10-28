@@ -11,8 +11,12 @@
                         <i class="handle adf-icon-alt-drag"></i>
                         <select class="metric-select" placeholder="Select Metric" data-no-results="No results">
                             <option></option>
-                            <% _.each(AllMetrics, function(Metric){ %>
-                                <option value="<%= Metric.MetricId %>"><%= Metric.DisplayName %></option>
+                            <% _.each(Grouped, function(group){ %>
+                                <optgroup label="<%= group[0].Group.GroupName %>">
+                                    <% _.each(group, function(Metric){ %>
+                                    <option value="<%= Metric.MetricId %>" data-desc="<%= Metric.Description %>"><%= Metric.DisplayName %></option>
+                                    <% }); %>
+                                </optgroup>
                             <% }); %>
                         </select>
                     </div>

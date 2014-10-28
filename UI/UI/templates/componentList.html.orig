@@ -1,4 +1,20 @@
+<<<<<<< HEAD
+﻿<div id="menu">
+    <ul class="wizard-nav">
+        <ul class="pull-right">
+            <li <%= data.activeReport %>><a href="#report">My Report</a></li>
+        </ul>
+        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
+        <li <%= data.activeList %>><a href="#list">List</a></li>
+        <li <%= data.activeNew %> ><a href="#dashboards">Dashboards</a></li>
+
+    </ul>
+</div>
+
+<table class="component-listView table table-striped heading-separation table-hover selectable-rows">
+=======
 ﻿<table class="component-listView table table-striped heading-separation table-hover selectable-rows">
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     <thead>
         <tr>
             <th>Id</th>

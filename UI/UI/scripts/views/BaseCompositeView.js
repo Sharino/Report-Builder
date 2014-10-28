@@ -22,6 +22,7 @@
 
         destroy: function () {
             console.log('Closing view', this);
+            this.destroySubViews();
 
             if (this.beforeClose) {
                 this.beforeClose();
@@ -29,8 +30,6 @@
 
             this.remove();
             this.unbind();
-
-            this.destroySubViews();
         },
 
         destroySubViews: function () {

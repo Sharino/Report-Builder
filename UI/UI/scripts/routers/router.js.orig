@@ -6,18 +6,23 @@
     'ComponentCollection',
     'ComponentView',
     'ComponentListView',
+<<<<<<< HEAD
     'Dashboard',
     'DashboardView',
     'DashboardComponent',
     'DashboardCollection',
     'DashboardListView',
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     'MenuView',
     'GenerateView',
     'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+<<<<<<< HEAD
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+=======
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, GenerateView, Config) {
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     var Router = Backbone.Router.extend({
         routes: {
             "": "list",
@@ -25,8 +30,7 @@
             "create/:id": "createById",
             "list": "list",
             "generate/:id": "generateById",
-            "dashboards": "dashboards",
-            "dashboard/:id": "showDashboard"
+            "menu": "menu"
         },
 
         initialize: function () {
@@ -35,7 +39,7 @@
         },
 
         create: function () {
-            this.showView("#component", new ComponentView({ model: new Component() }));
+<<<<<<< HEAD
             var tempComponent = new Component();
             this.showView("#component", new ComponentView({ model: tempComponent }));
         },
@@ -75,6 +79,9 @@
                     self.showView("#list", new DashboardListView({ collection: null }));
                 }
             });
+=======
+            this.showView("#component", new ComponentView({ model: new Component() }));
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
         },
 
         list: function () {

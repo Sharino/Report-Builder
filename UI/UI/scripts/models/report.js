@@ -9,12 +9,14 @@
 
         idAttribute: "Id",
 
-        defaults: {
-            Title: "",
-            Type: 0,
-            Metrics: [],
-            Dimensions: [],
-            Filters: []
+        defaults: function () {
+            this.set({
+                Title: "",
+                Type: 0,
+                Metrics: [],
+                Dimensions: [],
+                Filters: []
+            });
         },
 
         validate: function (attrs) {

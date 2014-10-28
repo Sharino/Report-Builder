@@ -63,9 +63,7 @@
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
-    <Content Include="scripts\lib\adform-loader.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
-    <Content Include="scripts\lib\adform-select-group.js" />
     <Content Include="scripts\lib\adform-select.js" />
     <Content Include="scripts\lib\backbone-forms.min.js" />
     <Content Include="scripts\lib\backbone.js" />
@@ -75,12 +73,10 @@
     <Content Include="scripts\lib\jquery.sortable.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
-    <Content Include="scripts\lib\spin.js" />
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
     <Content Include="scripts\models\dashboard.js" />
-    <Content Include="scripts\models\dashboardComponent.js" />
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
@@ -89,11 +85,8 @@
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
     <Content Include="scripts\views\componentListView.js" />
-    <Content Include="scripts\views\dashboardComponentView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
-    <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\generateView.js" />
-    <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
@@ -104,17 +97,15 @@
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
     <Content Include="templates\dashboard.html" />
-    <Content Include="templates\dashboardComponent.html" />
     <Content Include="templates\dashboardList.html" />
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />
-    <Content Include="templates\menu.html" />
     <Content Include="templates\report.html" />
     <Content Include="templates\metricList.html" />
     <Content Include="templates\table.html" />
     <Content Include="templates\timeline.html" />
     <Content Include="tests.html" />
-    <Content Include="scripts\tests.js" />
+    <Content Include="tests.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

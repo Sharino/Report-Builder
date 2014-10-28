@@ -58,10 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="index.html" />
+<<<<<<< HEAD
     <Content Include="scripts\collections\dashboardCollection.js" />
+    <Content Include="scripts\collections\dashboardComponentCollection.js" />
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\lib\adform-accordion.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-loader.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
@@ -79,8 +84,11 @@
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
+<<<<<<< HEAD
     <Content Include="scripts\models\dashboard.js" />
     <Content Include="scripts\models\dashboardComponent.js" />
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
@@ -89,9 +97,12 @@
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
     <Content Include="scripts\views\componentListView.js" />
+<<<<<<< HEAD
     <Content Include="scripts\views\dashboardComponentView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
     <Content Include="scripts\views\dashboardView.js" />
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\reportView.js" />
@@ -103,9 +114,12 @@
     <Content Include="templates\chart.html" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
+<<<<<<< HEAD
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\dashboardComponent.html" />
     <Content Include="templates\dashboardList.html" />
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />
     <Content Include="templates\menu.html" />

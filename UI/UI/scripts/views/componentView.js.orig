@@ -15,7 +15,7 @@
             'click #component-submit': 'submit'
         },
 
-        inputTitle: function () {
+        inputTitle: function() {
             return $('#input').val();
         },
 
@@ -28,8 +28,12 @@
             }
         },
 
-        /* TODO: Should move validation to MetricListView */
+<<<<<<< HEAD
         inputMetrics: function() {
+=======
+        /* TODO: Should move validation to MetricListView */
+        inputMetrics: function () {
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
             var result = [];
 
             this.subViews[0].metricArray.forEach(function(metric) {
@@ -41,8 +45,12 @@
             return result;
         },
 
+<<<<<<< HEAD
         render: function() {
+=======
+        render: function () {
 
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
