@@ -8,17 +8,22 @@ using Models.Models;
 
 namespace DataLayer.Repositories
 {
-    public interface IComponentRepository : IBaseRepository
+    public interface IReportComponentRepository
     {
-
+        IEnumerable<ReportComponent> GetAll();
+        ReportComponent Get(int id);
+        int Add(ReportComponent report);
+        void Remove(int id);
+        int Update(ReportComponent report);
+        bool Exists(int id);
     }
 
-    public class ComponentRepository : IComponentRepository
+    public class ReportComponentRepository : IReportComponentRepository
     {
         private readonly SqlConnection _connection;
         private readonly JavaScriptSerializer _jsonSerialiser;
 
-        public ComponentRepository()
+        public ReportComponentRepository()
         {
             _jsonSerialiser = new JavaScriptSerializer();
             _connection = CreateDbConnection();
@@ -47,7 +52,7 @@ namespace DataLayer.Repositories
                         component.Type = reader.GetInt32(2);
 
                         var json = new JavaScriptSerializer();
-                        var data = json.Deserialize<ReportComponentData>(reader.GetString(3));
+                        var data = json.Deserialize<ComponentData>(reader.GetString(3));
                         component.Data = data;
                         list.Add(component);
                     }
@@ -73,7 +78,7 @@ namespace DataLayer.Repositories
                     component.Type = reader.GetInt32(2);
 
                     var json = new JavaScriptSerializer();
-                    var data = json.Deserialize<ReportComponentData>(reader.GetString(3));
+                    var data = json.Deserialize<ComponentData>(reader.GetString(3));
                     component.Data = data;
 
                     _connection.Close();
@@ -85,13 +90,13 @@ namespace DataLayer.Repositories
 
         public int Add(ReportComponent reportComponent)
         {
-            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Data) VALUES (@reportTitle, @reportType, @data); SELECT @@IDENTITY;";
+            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Definition) VALUES (@componentTitle, @componentType, @definition); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
-                command.Parameters.AddWithValue("@reportType", reportComponent.Type);
-                command.Parameters.AddWithValue("@data", _jsonSerialiser.Serialize(reportComponent.Data));
+                command.Parameters.AddWithValue("@componentTitle", reportComponent.Title);
+                command.Parameters.AddWithValue("@componentType", reportComponent.Type);
+                command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -108,13 +113,13 @@ namespace DataLayer.Repositories
 
         public int Update(ReportComponent reportComponent)
         {
-            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Data] = @data WHERE [ReportId] = @reportId";
+            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Definition] = @definition WHERE [ReportId] = @reportId";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
-                command.Parameters.AddWithValue("@data", _jsonSerialiser.Serialize(reportComponent.Data));
+                command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
                 command.Parameters.AddWithValue("@reportId", reportComponent.Id);
                 int id = 0;
                 object result = command.ExecuteScalar();

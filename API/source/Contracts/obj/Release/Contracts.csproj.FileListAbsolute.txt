@@ -1,9 +1,7 @@
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Contracts.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Contracts.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\bin\Release\Newtonsoft.Json.xml
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
-C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\bin\Release\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\bin\Release\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\bin\Release\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\bin\Release\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb

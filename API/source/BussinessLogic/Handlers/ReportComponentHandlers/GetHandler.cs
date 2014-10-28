@@ -9,10 +9,10 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 {
     public class GetHandler : BaseHandler<int, ReportComponentResponse>
     {
-        private readonly IComponentRepository _repository;
-        public GetHandler(IComponentRepository repository = null)
+        private readonly IReportComponentRepository _repository;
+        public GetHandler(IReportComponentRepository repository = null)
         {
-            _repository = repository ?? new ComponentRepository();
+            _repository = repository ?? new ReportComponentRepository();
         }
 
         public override ReportComponentResponse HandleCore(int request)
@@ -27,7 +27,7 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
         {
             if (_repository.Exists(request))
                 return true;
-            Response = new ReportComponentResponse(new ErrorDto("EN", "A report component with such id does not exist", DateTime.Now));
+            Errors.Add(new ErrorDto("EN", "A Report Component with such ID does not exist", DateTime.Now));
             return false;
         }
     }

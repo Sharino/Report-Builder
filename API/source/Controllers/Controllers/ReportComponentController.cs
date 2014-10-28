@@ -18,16 +18,12 @@ namespace Controllers.Controllers
         {            
             BaseHandler<int, ReportComponentResponse> handler = new GetAllHandler();
             var response = handler.Handle(0);
-            if (response != null)
+
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.ReportComponentDtos != null)
-                {
-                    IEnumerable<ReportComponentDto> reportComponentDtos = response.ReportComponentDtos;
-                    return Request.CreateResponse(HttpStatusCode.OK, reportComponentDtos);
-                }
-                return Request.CreateResponse(HttpStatusCode.NoContent, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos);
             }
-            return Request.CreateResponse(HttpStatusCode.NoContent);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpGet]
@@ -35,15 +31,11 @@ namespace Controllers.Controllers
         {
             BaseHandler<int, ReportComponentResponse> handler = new GetHandler();
             var response = handler.Handle(id);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.ReportComponentDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpPut]
@@ -51,15 +43,11 @@ namespace Controllers.Controllers
         {
             var handler = new UpdateHandler();
             var response = handler.Handle(reportDto);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.ReportComponentDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpPost]
@@ -67,15 +55,11 @@ namespace Controllers.Controllers
         {
             BaseHandler<ReportComponentDto, ReportComponentResponse> handler = new AddHandler();
             var response = handler.Handle(reportDto);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.ReportComponentDtos == null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
-                }
                 return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
 
         [HttpDelete]
@@ -83,15 +67,11 @@ namespace Controllers.Controllers
         {
             BaseHandler<int, ReportComponentResponse> handler = new DeleteHandler();
             var response = handler.Handle(id);
-            if (response != null)
+            if (handler.Errors == null || handler.Errors.Count < 1)
             {
-                if (response.ReportComponentDtos != null)
-                {
-                    return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
-                }
-                return Request.CreateResponse(HttpStatusCode.BadRequest, response.Errors);
+                return Request.CreateResponse(HttpStatusCode.OK, response.ReportComponentDtos[0]);
             }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
         }
     }
 }

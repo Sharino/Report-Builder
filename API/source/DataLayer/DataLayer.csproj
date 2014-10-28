@@ -50,10 +50,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Repositories\IBaseRepository.cs" />
+    <Compile Include="Repositories\DashboardComponentRepository.cs" />
     <Compile Include="Repositories\MetricRepository.cs" />
     <Compile Include="Repositories\ReportComponentsRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\DashboardRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Models\Models.csproj">

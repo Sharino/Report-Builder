@@ -37,12 +37,12 @@ INSERT INTO [dbo].[MetricName] ([ID], [MetricID], [Language], [DisplayName])
      VALUES (1,1,'EN','Impressions')
 GO
 INSERT INTO [dbo].[MetricName] ([ID], [MetricID], [Language], [DisplayName])
-     VALUES (2,2,'US','Clicks')
+     VALUES (2,2,'EN','Clicks')
 GO
-/* METRIC DISCRIPTION */
+/* METRIC DESCRIPTION */
 INSERT INTO [dbo].[MetricDescriptions] ([ID], [MetricID], [Description])
-     VALUES (1,1,'Impresive Discription')
+     VALUES (1,1,'Impressions')
 GO
 INSERT INTO [dbo].[MetricDescriptions] ([ID], [MetricID], [Description])
-     VALUES (2,2,'CLICkING Discription')
+     VALUES (2,2,'Clicks')
 GO

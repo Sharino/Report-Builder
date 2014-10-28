@@ -6,6 +6,7 @@ API/WebApi.sln
 *.DS_Store
 
 #Visual Studio files
+*.[Oo]bj
 *.user
 *.aps
 *.pch
@@ -26,6 +27,11 @@ API/WebApi.sln
 *.sdf
 *.opensdf
 *.unsuccessfulbuild
+ipch/
+[Oo]bj/
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
 Ankh.NoLoad
 
 #MonoDevelop
@@ -60,4 +66,6 @@ packages/
 
 # visual studio database projects
 *.dbmdl
-*.cache
+
+#Test files
+*.testsettings

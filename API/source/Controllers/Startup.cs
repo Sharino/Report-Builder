@@ -39,7 +39,7 @@ namespace Controllers
                 owinContext.Response.ContentType = "text/plain";
                 // here comes the performance, everythign in the Katana is Async. Living in the current century.  
                 // Let's print our obvious message: :)  
-                return owinContext.Response.WriteAsync("Api is available at:  /api/ReportComponent");
+                return owinContext.Response.WriteAsync("Api is available at:  /swagger");
             });
         }
     }

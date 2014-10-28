@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
+﻿using System.Collections.Generic;
 using BussinessLogic.Mappings;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Models.Models;
@@ -51,10 +49,9 @@ namespace UnitTests
             var source = new ReportComponent
             {
                 Id = 1,
-                SubmissionDate = DateTime.Now,
                 Title = "Test",
                 Type = 1,
-                Data = new ReportComponentData
+                Data = new ComponentData
                 {
                     Dimensions = new List<Dimension> {new Dimension {DimensionId = 1}},
                     Filters = new List<Filter> {new Filter {FilterId = 1}},
@@ -121,15 +118,14 @@ namespace UnitTests
             //Arrange
             var mapping = new Mapping();
             #region var source
-            IEnumerable<ReportComponent> source = new List<ReportComponent>
+            var source = new List<ReportComponent>
             {
                 new ReportComponent
                 {
                     Id = 1,
-                    SubmissionDate = DateTime.Now,
                     Title = "Test",
                     Type = 1,
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension> {new Dimension {DimensionId = 1}},
                         Filters = new List<Filter> {new Filter {FilterId = 1}},
@@ -155,10 +151,9 @@ namespace UnitTests
                 new ReportComponent
                 {
                     Id = 2,
-                    SubmissionDate = DateTime.Now,
                     Title = "Test2",
                     Type = 1,
-                    Data = new ReportComponentData
+                    Data = new ComponentData
                     {
                         Dimensions = new List<Dimension> {new Dimension {DimensionId = 2}},
                         Filters = new List<Filter> {new Filter {FilterId = 2}},
@@ -184,11 +179,11 @@ namespace UnitTests
             };
             #endregion
             //Act
-            IEnumerable<ReportComponentDto> destination = mapping.ReportComponentToDto(source);
+            List<ReportComponentDto> destination = mapping.ReportComponentToDto(source);
 
             //Assert
             Assert.AreNotSame(source, destination);
-            Assert.IsInstanceOfType(destination, typeof(IEnumerable<ReportComponentDto>));
+            Assert.IsInstanceOfType(destination, typeof(List<ReportComponentDto>));
         }
     }
 }
