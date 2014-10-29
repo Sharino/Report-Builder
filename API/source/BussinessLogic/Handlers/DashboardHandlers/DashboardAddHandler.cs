@@ -38,7 +38,7 @@ namespace BussinessLogic.Handlers.DashboardHandlers
                         if (componentRepository.Exists(component))
                             continue;
                         Errors.Add(new ErrorDto("404",
-                            "A provided Dashboard Component with ID " + component + " does not exist", DateTime.UtcNow));
+                            "A provided Dashboard Component with ID " + component + " does not exist"));
                     }   
                 }
             }

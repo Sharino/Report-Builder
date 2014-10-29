@@ -25,7 +25,7 @@ namespace BussinessLogic.Handlers.Base
                 _log = new Log("Base handler");
                 _log.Error(exception.ToString());
 
-                Errors.Add(new ErrorDto("GenericError", "Generic error happened. Please contact customer support", DateTime.UtcNow));
+                Errors.Add(new ErrorDto("GenericError", "Generic error happened. Please contact customer support"));
                 return Response;
             }
             return Response;

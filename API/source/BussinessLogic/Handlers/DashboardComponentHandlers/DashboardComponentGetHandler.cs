@@ -28,7 +28,7 @@ namespace BussinessLogic.Handlers.DashboardComponentHandlers
         {
             if (_repository.Exists(request))
                 return true;
-            Errors.Add(new ErrorDto("404", "Dashboard Component with such ID does not exist", DateTime.UtcNow));
+            Errors.Add(new ErrorDto("404", "Dashboard Component with such ID does not exist"));
             return false;
         }
     }

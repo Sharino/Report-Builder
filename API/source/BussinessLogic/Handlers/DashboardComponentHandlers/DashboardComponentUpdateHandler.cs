@@ -26,7 +26,10 @@ namespace BussinessLogic.Handlers.DashboardComponentHandlers
 
         public override bool Validate(DashboardComponentDto request)
         {
-            return true;
+            if (_repository.Exists(request.Id))
+                return true;
+            Errors.Add(new ErrorDto("404", "A Dashboard Component with such ID does not exist."));
+            return false;
         }
     }
 }

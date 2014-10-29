@@ -37,7 +37,7 @@ namespace DataLayer.Repositories
 
         public IEnumerable<ReportComponent> GetAll()
         {
-            const string sql = @"SELECT * FROM [dbo].[ReportComponents]";
+            const string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [IS_DELETED] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -64,11 +64,11 @@ namespace DataLayer.Repositories
 
         public ReportComponent Get(int id)
         {
-            const string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
+            const string sql = @"SELECT * FROM [dbo].[ReportComponents] WHERE [Id] = @Id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                command.Parameters.AddWithValue("@reportId", id);
+                command.Parameters.AddWithValue("@Id", id);
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
@@ -90,13 +90,15 @@ namespace DataLayer.Repositories
 
         public int Add(ReportComponent reportComponent)
         {
-            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Definition) VALUES (@componentTitle, @componentType, @definition); SELECT @@IDENTITY;";
+            const string sql = @"INSERT INTO [dbo].[ReportComponents] (Title, Type, Definition, CreationDate, ModificationDate) VALUES (@componentTitle, @componentType, @definition, @creationDate, @modificationDate); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@componentTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@componentType", reportComponent.Type);
                 command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
+                command.Parameters.AddWithValue("@creationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
+                command.Parameters.AddWithValue("@modificationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 int id = 0;
                 object result = command.ExecuteScalar();
 
@@ -113,14 +115,15 @@ namespace DataLayer.Repositories
 
         public int Update(ReportComponent reportComponent)
         {
-            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Definition] = @definition WHERE [ReportId] = @reportId";
+            const string sql = @"UPDATE [dbo].[ReportComponents] SET [Title] = @reportTitle, [Type] = @reportType, [Definition] = @definition, [ModificationDate] = @modificationDate WHERE [Id] = @Id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@reportTitle", reportComponent.Title);
                 command.Parameters.AddWithValue("@reportType", reportComponent.Type);
                 command.Parameters.AddWithValue("@definition", _jsonSerialiser.Serialize(reportComponent.Data));
-                command.Parameters.AddWithValue("@reportId", reportComponent.Id);
+                command.Parameters.AddWithValue("@Id", reportComponent.Id);
+                command.Parameters.AddWithValue("@modificationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 int id = 0;
                 object result = command.ExecuteScalar();
                 if (result != null)
@@ -134,11 +137,12 @@ namespace DataLayer.Repositories
 
         public void Remove(int id)
         {
-            const string sql = @"DELETE FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
+            const string sql = @"UPDATE [dbo].[ReportComponents] SET [IS_DELETED] = 1, [DeletionDate] = @deletionDate WHERE [Id] = @Id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
-                command.Parameters.AddWithValue("@reportId", id);
+                command.Parameters.AddWithValue("@Id", id);
+                command.Parameters.AddWithValue("@deletionDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 command.ExecuteNonQuery();
                 _connection.Close();
             }
@@ -146,12 +150,12 @@ namespace DataLayer.Repositories
 
         public bool Exists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[ReportComponents] WHERE [ReportId] = @reportId";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[ReportComponents] WHERE [Id] = @Id AND [IS_DELETED] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
 
-                command.Parameters.AddWithValue("@reportId", id);
+                command.Parameters.AddWithValue("@Id", id);
                 int count = (int)command.ExecuteScalar();
 
                 _connection.Close();

@@ -26,7 +26,7 @@ namespace BussinessLogic.Handlers.DashboardComponentHandlers
 
             var dashboardComponent = mapping.ReportComponentToDashboardComponent(reportComponent);
             dashboardComponent.DashboardId = dashboardId;
-            dashboardComponent.CreationDate = DateTime.UtcNow.ToString();
+            dashboardComponent.CreationDate = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss");
             dashboardComponent.Id = _dashboardComponentRepository.Add(dashboardComponent);
             _dashboardComponentRepository.UpdateDashboard(dashboardComponent);
             var componentDto = mapping.DashboardComponentToDto(dashboardComponent);
@@ -36,15 +36,17 @@ namespace BussinessLogic.Handlers.DashboardComponentHandlers
         public bool Validate(int dashboardId, int reportComponentId)
         {
             Errors = new List<ErrorDto>();
-            if (_dashboardComponentRepository.ReportComponentExists(reportComponentId))
+            if (!_dashboardComponentRepository.ReportComponentExists(reportComponentId))
             {
-                if (_dashboardComponentRepository.DashboardExists(dashboardId))
-                {
-                    return true;
-                }
-                Errors.Add(new ErrorDto("404", "A Dashboard with such ID does not exist", DateTime.UtcNow));
+                Errors.Add(new ErrorDto("404", "A Report Component with such ID does not exist"));
             }
-            else Errors.Add(new ErrorDto("404", "A Report Component with such ID does not exist", DateTime.UtcNow));
+            if (!_dashboardComponentRepository.DashboardExists(dashboardId))
+            {
+                Errors.Add(new ErrorDto("404", "A Dashboard with such ID does not exist"));
+            }
+            
+            if (Errors.Count == 0)
+                return true;
             return false;
         }
     }

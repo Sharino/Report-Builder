@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Handlers.DashboardComponentHandlers;
 using Contracts.DTO;
 using Contracts.Responses;
@@ -54,6 +55,7 @@ namespace Controllers.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
+//            var handler = new DashboardComponentDeleteHandler();
             var handler = new DashboardComponentDeleteHandler();
             var response = handler.Handle(id);
             if (handler.Errors == null || handler.Errors.Count < 1)
