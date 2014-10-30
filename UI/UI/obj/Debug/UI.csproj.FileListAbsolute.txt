@@ -22,4 +22,8 @@ C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\bin\UI.pdb
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.dll
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.pdb
 C:\Users\Administrator\Desktop\merged ui\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
-
+C:\Users\Administrator\Desktop\Report-Builder\UI\UI\bin\UI.dll.config
+C:\Users\Administrator\Desktop\Report-Builder\UI\UI\bin\UI.dll
+C:\Users\Administrator\Desktop\Report-Builder\UI\UI\bin\UI.pdb
+C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.dll
+C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.pdb
