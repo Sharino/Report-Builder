@@ -65,7 +65,6 @@ requirejs.config({
 
         'bootstrap': {
             deps: ['jquery'],
-            exports: 'bootstrap'
         },
 
         'qunit': {

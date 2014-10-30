@@ -21,28 +21,24 @@
             Timeout: 5000
         },
 
-        NetworkSettings:{
+        NetworkSettings: {
             Timeout: 5000
         },
 
         MenuSettings: {
-            items:[
+            items: [
                 {
-                    link: "#report",
-                    title: "My Report",
+                    link: "#dashboards",
+                    title: "My Dashboards",
                     position: "right"
                 },
                 {
                     link: "#create",
-                    title: "Create new"
+                    title: "New Component"
                 },
                 {
                     link: "#list",
-                    title: "List"
-                },
-                {
-                    link: "#dashboards",
-                    title: "My Dashboards"
+                    title: "Component List"
                 }
             ]
         },
