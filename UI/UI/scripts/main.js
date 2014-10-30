@@ -3,7 +3,7 @@
     baseUrl: '',
 
 
-    urlArgs: "bust=" + (new Date()).getTime(),
+    //urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
@@ -11,10 +11,13 @@
         'underscore':           'scripts/lib/underscore',
         'backbone':             'scripts/lib/backbone',
         'handlebars':           'scripts/lib/handlebars',
-        'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
         'spin':                 'scripts/lib/spin',
+
+        /* Bootstrap components */
+        'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
+        'bootstrap-tooltip': 'scripts/lib/bootstrap/bootstrap-tooltip',
 
         /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
@@ -79,9 +82,12 @@
             exports: '_'
         },
 
-        'bootstrap': {
-            deps: ['jquery'],
-            exports: 'bootstrap'
+        'bootstrap-tooltip': {
+            deps: ['jquery']
+        },
+
+        'bootstrap-modal': {
+            deps: ['jquery']
         },
 
         'spin':{
@@ -105,13 +111,8 @@
             deps: ['jquery']
         },
 
-        'adform-select': {
-            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
-            exports: 'AdformSelect'
-        },
-
         'adform-select-group': {
-            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap-tooltip'],
             exports: 'AdformSelect'
         },
 
@@ -120,7 +121,7 @@
         },
         
         'adform-modal': {
-            deps: ['bootstrap', 'spin']
+            deps: ['bootstrap-modal', 'spin']
         },
     }
 

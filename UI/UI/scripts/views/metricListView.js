@@ -27,8 +27,8 @@
             this.selectReferences = [];
 
             this.model = parentModel;
-       
-            this.metricArray = this.model.get("Metrics");
+            
+            this.metricArray = this.model.get("Metrics").slice(0);
 
             for (var i = 0; i < this.metricArray.length; i++) {
                 this.metricArray[i].Order = i;

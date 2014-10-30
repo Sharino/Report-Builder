@@ -9,7 +9,7 @@
         template: _.template(dashboardListTemplate),
 
         events: {
-            'click .dashboard-list-item>.del': 'onDelete',
+            'click .dashboard-list-item>.del': 'handleDeleteAction',
             'click .dashboard-list-item>.gen': 'onGenerate',
             'click .dashboard-list-item>.click': 'onClick',
         },
@@ -33,6 +33,7 @@
 
             templVariables["activeNew"] = '';
             templVariables["activeList"] = 'class="active"';
+
             this.$el.html(this.template({
                 "Dashboards": this.collection.toJSON(),
                 "data": templVariables
@@ -49,6 +50,36 @@
 
             Backbone.history.navigate(routerUrl, true, true);
         },
+
+        handleDeleteAction: function (e) {
+            e.preventDefault();
+
+            var id = $(e.currentTarget).attr("id");
+            
+            $.ajax({
+                url: 'http://172.22.22.33:33894/api/dashboard' + id,
+                type: 'DELETE',
+                success: function (result) {
+                    $.notifications.display({
+                        type: 'success',
+                        content: 'Successfully deleted!',
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                },
+                error: function (response){
+                    if (response.responseJSON) {
+                        response.responseJSON.forEach(function (entry) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: entry.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        });
+                    }
+                }
+            });
+        },
+
     });
 
     return DashboardListView;
