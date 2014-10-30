@@ -14,7 +14,11 @@
     'MenuView',
     'GenerateView',
     'Config',
-    'adform-notifications'
+    'adform-notifications',
+    'adform-notifications',
+    'globalize',
+    'moment',
+    'adform-datepicker'
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
     var Router = Backbone.Router.extend({
         routes: {

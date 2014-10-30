@@ -14,10 +14,12 @@
         'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
         'spin':                 'scripts/lib/spin',
+        'globalize':            'scripts/lib/globalize',
+        'moment':               'scripts/lib/moment',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
-        'bootstrap-tooltip': 'scripts/lib/bootstrap/bootstrap-tooltip',
+        'bootstrap-tooltip':    'scripts/lib/bootstrap/bootstrap-tooltip',
 
         /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
@@ -26,7 +28,9 @@
         'adform-notifications': 'scripts/lib/adform-notifications',
         'adform-loader':        'scripts/lib/adform-loader',
         'adform-modal':         'scripts/lib/adform-modal',
-
+        'adform-calendar':      'scripts/lib/adform-calendar.v2.01',
+        'adform-date': '        scripts/lib/adform-date',
+        'adform-datepicker':    'scripts/lib/adform-datepicker',
 
         /* Config dependencies */
         'Config':               'scripts/config/config',
@@ -58,7 +62,8 @@
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
-        'KPIView':              'scripts/views/kpiView',
+        'KPIView': 'scripts/views/kpiView',
+        'DateFilterView': 'scripts/views/dateFilterView',
 
 
         /* Router dependencies */
@@ -118,6 +123,12 @@
 
         'adform-notifications': {
             deps: ['jquery', 'backbone', 'underscore']
+        },
+        'adform-datepicker': {
+            deps: ['globalize', 'moment', 'adform-calendar', 'adform-date']
+        },
+        'adform-calendar': {
+            deps: ['jquery'],
         },
         
         'adform-modal': {

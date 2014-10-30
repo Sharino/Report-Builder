@@ -3,7 +3,7 @@
     'ComponentCollection',
     'MenuView',
     'text!templates/componentList.html',
-    'Config'
+    'Config',
 ], function (BaseCompositeView, ComponentCollection, MenuView, componentListTemplate, Config) {
     var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
@@ -48,6 +48,7 @@
                     "data": templVariables
                 }));
             }
+
             return this;
         },
         

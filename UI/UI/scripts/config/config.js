@@ -27,18 +27,18 @@
 
         MenuSettings: {
             items: [
-                {
-                    link: "#dashboards",
-                    title: "My Dashboards",
-                    position: "right"
-                },
+              
                 {
                     link: "#create",
                     title: "New Component"
                 },
                 {
                     link: "#list",
-                    title: "Component List"
+                    title: "Components"
+                },
+                {
+                    link: "#dashboards",
+                    title: "Dashboards",
                 }
             ]
         },

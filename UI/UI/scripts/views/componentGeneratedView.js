@@ -47,7 +47,7 @@ define('ComponentGeneratedView', [
 
             //var template = _.template(tpl);
 
-
+           
 
             return this;
         },

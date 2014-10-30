@@ -62,7 +62,10 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\lib\adform-calendar.v2.01.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
+    <Content Include="scripts\lib\adform-date.js" />
+    <Content Include="scripts\lib\adform-datepicker.js" />
     <Content Include="scripts\lib\adform-loader.js" />
     <Content Include="scripts\lib\adform-modal.js" />
     <Content Include="scripts\lib\adform-notifications.js" />
@@ -71,9 +74,11 @@
     <Content Include="scripts\lib\backbone-forms.min.js" />
     <Content Include="scripts\lib\backbone.js" />
     <Content Include="scripts\lib\bootstrap.js" />
+    <Content Include="scripts\lib\globalize.js" />
     <Content Include="scripts\lib\handlebars.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\jquery.sortable.js" />
+    <Content Include="scripts\lib\moment.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
     <Content Include="scripts\lib\spin.js" />
@@ -93,6 +98,7 @@
     <Content Include="scripts\views\dashboardComponentView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
     <Content Include="scripts\views\dashboardView.js" />
+    <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\reportView.js" />
@@ -101,12 +107,14 @@
     <Content Include="scripts\views\componentView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\site.css" />
+    <Content Include="styles\test.css" />
     <Content Include="templates\chart.html" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\dashboardComponent.html" />
     <Content Include="templates\dashboardList.html" />
+    <Content Include="templates\dateFilter.html" />
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />
     <Content Include="templates\menu.html" />
@@ -129,9 +137,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="scripts\lib\bootstrap\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

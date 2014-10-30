@@ -15,6 +15,8 @@
             'click #component-submit': 'submit'
         },
 
+       
+
         inputTitle: function () {
             return $('#input').val();
         },

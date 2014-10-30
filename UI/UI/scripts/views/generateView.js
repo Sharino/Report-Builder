@@ -5,8 +5,9 @@
     'MetricListView',
     'ComponentGeneratedView',
     'text!templates/generate.html',
+     'DateFilterView',
     'adform-notifications'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, ComponentGeneratedView, generateTemplate) {
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, ComponentGeneratedView, generateTemplate, DateFilterView) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
 
@@ -54,7 +55,9 @@
             //        collection: this.model.get("Metrics")
             //    })
             //});
-            
+
+            this.renderSubview("#date-filter", new DateFilterView());
+
             return this;
         },
 

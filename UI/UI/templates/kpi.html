@@ -1,9 +1,12 @@
-﻿<div class="form-horizontal well component">
-    <div class="group-label">
-        <label><%= model.Title %></label>
+﻿
+<div class="form-horizontal well component ">
+
+    <div class="group-label ">
+        <label><%= model.Title %> <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i></label>
+        <div id="component-edit-<%= Position %>"></div>
         <hr />
     </div>
-    <ul class="sparklines">
+    <div class="sparklines ">
         <% _.each(Metrics, function(metric) { %>
         <li>
             <span class="headline"><%= metric.DisplayName %></span>
@@ -16,24 +19,5 @@
             </span>
         </li>
         <% }); %>
-        <li>
-            <span class="headline">Impressions</span>
-            <span class="numbers">
-                <%= (Math.random() * 100000 + 1).toFixed(3) %>
-            </span>
-        </li>
-        <li>
-            <span class="headline">In-screen</span>
-            <span class="numbers">
-                <%= (Math.random() * 100000 + 1).toFixed(3) %>
-            </span>
-        </li>
-        <li>
-            <span class="headline">CTR (%)</span>
-            <span class="numbers">
-                <%= (Math.random() * 100 + 1).toFixed(2) %>
-            </span>
-        </li>
-    </ul>
+    </div>
 </div>
-
