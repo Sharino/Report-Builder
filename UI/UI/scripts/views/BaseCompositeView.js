@@ -30,6 +30,7 @@
 
             this.remove();
             this.unbind();
+            this.undelegateEvents();
         },
 
         destroySubViews: function () {

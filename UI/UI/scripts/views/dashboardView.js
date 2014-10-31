@@ -38,6 +38,15 @@
 
                 modal.on('hidden', function () {
                     self.editform.destroy();
+
+                    for (var i = 0; i < self.subViews.length; i++) {
+                        if (self.subViews[i] === self.editform) {
+                            self.subViews.splice(i, 1);
+                            self.editform = null;
+                            break;
+                        }
+                    }
+
                 });
 
 

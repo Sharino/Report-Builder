@@ -93,7 +93,6 @@
                         timeout: Config.NotificationSettings.Timeout
                     });
 
-
                     Backbone.history.loadUrl(Backbone.history.fragment);
                 },
                 error: function (model, response) {
@@ -140,6 +139,10 @@
                 }
             }
             return false;
+        },
+
+        beforeClose: function(){
+            this.submitEvent.unbind();
         }
     });
 
