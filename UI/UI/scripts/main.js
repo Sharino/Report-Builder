@@ -62,8 +62,9 @@
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
-        'KPIView': 'scripts/views/kpiView',
-        'DateFilterView': 'scripts/views/dateFilterView',
+        'KPIView':              'scripts/views/kpiView',
+        'DateFilterView':       'scripts/views/dateFilterView',
+        'MessageView':          'scripts/views/messageView',
 
 
         /* Router dependencies */

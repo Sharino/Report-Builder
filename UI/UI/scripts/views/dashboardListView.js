@@ -34,7 +34,7 @@
 
             Backbone.history.navigate(routerUrl, true, true);
         },
-
+        //TODO: RENAME 
         onClick: function (e) {
             console.log(e);
             e.preventDefault();

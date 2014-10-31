@@ -14,12 +14,13 @@
     'MenuView',
     'GenerateView',
     'Config',
+    'text!templates/dashboardCreate.html',
     'adform-notifications',
     'adform-notifications',
     'globalize',
     'moment',
     'adform-datepicker'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
     var Router = Backbone.Router.extend({
         routes: {
             "": "list",
@@ -42,25 +43,46 @@
         },
 
         createDashboard: function () {
-            var self = this;
-            var tempDashboard = new Dashboard({ Title: prompt("New Dashboard title", "novyje dershberd") });
-            tempDashboard.save({}, {
-                success: function (model, response) {
-                    console.log("GET", "Success", model, response);
-                    $.notifications.display({       
-                        type: 'success',
-                        content: "New Dashboard was successfully created",         
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                    Backbone.history.navigate("dashboard/" + model.get("Id"), { trigger: true });
-                },
-                error: function () {
-                    $.notifications.display({
-                        type: 'error',
-                        content: "Error",
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                }
+            $.modal({
+                title: "Create Dashboard",
+                body: DashboardCreate,
+                buttons: [
+                    {
+                        title: "Submit",
+                        cssClass: "btn-success",
+                        //dismiss: false,
+                        callback: function () {
+                            var tempDashboard = new Dashboard({ Title: $("#dashboard-title").val() });
+
+                            tempDashboard.save({}, {
+                                success: function (model, response) {
+                                    console.log("GET", "Success", model, response);
+
+                                    $.notifications.display({
+                                        type: 'success',
+                                        content: "New Dashboard was successfully created",         
+                                        timeout: Config.NotificationSettings.Timeout
+                                    });
+
+                                    Backbone.history.navigate("dashboard/" + model.get("Id"), { trigger: true });
+                                },
+                                error: function () {
+                                    $.notifications.display({
+                                        type: 'error',
+                                        content: "Error",
+                                        timeout: Config.NotificationSettings.Timeout
+                                    });
+                                }
+                            });
+                        }
+                    },
+                    {
+                        title: "Cancel",
+                        cssClass: "btn-cancel",
+                        id: "modalCancel"
+                    }
+                ],
+                className: "form"
             });
         },
 

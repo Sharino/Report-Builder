@@ -7,11 +7,12 @@
     'MetricListView',
     'text!templates/dashboard.html',
     'KPIView',
+    'MessageView',
     'Config',
     'DateFilterView',
     'adform-notifications',
     'adform-modal'
-], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate, KPIView, Config, DateFilterView) {
+], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate, KPIView, MessageView, Config, DateFilterView) {
     var DashboardView = BaseCompositeView.extend({
         template: _.template(dashboardTemplate),
 
@@ -177,14 +178,17 @@
                             }
                         case 2:
                             {
+                                self.renderSubview(("#component-" + position), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
                                 break;
                             }
                         case 3:
                             {
+                                self.renderSubview(("#component-" + position), new MessageView('<img src="http://i.imgur.com/bAmN3M9.png"></img>'));
                                 break;
                             }
                         case 4:
                             {
+                                self.renderSubview(("#component-" + position), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
                                 break;
                             }
                     }
