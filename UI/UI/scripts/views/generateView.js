@@ -6,15 +6,33 @@
     'KPIView',
     'text!templates/generate.html',
     'DateFilterView',
+    'text!templates/selectDashboardList.html',
+    'DashboardCollection',
+    'DashboardComponent',
     'adform-notifications',
     'adform-modal'
-
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView) {
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
+        selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
-            'click #generate-submit': 'submit',
+            'click #generate-submit': 'addToDashboard',
+        },
+
+        initialize: function(){
+            if (!this.collection) {
+                this.collection = new DashboardCollection();
+
+                this.collection.fetch({
+                    success: function (collection, response) {
+                        console.log(collection);
+                    },
+                    error: function (collection, response) {
+                        console.log(collection);
+                    }
+                });
+            }
         },
 
         render: function () {
@@ -47,15 +65,63 @@
                 }
             }
 
-
-
             return this;
         },
 
-        submit: function () {
-            console.log(this.model.toJSON());
+        addToDashboard: function () {
+            var modal = $.modal();
 
-            $.modal();
+            $.modal({
+                title: "Select Dashboard",
+                body: this.selectDashboardTemplate({Dashboards: this.collection.toJSON()}),
+                buttons: [
+                    //{
+                    //    title: "Submit",
+                    //    cssClass: "btn-success disabled",
+                    //    dismiss: false
+                    //},
+                    //{
+                    //    title: "Cancel",
+                    //    cssClass: "btn-cancel",
+                    //    id: "modalCancel"
+                    //}
+                ],
+                className: "form"
+            });
+
+            var self = this;
+
+            $(".dashboard-list-item").bind("click", function (e) {
+                var reportComponentId = self.model.get("Id");
+                var selectedDashboardId = parseInt(e.currentTarget.id);
+                
+                console.log(reportComponentId, selectedDashboardId);
+
+                //
+                //var tempDashboardComponent = new DashboardComponent({ dashboardId: selectedDashboardId, reportComponentId: reportComponentId });
+                //tempDashboardComponent.save({}, {
+                //    success: function (collection, response) {
+                //        console.log("YAY", collection);
+                //    },
+                //    error: function (collection, response) {
+                //        console.log(collection);
+                //    }
+                //});
+
+                $.ajax({
+                    url: "http://37.157.0.42:33895/api/DashboardComponent?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
+
+                    type: 'post',
+                    success: function () {
+                        console.log('success!');
+                    },
+                    error: function () {
+                        console.log('error!');
+                    }
+                });
+
+                modal.modal("hide");
+            });
 
             return false;
         }

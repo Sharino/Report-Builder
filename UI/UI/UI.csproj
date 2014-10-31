@@ -120,6 +120,7 @@
     <Content Include="templates\menu.html" />
     <Content Include="templates\report.html" />
     <Content Include="templates\metricList.html" />
+    <Content Include="templates\selectDashboardList.html" />
     <Content Include="templates\table.html" />
     <Content Include="templates\timeline.html" />
     <Content Include="tests.html" />
