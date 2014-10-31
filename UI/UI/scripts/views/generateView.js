@@ -9,9 +9,10 @@
     'text!templates/selectDashboardList.html',
     'DashboardCollection',
     'DashboardComponent',
+    'MessageView',
     'adform-notifications',
     'adform-modal'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent) {
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
@@ -53,17 +54,17 @@
                 }
                 case 2:
                 {
-                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
                     break;
                 }
                 case 3:
                 {
-                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/bAmN3M9.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/bAmN3M9.png"></img>'));
                     break;
                 }
                 case 4:
                 {
-                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
                     break;
                 }
             }
