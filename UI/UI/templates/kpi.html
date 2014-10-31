@@ -1,23 +1,25 @@
 ﻿
 <div class="form-horizontal well component ">
-
-    <div class="group-label ">
-        <label><%= model.Title %> <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i></label>
-        <div id="component-edit-<%= Position %>"></div>
-        <hr />
+        <div class="table-toolbar">
+            <div class="group-label ">
+                <label><%= model.Title %> <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i></label>
+                <div id="component-edit-<%= Position %>"></div>
+                <hr />
+            </div>
+            <div id="date-filter"></div>
+        </div>
+        <div class="sparklines ">
+            <% _.each(Metrics, function(metric) { %>
+            <li>
+                <span class="headline"><%= metric.DisplayName %></span>
+                <span class="numbers">
+                    <% if (metric.DisplayName.indexOf("%") > -1) { %>
+                    <%= (Math.random() * 100 + 1).toFixed(3) %>
+                    <% } else { %>
+                    <%= (Math.random() * 100000 + 1).toFixed(3) %>
+                    <% } %>
+                </span>
+            </li>
+            <% }); %>
+        </div>
     </div>
-    <div class="sparklines ">
-        <% _.each(Metrics, function(metric) { %>
-        <li>
-            <span class="headline"><%= metric.DisplayName %></span>
-            <span class="numbers">
-                <% if (metric.DisplayName.indexOf("%") > -1) { %>
-                <%= (Math.random() * 100 + 1).toFixed(3) %>
-                <% } else { %>
-                <%= (Math.random() * 100000 + 1).toFixed(3) %>
-                <% } %>
-            </span>
-        </li>
-        <% }); %>
-    </div>
-</div>

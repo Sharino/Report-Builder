@@ -99,53 +99,6 @@
             this.render();
         },
 
-        //toggle: function (e) {
-        //    e.preventDefault();
-
-        //    var pos = parseInt($(e.currentTarget).attr('data-id'));
-
-        //    if (!isNaN(pos)) {
-        //        var currentModel = this.model.get("Components")[pos];
-
-        //        this.editform = this.renderSubview(('#component-edit-' + pos), new DashboardComponentView({ model: currentModel}));
-
-        //        var self = this;
-
-        //        var modal = $.modal();
-
-        //        modal.on('hidden', function() {
-        //            self.editform.destroy();
-        //        });
-
-
-        //        $.modal({
-        //            title: "Edit Dashboard Component",
-        //            body: this.editform.$el,
-        //            buttons: [
-        //                {
-        //                    title: "Submit",
-        //                    id: "component-submit",
-        //                    cssClass: "btn-success",
-        //                    callback: function() {
-        //                        self.submitEvent.trigger('submitEvent');
-        //                    }
-        //                },
-        //                {
-        //                    title: "Cancel",
-        //                    cssClass: "btn-cancel",
-        //                    id: "modalCancel",
-        //                    callback: function() {
-        //                    }
-        //                }
-        //            ],
-        //            className: "form"
-        //        });
-
-        //        this.$el.find(("#component-" + pos)).append("<div id='component-edit-" + pos + "'></div>");
-        //    }
-        //},
-
-
         initialize: function () {
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
 
@@ -202,7 +155,7 @@
         },
 
         render: function () {
-            this.$el.html(this.template({ ComponentCount: this.model.get("ComponentIds").length }));
+            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
             this.renderSubview("#date-filter", new DateFilterView());
             return this;
         }
