@@ -101,6 +101,7 @@
     <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\kpiView.js" />
+    <Content Include="scripts\views\messageView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
@@ -119,6 +120,7 @@
     <Content Include="templates\generate.html" />
     <Content Include="templates\kpi.html" />
     <Content Include="templates\menu.html" />
+    <Content Include="templates\message.html" />
     <Content Include="templates\report.html" />
     <Content Include="templates\metricList.html" />
     <Content Include="templates\table.html" />
