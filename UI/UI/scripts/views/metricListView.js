@@ -92,8 +92,8 @@
 
                 $('.list-pop').tooltip({
                     delay: {
-                        show: 50,
-                        hide: 50
+                        show: 1000,
+                        hide: 500
                     },
                     template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
                 });

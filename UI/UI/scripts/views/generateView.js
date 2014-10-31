@@ -53,14 +53,17 @@
                 }
                 case 2:
                 {
+                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
                     break;
                 }
                 case 3:
                 {
+                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/bAmN3M9.png"></img>'));
                     break;
                 }
                 case 4:
                 {
+                    self.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
                     break;
                 }
             }
