@@ -24,26 +24,13 @@
         },
 
         render: function () {
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
-                }
-            };
+            this.$el.html(this.template({ "Dashboards": this.collection.toJSON() }));
 
-            templVariables["activeNew"] = '';
-            templVariables["activeList"] = 'class="active"';
-
-            this.$el.html(this.template({
-                "Dashboards": this.collection.toJSON(),
-                "data": templVariables
-            }));
             return this;
         },
 
         submitNewDashboard: function () {
-            var routerUrl = "createDashbaord";
+            var routerUrl = "createDashboard";
 
             Backbone.history.navigate(routerUrl, true, true);
         },

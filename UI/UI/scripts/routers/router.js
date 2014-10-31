@@ -29,7 +29,7 @@
             "generate/:id": "generateById",
             "dashboards": "dashboards",
             "dashboard/:id": "showDashboard",
-            "createDashbaord": "createDashbaord"
+            "createDashboard": "createDashboard"
         },
 
         initialize: function () {
@@ -41,7 +41,7 @@
             this.showView("#component", new ComponentView({ model: new Component() }));
         },
 
-        createDashbaord: function () {
+        createDashboard: function () {
             var self = this;
             var tempDashboard = new Dashboard({ Title: prompt("New Dashboard title", "novyje dershberd") });
             tempDashboard.save({}, {

@@ -16,7 +16,7 @@
             this.$el.html(this.template({
                 Metrics: this.model.get('Metrics'),
                 model: this.model.toJSON(),
-                Position: this.position
+                Position: this.position || 0
             }));
 
             this.renderSubview("#date-filter", new DateFilterView());

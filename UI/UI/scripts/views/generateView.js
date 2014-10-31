@@ -3,11 +3,13 @@
     'Component',
     'MetricCollection',
     'MetricListView',
-    'ComponentGeneratedView',
+    'KPIView',
     'text!templates/generate.html',
-     'DateFilterView',
-    'adform-notifications'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, ComponentGeneratedView, generateTemplate, DateFilterView) {
+    'DateFilterView',
+    'adform-notifications',
+    'adform-modal'
+
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
 
@@ -16,53 +18,45 @@
         },
 
         render: function () {
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
-                }
-            };
-
-            if (this.model) {       // Model exists
-                if (this.model.isNew()) {
-                    templVariables["data"]["viewTitle"] = "Create a New Component";
-                    templVariables["data"]["activeNew"] = 'class="active"';
-                    templVariables["data"]["activeList"] = '';
-                } else {
-                    templVariables["data"]["viewTitle"] = "Edit";
-                    templVariables["data"]["activeNew"] = '';
-                    templVariables["data"]["activeList"] = '';
-                }
-                templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
-                this.$el.html(this.template(templVariables));
-            }
-            else {                  // Model does not exist
-                templVariables["data"]["viewTitle"] = "Create a New Component";
-                templVariables["data"]["activeNew"] = 'class="active"';
-                templVariables["data"]["activeList"] = '';
-                templVariables["data"]["model"] = [];
-                this.$el.html(this.template(templVariables));
-            }
-
-            this.renderSubview('#component-by-type', new ComponentGeneratedView(this.model));
-
-            //this.assign({
-            //    '#component-by-type': new ComponentGeneratedView({
-            //        model: this.model,
-            //        collection: this.model.get("Metrics")
-            //    })
-            //});
+            this.$el.html(this.template());
 
             this.renderSubview("#date-filter", new DateFilterView());
+
+            switch (this.model.get("Type")) {
+                case 0:
+                {
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    break;
+                }
+                case 1:
+                {
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    break;
+                }
+                case 2:
+                {
+                    break;
+                }
+                case 3:
+                {
+                    break;
+                }
+                case 4:
+                {
+                    break;
+                }
+            }
+
+
 
             return this;
         },
 
         submit: function () {
             console.log(this.model.toJSON());
+
+            $.modal();
+
             return false;
         }
     });
