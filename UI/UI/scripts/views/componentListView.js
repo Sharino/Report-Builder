@@ -12,6 +12,11 @@
             'click .del': 'handleDeleteAction',
             'click .gen': 'handleGenerateAction',
             'click .component-list-item>.click': 'handleClickAction',
+            'click .create': 'submitNewComponent'
+        },
+        submitNewComponent: function () {
+            var routerUrl = "create";
+            Backbone.history.navigate(routerUrl, true, true);
         },
 
         initialize: function () {

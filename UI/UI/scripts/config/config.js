@@ -27,11 +27,6 @@
 
         MenuSettings: {
             items: [
-              
-                {
-                    link: "#create",
-                    title: "New Component"
-                },
                 {
                     link: "#list",
                     title: "Components"
