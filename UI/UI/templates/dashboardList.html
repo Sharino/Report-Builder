@@ -1,4 +1,8 @@
-﻿<table class="table table-striped heading-separation table-hover selectable-rows">
+﻿<!--<i class="create adf-icon-toolbar-publish"></i>-->
+<div style="display:inline; margin-bottom: 6px;" class="pull-right">
+    <a class="create btn btn-primary"><b>Create Dashboard</b></a>
+</div>
+<table class="table table-striped heading-separation table-hover selectable-rows">
     <thead>
         <tr>
             <th>Id</th>
@@ -13,7 +17,7 @@
             <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
             <td id="<%= model.Id %>">
                 <i class="del adf-icon-small-close"></i>
-                <i class="create adf-icon-toolbar-publish"></i>
+              
             </td>
         </tr>
         <% }); %>

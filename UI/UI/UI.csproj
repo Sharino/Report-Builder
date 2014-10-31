@@ -113,6 +113,7 @@
     <Content Include="templates\componentList.html" />
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\dashboardComponent.html" />
+    <Content Include="templates\dashboardCreate.html" />
     <Content Include="templates\dashboardList.html" />
     <Content Include="templates\dateFilter.html" />
     <Content Include="templates\generate.html" />
