@@ -12,6 +12,17 @@
     /* inline-block space fix */
     margin-right:-4px;
 }
+#metric-list>.form-horizontal.well {
+    background: rgba(231,246,253,0.5);
+}
+
+.form-horizontal.well {
+    background: rgba(224,224,224,0.2);
+}
+
+.btn {
+    background-color: white !important;
+}
 
 .sortable>li, .sortable>button {
     display: inline;

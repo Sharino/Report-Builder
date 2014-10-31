@@ -9,9 +9,10 @@
         template: _.template(dashboardListTemplate),
 
         events: {
-            'click .dashboard-list-item>.del': 'handleDeleteAction',
+            'click .del': 'handleDeleteAction',
             'click .dashboard-list-item>.gen': 'onGenerate',
             'click .dashboard-list-item>.click': 'onClick',
+            'click .create': 'submitNewDashboard'
         },
 
         initialize: function () {
@@ -41,6 +42,12 @@
             return this;
         },
 
+        submitNewDashboard: function () {
+            var routerUrl = "createDashbaord";
+
+            Backbone.history.navigate(routerUrl, true, true);
+        },
+
         onClick: function (e) {
             console.log(e);
             e.preventDefault();
@@ -54,11 +61,10 @@
         handleDeleteAction: function (e) {
             e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
-            
-            $.ajax({
-                url: 'http://172.22.22.33:33894/api/dashboard' + id,
-                type: 'DELETE',
+            var id = $(e.currentTarget)[0].parentElement.id;
+            var dashboard = this.collection.get(id);
+
+            dashboard.destroy({
                 success: function (result) {
                     $.notifications.display({
                         type: 'success',
@@ -66,7 +72,7 @@
                         timeout: Config.NotificationSettings.Timeout
                     });
                 },
-                error: function (response){
+                error: function (response) {
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (entry) {
                             $.notifications.display({
@@ -78,6 +84,8 @@
                     }
                 }
             });
+
+            this.render();
         },
 
     });

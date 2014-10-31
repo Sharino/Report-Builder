@@ -13,7 +13,6 @@
         <tr class="component-list-item">
             <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
             <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
-            <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
                 
             <td id="<%= model.Id %>">
                 <% if (!model.IsGenerated) { %>
@@ -31,6 +30,8 @@
                 <% } else { %>
                 <i class="adf-icon-alt-check"></i>
                 <% } %>
+            </td>
+            <td id="<%= model.Id %>">
                 <i class="del adf-icon-small-close"></i>
             </td>
         </tr>

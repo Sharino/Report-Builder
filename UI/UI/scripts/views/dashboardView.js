@@ -16,8 +16,9 @@
         template: _.template(dashboardTemplate),
 
         events: {
-            'click  .editable ': 'toggle',
-            'click #edit': 'edit'
+            'click .editable ': 'toggle',
+            'click #edit': 'edit',
+            'click .dashboard-list-item>.del': 'handleDeleteAction'
         },
 
         edit: function (e) {
@@ -29,7 +30,6 @@
                 var currentModel = this.model.get("Components")[pos];
 
                 this.editform = this.renderSubview(('#component-edit-' + pos), new DashboardComponentView({ model: currentModel }));
-
 
                 var self = this;
 
@@ -66,6 +66,36 @@
                 this.$el.find(("#component-" + pos)).append("<div id='component-edit-" + pos + "'></div>");
             }
 
+        },
+
+        handleDeleteAction: function (e) {
+            e.preventDefault();
+            alert("s");
+            var id = $(e.currentTarget).attr("id");
+            var dashboard = this.collection.get(id);
+
+            dashboard.destroy({
+                success: function (result) {
+                    $.notifications.display({
+                        type: 'success',
+                        content: 'Successfully deleted!',
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                },
+                error: function (response) {
+                    if (response.responseJSON) {
+                        response.responseJSON.forEach(function (entry) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: entry.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        });
+                    }
+                }
+            });
+
+            this.render();
         },
 
         //toggle: function (e) {
@@ -143,7 +173,6 @@
                         case 1:
                             {
                                 self.renderSubview(("#component-" + position), new KPIView(model, position));
-                                //self.renderSubview(("#component-" + position), new KPIView({ model: model }, position));
                                 break;
                             }
                         case 2:
@@ -159,7 +188,6 @@
                                 break;
                             }
                     }
-
                     return model;
                 },
                 error: function (model, response) {
@@ -171,9 +199,7 @@
 
         render: function () {
             this.$el.html(this.template({ ComponentCount: this.model.get("ComponentIds").length }));
-
             this.renderSubview("#date-filter", new DateFilterView());
-
             return this;
         }
     });

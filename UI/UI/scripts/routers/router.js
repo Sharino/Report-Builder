@@ -28,7 +28,8 @@
             "list": "list",
             "generate/:id": "generateById",
             "dashboards": "dashboards",
-            "dashboard/:id": "showDashboard"
+            "dashboard/:id": "showDashboard",
+            "createDashbaord": "createDashbaord"
         },
 
         initialize: function () {
@@ -38,6 +39,29 @@
 
         create: function () {
             this.showView("#component", new ComponentView({ model: new Component() }));
+        },
+
+        createDashbaord: function () {
+            var self = this;
+            var tempDashboard = new Dashboard({ Title: prompt("New Dashboard title", "novyje dershberd") });
+            tempDashboard.save({}, {
+                success: function (model, response) {
+                    console.log("GET", "Success", model, response);
+                    $.notifications.display({       
+                        type: 'success',
+                        content: "New Dashboard was successfully created",         
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                    Backbone.history.navigate("dashboard/" + model.get("Id"), { trigger: true });
+                },
+                error: function () {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Error",
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
         },
 
         showDashboard: function (id) {
