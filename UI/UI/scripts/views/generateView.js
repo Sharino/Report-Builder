@@ -78,18 +78,7 @@
             $.modal({
                 title: "Select Dashboard",
                 body: this.selectDashboardTemplate({Dashboards: this.collection.toJSON()}),
-                buttons: [
-                    //{
-                    //    title: "Submit",
-                    //    cssClass: "btn-success disabled",
-                    //    dismiss: false
-                    //},
-                    //{
-                    //    title: "Cancel",
-                    //    cssClass: "btn-cancel",
-                    //    id: "modalCancel"
-                    //}
-                ],
+                buttons: [],
                 className: "form"
             });
 
