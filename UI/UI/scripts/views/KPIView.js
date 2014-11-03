@@ -19,69 +19,49 @@
         },
 
         render: function () {
-            var metrics = this.model.get("Metrics");
-            console.log("Metrics: ", metrics);
-
-            var metricModels = [];
-            _.each(metrics, function (metric) {
-                metricModels.push(new Metric(metric));
+            var einstein = new Einstein({
+                Metrics: this.getMnemonics(this.model.get("Metrics")),
+                Dimensions: [],
+                Filters: {
+                    "DateFilter": {
+                        "From": "2012-09-01",
+                        "To": "2013-02-01"
+                    }
+                }
             });
 
-            var complete = _.invoke(metricModels, 'fetch');
-
-            var metricMnemonics = [];
             var self = this;
-            $.when.apply($, complete).done(function () {
-                _.each(metricModels, function (metric) {
-                    metricMnemonics.push(metric.get("Mnemonic"));
-                });
+            einstein.fetch({
+                url: 'http://37.157.0.42:33896/api/Einstein/' + JSON.stringify(einstein),
 
-                var einstein = new Einstein({
-                    Metrics: metricMnemonics,
-                    Dimensions: [],
-                    Filters: {
-                        "DateFilter": {
-                            "From": "2011-09-01",
-                            "To": "2013-02-01"
-                        }
-                    }
-                });
+                type: "GET",
 
-                console.log(einstein);
+                success: function (response) {
+                    console.log("Sufecintas einsteinas: ");
+                    console.log(JSON.stringify(response.attributes));
+                    console.log(self.model.get("Metrics"));
 
-                einstein.fetch({
-                    //data: metricMnemonics,
-                    url: 'http://37.157.0.42:33896/api/Einstein/' + JSON.stringify(einstein),
-                    type: "GET",
-                    //dataType: 'text',
-                    // contentType: 'application/json', //'application/x-www-form-urlencoded',
-                    success: function (response) {
-                        console.log(metricMnemonics);
+                    self.$el.html(self.template({//$(this.el)
+                        "Einstein": response.get("ComponentValues")[0],
+                        "Metrics": self.model.get('Metrics'),
+                        "model": self.model.toJSON(),
+                        "Position": self.position || 0
+                    })); // Render Metric list    
+                },
 
-                        console.log("Sufecintas einsteinas: ");
-                        console.log(JSON.stringify(response.attributes));
-
-                        self.$el.html(self.template({//$(this.el)
-                            "Einstein": response.attributes.ComponentValues[0],
-                            "Metrics": self.model.get('Metrics'),
-                            "model": self.model.toJSON(),
-                            "Position": self.position || 0
-                        })); // Render Metric list    
-                    },
-                    error: function (error) {
-                        console.log("kaka");
-                        console.log(error);
-                    }
-                });
-
+                error: function (error) {
+                    console.log("kaka");
+                    console.log(error);
+                }
             });
-
-           
 
             this.renderSubview("#date-filter", new DateFilterView());
+            
+            
 
             return this;
         },
+
         generateNewData: function () {
 
             var startDate = $("#picker").find("input")[0].value;
@@ -93,7 +73,18 @@
             }
         
             return true;
-        }
+        },
+
+        getMnemonics: function (metrics) {
+            var metricMnemonics = [];
+
+            _.each(metrics, function (metric) {
+                var newMetric = new Metric(metric);
+                metricMnemonics.push(newMetric.get("Mnemonic"));
+            });
+
+            return metricMnemonics;
+        },
 
     });
 
