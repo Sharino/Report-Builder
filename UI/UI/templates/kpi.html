@@ -9,15 +9,11 @@
             <div id="date-filter"></div>
         </div>
         <div class="sparklines ">
-            <% _.each(Metrics, function(metric) { %>
+            <% _.each(Einstein.MetricValues, function(metric) { %>
             <li>
-                <span class="headline"><%= metric.DisplayName %></span>
+                <span class="headline"><%= metric.Key %></span>
                 <span class="numbers">
-                    <% if (metric.DisplayName.indexOf("%") > -1) { %>
-                    <%= (Math.random() * 100 + 1).toFixed(3) %>
-                    <% } else { %>
-                    <%= (Math.random() * 100000 + 1).toFixed(3) %>
-                    <% } %>
+                    <%= metric.Value %>
                 </span>
             </li>
             <% }); %>

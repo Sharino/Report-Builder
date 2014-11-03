@@ -16,6 +16,10 @@
         MetricSettings: {
             URL: "http://172.22.22.33:33894/api/Metric"
         },
+        EinsteinSettings: {
+            URL: "http://37.157.0.42:33896/api/Einstein/",
+            // URL: "http://37.157.0.42:33859/einstein"    
+        },
 
         NotificationSettings: {
             Timeout: 5000

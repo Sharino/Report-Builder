@@ -1,9 +1,10 @@
 ﻿requirejs.config({
     //By default load any module IDs from scripts/lib
     baseUrl: '',
+    
+    urlArgs: "bust=v2",
 
-
-    urlArgs: "bust=" + (new Date()).getTime(),
+    //urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
@@ -43,7 +44,8 @@
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
         'Dashboard':            'scripts/models/dashboard',
-        'DashboardComponent':   'scripts/models/dashboardComponent',
+        'DashboardComponent': 'scripts/models/dashboardComponent',
+        'Einstein':             'scripts/models/einstein',
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',

@@ -1,8 +1,9 @@
 ﻿define('KPIView', [
     'BaseCompositeView',
     'text!templates/kpi.html',
-    'DateFilterView'
-], function (BaseCompositeView, KPITemplate, DateFilterView) {
+    'DateFilterView',
+    'Einstein'
+], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein) {
 
     var KPIView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
@@ -13,11 +14,62 @@
         },
 
         render: function () {
-            this.$el.html(this.template({
-                Metrics: this.model.get('Metrics'),
-                model: this.model.toJSON(),
-                Position: this.position || 0
-            }));
+            var metrics = this.model.get("Metrics");
+            console.log("Metrics: ", metrics);
+
+            var metricMnemonics = [];
+            _.each(metrics, function (metric) {
+                var m = new Metric(metric);
+                m.fetch({
+                    async: false,
+                    success: function (model) {
+                        metricMnemonics.push(model.get("Mnemonic"));
+                    },
+                    error: function (error) {
+                        console.log(error);
+                        console.log("X(");
+                    }
+                });
+            });
+
+            var self = this;
+            var einstein = new Einstein({
+                Metrics: metricMnemonics,
+                Dimensions: [],
+                Filters: {
+                    "DateFilter": {
+                        "From": "2011-09-01",
+                        "To": "2013-02-01"
+                    }
+                }
+            });
+
+            console.log(einstein);
+
+            einstein.fetch({
+                //data: metricMnemonics,
+                url: 'http://37.157.0.42:33896/api/Einstein/' + JSON.stringify(einstein),
+                type: "GET",
+                //dataType: 'text',
+                // contentType: 'application/json', //'application/x-www-form-urlencoded',
+                success: function (response) {
+                    console.log(metricMnemonics);
+
+                    console.log("Sufecintas einsteinas: ");
+                    console.log(JSON.stringify(response.attributes));
+
+                    self.$el.html(template({//$(this.el)
+                        "Einstein": response.attributes.ComponentValues[0],
+                        "Metrics": self.model.get('Metrics'),
+                        "model": self.model.toJSON(),
+                        "Position": self.position || 0
+                    })); // Render Metric list    
+                },
+                error: function (error) {
+                    console.log("kaka");
+                    console.log(error);
+                }
+            });
 
             this.renderSubview("#date-filter", new DateFilterView());
 
