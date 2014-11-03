@@ -2,8 +2,9 @@
     'BaseCompositeView',
     'text!templates/kpi.html',
     'DateFilterView',
-    'Einstein'
-], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein) {
+    'Einstein',
+    'Metric'
+], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric) {
 
     var KPIView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
@@ -58,7 +59,7 @@
                     console.log("Sufecintas einsteinas: ");
                     console.log(JSON.stringify(response.attributes));
 
-                    self.$el.html(template({//$(this.el)
+                    self.$el.html(self.template({//$(this.el)
                         "Einstein": response.attributes.ComponentValues[0],
                         "Metrics": self.model.get('Metrics'),
                         "model": self.model.toJSON(),

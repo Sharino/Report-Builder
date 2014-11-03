@@ -2,9 +2,7 @@
     //By default load any module IDs from scripts/lib
     baseUrl: '',
     
-    urlArgs: "bust=v2",
-
-    //urlArgs: "bust=" + (new Date()).getTime(),
+    urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
