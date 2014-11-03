@@ -9,6 +9,10 @@
     var KPIView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
+        events: {
+            'click #generateByDate': 'generateNewData',
+        },
+
         initialize: function (parent, pos) {
             this.model = parent;
             this.position = pos;
@@ -77,7 +81,20 @@
             this.renderSubview("#date-filter", new DateFilterView());
 
             return this;
+        },
+        generateNewData: function () {
+
+            var startDate = $("#picker").find("input")[0].value;
+            var endDate = $("#picker2").find("input")[0].value;
+            if (startDate <= endDate) {
+                alert('validi');
+            } else {
+                alert('Suds');
+            }
+        
+            return true;
         }
+
     });
 
 

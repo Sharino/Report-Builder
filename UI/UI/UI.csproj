@@ -81,6 +81,7 @@
     <Content Include="scripts\lib\moment.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
+    <Content Include="scripts\lib\slack-webhook.js" />
     <Content Include="scripts\lib\spin.js" />
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
