@@ -17,6 +17,7 @@
             <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
                 
             <td id="<%= model.Id %>">
+                Show Component -
                 <% if (!model.IsGenerated) { %>
                 <% if (model.Type === 0) { %>
                 <i class="gen adf-icon-alt-sadface"></i>
@@ -31,7 +32,7 @@
                 <% } %>
                 <% } else { %>
                 <i class="adf-icon-alt-check"></i>
-                <% } %>
+                <% } %> 
             </td>
             <td id="<%= model.Id %>">
                 <i class="del adf-icon-small-close"></i>

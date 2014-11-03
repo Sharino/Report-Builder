@@ -6,9 +6,10 @@
     var DateFilterView = BaseCompositeView.extend({
         template: _.template(dateFilterTemplate),
 
+      
+
         render: function () {
             this.$el.html(this.template);
-
             this.initializeDateFilter();
         },
 
@@ -29,11 +30,15 @@
                 var datePicker = new AdformDatePicker(pickerOptions);
                 var datePicker2 = new AdformDatePicker(pickerOptions2);
 
-                //                this.$el.html(date(datePicker));
-                //                this.$el.html(date(datePicker2));
+                var datePickerChangeCallback = function(e) {
+                    console.log(e, $("#picker").find("input"));
+                };
+
+                $(datePicker).on("AdformDatePicker:change", datePickerChangeCallback);
+                $(datePicker2).on("AdformDatePicker:change", datePickerChangeCallback);
+
             });
         }
-
     });
 
     return DateFilterView;
