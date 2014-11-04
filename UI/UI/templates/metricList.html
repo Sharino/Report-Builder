@@ -4,7 +4,7 @@
         <hr />
     </div>
     <ul class="sortable">
-        <% _.each(Metrics, function(model) { %>  
+        <% _.each(Metrics, function(model, i) { %>  
             <li draggable="true" class="">
                 <div class="control-group metric-group">
                     <div class="controls metric-controls">
@@ -19,7 +19,7 @@
                             </optgroup>
                             <% }); %>
                         </select>
-                        <a><i class="removeMetric adf-icon-small-reset blue-icon"></i></a>
+                        <a><i class="removeMetric adf-icon-small-reset" id="<%= i %>"></i></a>
                     </div>
                 </div>
             </li>

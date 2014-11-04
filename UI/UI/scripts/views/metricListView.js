@@ -105,7 +105,7 @@
             var reference = $(e.target).data("AdformSelect");
 
             var selectReferenceID = null;
-            for (var i = 0; i < this.selectReferences.length; i++) {
+            for (var i = 0, len = this.selectReferences.length; i < len; i++) {
                 if (this.selectReferences[i] === reference) {
                     selectReferenceID = i;
                     break;
@@ -127,7 +127,7 @@
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 //forcePlaceholderSize: true,
-                placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
+                placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>',
             });
 
             sort.bind('sortupdate', function (e, ui) {
@@ -159,28 +159,18 @@
                 }
                 draggedItem.Order = ui.item.index();
             }
+
             this.render();
         },
 
         
-        metricRemovedAction: function () {
-            //var myId = e.currentTarget.id;
-            console.log("removed");
-            //console.log(this.metricArray);
-            /*
+        metricRemovedAction: function (e) {
+            var myId = e.currentTarget.id;
 
-            var removedItem = null;
-            for (var i = 0; i < this.metricArray.length; i++) {
-                if (this.metricArray[i].Order == ui.oldindex) {
-                    removedItem = this.metricArray[i];
-                }
+            if (myId > -1) {
+                this.metricArray.splice(myId, 1);
             }
 
-            for (var i = )
-
-
-            this.metricArray.pop({ Placeholder: true, Order: this.metricArray.length });
-            */
             this.render();
         },
         
