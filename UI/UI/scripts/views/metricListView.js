@@ -12,7 +12,8 @@
 
         events: {
             'click #addMetric': 'metricAddedAction',
-            'AdformSelect:selectionChanged': 'metricSelectedAction'
+            'AdformSelect:selectionChanged': 'metricSelectedAction',
+            'click .removeMetric': 'metricRemovedAction'
         },
 
         fire: function(e){
@@ -113,22 +114,26 @@
 
             var selectedValue = parseInt(reference.getValues());
             var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
+            var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
 
-            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
+            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
             delete this.metricArray[selectReferenceID].Placeholder;
         },
 
         initializeSortableList: function () {
             var self = this;
 
-            $('.sortable').sortable({
+            var sort = $('.sortable').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 //forcePlaceholderSize: true,
                 placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
-            }).bind('sortupdate', function (e, ui) {
+            });
+
+            sort.bind('sortupdate', function (e, ui) {
                 self.metricDraggedAction(e, ui);
             });
+            
         },
 
         metricDraggedAction: function (e, ui) {
@@ -157,6 +162,28 @@
             this.render();
         },
 
+        
+        metricRemovedAction: function () {
+            //var myId = e.currentTarget.id;
+            console.log("removed");
+            //console.log(this.metricArray);
+            /*
+
+            var removedItem = null;
+            for (var i = 0; i < this.metricArray.length; i++) {
+                if (this.metricArray[i].Order == ui.oldindex) {
+                    removedItem = this.metricArray[i];
+                }
+            }
+
+            for (var i = )
+
+
+            this.metricArray.pop({ Placeholder: true, Order: this.metricArray.length });
+            */
+            this.render();
+        },
+        
         compareNumbers: function (a, b) {
             var x = parseInt(a.Order);
             var y = parseInt(b.Order);
