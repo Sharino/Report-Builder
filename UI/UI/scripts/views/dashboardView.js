@@ -13,15 +13,18 @@
     'adform-notifications',
     'adform-modal'
 ], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate, KPIView, MessageView, Config, DateFilterView) {
+
+    var startDate = moment().format('YYYY-MM-DD');
+
     var DashboardView = BaseCompositeView.extend({
         template: _.template(dashboardTemplate),
-
+       
         events: {
             'click .editable ': 'toggle',
             'click #edit': 'edit',
             'click .dashboard-list-item>.del': 'handleDeleteAction'
         },
-
+       
         edit: function (e) {
             e.preventDefault();
 
@@ -112,10 +115,12 @@
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
 
             this.render();
+
             for (var i = 0; i < this.model.get('ComponentIds').length; i++) {
                 var id = this.model.get('ComponentIds')[i];
                 this.populate(id, i);
             }
+           
         },
 
         populate: function (id, position) {
@@ -165,7 +170,10 @@
 
         render: function () {
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
-            this.renderSubview("#date-filter", new DateFilterView());
+            this.renderSubview("#date-filter", new DateFilterView({
+                from: startDate,
+                to: startDate
+            }));
             return this;
         }
     });

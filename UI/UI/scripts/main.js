@@ -98,7 +98,7 @@
 
         'spin':{
             deps: ['jquery'],
-            exports: 'Spinner'
+            exports: 'jquery'
         },
 
         'handlebars': {

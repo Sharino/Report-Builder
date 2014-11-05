@@ -38,8 +38,11 @@
 
         render: function () {
             this.$el.html(this.template());
-
-            this.renderSubview("#date-filter", new DateFilterView());
+         
+//            this.renderSubview("#date-filter", new DateFilterView({
+//                from: '2050-01-01',
+//                to: '2060-01-01'
+//            }));
 
             switch (this.model.get("Type")) {
                 case 0:

@@ -1,113 +1,133 @@
-﻿﻿define('KPIView', [
+﻿define('KPIView', [
     'BaseCompositeView',
     'text!templates/kpi.html',
     'DateFilterView',
     'Einstein',
-    'Metric'
+    'Metric',
+    'spin',
+    'adform-loader'
 ], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric) {
 
-    var KPIView = BaseCompositeView.extend({
+    var startDate = moment().format('YYYY-MM-DD');
+
+    var kpiView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
         events: {
             'click #generateByDate': 'generateNewData',
+            'click .KpiEdit': 'edit'
         },
 
         initialize: function (parent, pos) {
             this.model = parent;
             this.position = pos;
-            this.initEinstein('2014-01-01', '2014-01-02');
+            this.initEinstein(startDate, startDate);
         },
+
+        render: function (einstein,dataFiler) {
+           
+            if (!einstein && !dataFiler) {
+                einstein = 'garbage';
+                from = startDate;
+                to = startDate;
+            } else {
+//                console.log(dataFiler);
+                from = $("#picker").find("input")[0].value;
+                to = $("#picker2").find("input")[0].value;
+            }
+            
+            this.$el.html(this.template({
+                Einstein: einstein,
+                Metrics: this.model.get('Metrics'),
+                model: this.model.toJSON(),
+                Position: this.position || 0,
+                ComponentID: this.model.id
+            }));
+
+//            alert("Before render");
+            this.renderSubview("#date-filter", new DateFilterView({
+                from: from,
+                to: to
+            }));
+
+            return this;
+        },
+
+        initEinstein: function (start, end) {
+
+            var einstein = new Einstein({
+                    Metrics: this.getMnemonics(this.model.get("Metrics")),
+                    Dimensions: [],
+                    Filters: {
+                        "DateFilter": {
+                            "From": start,
+                            "To": end
+                        }
+                    }
+                });
+            console.log(einstein);
+            this.workEinstein(einstein);
+
+        },
+
         generateNewData: function () {
 
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
+
             if (startDate <= endDate) {
-//                alert(startDate + ' <> ' + endDate);
                 this.initEinstein(startDate, endDate);
             } else {
-                alert('Suds');
+                alert('back to the future');
             }
 
-            return true;
         },
 
-        initEinstein: function (start, end) {
-            var metrics = this.model.get("Metrics");
-         
-            var metricModels = [];
-            _.each(metrics, function (metric) {
-                metricModels.push(new Metric(metric));
-            });
-
-            var complete = _.invoke(metricModels, 'fetch');
+        getMnemonics: function (metrics) {
 
             var metricMnemonics = [];
-            var self = this;
-            $.when.apply($, complete).done(function () {
-                _.each(metricModels, function (metric) {
-                    metricMnemonics.push(metric.get("Mnemonic"));
-                });
+
+            _.each(metrics, function (metric) {
+                var newMetric = new Metric(metric);
+                metricMnemonics.push(newMetric.get("Mnemonic"));
             });
 
-            var einstein = new Einstein({
-                Metrics: metricMnemonics,
-                Dimensions: [],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-            console.log(einstein);
-            this.workEinstein(einstein);
+            return metricMnemonics;
+
         },
+
         workEinstein: function (stoneAlone) {
+
             var self = this;
+//            $('#spinner').loader({ spinner: 'tiny' });
+//            $("#spinner").spin("tiny");
             stoneAlone.fetch({
-                //data: metricMnemonics,
                 url: 'http://37.157.0.42:33896/api/Einstein/' + JSON.stringify(stoneAlone),
                 type: "GET",
-                //dataType: 'text',
-                // contentType: 'application/json', //'application/x-www-form-urlencoded',
                 success: function (response) {
-                    console.log("RESPONSE IS JUST BELOW ME");
-                    console.log(response);
-                    console.log(JSON.stringify(response.attributes));
-                    self.render(response.attributes.ComponentValues[0]);
-     
+                 
+                      self.render( response.attributes.ComponentValues[0],response.attributes.Filters.DateFilter);
+                   
                 },
                 error: function (error) {
                     console.log("Stone Alone FAIL");
                     console.log(error);
                 }
             });
+        },
+        edit: function (e) {
            
-﻿        },
+            e.preventDefault();
 
-        render: function (einstein) {
-            
-            if (!einstein)
-                einstein = 'garbage';
+            var id = $(e.currentTarget).attr("id");
+            var routerUrl = "create/".concat(id);
 
-            console.log("EINSTEIN IS JUST BELOW ME");
-            console.log(einstein);
-
-
-            this.$el.html(this.template({
-                Einstein: einstein,
-                Metrics: this.model.get('Metrics'),
-                model: this.model.toJSON(),
-                Position: this.position || 0
-            }));
-
-            this.renderSubview("#date-filter", new DateFilterView());
-
-            return this;
+            Backbone.history.navigate(routerUrl, true, true);
+         
         }
+        
+       
     });
 
-
-    return KPIView;
+    return kpiView;
 });
