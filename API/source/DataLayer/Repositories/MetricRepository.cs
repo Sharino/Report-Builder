@@ -42,6 +42,7 @@ namespace DataLayer.Repositories
 		                        ON  [dbo].[Metrics].ID = [dbo].[MetricGroupMetric].MetricID
 	                        LEFT JOIN [dbo].[MetricGroups]	
 		                        ON [dbo].[MetricGroups].ID = [dbo].[MetricGroupMetric].GroupID";
+
             using (var command = new SqlCommand(sql, _connection))
             {
  

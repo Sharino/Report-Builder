@@ -84,6 +84,7 @@
   <ItemGroup>
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\DashboardComponentController.cs" />
+    <Compile Include="Controllers\DimensionController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MetricController.cs" />
     <Compile Include="Controllers\ReportComponentController.cs" />
