@@ -18,14 +18,14 @@
             'click .KpiEdit': 'edit'
         },
 
-        initialize: function (parent, pos) {
+        initialize: function(parent, pos) {
             this.model = parent;
             this.position = pos;
             this.initEinstein(startDate, startDate);
         },
 
-        render: function (einstein,dataFiler) {
-           
+        render: function(einstein, dataFiler) {
+
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
                 from = startDate;
@@ -35,7 +35,7 @@
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
             }
-            
+
             this.$el.html(this.template({
                 Einstein: einstein,
                 Metrics: this.model.get('Metrics'),
@@ -53,24 +53,24 @@
             return this;
         },
 
-        initEinstein: function (start, end) {
+        initEinstein: function(start, end) {
 
             var einstein = new Einstein({
-                    Metrics: this.getMnemonics(this.model.get("Metrics")),
-                    Dimensions: [],
-                    Filters: {
-                        "DateFilter": {
-                            "From": start,
-                            "To": end
-                        }
+                Metrics: this.getMnemonics(this.model.get("Metrics")),
+                Dimensions: [],
+                Filters: {
+                    "DateFilter": {
+                        "From": start,
+                        "To": end
                     }
-                });
+                }
+            });
             console.log(einstein);
             this.workEinstein(einstein);
 
         },
 
-        generateNewData: function () {
+        generateNewData: function() {
 
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
@@ -83,11 +83,11 @@
 
         },
 
-        getMnemonics: function (metrics) {
+        getMnemonics: function(metrics) {
 
             var metricMnemonics = [];
 
-            _.each(metrics, function (metric) {
+            _.each(metrics, function(metric) {
                 var newMetric = new Metric(metric);
                 metricMnemonics.push(newMetric.get("Mnemonic"));
             });
@@ -95,17 +95,23 @@
             return metricMnemonics;
 
         },
-
+      
+     
         workEinstein: function (stoneAlone) {
-
+             
             var self = this;
 //            $('#spinner').loader({ spinner: 'tiny' });
-//            $("#spinner").spin("tiny");
+            //            $("#spinner").spin("tiny");
+
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/' + JSON.stringify(stoneAlone),
-                type: "GET",
+                url: 'http://37.157.0.42:33896/api/Einstein/Data',
+                data: JSON.stringify(stoneAlone),
+                contentType: 'application/json',
+                dataType: 'json',
+                type: 'POST',
+                processData: false,
                 success: function (response) {
-                 
+                       
                       self.render( response.attributes.ComponentValues[0],response.attributes.Filters.DateFilter);
                    
                 },

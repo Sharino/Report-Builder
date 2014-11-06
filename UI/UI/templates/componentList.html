@@ -4,10 +4,14 @@
 <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
     <thead>
         <tr>
-            <th style="width:5%">Id</th>
-            <th style="width:10%">Title</th>
-            <th style="width:5%">Type</th>
+            <th >Id</th>
+            <th >Title</th>
+            <th >Type</th>
             <th style="text-align: center">Actions</th>
+<!--            <th style="width:10%">Id</th>-->
+<!--            <th style="width:10%">Title</th>-->
+<!--            <th style="width:10%">Type</th>-->
+<!--            <th style="text-align: center">Actions</th>-->
         </tr>
     </thead>
     <tbody>
@@ -16,7 +20,7 @@
             <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
             <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
                 
-            <td id="<%= model.Id %>" >
+            <td class="click"  id="<%= model.Id %>">
                 <% if (!model.IsGenerated) { %>
                 <% if (model.Type === 0) { %>
                 <i class="gen adf-icon-alt-sadface"></i>
@@ -33,10 +37,10 @@
                 <i class="adf-icon-alt-check"></i>
                 <% } %>
             </td>
-            <td id="<%= model.Id %>">
-                <i class="del adf-icon-small-close pull-right"></i>
+            <td  id="<%= model.Id %>">
+                <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
                 <a class="gen btn btn-transparent pull-right">Generate</a>
-              
+
             </td>
         </tr>
         <% }); %>

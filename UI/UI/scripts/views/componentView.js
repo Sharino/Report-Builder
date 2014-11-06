@@ -119,7 +119,8 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    Backbone.history.navigate("list", { trigger: true });
+                    //                    Backbone.history.navigate("list", { trigger: true });
+                    window.history.back();
                 },
                 error: function(model, response) {
                     console.log("Save FAIL", model, response);

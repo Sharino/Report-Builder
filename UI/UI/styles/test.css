@@ -73,6 +73,10 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     height: 10px;
 }
 
+.notifications-container {
+    width: 220px !important;
+}
+
 .group-label label {
     font-size: 15px;
 }

@@ -95,6 +95,7 @@
                     }
                 }
             });
+            return false;
         },
 
         handleGenerateAction: function (e) {

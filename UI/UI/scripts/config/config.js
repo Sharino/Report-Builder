@@ -22,7 +22,7 @@
         },
 
         NotificationSettings: {
-            Timeout: 5000
+            Timeout: 1500
         },
 
         NetworkSettings: {
