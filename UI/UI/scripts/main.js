@@ -42,7 +42,7 @@
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
         'Dashboard':            'scripts/models/dashboard',
-        'DashboardComponent': 'scripts/models/dashboardComponent',
+        'DashboardComponent':   'scripts/models/dashboardComponent',
         'Einstein':             'scripts/models/einstein',
 
         /* Collection dependencies */

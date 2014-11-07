@@ -49,7 +49,7 @@
         },
 
         render: function() {
-
+           
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
@@ -75,9 +75,11 @@
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
                 this.$el.html(this.template(templVariables));
-
+           
                 allMetrics.fetch({
-                    success: function(allMetrics, response) {
+                    success: function (allMetrics, response) {
+                        console.log('cia');
+                        console.log(self.model);
                         console.log("allMetric.fetch OK", allMetrics, response);
 
                         self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
@@ -116,7 +118,7 @@
 //        Returns nothing. */
         submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+           
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {

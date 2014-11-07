@@ -30,7 +30,8 @@
             "generate/:id": "generateById",
             "dashboards": "dashboards",
             "dashboard/:id": "showDashboard",
-            "createDashboard": "createDashboard"
+            "createDashboard": "createDashboard",
+            "editComponent/:id": "editDashboardComponent"
         },
 
         initialize: function () {
@@ -39,6 +40,7 @@
         },
 
         create: function () {
+       
             this.showView("#component", new ComponentView({ model: new Component() }));
         },
 
@@ -141,6 +143,20 @@
                         timeout: Config.NotificationSettings.Timeout
                     });
                     self.showView("#list", new ComponentListView({ collection: null }));
+                }
+            });
+        },
+
+        editDashboardComponent: function(id) {
+            var self = this;
+            var tempComponent = new DashboardComponent({ Id: id });
+            tempComponent.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#component", new ComponentView({ model: model }));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
                 }
             });
         },

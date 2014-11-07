@@ -100,7 +100,7 @@
         workEinstein: function (stoneAlone) {
              
             var self = this;
-            $('#spinner').loader();
+//            $('#spinner').loader();
             //            $("#spinner").spin("tiny");
 
             stoneAlone.fetch({
@@ -122,11 +122,10 @@
             });
         },
         edit: function (e) {
-           
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("id");
-            var routerUrl = "create/".concat(id);
+            var routerUrl = "editComponent/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
          
