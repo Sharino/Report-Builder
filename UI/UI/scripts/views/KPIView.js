@@ -100,7 +100,7 @@
         workEinstein: function (stoneAlone) {
              
             var self = this;
-//            $('#spinner').loader({ spinner: 'tiny' });
+            $('#spinner').loader();
             //            $("#spinner").spin("tiny");
 
             stoneAlone.fetch({
