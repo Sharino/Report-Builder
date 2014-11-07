@@ -121,7 +121,6 @@
             deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap-tooltip'],
             exports: 'AdformSelect'
         },
-
         'adform-notifications': {
             deps: ['jquery', 'backbone', 'underscore']
         },

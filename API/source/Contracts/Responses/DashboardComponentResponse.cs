@@ -8,14 +8,14 @@ namespace Contracts.Responses
     {
         public DashboardComponentResponse(List<DashboardComponentDto> componentDtos)
         {
-            ComponetDtos = componentDtos;
+            ComponentDtos = componentDtos;
         }
 
         public DashboardComponentResponse(DashboardComponentDto componentDto)
         {
-            ComponetDtos = new List<DashboardComponentDto> { componentDto };
+            ComponentDtos = new List<DashboardComponentDto> { componentDto };
         }
 
-        public List<DashboardComponentDto> ComponetDtos { get; set; }
+        public List<DashboardComponentDto> ComponentDtos { get; set; }
     }
 }

@@ -26,6 +26,10 @@ namespace Controllers
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
 
+            //configuration.Routes.MapHttpRoute(
+            //    name: "DashComponentAdd",
+            //    routeTemplate: "api/{controller}/{dashboardId}/{reportComponentId}");
+
 
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 

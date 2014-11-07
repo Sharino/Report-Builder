@@ -13,32 +13,6 @@ namespace BussinessLogicTests
     [TestClass]
     public class ReportComponentHandlerTests
     {
-
-        [TestMethod]
-        public void AddHandler_ValidatesData()
-        {
-            //Arrange
-            var repository = new Mock<IReportComponentRepository>();
-            repository.Setup(x => x.Add(It.IsAny<ReportComponent>())).Returns(1);
-
-            var reportDto = new ReportComponentDto
-            {
-                Dimensions = null,
-                Filters = null,
-                Metrics = null,
-                Id = 1,
-                Title = "Test",
-                Type = 1
-            };
-            var handler = new AddHandler(repository.Object);
-            //Act
-            var result = handler.Handle(reportDto);
-
-            //Assert
-            Assert.IsNotNull(result);
-            Assert.AreEqual(reportDto.Title, result.ReportComponentDtos[0].Title);
-            Assert.IsInstanceOfType(result, typeof(ReportComponentResponse));
-        }
         [TestMethod]
         public void GetHandler_ValidatesData()
         {

@@ -1,10 +1,3 @@
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Models\bin\Debug\Models.dll
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Models\bin\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
@@ -18,3 +11,16 @@ C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Models\bin\Debug
 C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Models\obj\Debug\Models.dll
 C:\Users\Administrator\Desktop\Report-Builder-master\API\source\Models\obj\Debug\Models.pdb
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.dll
+C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.pdb

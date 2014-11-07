@@ -98,7 +98,11 @@ namespace UnitTests
             {
                 Id = 1,
                 Title = "Test",
-                Type = 1
+                Type = 1,
+                Dimensions = new List<Dimension>{new Dimension{DimensionId = 1}},
+                Filters = new List<Filter>{new Filter{FilterId = 1}},
+                Metrics = new List<MetricDto>{new MetricDto{DataType = " ", Description = " ", DisplayName = " ", Group = new MetricGroup{GroupId = 1, GroupName = " "}, MetricId = 1, Mnemonic = " "}},
+                SubmissionDate = "now"
             };
 
             //Act
@@ -110,6 +114,9 @@ namespace UnitTests
             Assert.AreEqual(source.Title, destination.Title);
             Assert.AreEqual(source.Id, destination.Id);
             Assert.AreEqual(source.Type, destination.Type);
+            Assert.AreEqual(source.Dimensions.Count, destination.Data.Dimensions.Count);
+            Assert.AreEqual(source.Filters.Count, destination.Data.Filters.Count);
+            Assert.AreEqual(source.Metrics.Count, destination.Data.Metrics.Count);
         }
 
         [TestMethod]

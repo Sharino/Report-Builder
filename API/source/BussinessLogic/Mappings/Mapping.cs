@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
 using Contracts.DTO;
@@ -65,7 +66,7 @@ namespace BussinessLogic.Mappings
         public Dashboard DtoToDashboard(DashboardDto dto)
         {
             var dashboard = new Dashboard();
-            dashboard.Components = dto.Components;
+            dashboard.ComponentIds = dto.ComponentIds;
             dashboard.Id = dto.Id;
             dashboard.Title = dto.Title;
             return dashboard;
@@ -74,7 +75,7 @@ namespace BussinessLogic.Mappings
         public DashboardDto DashboardToDto(Dashboard dashboard)
         {
             var dto = new DashboardDto();
-            dto.Components = dashboard.Components;
+            dto.ComponentIds = dashboard.ComponentIds;
             dto.Id = dashboard.Id;
             dto.Title = dashboard.Title;
             return dto;
@@ -120,9 +121,32 @@ namespace BussinessLogic.Mappings
 
         #endregion
 
-        #region Report Component
+		#region Dimension
 
-        public ReportComponent DtoToReportComponent(ReportComponentDto dto)
+		public List<DimensionDto> DimensionToDto(List<Dimension> dimensions)
+		{
+			return dimensions.Select(DimensionToDto).ToList();
+		}
+
+		public DimensionDto DimensionToDto(Dimension dimension)
+		{
+			var dto = new DimensionDto();
+			dto.Description = dimension.Description;
+			dto.DisplayName = dimension.DisplayName;
+			dto.DataType = dimension.DataType;
+			dto.Mnemonic = dimension.Mnemonic;
+			dto.DimensionId = dimension.DimensionId;
+			dto.Group = dimension.Group;
+			return dto;
+		}
+	
+		#endregion
+
+
+
+		#region Report Component
+
+		public ReportComponent DtoToReportComponent(ReportComponentDto dto)
         {
             var report = new ReportComponent
             {

@@ -57,6 +57,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportComponentHandlerTests.cs" />
     <Compile Include="DashboardComponentHandlerTests.cs" />
+    <Compile Include="DashboardHandlerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\source\BussinessLogic\BussinessLogic.csproj">

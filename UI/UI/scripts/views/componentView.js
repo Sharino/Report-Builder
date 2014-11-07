@@ -11,16 +11,21 @@
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
+        /* ComponentView events */
         events: {
             'click #component-submit': 'submit'
         },
 
        
 
+        /* Form input title return method.
+        Returns: string */
         inputTitle: function () {
             return $('#input').val();
         },
 
+        /* Form input type return method.
+        Returns: int */
         inputType: function() {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
@@ -106,7 +111,11 @@
         },
 
 
+        Takes required data from the form.
+        Validates it, tries to save it, acts accordingly.
+        Returns nothing. */
         submit: function() {
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             console.log(this.model.toJSON());
 

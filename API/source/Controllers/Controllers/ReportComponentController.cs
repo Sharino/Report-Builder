@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
@@ -16,7 +15,7 @@ namespace Controllers.Controllers
         [HttpGet]
         public HttpResponseMessage GetAll()
         {            
-            BaseHandler<int, ReportComponentResponse> handler = new GetAllHandler();
+            var handler = new GetAllHandler();
             var response = handler.Handle(0);
 
             if (handler.Errors == null || handler.Errors.Count < 1)
@@ -29,7 +28,7 @@ namespace Controllers.Controllers
         [HttpGet]
         public HttpResponseMessage Get(int id)
         {
-            BaseHandler<int, ReportComponentResponse> handler = new GetHandler();
+            var handler = new GetHandler();
             var response = handler.Handle(id);
             if (handler.Errors == null || handler.Errors.Count < 1)
             {
@@ -53,7 +52,7 @@ namespace Controllers.Controllers
         [HttpPost]
         public HttpResponseMessage Add(ReportComponentDto reportDto)
         {
-            BaseHandler<ReportComponentDto, ReportComponentResponse> handler = new AddHandler();
+            var handler = new AddHandler();
             var response = handler.Handle(reportDto);
             if (handler.Errors == null || handler.Errors.Count < 1)
             {
@@ -65,7 +64,7 @@ namespace Controllers.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-            BaseHandler<int, ReportComponentResponse> handler = new DeleteHandler();
+            var handler = new DeleteHandler();
             var response = handler.Handle(id);
             if (handler.Errors == null || handler.Errors.Count < 1)
             {

@@ -30,11 +30,11 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
         {
             if (request.Title.Length > 30)
             {
-                Errors.Add(new ErrorDto("EN", "Report Component title cannot exceed 30 symbols", DateTime.Now));
+                Errors.Add(new ErrorDto("EN", "Report Component title cannot exceed 30 symbols"));
             }
             if (request.Type < 1 || request.Type > 4)
             {
-                Errors.Add(new ErrorDto("EN", "Provided Report Componing type is invalid", DateTime.Now));
+                Errors.Add(new ErrorDto("EN", "Provided Report Componing type is invalid"));
             }
 
             return Errors.Count == 0;

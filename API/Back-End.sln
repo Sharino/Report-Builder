@@ -7,6 +7,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{13338875-5B3B-46E1-818F-C8024BB7F077}"
 	ProjectSection(SolutionItems) = preProject
 		scripts\CREATE_DROP.sql = scripts\CREATE_DROP.sql
+		C:\Users\User\Desktop\DimensionsPopulate.sql = C:\Users\User\Desktop\DimensionsPopulate.sql
+		C:\Users\User\Desktop\DimensionsTableCreate.sql = C:\Users\User\Desktop\DimensionsTableCreate.sql
 		scripts\POPULATE.sql = scripts\POPULATE.sql
 		scripts\TABLE-CREATE.sql = scripts\TABLE-CREATE.sql
 	EndProjectSection

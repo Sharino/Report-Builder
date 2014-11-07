@@ -38,7 +38,7 @@ namespace DataLayer.Repositories
 
         public IEnumerable<Dashboard> GetAll()
         {
-            const string sql = @"SELECT * FROM [dbo].[Dashboard]";
+            const string sql = @"SELECT * FROM [dbo].[Dashboards] WHERE [IS_DELETED] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -50,7 +50,7 @@ namespace DataLayer.Repositories
                         var item = new Dashboard();
                         item.Id = reader.GetInt32(0);
                         item.Title = reader.GetString(1);
-                        item.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                        item.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
                         list.Add(item);
                     }
                     _connection.Close();
@@ -61,7 +61,7 @@ namespace DataLayer.Repositories
 
         public Dashboard Get(int id)
         {
-            const string sql = @"SELECT * FROM [dbo].[Dashboard] WHERE [Id] = @id";
+            const string sql = @"SELECT * FROM [dbo].[Dashboards] WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -72,7 +72,7 @@ namespace DataLayer.Repositories
                     var dashboard = new Dashboard();
                     dashboard.Id = reader.GetInt32(0);
                     dashboard.Title = reader.GetString(1);
-                    dashboard.Components = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                    dashboard.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
 
                     _connection.Close();
                     return dashboard;
@@ -80,14 +80,16 @@ namespace DataLayer.Repositories
             }
         }
 
-        public int Add(Dashboard dashboard)
+        public int Add(Dashboard dashboard)  
         {
-            const string sql = @"INSERT INTO [dbo].[Dashboard] (Title, Definition) VALUES (@title, @definition); SELECT @@IDENTITY;";
+            const string sql = @"INSERT INTO [dbo].[Dashboards] (Title, Definition, CreationDate, ModificationDate) VALUES (@title, @definition, @creationDate, @modificationDate); SELECT @@IDENTITY;";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@title", dashboard.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.ComponentIds));
+                command.Parameters.AddWithValue("@creationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
+                command.Parameters.AddWithValue("@modificationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 object result = command.ExecuteScalar();
                 int id = 0;
                 if (result != null)
@@ -101,11 +103,13 @@ namespace DataLayer.Repositories
 
         public void Remove(int id)
         {
-            const string sql = @"DELETE FROM [dbo].[Dashboard] WHERE [Id] = @id";
+            const string sql = @"UPDATE [dbo].[Dashboards] SET [IS_DELETED] = @q, [DeletionDate] = @deletionDate WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@id", id);
+                command.Parameters.AddWithValue("@q", 1);
+                command.Parameters.AddWithValue("@deletionDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 command.ExecuteNonQuery();
                 _connection.Close();
             }
@@ -113,13 +117,14 @@ namespace DataLayer.Repositories
 
         public int Update(Dashboard dashboard)
         {
-            const string sql = @"UPDATE [dbo].[Dashboard] SET [Title] = @title, [Definition] = @definition WHERE [Id] = @id";
+            const string sql = @"UPDATE [dbo].[Dashboards] SET [Title] = @title, [Definition] = @definition, [ModificationDate] = @modificationDate WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
                 command.Parameters.AddWithValue("@title", dashboard.Title);
-                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.Components));
+                command.Parameters.AddWithValue("@definition", _serializer.Serialize(dashboard.ComponentIds));
                 command.Parameters.AddWithValue("@id", dashboard.Id);
+                command.Parameters.AddWithValue("@modificationDate", DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss"));
                 command.ExecuteNonQuery();
                 _connection.Close();
                 return dashboard.Id;
@@ -128,7 +133,7 @@ namespace DataLayer.Repositories
 
         public bool Exists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboard] WHERE [Id] = @id";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboards] WHERE [Id] = @id AND [IS_DELETED] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
