@@ -3,16 +3,18 @@
     'Component',
     'DashboardComponent',
     'MetricCollection',
+    'DimensionCollection',
     'MetricListView',
+    'DimensionListView',
     'text!templates/component.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, MetricListView, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, componentTemplate, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
-            'click #component-submit': 'submit'
+            'click #component-submit': 'submit',
         },
 
         inputTitle: function () {
@@ -32,9 +34,20 @@
         inputMetrics: function() {
             var result = [];
 
-            this.subViews[0].metricArray.forEach(function(metric) {
+            this.metricView.metricArray.forEach(function (metric) {
                 if (!metric.Placeholder) {
                     result.push(metric);
+                }
+            });
+
+            return result;
+        },
+        inputDimensions: function () {
+            var result = [];
+
+            this.dimensionView.dimensionArray.forEach(function (dimension) {
+                if (!dimension.Placeholder) {
+                    result.push(dimension);
                 }
             });
 
@@ -53,6 +66,7 @@
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
+            var allDimensions = new DimensionCollection();
 
             var self = this;
 
@@ -73,10 +87,19 @@
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
-                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
                     error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
                     }
                 });
 
@@ -88,14 +111,35 @@
                 this.$el.html(this.template(templVariables));
 
                 allMetrics.fetch({
-                    success: function(allMetrics, response) {
-                        self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+                    success: function (allMetrics) {
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
-                    error: function(allMetrics, response) {
+                    error: function (allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
                     }
                 });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
+                    }
+                });
             }
+
+            setTimeout(function() {
+                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
+
+                $('#metric-list').find('.list-pop').tooltip({
+                    delay: {
+                        show: 1000,
+                        hide: 500
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
+            }, 3000);
 
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
@@ -103,7 +147,8 @@
         },
 
         submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
+            console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
                 success: function(model, response) {
@@ -112,8 +157,7 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    //                    Backbone.history.navigate("list", { trigger: true });
-                    window.history.back();
+                    Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function(model, response) {
                     console.log("Save FAIL", model, response);

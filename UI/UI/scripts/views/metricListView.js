@@ -1,11 +1,11 @@
 ﻿define('MetricListView', [
-    'BaseCompositeView',
-    'Metric',
-    'MetricCollection',
-    'text!templates/metricList.html',
-    'Config',
-    'adform-select-group',
-    'jquery-sortable'
+   'BaseCompositeView',
+   'Metric',
+   'MetricCollection',
+   'text!templates/metricList.html',
+   'Config',
+   'adform-select-group',
+   'jquery-sortable'
 ], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, ASG) {
     var MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
@@ -16,7 +16,7 @@
             'click .removeMetric': 'metricRemovedAction'
         },
 
-        fire: function(e){
+        fire: function (e) {
             $(e.target.nextElementSibling).toggle();
         },
 
@@ -28,7 +28,7 @@
             this.selectReferences = [];
 
             this.model = parentModel;
-            
+
             this.metricArray = this.model.get("Metrics").slice(0);
 
             for (var i = 0; i < this.metricArray.length; i++) {
@@ -133,7 +133,7 @@
             sort.bind('sortupdate', function (e, ui) {
                 self.metricDraggedAction(e, ui);
             });
-            
+
         },
 
         metricDraggedAction: function (e, ui) {
@@ -163,7 +163,7 @@
             this.render();
         },
 
-        
+
         metricRemovedAction: function (e) {
             var myId = parseInt(e.currentTarget.id);
 
@@ -173,7 +173,7 @@
 
             this.render();
         },
-        
+
         compareNumbers: function (a, b) {
             var x = parseInt(a.Order);
             var y = parseInt(b.Order);

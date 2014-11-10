@@ -2,11 +2,13 @@
     'BaseCompositeView',
     'DashboardComponent',
     'MetricCollection',
+    'DimensionCollection',
     'MetricListView',
+    'DimensionListView',
     'text!templates/dashboardComponent.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, DashboardComponent, MetricCollection, MetricListView, dashboardComponentTemplate, Config) {
+], function (BaseCompositeView, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, dashboardComponentTemplate, Config) {
     var DashboardComponentView = BaseCompositeView.extend({
         template: _.template(dashboardComponentTemplate),
 
@@ -31,9 +33,21 @@
         inputMetrics: function() {
             var result = [];
 
-            this.subViews[0].metricArray.forEach(function(metric) {
+            this.metricView.metricArray.forEach(function(metric) {
                 if (!metric.Placeholder) {
                     result.push(metric);
+                }
+            });
+
+            return result;
+        },
+
+        inputDimensions: function () {
+            var result = [];
+
+            this.dimensionView.dimensionArray.forEach(function (dimension) {
+                if (!dimension.Placeholder) {
+                    result.push(dimension);
                 }
             });
 
@@ -50,6 +64,8 @@
             };
 
             var allMetrics = new MetricCollection();
+            var allDimensions = new DimensionCollection();
+
 
             var self = this;
 
@@ -59,12 +75,19 @@
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
-                        console.log("allMetric.fetch OK", allMetrics, response);
-
-                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
                     error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
                     }
                 });
 
@@ -76,7 +99,7 @@
         },
 
         submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
             console.log(this.model.toJSON());
 
             var def = JSON.stringify({Metrics: this.model.get("Metrics"), Dimensions: this.model.get("Dimensions"), Filters: this.model.get("Filters")});

@@ -1,4 +1,4 @@
-﻿define('KPIView', [
+﻿﻿define('KPIView', [
     'BaseCompositeView',
     'text!templates/kpi.html',
     'DateFilterView',

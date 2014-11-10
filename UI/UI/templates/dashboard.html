@@ -2,9 +2,7 @@
     <div class="row" style="margin: auto;display: inline-block">
         <h2 style="padding-left: 10px"><b><%= title %></b></h2>
     </div>
-
-<!--    <div class="pull-right" id="date-filter"></div>-->
-
+    <div class="pull-right" id="date-filter"></div>
     <% for (var i = 0; i < ComponentCount; i++) { %>
     <div class="row" style="margin:auto">
         <div class="editable" data-id="<%= i %>" id="dashboard-component-<%= i %>" style="list-style-type: none;">
@@ -14,7 +12,6 @@
     </div>
     <% } %>
     <% if (ComponentCount == 0){ %>
-        <div class="row well" style="margin:auto">Dashboard is currently empty : (</div>
+    <div class="row well" style="margin:auto">Dashboard is currently empty : (</div>
     <% } %>
-
 </div>

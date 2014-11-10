@@ -1,33 +1,33 @@
-﻿<div class="form-horizontal well">
+﻿﻿<div class="form-horizontal well">
     <div class="group-label">
         <label>Metrics</label>
         <hr />
     </div>
     <ul class="sortable">
-        <% _.each(Metrics, function(model, i) { %>  
-            <li draggable="true" class="">
-                <div class="control-group metric-group">
-                    <div class="controls metric-controls">
-                        <i class="handle adf-icon-alt-drag"></i>
-                        <select class="metric-select" placeholder="Select Metric" data-no-results="No results">
-                            <option></option>
-                            <% _.each(Grouped, function(group){ %>
-                            <optgroup label="<%= group[0].Group.GroupName %>">
-                                <% _.each(group, function(Metric){ %>
-                                <option value="<%= Metric.MetricId %>" data-desc="<%= Metric.Description %>"><%= Metric.DisplayName %></option>
-                                <% }); %>
-                            </optgroup>
+        <% _.each(Metrics, function(model, i) { %>
+        <li draggable="true" class="">
+            <div class="control-group metric-group">
+                <div class="controls metric-controls">
+                    <i class="handle adf-icon-alt-drag"></i>
+                    <select class="metric-select" placeholder="Select Metric" data-no-results="No results">
+                        <option></option>
+                        <% _.each(Grouped, function(group){ %>
+                        <optgroup label="<%= group[0].Group.GroupName %>">
+                            <% _.each(group, function(Metric){ %>
+                            <option value="<%= Metric.MetricId %>" data-desc="<%= Metric.Description %>"><%= Metric.DisplayName %></option>
                             <% }); %>
-                        </select>
-                        <a><i class="removeMetric adf-icon-small-reset" id="<%= i %>"></i></a>
-                    </div>
+                        </optgroup>
+                        <% }); %>
+                    </select>
+                    <a><i class="removeMetric adf-icon-small-reset" id="<%= i %>"></i></a>
                 </div>
-            </li>
-        <% }); %> 
+            </div>
+        </li>
+        <% }); %>
 
         <button type="button" id="addMetric" class="btn btn-transparent btn-add">
             <i class="adf-icon-small-add-circle blue-icon"></i> Add Metric
         </button>
-         
+
     </ul>
 </div>

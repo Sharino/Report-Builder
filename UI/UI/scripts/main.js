@@ -1,6 +1,7 @@
 ﻿requirejs.config({
     baseUrl: '',
-    
+
+
     urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
@@ -27,7 +28,7 @@
         'adform-loader':        'scripts/lib/adform-loader',
         'adform-modal':         'scripts/lib/adform-modal',
         'adform-calendar':      'scripts/lib/adform-calendar.v2.01',
-        'adform-date': '        scripts/lib/adform-date',
+        'adform-date':          'scripts/lib/adform-date',
         'adform-datepicker':    'scripts/lib/adform-datepicker',
 
         /* Config dependencies */
@@ -41,14 +42,15 @@
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
         'Dashboard':            'scripts/models/dashboard',
-        'DashboardComponent': 'scripts/models/dashboardComponent',
+        'DashboardComponent':   'scripts/models/dashboardComponent',
+        'Dimension':            'scripts/models/dimension',
         'Einstein':             'scripts/models/einstein',
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
         'MetricCollection':     'scripts/collections/metricCollection',
         'DashboardCollection':  'scripts/collections/dashboardCollection',
-
+        'DimensionCollection':  'scripts/collections/dimensionCollection',
 
         /* View dependencies */
         'ComponentView':        'scripts/views/componentView',
@@ -64,7 +66,7 @@
         'KPIView':              'scripts/views/kpiView',
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',
-
+        'DimensionListView':    'scripts/views/dimensionListView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router',
@@ -94,9 +96,9 @@
         'bootstrap-modal': {
             deps: ['jquery']
         },
-
-        'spin': {
-            deps: ['jquery']
+        'spin':{
+            deps: ['jquery'],
+            exports: 'Spinner'
         },
 
         'handlebars': {
@@ -119,6 +121,7 @@
             deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap-tooltip'],
             exports: 'AdformSelect'
         },
+
         'adform-notifications': {
             deps: ['jquery', 'backbone', 'underscore']
         },
