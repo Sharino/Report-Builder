@@ -18,6 +18,7 @@
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
+            'click #edit': 'edit',
             'click #generate-submit': 'addToDashboard',
         },
 
@@ -34,6 +35,15 @@
                     }
                 });
             }
+        },
+        edit: function (e) {
+            e.preventDefault();
+
+            var id = $(e.currentTarget).attr("comp-id");
+            var routerUrl = "create/".concat(id);
+
+            Backbone.history.navigate(routerUrl, true, true);
+
         },
 
         render: function () {
