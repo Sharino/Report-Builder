@@ -20,6 +20,7 @@
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
+<<<<<<< HEAD
             <tr class="component-list-item">
                 <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
                 <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
@@ -43,6 +44,35 @@
                     <% } %>
                 </td>
             </tr>
+=======
+        <tr class="component-list-item">
+            <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
+            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
+                
+            <td class="click"  id="<%= model.Id %>">
+                <% if (!model.IsGenerated) { %>
+                <% if (model.Type === 0) { %>
+                <i class="gen adf-icon-alt-sadface"></i>
+                <% } else if (model.Type === 1) { %>
+                <i class="gen adf-icon-big-bars-vertical"></i>
+                <% } else if (model.Type === 2) { %>
+                <i class="gen adf-icon-big-table"></i>
+                <% } else if (model.Type === 3) { %>
+                <i class="gen adf-icon-big-graph"></i>
+                <% } else if (model.Type === 4) { %>
+                <i class="gen adf-icon-big-bars-horizontal"></i>
+                <% } %>
+                <% } else { %>
+                <i class="adf-icon-alt-check"></i>
+                <% } %>
+            </td>
+            <td  id="<%= model.Id %>">
+                <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
+                <a class="gen btn btn-transparent pull-right">Generate</a>
+
+            </td>
+        </tr>
+>>>>>>> parent of 91d8023... minor fix
         <% }); %>
     </tbody>
 </table>
