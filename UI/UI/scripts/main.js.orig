@@ -1,7 +1,8 @@
 ﻿requirejs.config({
     //By default load any module IDs from scripts/lib
     baseUrl: '',
-    
+
+
     urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
@@ -10,15 +11,10 @@
         'underscore':           'scripts/lib/underscore',
         'backbone':             'scripts/lib/backbone',
         'handlebars':           'scripts/lib/handlebars',
+        'bootstrap':            'scripts/lib/bootstrap',
         'text':                 'scripts/lib/text',
         'jquery-sortable':      'scripts/lib/jquery.sortable',
         'spin':                 'scripts/lib/spin',
-        'globalize':            'scripts/lib/globalize',
-        'moment':               'scripts/lib/moment',
-
-        /* Bootstrap components */
-        'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
-        'bootstrap-tooltip':    'scripts/lib/bootstrap/bootstrap-tooltip',
 
         /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform-checkbox',
@@ -26,10 +22,7 @@
         'adform-select-group':  'scripts/lib/adform-select-group',
         'adform-notifications': 'scripts/lib/adform-notifications',
         'adform-loader':        'scripts/lib/adform-loader',
-        'adform-modal':         'scripts/lib/adform-modal',
-        'adform-calendar':      'scripts/lib/adform-calendar.v2.01',
-        'adform-date': '        scripts/lib/adform-date',
-        'adform-datepicker':    'scripts/lib/adform-datepicker',
+
 
         /* Config dependencies */
         'Config':               'scripts/config/config',
@@ -41,15 +34,22 @@
         /* Model dependencies */
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
+<<<<<<< HEAD
         'Dashboard':            'scripts/models/dashboard',
-        'DashboardComponent': 'scripts/models/dashboardComponent',
-        'Einstein':             'scripts/models/einstein',
+        'DashboardComponent':   'scripts/models/dashboardComponent',
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
         'MetricCollection':     'scripts/collections/metricCollection',
+<<<<<<< HEAD
         'DashboardCollection':  'scripts/collections/dashboardCollection',
+        'DashboardComponentCollection': 'scripts/collections/dashboardComponentCollection',
+        
+=======
 
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
 
         /* View dependencies */
         'ComponentView':        'scripts/views/componentView',
@@ -58,14 +58,16 @@
         'MetricView':           'scripts/views/metricView',
         'MetricListView':       'scripts/views/metricListView',
         'GenerateView':         'scripts/views/generateView',
+<<<<<<< HEAD
         'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
         'KPIView':              'scripts/views/kpiView',
-        'DateFilterView':       'scripts/views/dateFilterView',
-        'MessageView':          'scripts/views/messageView',
 
+=======
+        'ComponentGeneratedView':'scripts/views/componentGeneratedView',
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
 
         /* Router dependencies */
         'Router':               'scripts/routers/router',
@@ -88,17 +90,14 @@
             exports: '_'
         },
 
-        'bootstrap-tooltip': {
-            deps: ['jquery']
-        },
-
-        'bootstrap-modal': {
-            deps: ['jquery']
+        'bootstrap': {
+            deps: ['jquery'],
+            exports: 'bootstrap'
         },
 
         'spin':{
             deps: ['jquery'],
-            exports: 'jquery'
+            exports: 'Spinner'
         },
 
         'handlebars': {
@@ -117,38 +116,24 @@
             deps: ['jquery']
         },
 
-        'adform-select-group': {
-            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap-tooltip'],
+        'adform-select': {
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
             exports: 'AdformSelect'
         },
 
-<<<<<<< HEAD
+        'adform-select-group': {
+            deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap'],
+            exports: 'AdformSelect'
+        },
+
         'adform-notifications': {
             deps: ['jquery', 'backbone', 'underscore']
         },
-        'adform-datepicker': {
-            deps: ['globalize', 'moment', 'adform-calendar', 'adform-date']
-        },
-        'adform-calendar': {
-            deps: ['jquery'],
-        },
         
-        'adform-modal': {
-            deps: ['bootstrap-modal', 'spin']
-        },
     }
 
 });
 
-=======
-        Backbone.View.prototype.close = function () {
-            console.log('Closing view', this);
-            if (this.beforeClose) {
-                this.beforeClose();
-            }
-            this.remove();
-            this.unbind();
->>>>>>> origin/master
 
 require(['Router', 'Config', 'adform-loader'],
     function (Router, Config) {
