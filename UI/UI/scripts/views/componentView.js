@@ -111,9 +111,9 @@
         },
 
 
-//        Takes required data from the form.
-//        Validates it, tries to save it, acts accordingly.
-//        Returns nothing. */
+        Takes required data from the form.
+        Validates it, tries to save it, acts accordingly.
+        Returns nothing. */
         submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
