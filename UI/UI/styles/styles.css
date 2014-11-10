@@ -127,7 +127,7 @@ i[class*="adf-icon-alt"] {
 .invisible {
   visibility: hidden;
 }
-.removeMetric {
+.removeMetric, .removeDimension {
     margin-top: -4px !important;
     margin-left: -3px !important;
 }

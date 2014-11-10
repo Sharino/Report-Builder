@@ -22,9 +22,9 @@ C:\Users\Administrator\Desktop\Report-Builder\UI\UI\bin\UI.pdb
 C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.dll
 C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.pdb
 C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\bin\UI.dll.config
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\bin\UI.dll
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\bin\UI.pdb
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\obj\Debug\UI.dll
-C:\Users\Administrator\Desktop\premerge master\Report-Builder\UI\UI\obj\Debug\UI.pdb
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.dll.config
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.dll
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\bin\UI.pdb
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.dll
+C:\Users\Ignas\Documents\GitHub\Report-Builder\UI\UI\obj\Debug\UI.pdb

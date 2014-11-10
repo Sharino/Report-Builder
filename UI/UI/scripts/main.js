@@ -15,6 +15,7 @@
         'spin':                 'scripts/lib/spin',
         'globalize':            'scripts/lib/globalize',
         'moment':               'scripts/lib/moment',
+        'Highcharts':           'scripts/lib/highcharts',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
@@ -63,7 +64,9 @@
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
-        'KPIView':              'scripts/views/kpiView',
+        'KPIView': 'scripts/views/kpiView',
+        'TimelineView': 'scripts/views/timelineView',
+        'HighchartsTimelineView': 'scripts/views/highchartsTimelineView',
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',
         'DimensionListView':    'scripts/views/dimensionListView',
@@ -134,6 +137,11 @@
         
         'adform-modal': {
             deps: ['bootstrap-modal', 'spin']
+        },
+
+        'Highcharts': {
+            deps: ['jquery'],
+            exports: "Highcharts"
         },
     }
 });
