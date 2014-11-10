@@ -63,7 +63,7 @@
                     }
                 }
             });
-            console.log(einstein);
+
             this.workEinstein(einstein);
         },
 
@@ -108,8 +108,7 @@
                       self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
+                    console.log("Stone Alone FAIL", error);
                 }
             });
         },

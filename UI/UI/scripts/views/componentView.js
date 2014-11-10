@@ -73,8 +73,6 @@
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
-                        console.log("allMetric.fetch OK", allMetrics, response);
-
                         self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
                     error: function(allMetrics, response) {
@@ -91,7 +89,6 @@
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
-                        console.log("allMetric.fetch OK", allMetrics, response);
                         self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
                     },
                     error: function(allMetrics, response) {
@@ -107,12 +104,9 @@
 
         submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
-            console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
                 success: function(model, response) {
-                    console.log("Save OK", model, response);
-
                     $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
@@ -152,8 +146,6 @@
             });
 
             if (!validationSuccess) {
-                console.log("Validation failed!", this.model.errors);
-
                 if (this.model.errors) {
                     this.model.errors.forEach(function(error) {
                         $.notifications.display({

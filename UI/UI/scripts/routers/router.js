@@ -51,14 +51,11 @@
                     {
                         title: "Submit",
                         cssClass: "btn-success",
-                        //dismiss: false,
                         callback: function () {
                             var tempDashboard = new Dashboard({ Title: $("#dashboard-title").val() });
 
                             tempDashboard.save({}, {
                                 success: function (model, response) {
-                                    console.log("GET", "Success", model, response);
-
                                     $.notifications.display({
                                         type: 'success',
                                         content: "New Dashboard was successfully created",         
@@ -92,7 +89,6 @@
             var tempDashboardModel = new Dashboard({ Id: id });
             tempDashboardModel.fetch({
                 success: function (model, response) {
-                    console.log("GET", id, "Success", model, response);
                     self.showView("#generate", new DashboardView({ model: model }));
                 },
                 error: function (model, response) {
@@ -107,7 +103,6 @@
             this.DashboardCollection = new DashboardCollection();
             this.DashboardCollection.fetch({
                 success: function (collection, response) {
-                    console.log("fetch OK", collection.toJSON());
                     self.showView("#list", new DashboardListView({ collection: collection }));
                 },
                 error: function (collection, response) {
@@ -130,7 +125,6 @@
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
                 success: function (model, response) {
-                    console.log("fetch OK", model.toJSON());
                     self.showView("#list", new ComponentListView({ collection: model }));
                 },
                 error: function (model, response) {
@@ -151,7 +145,6 @@
             var tempComponent = new Component({ Id: id });
             tempComponent.fetch({
                 success: function (model, response) {
-                    console.log("GET", id, "Success", model, response);
                     self.showView("#component", new ComponentView({ model: model }));
                 },
                 error: function (model, response) {
@@ -165,7 +158,6 @@
             var tempComponentModel = new Component({ Id: id });
             tempComponentModel.fetch({
                 success: function (model, response) {
-                    console.log("GET", id, "Success", model, response);
                     self.showView("#generate", new GenerateView({ model: model }));
                 },
                 error: function (model, response) {
@@ -183,8 +175,6 @@
 
             this.currentView = view;
 
-            console.log("Opening view", this.currentView);
-
             return view;
         },
 
@@ -196,8 +186,6 @@
             $("#menu").html(view.render().el);
 
             this.menu = view;
-
-            console.log("Opening Menu", this.menu);
         }
     });
 

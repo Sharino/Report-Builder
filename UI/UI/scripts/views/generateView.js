@@ -27,7 +27,7 @@
 
                 this.collection.fetch({
                     success: function (collection, response) {
-                        console.log(collection);
+
                     },
                     error: function (collection, response) {
                         console.log(collection);
@@ -91,7 +91,7 @@
                 var reportComponentId = self.model.get("Id");
                 var selectedDashboardId = parseInt(e.currentTarget.id);
                 
-                console.log(reportComponentId, selectedDashboardId);
+//                console.log(reportComponentId, selectedDashboardId);
 
                 //
                 //var tempDashboardComponent = new DashboardComponent({ dashboardId: selectedDashboardId, reportComponentId: reportComponentId });
@@ -109,7 +109,7 @@
 
                     type: 'post',
                     success: function () {
-                        console.log('success!');
+
                     },
                     error: function () {
                         console.log('error!');

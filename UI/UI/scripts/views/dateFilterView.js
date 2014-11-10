@@ -23,9 +23,9 @@
                 var datePicker = new AdformDatePicker(pickerOptions);
                 var datePicker2 = new AdformDatePicker(pickerOptions2);
 
-                var datePickerChangeCallback = function(e) {
-                    console.log(e, $("#picker").find("input"));
-                };
+//                var datePickerChangeCallback = function(e) {
+//                    console.log(e, $("#picker").find("input"));
+//                };
 
                 $(datePicker).on("AdformDatePicker:change", datePickerChangeCallback);
                 $(datePicker2).on("AdformDatePicker:change", datePickerChangeCallback);
