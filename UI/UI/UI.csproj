@@ -111,8 +111,7 @@
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
     <Content Include="styles\qunit.css" />
-    <Content Include="styles\site.css" />
-    <Content Include="styles\test.css" />
+    <Content Include="styles\styles.css" />
     <Content Include="templates\chart.html" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />

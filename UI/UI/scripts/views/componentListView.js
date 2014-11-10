@@ -74,8 +74,7 @@
 
             item.destroy({
                 success: function (model, response) {
-                    console.log("Delete OK", model, response);
-                    $.notifications.display({           
+                    $.notifications.display({
                         type: 'success',
                         content: 'Successfully deleted!',
                         timeout: Config.NotificationSettings.Timeout

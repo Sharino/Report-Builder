@@ -45,6 +45,7 @@
         inputDimensions: function () {
             var result = [];
 
+<<<<<<< HEAD
             this.dimensionView.dimensionArray.forEach(function (dimension) {
                 if (!dimension.Placeholder) {
                     result.push(dimension);
@@ -54,6 +55,8 @@
             return result;
         },
 
+=======
+>>>>>>> origin/master
         render: function() {
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
@@ -63,6 +66,7 @@
                     "activeList": ""
                 }
             };
+            $('#component').loader();
 
             var allMetrics = new MetricCollection();
             var allDimensions = new DimensionCollection();
@@ -82,9 +86,15 @@
                 templVariables["data"]["model"] = this.model.toJSON();
                 this.$el.html(this.template(templVariables));
 
+                _.defer(function () { $("#metric-list").loader(); });
+
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
+<<<<<<< HEAD
                         self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+=======
+                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+>>>>>>> origin/master
                     },
                     error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
@@ -108,8 +118,13 @@
                 this.$el.html(this.template(templVariables));
 
                 allMetrics.fetch({
+<<<<<<< HEAD
                     success: function (allMetrics) {
                         self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+=======
+                    success: function(allMetrics, response) {
+                        self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+>>>>>>> origin/master
                     },
                     error: function (allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
@@ -144,13 +159,15 @@
         },
 
         submit: function() {
+<<<<<<< HEAD
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
             console.log(this.model.toJSON());
+=======
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+>>>>>>> origin/master
 
             var validationSuccess = this.model.save({}, {
                 success: function(model, response) {
-                    console.log("Save OK", model, response);
-
                     $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
@@ -189,8 +206,6 @@
             });
 
             if (!validationSuccess) {
-                console.log("Validation failed!", this.model.errors);
-
                 if (this.model.errors) {
                     this.model.errors.forEach(function(error) {
                         $.notifications.display({

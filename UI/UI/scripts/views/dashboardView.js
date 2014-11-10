@@ -98,11 +98,12 @@
                     self.model.get("Components")[position] = model;
                     
                     switch (model.get("Type")) {
-                        case 0:
-                            {
-                                self.renderSubview(("#component-" + position), new KPIView(model, position));
-                                break;
-                            }
+//                        case 0:
+//                            {
+//                                $(("#component-" + position)).loader();
+//                                self.renderSubview(("#component-" + position), new KPIView(model, position));
+//                                break;
+//                            }
                         case 1:
                             {
                                 self.renderSubview(("#component-" + position), new KPIView(model, position));
@@ -136,8 +137,15 @@
         render: function () {
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
 
+<<<<<<< HEAD
 //            this.renderSubview/**/("#date-filter", new DateFilterView());
 
+=======
+            this.renderSubview("#date-filter", new DateFilterView({
+                from: startDate,
+                to: startDate
+            }));
+>>>>>>> origin/master
             return this;
         }
     });

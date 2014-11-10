@@ -23,14 +23,28 @@
                 var datePicker = new AdformDatePicker(pickerOptions);
                 var datePicker2 = new AdformDatePicker(pickerOptions2);
 
+<<<<<<< HEAD
          
+=======
+//                var datePickerChangeCallback = function(e) {
+//                    console.log(e, $("#picker").find("input"));
+//                };
+
+                $(datePicker).on("AdformDatePicker:change", datePickerChangeCallback);
+                $(datePicker2).on("AdformDatePicker:change", datePickerChangeCallback);
+
+>>>>>>> origin/master
             });
             this.render(options);
         },
 
         render: function (options) {
             var date;
+<<<<<<< HEAD
 
+=======
+            
+>>>>>>> origin/master
             if (!options) {
                 date = this.options;
             } else {
