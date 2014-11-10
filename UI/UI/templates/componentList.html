@@ -1,48 +1,48 @@
-﻿<div id="menu">
-    <ul class="wizard-nav">
-        <ul class="pull-right">
-            <li <%= data.activeReport %>><a href="#report">My Report</a></li>
-        </ul>
-        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
-        <li <%= data.activeList %>><a href="#list">List</a></li>
-    </ul>
+﻿<div style="display:inline; margin-bottom: 6px;" class="pull-right">
+    <a class="create btn btn-primary"><b>New Component</b></a>
 </div>
-
 <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
     <thead>
         <tr>
-            <th>Id</th>
-            <th>Title</th>
-            <th>Type</th>
-            <th>Delete</th>
-            <th>Generate</th>
+            <th >Id</th>
+            <th >Title</th>
+            <th >Type</th>
+            <th style="text-align: center">Actions</th>
+<!--            <th style="width:10%">Id</th>-->
+<!--            <th style="width:10%">Title</th>-->
+<!--            <th style="width:10%">Type</th>-->
+<!--            <th style="text-align: center">Actions</th>-->
         </tr>
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
-            <tr class="component-list-item">
-                <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
-                <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
-                <td class="click" id="<%= model.Id %>"><%= model.Type %></td>
-                <td class="del" id="<%= model.Id %>"><i class="adf-icon-small-close"></i></td>
-                <td class="gen" id="<%= model.Id %>">
-                    <% if (!model.IsGenerated) { %>
-                        <% if (model.Type === 0) { %>
-                            <i class="adf-icon-alt-sadface"></i>
-                        <% } else if (model.Type === 1) { %>
-                            <i class="adf-icon-big-bars-vertical"></i>
-                        <% } else if (model.Type === 2) { %>
-                            <i class="adf-icon-big-table"></i>
-                        <% } else if (model.Type === 3) { %>
-                            <i class="adf-icon-big-graph"></i>
-                        <% } else if (model.Type === 4) { %>
-                            <i class="adf-icon-big-bars-horizontal"></i>
-                        <% } %>
-                    <% } else { %>
-                        <i class="adf-icon-alt-check"></i>
-                    <% } %>
-                </td>
-            </tr>
+        <tr class="component-list-item">
+            <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
+            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
+                
+            <td class="click"  id="<%= model.Id %>">
+                <% if (!model.IsGenerated) { %>
+                <% if (model.Type === 0) { %>
+                <i class=" adf-icon-alt-sadface"></i>
+                <% } else if (model.Type === 1) { %>
+                <i class=" adf-icon-big-bars-vertical"></i>
+                <% } else if (model.Type === 2) { %>
+                <i class=" adf-icon-big-table"></i>
+                <% } else if (model.Type === 3) { %>
+                <i class=" adf-icon-big-graph"></i>
+                <% } else if (model.Type === 4) { %>
+                <i class=" adf-icon-big-bars-horizontal"></i>
+                <% } %>
+                <% } else { %>
+                <i class="adf-icon-alt-check"></i>
+                <% } %>
+            </td>
+            <td  id="<%= model.Id %>">
+                <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
+                <a class="gen btn btn-transparent pull-right">Generate</a>
+
+            </td>
+        </tr>
         <% }); %>
     </tbody>
 </table>

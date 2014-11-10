@@ -1321,12 +1321,11 @@
 
     // If a variable is not specified, place data values in local scope.
     if (!settings.variable) source = 'with(obj||{}){\n' + source + '}\n';
-
     source = "var __t,__p='',__j=Array.prototype.join," +
       "print=function(){__p+=__j.call(arguments,'');};\n" +
       source + 'return __p;\n';
 
-    try {
+      try {
       var render = new Function(settings.variable || 'obj', '_', source);
     } catch (e) {
       e.source = source;

@@ -1,14 +1,4 @@
-﻿<div id="menu">
-    <ul class="wizard-nav">
-        <ul class="pull-right">
-            <li <%= data.activeReport %>><a href="#report">My Report</a></li>
-        </ul>
-        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
-        <li <%= data.activeList %>><a href="#list">List</a></li>
-    </ul>
-</div>
-
-<div class="report-list table table-striped heading-separation table-hover selectable-rows">
+﻿<div class="report-list table table-striped heading-separation table-hover selectable-rows">
 
         <% _.each(_.filter(Components, function(model){ return model.isGenerated }), function(model) { %>
             <ul class="report-item sparklines">

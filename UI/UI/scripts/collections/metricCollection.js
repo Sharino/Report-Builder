@@ -2,14 +2,15 @@
     'jquery',
     'underscore',
     'backbone',
-    'Metric'
-], function ($, _, Backbone, Metric) {
+    'Metric',
+    'Config'
+], function ($, _, Backbone, Metric, Config) {
     var MetricCollection;
 
     MetricCollection = Backbone.Collection.extend({
         model: Metric,
-        comparator: 'Order'
-		// TODO: Add URL for Metric API.
+        comparator: 'Order',
+        url: Config.MetricSettings.URL
     });
 
     return MetricCollection;

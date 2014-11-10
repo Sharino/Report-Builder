@@ -1,0 +1,169 @@
+﻿define('Router', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'Component',
+    'ComponentCollection',
+    'ComponentView',
+    'ComponentListView',
+<<<<<<< HEAD
+    'Dashboard',
+    'DashboardView',
+    'DashboardComponent',
+    'DashboardCollection',
+    'DashboardListView',
+=======
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
+    'MenuView',
+    'GenerateView',
+    'Config',
+    'adform-notifications'
+<<<<<<< HEAD
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config) {
+=======
+], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, MenuView, GenerateView, Config) {
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
+    var Router = Backbone.Router.extend({
+        routes: {
+            "": "list",
+            "create": "create",
+            "create/:id": "createById",
+            "list": "list",
+            "generate/:id": "generateById",
+            "menu": "menu"
+        },
+
+        initialize: function () {
+            this.showMenu(new MenuView());
+            this.on("route", this.menu.routeChangedAction);
+        },
+
+        create: function () {
+<<<<<<< HEAD
+            var tempComponent = new Component();
+            this.showView("#component", new ComponentView({ model: tempComponent }));
+        },
+
+        showDashboard: function (id) {
+            var self = this;
+            var tempDashboardModel = new Dashboard({ Id: id });
+            tempDashboardModel.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#generate", new DashboardView({ model: model }));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
+                }
+            });
+        },
+
+        dashboards: function () {
+            var self = this; 
+
+            this.DashboardCollection = new DashboardCollection();
+            this.DashboardCollection.fetch({
+                success: function (collection, response) {
+                    console.log("fetch OK", collection.toJSON());
+                    self.showView("#list", new DashboardListView({ collection: collection }));
+                },
+                error: function (collection, response) {
+                    console.log("fetch FAIL", response);
+
+                    $.notifications.display({       
+                        type: 'error',
+                        content: "Error fetching from server.",         
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+
+                    self.showView("#list", new DashboardListView({ collection: null }));
+                }
+            });
+=======
+            this.showView("#component", new ComponentView({ model: new Component() }));
+>>>>>>> 7c4c14faadb7656c1d616a76de79351a4909cdf1
+        },
+
+        list: function () {
+            var self = this; 
+
+            this.ComponentsCollection = new ComponentCollection();
+            this.ComponentsCollection.fetch({
+                success: function (model, response) {
+                    console.log("fetch OK", model.toJSON());
+                    self.showView("#list", new ComponentListView({ collection: model }));
+                },
+                error: function (model, response) {
+                    console.log("fetch FAIL", response);
+
+                    $.notifications.display({       
+                        type: 'error',
+                        content: "Error fetching from server.",         
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                    self.showView("#list", new ComponentListView({ collection: null }));
+                }
+            });
+        },
+
+        createById: function (id) {
+            var self = this;
+            var tempComponent = new Component({ Id: id });
+            tempComponent.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#component", new ComponentView({ model: model }));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
+                }
+            });
+
+            tempComponent = null;
+        },
+
+        generateById: function (id) {
+            var self = this;
+            var tempComponentModel = new Component({ Id: id });
+            tempComponentModel.fetch({
+                success: function (model, response) {
+                    console.log("GET", id, "Success", model, response);
+                    self.showView("#generate", new GenerateView({ model: model }));
+                },
+                error: function (model, response) {
+                    console.log("GET", id, "Fail", model, response);
+                }
+            });
+
+            tempComponentModel = null;
+        },  
+
+        showView: function(selector, view) {
+            if (this.currentView) {
+                this.currentView.destroy();
+            }
+
+            $(selector).html(view.render().el);
+
+            this.currentView = view;
+
+            console.log("Opening view", this.currentView);
+
+            return view;
+        },
+
+        showMenu: function (view) {
+            if (this.menu) {
+                this.menu.destroy();
+            }
+
+            $("#menu").html(view.render().el);
+
+            this.menu = view;
+
+            console.log("Opening Menu", this.menu);
+        }
+    });
+
+    return Router;
+});
