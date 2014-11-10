@@ -96,15 +96,9 @@
         'bootstrap-modal': {
             deps: ['jquery']
         },
-
-<<<<<<< HEAD
         'spin':{
             deps: ['jquery'],
             exports: 'Spinner'
-=======
-        'spin': {
-            deps: ['jquery']
->>>>>>> origin/master
         },
 
         'handlebars': {

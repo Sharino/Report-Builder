@@ -13,8 +13,11 @@
     'adform-notifications',
     'adform-modal'
 ], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate, KPIView, MessageView, Config, DateFilterView) {
+    var startDate = moment().format('YYYY-MM-DD');
     var DashboardView = BaseCompositeView.extend({
         template: _.template(dashboardTemplate),
+
+      
 
         events: {
             'click #edit': 'edit',
@@ -139,10 +142,10 @@
 
 //            this.renderSubview/**/("#date-filter", new DateFilterView());
 
-            this.renderSubview("#date-filter", new DateFilterView({
-                from: startDate,
-                to: startDate
-            }));
+//            this.renderSubview("#date-filter", new DateFilterView({
+//                from: startDate,
+//                to: startDate
+//            }));
 
             return this;
         }
