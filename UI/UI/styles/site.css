@@ -57,7 +57,16 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     vertical-align: top;
 }
 
+.dimension-group{
+    vertical-align: top;
+}
+
+
 .metric-group > .controls{
+    margin: 0 !important;
+}
+
+.dimension-group > .controls{
     margin: 0 !important;
 }
 

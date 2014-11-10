@@ -1,7 +1,8 @@
 ﻿requirejs.config({
     //By default load any module IDs from scripts/lib
     baseUrl: '',
-    
+
+
     urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
@@ -28,7 +29,7 @@
         'adform-loader':        'scripts/lib/adform-loader',
         'adform-modal':         'scripts/lib/adform-modal',
         'adform-calendar':      'scripts/lib/adform-calendar.v2.01',
-        'adform-date': '        scripts/lib/adform-date',
+        'adform-date':          'scripts/lib/adform-date',
         'adform-datepicker':    'scripts/lib/adform-datepicker',
 
         /* Config dependencies */
@@ -42,14 +43,14 @@
         'Component':            'scripts/models/component',
         'Metric':               'scripts/models/metric',
         'Dashboard':            'scripts/models/dashboard',
-        'DashboardComponent': 'scripts/models/dashboardComponent',
-        'Einstein':             'scripts/models/einstein',
+        'DashboardComponent':   'scripts/models/dashboardComponent',
+        'Dimension':            'scripts/models/dimension',
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
         'MetricCollection':     'scripts/collections/metricCollection',
         'DashboardCollection':  'scripts/collections/dashboardCollection',
-
+        'DimensionCollection':  'scripts/collections/dimensionCollection',
 
         /* View dependencies */
         'ComponentView':        'scripts/views/componentView',
@@ -58,14 +59,14 @@
         'MetricView':           'scripts/views/metricView',
         'MetricListView':       'scripts/views/metricListView',
         'GenerateView':         'scripts/views/generateView',
-        'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
+      'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
-        'DashboardComponentView': 'scripts/views/dashboardComponentView',
+      'DashboardComponentView': 'scripts/views/dashboardComponentView',
         'KPIView':              'scripts/views/kpiView',
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',
-
+        'DimensionListView':    'scripts/views/dimensionListView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router',
@@ -98,7 +99,7 @@
 
         'spin':{
             deps: ['jquery'],
-            exports: 'jquery'
+            exports: 'Spinner'
         },
 
         'handlebars': {
@@ -121,6 +122,7 @@
             deps: ['jquery', 'adform-checkbox', 'handlebars', 'bootstrap-tooltip'],
             exports: 'AdformSelect'
         },
+
         'adform-notifications': {
             deps: ['jquery', 'backbone', 'underscore']
         },

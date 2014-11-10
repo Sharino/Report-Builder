@@ -38,11 +38,8 @@
 
         render: function () {
             this.$el.html(this.template());
-         
-//            this.renderSubview("#date-filter", new DateFilterView({
-//                from: '2050-01-01',
-//                to: '2060-01-01'
-//            }));
+
+            this.renderSubview("#date-filter", new DateFilterView());
 
             switch (this.model.get("Type")) {
                 case 0:
@@ -81,7 +78,18 @@
             $.modal({
                 title: "Select Dashboard",
                 body: this.selectDashboardTemplate({Dashboards: this.collection.toJSON()}),
-                buttons: [],
+                buttons: [
+                    //{
+                    //    title: "Submit",
+                    //    cssClass: "btn-success disabled",
+                    //    dismiss: false
+                    //},
+                    //{
+                    //    title: "Cancel",
+                    //    cssClass: "btn-cancel",
+                    //    id: "modalCancel"
+                    //}
+                ],
                 className: "form"
             });
 

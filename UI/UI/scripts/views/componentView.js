@@ -3,29 +3,24 @@
     'Component',
     'DashboardComponent',
     'MetricCollection',
+    'DimensionCollection',
     'MetricListView',
+    'DimensionListView',
     'text!templates/component.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, MetricListView, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, componentTemplate, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
-        /* ComponentView events */
         events: {
-            'click #component-submit': 'submit'
+            'click #component-submit': 'submit',
         },
 
-       
-
-        /* Form input title return method.
-        Returns: string */
         inputTitle: function () {
             return $('#input').val();
         },
 
-        /* Form input type return method.
-        Returns: int */
         inputType: function() {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
@@ -39,7 +34,7 @@
         inputMetrics: function() {
             var result = [];
 
-            this.subViews[0].metricArray.forEach(function(metric) {
+            this.metricView.metricArray.forEach(function (metric) {
                 if (!metric.Placeholder) {
                     result.push(metric);
                 }
@@ -47,9 +42,19 @@
 
             return result;
         },
+        inputDimensions: function () {
+            var result = [];
+
+            this.dimensionView.dimensionArray.forEach(function (dimension) {
+                if (!dimension.Placeholder) {
+                    result.push(dimension);
+                }
+            });
+
+            return result;
+        },
 
         render: function() {
-
             // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
@@ -60,6 +65,7 @@
             };
 
             var allMetrics = new MetricCollection();
+            var allDimensions = new DimensionCollection();
 
             var self = this;
 
@@ -78,12 +84,19 @@
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
-                        console.log("allMetric.fetch OK", allMetrics, response);
-
-                        self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
                     },
                     error: function(allMetrics, response) {
                         console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
                     }
                 });
 
@@ -94,16 +107,31 @@
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
 
-                allMetrics.fetch({
-                    success: function(allMetrics, response) {
-                        console.log("allMetric.fetch OK", allMetrics, response);
-                        self.renderSubview('#metric-list', new MetricListView(null, allMetrics));
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        console.log("allDimensions.fetch OK", allDimensions, response);
+
+                        self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
                     },
-                    error: function(allMetrics, response) {
-                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
                     }
                 });
+
+                // TODO bring back ze metrics
             }
+
+            setTimeout(function() {
+                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
+
+                $('#metric-list').find('.list-pop').tooltip({
+                    delay: {
+                        show: 1000,
+                        hide: 500
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
+            }, 3000);
 
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
@@ -111,12 +139,8 @@
         },
 
 
-//        Takes required data from the form.
-//        Validates it, tries to save it, acts accordingly.
-//        Returns nothing. */
         submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
-//            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
@@ -128,8 +152,7 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    //                    Backbone.history.navigate("list", { trigger: true });
-                    window.history.back();
+                    Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function(model, response) {
                     console.log("Save FAIL", model, response);

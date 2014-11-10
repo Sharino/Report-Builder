@@ -16,6 +16,10 @@
     background: rgba(231,246,253,0.5);
 }
 
+#dimension-list>.form-horizontal.well {
+    background: rgba(250,128,114,0.1);
+}
+
 .form-horizontal.well {
     background: rgba(224,224,224,0.2);
 }
@@ -73,13 +77,6 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     height: 10px;
 }
 
-.notifications-container {
-    width: 220px !important;
-}
-
-.group-label label {
-    font-size: 15px;
-}
 
 .metric-group{
     vertical-align: top;
@@ -89,6 +86,13 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     margin: 0 !important;
 }
 
+.dimension-group{
+    vertical-align: top;
+}
+
+.dimension-group > .controls{
+    margin: 0 !important;
+}
 .adform-select-control {
     vertical-align: top;
 }
@@ -113,9 +117,4 @@ i[class*="adf-icon-alt"] {
 }
 .invisible {
   visibility: hidden;
-}
-
-.removeMetric {
-    margin-top: -4px !important;
-    margin-left: -3px !important;
 }

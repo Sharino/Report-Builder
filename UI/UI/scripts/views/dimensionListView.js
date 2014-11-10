@@ -1,90 +1,84 @@
-﻿define('MetricListView', [
+﻿define('DimensionListView', [
     'BaseCompositeView',
-    'Metric',
-    'MetricCollection',
-    'text!templates/metricList.html',
+    'Dimension',
+    'DimensionCollection',
+    'text!templates/dimensionList.html',
     'Config',
     'adform-select-group',
     'jquery-sortable'
-], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, ASG) {
-    var MetricListView = BaseCompositeView.extend({
-        template: _.template(MetricListTemplate),
+], function (BaseCompositeView, Dimension, DimensionCollection, DimensionListTemplate, Config, ASG) {
+    var DimensionListView = BaseCompositeView.extend({
+        template: _.template(DimensionListTemplate),
 
         events: {
-            'click #addMetric': 'metricAddedAction',
-            'AdformSelect:selectionChanged': 'metricSelectedAction'
+            'click #addDimension': 'dimensionAddedAction',
+            'AdformSelect:selectionChanged': 'dimensionSelectedAction'
         },
 
-        fire: function(e){
+        fire: function (e) {
             $(e.target.nextElementSibling).toggle();
         },
 
-        initialize: function (parentModel, allMetrics) {
+        initialize: function (parentModel, allDimensions) {
             var self = this;
-
-            this.metricArray = [];
-
+            this.dimensionArray = [];
             this.selectReferences = [];
-
             this.model = parentModel;
-            
-            this.metricArray = this.model.get("Metrics").slice(0);
+            this.dimensionArray = this.model.get("Dimensions").slice(0);
 
-            for (var i = 0; i < this.metricArray.length; i++) {
-                this.metricArray[i].Order = i;
+            for (var i = 0; i < this.dimensionArray.length; i++) {
+                this.dimensionArray[i].Order = i;
             }
+            this.allDimensions = allDimensions;
 
-            this.allMetrics = allMetrics;
-
-            this.grouped = _.groupBy(allMetrics.toJSON(), function (metric) {
-                return metric.Group.GroupId;
+            this.grouped = _.groupBy(allDimensions.toJSON(), function (dimension) {
+                return dimension.Group.GroupId;
             });
-
         },
 
         render: function () {
             var self = this;
 
-            this.metricArray.sort(this.compareNumbers);
+            this.dimensionArray.sort(this.compareNumbers);
 
-            this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
+            this.$el.html(this.template({ "Dimensions": this.dimensionArray, "Grouped": this.grouped }));
 
-            this.initializeMetricSelects();
+            this.initializeDimensionSelects();
 
             this.initializeSortableList();
 
             return this;
         },
 
-        metricAddedAction: function () {
-            this.metricArray.push({ Placeholder: true, Order: this.metricArray.length });
+        dimensionAddedAction: function () {
+            this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length });
             this.render();
         },
 
-        initializeMetricSelects: function () {
+        initializeDimensionSelects: function () {
             var self = this;
 
-            var metricSelectArray = this.$el.find('select.metric-select').get();
+            var dimensionSelectArray = this.$el.find('select.dimension-select').get();
 
-            if (metricSelectArray.length !== 0) {
-                var singleMetricSelectReference = new ASG(metricSelectArray, { groups: true, adjustDropperWidth: true, search: true, footer: false, width: 'container' });
+            if (dimensionSelectArray.length !== 0) {
+                var singleDimensionSelectReference = new ASG(dimensionSelectArray, { groups: true, adjustDropperWidth: true, search: true, footer: false, width: 'container' });
 
-                if (metricSelectArray.length === 1) {
+                if (dimensionSelectArray.length === 1) {
                     // Strange approach, I know, but if Select element array has only one element, object reference is saved in the variable, not in $selector.data
                     // So we push that value to its $.data and later use general forEach
-                    $(metricSelectArray[0]).data("AdformSelect", singleMetricSelectReference);
+                    $(dimensionSelectArray[0]).data("AdformSelect", singleDimensionSelectReference);
                 }
 
                 this.selectReferences = [];
 
-                metricSelectArray.forEach(function (singleMetricSelect) {
-                    var reference = $(singleMetricSelect).data("AdformSelect");
+                dimensionSelectArray.forEach(function (singleDimensionSelect) {
+                    var reference = $(singleDimensionSelect).data("AdformSelect");
                     self.selectReferences.push(reference);
                 });
 
-                for (var i = 0; i < this.metricArray.length; i++) {
-                    if (!this.metricArray[i].Placeholder) {
-                        this.selectReferences[i].setValues([this.metricArray[i].MetricId]);
+                for (var i = 0; i < this.dimensionArray.length; i++) {
+                    if (!this.dimensionArray[i].Placeholder) {
+                        this.selectReferences[i].setValues([this.dimensionArray[i].DimensionId]);
                     }
                 }
 
@@ -98,7 +92,7 @@
             }
         },
 
-        metricSelectedAction: function (e) {
+        dimensionSelectedAction: function (e) {
             var reference = $(e.target).data("AdformSelect");
 
             var selectReferenceID = null;
@@ -110,10 +104,10 @@
             }
 
             var selectedValue = parseInt(reference.getValues());
-            var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
+            var displayName = this.allDimensions.get(selectedValue).get("DisplayName");
 
-            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
-            delete this.metricArray[selectReferenceID].Placeholder;
+            this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
+            delete this.dimensionArray[selectReferenceID].Placeholder;
         },
 
         initializeSortableList: function () {
@@ -122,32 +116,31 @@
             $('.sortable').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
-                //forcePlaceholderSize: true,
                 placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
             }).bind('sortupdate', function (e, ui) {
-                self.metricDraggedAction(e, ui);
+                self.dimensionDraggedAction(e, ui);
             });
         },
 
-        metricDraggedAction: function (e, ui) {
+        dimensionDraggedAction: function (e, ui) {
             var draggedItem = null;
-            for (var i = 0; i < this.metricArray.length; i++) {
-                if (this.metricArray[i].Order == ui.oldindex) {
-                    draggedItem = this.metricArray[i];
+            for (var i = 0; i < this.dimensionArray.length; i++) {
+                if (this.dimensionArray[i].Order == ui.oldindex) {
+                    draggedItem = this.dimensionArray[i];
                 }
             }
 
 
             if (ui.oldindex > ui.item.index()) {                                    // User dragged left
                 for (var i = ui.item.index() ; i < ui.oldindex; i++) {              // For every item in between new id and old id we increase Order, because it shifted right by 1
-                    var item = this.metricArray[i];
+                    var item = this.dimensionArray[i];
                     item.Order = i + 1;                                             // Increase order by 1
                 }
                 draggedItem.Order = ui.item.index();                                // Set new Order to dragged item.
             }
             else {                                                                  // User dragged right
                 for (var i = ui.oldindex + 1; i <= ui.item.index() ; i++) {         // Same idea all over, just decrease the order cuz items shifted left.
-                    var item = this.metricArray[i];
+                    var item = this.dimensionArray[i];
                     item.Order = i - 1;
                 }
                 draggedItem.Order = ui.item.index();
@@ -161,8 +154,6 @@
 
             return x - y;
         }
-
     });
-
-    return MetricListView;
+    return DimensionListView;
 });
