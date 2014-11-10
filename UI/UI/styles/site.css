@@ -1,31 +1,33 @@
-﻿#app {
-    max-width: 800px;
-    margin: auto;
-}
-
-.sortable>li, .sortable>button {
+﻿.sortable>li, .sortable>button {
     display: inline;
     list-style-type: none;
+   // padding-right: 20px;
     float: left;
 }
 
 .sortable .btn {
-    height: 27px;
-    margin-top: 5px;
+    height: 30px;
 }
 
 .sortable-placeholder{
-    width: 213px;
-    height: 23px;
     display: inline-block;
-    background: #dddddd;
-    border: 1px solid;
+    padding: 6px 6px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    border: 1px dashed;
     border-radius: 4px;
-    border-color: #ccc;
-    margin: 7px;
+    border-color: #353535;
+    height: auto;
 }
 
+
 .wizard-nav, .component-listView, .form-horizontal.well {
+    width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -43,46 +45,7 @@ li {
     display: flex;
 
     -webkit-flex-direction: row;
-    flex-direction: row;
-    -webkit-flex-wrap: wrap;
-    flex-wrap: wrap;
-}
-
-i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
-    height: 10px;
-}
-
-
-.metric-group{
-    vertical-align: top;
-}
-
-.metric-group > .controls{
-    margin: 0 !important;
-}
-
-.adform-select-control {
-    vertical-align: top;
-}
-i[class*="adf-icon-alt"] {
-    display: inline-block;
-    width: 8px;
-    height: 26px;
-    line-height: 0;
-    vertical-align: -5px
-}
-
-.del {
-    vertical-align: -webkit-baseline-middle!important;
-}
-
-.show {
-  display: block !important;
-}
-.hidden {
-  display: none !important;
-  visibility: hidden !important;
-}
-.invisible {
-  visibility: hidden;
+   flex-direction: row;
+   -webkit-flex-wrap: wrap;
+   flex-wrap: wrap;
 }

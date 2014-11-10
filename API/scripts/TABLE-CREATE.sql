@@ -7,79 +7,15 @@ GO
 SET QUOTED_IDENTIFIER ON
 GO
 
-/* DASHBOARD */
-
-CREATE TABLE [dbo].[Dashboards](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Title] [nvarchar](30) NOT NULL,
-	[Definition] [nvarchar](2000) NULL,
-	[CreationDate] [nvarchar](30) NULL,
-	[ModificationDate] [nvarchar](30) NULL,
-	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
- CONSTRAINT [PK_Dashboard] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-ALTER TABLE [dbo].[Dashboards] ADD  DEFAULT ((0)) FOR [IS_DELETED]
-GO
-
-/* DASHBOARD COMPONENT */
-
-SET ANSI_PADDING ON
-GO
-
-CREATE TABLE [dbo].[DashboardComponents](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[DashboardId] [int] NOT NULL,
-	[Title] [varchar](50) NOT NULL,
-	[Type] [int] NOT NULL,
-	[Definition] [nvarchar](2000) NULL,
-	[CreationDate] [nvarchar](30)  NULL,
-	[ModificationDate] [nvarchar](30) NULL,
-	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
- CONSTRAINT [PK_DashboardComponents] PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
-) ON [PRIMARY]
-
-GO
-
-SET ANSI_PADDING OFF
-GO
-
-ALTER TABLE [dbo].[DashboardComponents] ADD  DEFAULT ((0)) FOR [IS_DELETED]
-GO
-
 /* RERPORT COMPONENT */
 
 CREATE TABLE [dbo].[ReportComponents](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[ReportId] [int] IDENTITY(1,1) NOT NULL,
 	[Title] [nvarchar](30) NOT NULL,
 	[Type] [int] NOT NULL,
-	[Definition] [nvarchar](2000) NULL,
-	[CreationDate] [nvarchar](30) NULL,
-	[ModificationDate] [nvarchar](30) NULL,
-	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
- CONSTRAINT [PK_ReportComponents] PRIMARY KEY CLUSTERED 
-(
-	[ReportId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	[Data] [nvarchar](2000) NOT NULL
 ) ON [PRIMARY]
-
 GO
-
-ALTER TABLE [dbo].[ReportComponents] ADD  DEFAULT ((0)) FOR [IS_DELETED]
-GO
-
-
 
 /* METRIC */
 SET ANSI_PADDING ON

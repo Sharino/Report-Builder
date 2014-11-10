@@ -1,23 +1,23 @@
 /*exported _SelectTemplates*/
 var _SelectTemplates = {
-    ulItems: '{{#each items}}<li class="select-list-item {{#if selected}}selected{{/if}}" data-id="{{value}}"><div class="adform-checkbox{{#if disabled}} disabled{{/if}} {{#if selected}}checked{{/if}}" data-value="{{value}}"></div><label data-placement="top" data-title="{{title}}">{{title}}</label></li>{{/each}}',
-    itemList: '<div class="list {{#if single}}adform-select-single{{/if}}"><ul></ul><div class="no-results">{{noResults}}</div></div>',
-    search: '<div class="head-search"><input type="text"><i class="adf-icon-small-search search-icon"></i><i class="adf-icon-small-reset reset-icon"></i></div>',
-    footer: '<div class="footer"><div class="checkbox-group pull-right"><div class="adform-checkbox select-all {{#selectAllChkSelected}}checked{{/selectAllChkSelected}}"></div><label class="footer-label select-all-label">{{selectAllLabel}}</label></div><div class="dash">|</div><div class="checkbox-group pull-right"><div class="adform-checkbox {{#showSelected}}checked{{/showSelected}} show-selected"></div><label class="show-selected-label footer-label">{{showSelectedLabel}}</label></div></div>',
-    dropdown: '<div class="hide tooltip info bottom-left adform-select-tooltip no-arrow"><div class="tooltip-inner select-container"><div class="adform-select"></div></div></div>',
-    dropper: '<div tabindex="0" class="adform-select-dropper" href="#" draggable="false"><span class="value-holder"></span><i class="adf-icon-small-down pull-right"></i></div>'
+	ulItems: '{{#each items}}<li class="select-list-item {{#if selected}}selected{{/if}}" data-id="{{value}}"><div class="adform-checkbox{{#if disabled}} disabled{{/if}} {{#if selected}}checked{{/if}}" data-value="{{value}}"></div><label data-placement="top" data-title="{{title}}">{{title}}</label></li>{{/each}}',
+	itemList: '<div class="list {{#if single}}adform-select-single{{/if}}"><ul></ul><div class="no-results">{{noResults}}</div></div>',
+	search: '<div class="head-search"><input type="text"><i class="adf-icon-small-search search-icon"></i><i class="adf-icon-small-reset reset-icon"></i></div>',
+	footer: '<div class="footer"><div class="checkbox-group pull-right"><div class="adform-checkbox select-all {{#selectAllChkSelected}}checked{{/selectAllChkSelected}}"></div><label class="footer-label select-all-label">{{selectAllLabel}}</label></div><div class="dash">|</div><div class="checkbox-group pull-right"><div class="adform-checkbox {{#showSelected}}checked{{/showSelected}} show-selected"></div><label class="show-selected-label footer-label">{{showSelectedLabel}}</label></div></div>',
+	dropdown: '<div class="hide tooltip info bottom-left adform-select-tooltip no-arrow"><div class="tooltip-inner select-container"><div class="adform-select"></div></div></div>',
+	dropper: '<div tabindex="0" class="adform-select-dropper" href="#" draggable="false"><span class="value-holder"></span><i class="adf-icon-small-down pull-right"></i></div>'
 };
 /*exported SelectItemModel */
 var SelectItemModel = Backbone.Model.extend({
-    idAttribute: 'value',
-    reset: function () {
-        if (this.get('selected') === this.get('initSelected')) {
-            return;
-        }
-        this.set('selected', this.get('initSelected'));
+	idAttribute: 'value',
+	reset: function () {
+		if (this.get('selected') === this.get('initSelected')) {
+			return;
+		}
+		this.set('selected', this.get('initSelected'));
 
-        this.trigger('change');
-    }
+		this.trigger('change');
+	}
 });
 /*global Handlebars, _SelectTemplates*/
 /*exported SelectDropdownView */
@@ -63,28 +63,28 @@ var SelectDropdownView = Backbone.View.extend({
     handleKeydown: function (e) {
         var stroke = e.keyCode;
         switch (stroke) {
-            case 27:
-                if (!this.options.disableEscape) {
-                    var focusDropperOnClose = true;
+        case 27:
+            if (!this.options.disableEscape) {
+                var focusDropperOnClose = true;
 
-                    this.hide(focusDropperOnClose);
-                }
-                break;
-            case 13:
-            case 32:
-                if (this.$el.find('.hover').length > 0) {
-                    this.$el.find('.hover label').trigger('click');
-                    e.preventDefault();
-                }
-                break;
-            case 38:
+                this.hide(focusDropperOnClose);
+            }
+            break;
+        case 13:
+        case 32:
+            if (this.$el.find('.hover').length > 0) {
+                this.$el.find('.hover label').trigger('click');
                 e.preventDefault();
-                this.handleUpArrow();
-                break;
-            case 40:
-                e.preventDefault();
-                this.handleDownArrow();
-                break;
+            }
+            break;
+        case 38:
+            e.preventDefault();
+            this.handleUpArrow();
+            break;
+        case 40:
+            e.preventDefault();
+            this.handleDownArrow();
+            break;
         }
     },
 
@@ -277,19 +277,19 @@ var SelectDropperView = Backbone.View.extend({
         var key = e.keyCode;
 
         switch (key) {
-            case 27:
-                this.$el.blur();
-                break;
-            case 9:
-            case 16:
-            case 17:
-            case 18:
-            case 20:
-            case 91:
-            case 93:
-                break;
-            default:
-                this.trigger('dropper:toggleDropdown');
+        case 27:
+            this.$el.blur();
+            break;
+        case 9:
+        case 16:
+        case 17:
+        case 18:
+        case 20:
+        case 91:
+        case 93:
+            break;
+        default:
+            this.trigger('dropper:toggleDropdown');
         }
     },
 
@@ -1041,7 +1041,7 @@ if (!String.prototype.trim) {
             showSelected: userOptions.showSelected || false,
             disableEscape: userOptions.disableEscape || false,
             options: userOptions.options || false,
-            $offsetContainer: typeof (userOptions.offsetContainer) === 'undefined' ? false : $(userOptions.offsetContainer)
+            $offsetContainer: typeof(userOptions.offsetContainer) === 'undefined' ? false : $(userOptions.offsetContainer)
         };
 
         var noResults = this.$el.attr('data-no-results'),
@@ -1267,7 +1267,7 @@ if (!String.prototype.trim) {
 
         this.dropdownView = dropdownView;
 
-        var inViewFix = function () {
+        var inViewFix = function(){
             if (this.options.$offsetContainer) {
                 var $control = this.$selectContainer,
                     $dropdown = this.dropdownView.$el,
@@ -1275,9 +1275,9 @@ if (!String.prototype.trim) {
                     offsetTop = $control.offset().top - $container.offset().top,
                     dropDownLowerBorder = offsetTop + $control.outerHeight() + $dropdown.outerHeight(),
                     allowedLowerBorder = $container.height(),
-                    dropDownUpperBorder = offsetTop - 6 - ($dropdown.outerHeight());
+                    dropDownUpperBorder = offsetTop-6-($dropdown.outerHeight());
                 if (dropDownLowerBorder > allowedLowerBorder && dropDownUpperBorder > 0) {
-                    $dropdown.css('margin-top', 6 - ($control.outerHeight() + $dropdown.outerHeight()) + 'px');
+                    $dropdown.css('margin-top', 6-($control.outerHeight() + $dropdown.outerHeight()) + 'px');
                 } else {
                     $dropdown.css('margin-top', '-5px');
                 }
@@ -1541,16 +1541,16 @@ if (!String.prototype.trim) {
             }
 
             switch (width) {
-                case 'auto':
-                    break;
+            case 'auto':
+                break;
 
-                case 'container':
-                    dropdownView.$el.width(dropperWidth);
-                    break;
+            case 'container':
+                dropdownView.$el.width(dropperWidth);
+                break;
 
-                default:
-                    dropdownView.$el.css('width', width);
-                    break;
+            default:
+                dropdownView.$el.css('width', width);
+                break;
             }
         };
 

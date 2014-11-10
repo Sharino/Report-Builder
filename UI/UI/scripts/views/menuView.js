@@ -1,27 +1,34 @@
 ﻿define('MenuView', [
-    'BaseCompositeView',
-    'text!templates/menu.html',
-    'Config'
-], function (BaseCompositeView, MenuTemplate, Config) {
-    var MenuView = BaseCompositeView.extend({
-        template: _.template(MenuTemplate),
+    'jquery',
+    'underscore',
+    'backbone'
+], function ($, _, Backbone, tpl) {
+    var MenuView;
+
+    MenuView = Backbone.View.extend({
+        el: $('#menu'),
+        template: _.template($("#menu-template").html()),
+
+        initialize: function () {
+            this.render;
+        },
 
         render: function () {
-            this.$el.html(this.template({ items: Config.MenuSettings.items, active: this.getActive() }));
+            var templVariables = {
+                "data": {
+                    "activeNew": "",
+                    "activeList": ""
+                }
+            };
+
+            if (this.model.isNew()) {
+                templVariables["data"]["activeNew"] = 'class="active"';
+            } else {
+                // TODO:
+            }
+
+            this.$el.html(this.template(templVariables));
             return this;
-        },
-
-        routeChangedAction: function (route, params) {
-            this.menu.setActive(route);
-            this.menu.render();
-        },
-
-        setActive: function (link) {
-            this.active = "#" + link;
-        },
-
-        getActive: function () {
-            return this.active;
         }
     });
 

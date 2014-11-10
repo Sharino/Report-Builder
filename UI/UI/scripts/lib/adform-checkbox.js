@@ -1,12 +1,12 @@
 (function ($) {
     var handlers = {
-        click: function (element) {
+        click: function(element){
             var $element = $(element);
             if (!$element.hasClass("disabled")) {
                 handlers.toggle($element);
             }
         },
-        keyup: function (event, element) {
+        keyup: function(event, element){
 
             var $element = $(element);
             event.preventDefault();
@@ -17,7 +17,7 @@
             }
         },
         toggle: function ($element) {
-            if ($element.hasClass("checked")) {
+            if($element.hasClass("checked")){
                 $element
                     .removeClass("checked")
                     .val(false).change();
@@ -31,7 +31,7 @@
     var AdformCheckbox = function () {
         this.bindExchangeClick = function ($exchange) {
             var $checkbox = $exchange.find('.adform-checkbox');
-
+            
             $checkbox.on("change", function () {
                 $exchange.toggleClass("selected");
             });
@@ -45,7 +45,7 @@
             });
         },
         this.bindRowClick = function ($tr) {
-
+            
             $tr.click(function (event) {
                 var isNotAnchor = event.target.nodeName != "A",
                     isNotParentAnchor = event.target.parentElement.nodeName != "A",
@@ -71,7 +71,7 @@
                     $element.attr("tabindex", "0");
                 }
             });
-            $(document).on("click", ".adform-checkbox ~ label", function (event) {
+            $(document).on("click", ".adform-checkbox ~ label", function(event){
                 $(event.target).siblings(".adform-checkbox").click();
             });
         };

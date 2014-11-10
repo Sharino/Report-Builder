@@ -1,34 +1,35 @@
 ﻿define('ComponentListView', [
-    'BaseCompositeView',
+    'jquery',
+    'underscore',
+    'backbone',
     'ComponentCollection',
-    'MenuView',
     'text!templates/componentList.html',
-    'Config',
-], function (BaseCompositeView, ComponentCollection, MenuView, componentListTemplate, Config) {
-    var ComponentListView = BaseCompositeView.extend({
+    'adform-notifications'
+], function ($, _, Backbone, ComponentCollection, componentListTemplate, AdformNotification) {
+    var ComponentListView;
+
+    ComponentListView = Backbone.View.extend({
         template: _.template(componentListTemplate),
 
         events: {
-            'click .del': 'handleDeleteAction',
-            'click .gen': 'handleGenerateAction',
-            'click .component-list-item>.click': 'handleClickAction',
-            'click .create': 'submitNewComponent'
-        },
-        submitNewComponent: function () {
-            var routerUrl = "create";
-            Backbone.history.navigate(routerUrl, true, true);
+            'click .component-list-item>.del': 'onDelete',
+            'click .component-list-item>.gen': 'onGenerate',
+            'click .component-list-item>.click': 'onClick',
         },
 
         initialize: function () {
-            if (!this.collection) {
-                this.collection = new ComponentCollection();
+            if (this.collection) {
+                this.collection.on('remove', this.render, this);
+                this.collection.on('fetch', this.render, this);
             }
-
-            this.collection.on('remove', this.render, this);
-            this.collection.on('fetch', this.render, this);
+            else {
+                this.collection = new ComponentCollection();
+                this.collection.on('remove', this.render, this);
+                this.collection.on('fetch', this.render, this);
+            }
+            //this.render;
         },
         render: function () {
-            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -53,11 +54,11 @@
                     "data": templVariables
                 }));
             }
-
             return this;
         },
         
-        handleClickAction: function (e) {
+        onClick: function (e) {
+            console.log(e);
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("id");
@@ -66,42 +67,41 @@
             Backbone.history.navigate(routerUrl, true, true);
         },
 
-        handleDeleteAction: function (e) {
+        onDelete: function (e) {
+            console.log(e);
             e.preventDefault();
 
-            var id = $(e.currentTarget.parentElement).attr("id");
+            var id = $(e.currentTarget).attr("id");
             var item = this.collection.get(id);
 
             item.destroy({
                 success: function (model, response) {
                     console.log("Delete OK", model, response);
-                    $.notifications.display({           
+                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
                         type: 'success',
                         content: 'Successfully deleted!',
-                        timeout: Config.NotificationSettings.Timeout
+                        timeout: 5000
                     });
                 },
                 error: function (model, response) {
                     console.log("Delete Fail", model, response);
-                    
-                    if (response.responseJSON) {
-                        response.responseJSON.forEach(function (entry) {
-                            $.notifications.display({       
-                                type: 'error',
-                                content: entry.Message,      
-                                timeout: Config.NotificationSettings.Timeout
-                            });
+                    // For each error message entry display notification with message.
+                    response.responseJSON.forEach(function (entry) {
+                        AdformNotification.display({       // Show Adform notification.
+                            type: 'error',
+                            content: entry.Message,        // Shows message from server
+                            timeout: 5000
                         });
-                    }
+                    });
                 }
             });
-            return false;
         },
 
-        handleGenerateAction: function (e) {
+        onGenerate: function (e) {
+            console.log(e);
             e.preventDefault();
 
-            var id = $(e.currentTarget.parentElement).attr("id");
+            var id = $(e.currentTarget).attr("id");
             var routerUrl = "generate/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
