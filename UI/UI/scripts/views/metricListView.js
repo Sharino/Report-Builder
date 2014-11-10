@@ -28,21 +28,9 @@
             this.selectReferences = [];
 
             this.model = parentModel;
-
-//            SHARO Testai
-            console.log('model');
-            console.log(this.model);
-            console.log('Metrics');
-            var smth = this.model.get("Definition");
-            //            alert(smth.Metric);
-            var res = JSON.parse(smth)
-            console.log(res);
-            console.log('result');
-            console.log(res.Metrics);
-
-            this.metricArray = res.Metrics;
-//            this.metricArray = this.model.get("Metrics").slice(0);
             
+            this.metricArray = this.model.get("Metrics").slice(0);
+
             for (var i = 0; i < this.metricArray.length; i++) {
                 this.metricArray[i].Order = i;
             }

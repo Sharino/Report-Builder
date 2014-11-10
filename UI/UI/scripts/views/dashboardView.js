@@ -32,7 +32,7 @@
 
             if (!isNaN(pos)) {
                 var currentModel = this.model.get("Components")[pos];
-              
+
                 this.editform = this.renderSubview(('#component-edit-' + pos), new DashboardComponentView({ model: currentModel }));
 
                 var self = this;
@@ -115,8 +115,7 @@
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
 
             this.render();
-//            console.log('asd');
-//            console.log(this.model);
+
             for (var i = 0; i < this.model.get('ComponentIds').length; i++) {
                 var id = this.model.get('ComponentIds')[i];
                 this.populate(id, i);
