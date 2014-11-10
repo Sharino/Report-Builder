@@ -1,6 +1,36 @@
-﻿#app {
-    max-width: 800px;
-    margin: auto;
+﻿body {
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+#metric-list {
+    min-height: 129px;
+}
+
+.component {
+        min-height: 129px;
+}
+
+#metric-list>.form-horizontal.well {
+    background: rgba(231,246,253,0.5);
+}
+
+.form-horizontal.well {
+    background: rgba(224,224,224,0.2);
+}
+
+.btn {
+    background-color: white !important;
 }
 
 .sortable>li, .sortable>button {
@@ -52,6 +82,13 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
     height: 10px;
 }
 
+.notifications-container {
+    width: 220px !important;
+}
+
+.group-label label {
+    font-size: 15px;
+}
 
 .metric-group{
     vertical-align: top;
@@ -85,4 +122,9 @@ i[class*="adf-icon-alt"] {
 }
 .invisible {
   visibility: hidden;
+}
+
+.removeMetric {
+    margin-top: -4px !important;
+    margin-left: -3px !important;
 }

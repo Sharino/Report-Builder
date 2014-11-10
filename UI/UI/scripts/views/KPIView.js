@@ -4,12 +4,11 @@
     'DateFilterView',
     'Einstein',
     'Metric',
+    'Config',
     'spin',
-    'adform-loader'
-], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric) {
-
-    var startDate = moment().format('YYYY-MM-DD');
-
+    'adform-loader',
+    'adform-notifications'
+], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config) {
     var kpiView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
@@ -21,17 +20,18 @@
         initialize: function(parent, pos) {
             this.model = parent;
             this.position = pos;
-            this.initEinstein(startDate, startDate);
+            this.startDate = moment().format('YYYY-MM-DD');
+            this.initEinstein(this.startDate, this.startDate);
         },
 
         render: function(einstein, dataFiler) {
+            var from, to;
 
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = startDate;
-                to = startDate;
+                from = this.startDate;
+                to = this.startDate;
             } else {
-//                console.log(dataFiler);
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
             }
@@ -44,7 +44,6 @@
                 ComponentID: this.model.id
             }));
 
-//            alert("Before render");
             this.renderSubview("#date-filter", new DateFilterView({
                 from: from,
                 to: to
@@ -54,7 +53,6 @@
         },
 
         initEinstein: function(start, end) {
-
             var einstein = new Einstein({
                 Metrics: this.getMnemonics(this.model.get("Metrics")),
                 Dimensions: [],
@@ -67,24 +65,24 @@
             });
             console.log(einstein);
             this.workEinstein(einstein);
-
         },
 
         generateNewData: function() {
-
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
 
             if (startDate <= endDate) {
                 this.initEinstein(startDate, endDate);
             } else {
-                alert('back to the future');
+                $.notifications.display({
+                    type: 'error',
+                    content: "End Date is earlier than Start Date.",
+                    timeout: Config.NotificationSettings.Timeout
+                });
             }
-
         },
 
         getMnemonics: function(metrics) {
-
             var metricMnemonics = [];
 
             _.each(metrics, function(metric) {
@@ -93,15 +91,11 @@
             });
 
             return metricMnemonics;
-
         },
       
      
         workEinstein: function (stoneAlone) {
-             
             var self = this;
-//            $('#spinner').loader();
-            //            $("#spinner").spin("tiny");
 
             stoneAlone.fetch({
                 url: 'http://37.157.0.42:33896/api/Einstein/Data',
@@ -111,9 +105,7 @@
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                       
-                      self.render( response.attributes.ComponentValues[0],response.attributes.Filters.DateFilter);
-                   
+                      self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
                     console.log("Stone Alone FAIL");
@@ -121,18 +113,16 @@
                 }
             });
         },
+
         edit: function (e) {
-           
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("id");
             var routerUrl = "create/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
-         
         }
-        
-       
+
     });
 
     return kpiView;

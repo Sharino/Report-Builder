@@ -165,7 +165,7 @@
 
         
         metricRemovedAction: function (e) {
-            var myId = e.currentTarget.id;
+            var myId = parseInt(e.currentTarget.id);
 
             if (myId > -1) {
                 this.metricArray.splice(myId, 1);

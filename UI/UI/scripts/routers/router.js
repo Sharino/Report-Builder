@@ -19,7 +19,8 @@
     'adform-notifications',
     'globalize',
     'moment',
-    'adform-datepicker'
+    'adform-datepicker',
+    'adform-loader'
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
     var Router = Backbone.Router.extend({
         routes: {

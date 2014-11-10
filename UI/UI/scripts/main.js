@@ -1,5 +1,4 @@
 ﻿requirejs.config({
-    //By default load any module IDs from scripts/lib
     baseUrl: '',
     
     urlArgs: "bust=" + (new Date()).getTime(),
@@ -96,9 +95,8 @@
             deps: ['jquery']
         },
 
-        'spin':{
-            deps: ['jquery'],
-            exports: 'jquery'
+        'spin': {
+            deps: ['jquery']
         },
 
         'handlebars': {
@@ -135,7 +133,6 @@
             deps: ['bootstrap-modal', 'spin']
         },
     }
-
 });
 
 
@@ -145,6 +142,4 @@ require(['Router', 'Config', 'adform-loader'],
 
         var app = new Router();
         Backbone.history.start();
-
-        //$('#list').loader();
-    });
+});

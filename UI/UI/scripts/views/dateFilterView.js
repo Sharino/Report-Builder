@@ -7,7 +7,6 @@
         template: _.template(dateFilterTemplate),
 
         initialize: function (options) {
-//            alert('INIT');
             this.options = options;
 
 ;            _.defer(function () {
@@ -19,8 +18,6 @@
                     pickerControl: '#picker2',
                     optionalField: true
                 };
-
-                var date = _.template(dateFilterTemplate);
 
                 var AdformDatePicker = window.Adform.DatePicker;
                 var datePicker = new AdformDatePicker(pickerOptions);
@@ -38,16 +35,15 @@
         },
 
         render: function (options) {
-//            alert('render');
+            var date;
+            
             if (!options) {
                 date = this.options;
-//              alert(date.from + " <> " + date.to);
             } else {
                 date = options;
             }
 
             this.$el.html(this.template({ options: date }));
-
         }
         
     });
