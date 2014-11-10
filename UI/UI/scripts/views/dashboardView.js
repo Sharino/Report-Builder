@@ -17,7 +17,6 @@
         template: _.template(dashboardTemplate),
 
         events: {
-            'click .editable ': 'toggle',
             'click #edit': 'edit',
             'click .dashboard-list-item>.del': 'handleDeleteAction'
         },

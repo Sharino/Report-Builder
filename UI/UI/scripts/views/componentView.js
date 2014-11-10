@@ -107,18 +107,23 @@
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
 
+                allMetrics.fetch({
+                    success: function (allMetrics) {
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
                 allDimensions.fetch({
                     success: function (allDimensions, response) {
-                        console.log("allDimensions.fetch OK", allDimensions, response);
-
                         self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
                     },
                     error: function (allDimensions, response) {
                         console.log("allDimensions.fetch FAIL", allDimensions, response);
                     }
                 });
-
-                // TODO bring back ze metrics
             }
 
             setTimeout(function() {
@@ -137,7 +142,6 @@
 
             return this;
         },
-
 
         submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
