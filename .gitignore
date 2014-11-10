@@ -69,3 +69,4 @@ packages/
 
 #Test files
 *.testsettings
+UI/UI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

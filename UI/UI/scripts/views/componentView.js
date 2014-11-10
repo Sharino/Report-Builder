@@ -116,7 +116,7 @@
 //        Returns nothing. */
         submit: function() {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
+//            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics() });
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
