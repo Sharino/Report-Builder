@@ -2,26 +2,26 @@
 ], function () {
     var Config = {
         ComponentSettings: {
-            URL: "http://172.22.3.236:33894/api/reportComponent"
+            URL: "http://37.157.0.42:33895/api/reportComponent"
         },
         ReportSettings: {
-            URL: "http://172.22.3.236:33894/api/reportComponent"
+            URL: "http://37.157.0.42:33895/api/reportComponent"
         },
         DashboardSettings: {
-            URL: "http://172.22.3.236:33894/api/dashboard"
+            URL: "http://37.157.0.42:33895/api/dashboard"
         },
         DashboardComponentSettings: {
-            URL: "http://172.22.3.236:33894/api/dashboardcomponent"
+            URL: "http://37.157.0.42:33895/api/dashboardcomponent"
         },
         MetricSettings: {
-            URL: "http://172.22.3.236:33894/api/Metric"
-        },
-        DimensionSettings: {//FIX WHEN BACK-END IS AVAILABLE
-            URL: "http://172.22.3.236:33894/api/Dimension"
+            URL: "http://37.157.0.42:33895/api/Metric"
         },
         EinsteinSettings: {
-        URL: "http://37.157.0.42:33896/api/Einstein/",
+            URL: "http://37.157.0.42:33896/api/Einstein",
             // URL: "http://37.157.0.42:33859/einstein"    
+        },
+        DimensionSettings: {//FIX WHEN BACK-END IS AVAILABLE
+            URL: "http://37.157.0.42:33895/api/Dimension"
         },
 
         NotificationSettings: {

@@ -65,6 +65,7 @@
                     }
                 }
             });
+            console.log('eins');
             console.log(einstein);
             this.workEinstein(einstein);
 
@@ -102,7 +103,8 @@
             var self = this;
             //            $('#spinner').loader();
             //            $("#spinner").spin("tiny");
-
+            console.log("asdasd");
+            console.log(stoneAlone);
             stoneAlone.fetch({
                 url: 'http://37.157.0.42:33896/api/Einstein/Data',
                 data: JSON.stringify(stoneAlone),

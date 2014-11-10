@@ -1,21 +1,22 @@
 ﻿define('MetricListView', [
-    'BaseCompositeView',
-    'Metric',
-    'MetricCollection',
-    'text!templates/metricList.html',
-    'Config',
-    'adform-select-group',
-    'jquery-sortable'
+   'BaseCompositeView',
+   'Metric',
+   'MetricCollection',
+   'text!templates/metricList.html',
+   'Config',
+   'adform-select-group',
+   'jquery-sortable'
 ], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, ASG) {
     var MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
 
         events: {
             'click #addMetric': 'metricAddedAction',
-            'AdformSelect:selectionChanged': 'metricSelectedAction'
+            'AdformSelect:selectionChanged': 'metricSelectedAction',
+            'click .removeMetric': 'metricRemovedAction'
         },
 
-        fire: function(e){
+        fire: function (e) {
             $(e.target.nextElementSibling).toggle();
         },
 
@@ -27,7 +28,7 @@
             this.selectReferences = [];
 
             this.model = parentModel;
-            
+
             this.metricArray = this.model.get("Metrics").slice(0);
 
             for (var i = 0; i < this.metricArray.length; i++) {
@@ -48,6 +49,8 @@
             this.metricArray.sort(this.compareNumbers);
 
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
+
+            //var adfSelectReference1 = new ASG(this.$el.find('select.adf-select1'), { groups: true, adjustDropperWidth: true, search: 6, width: 'container' });
 
             this.initializeMetricSelects();
 
@@ -88,13 +91,13 @@
                     }
                 }
 
-                //$('.list-pop').tooltip({
-                //    delay: {
-                //        show: 1000,
-                //        hide: 500
-                //    },
-                //    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
-                //});
+                $('.list-pop').tooltip({
+                    delay: {
+                        show: 1000,
+                        hide: 500
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
             }
         },
 
@@ -102,7 +105,7 @@
             var reference = $(e.target).data("AdformSelect");
 
             var selectReferenceID = null;
-            for (var i = 0; i < this.selectReferences.length; i++) {
+            for (var i = 0, len = this.selectReferences.length; i < len; i++) {
                 if (this.selectReferences[i] === reference) {
                     selectReferenceID = i;
                     break;
@@ -111,22 +114,26 @@
 
             var selectedValue = parseInt(reference.getValues());
             var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
+            var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
 
-            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
+            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
             delete this.metricArray[selectReferenceID].Placeholder;
         },
 
         initializeSortableList: function () {
             var self = this;
 
-            $('.sortable').sortable({
+            var sort = $('.sortable').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 //forcePlaceholderSize: true,
-                placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
-            }).bind('sortupdate', function (e, ui) {
+                placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>',
+            });
+
+            sort.bind('sortupdate', function (e, ui) {
                 self.metricDraggedAction(e, ui);
             });
+
         },
 
         metricDraggedAction: function (e, ui) {
@@ -152,6 +159,18 @@
                 }
                 draggedItem.Order = ui.item.index();
             }
+
+            this.render();
+        },
+
+
+        metricRemovedAction: function (e) {
+            var myId = parseInt(e.currentTarget.id);
+
+            if (myId > -1) {
+                this.metricArray.splice(myId, 1);
+            }
+
             this.render();
         },
 
