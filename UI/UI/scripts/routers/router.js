@@ -98,7 +98,10 @@
         },
 
         dashboards: function () {
-            var self = this; 
+            this.showView("#list", new DashboardListView({ collection: null }));
+            $("#list").loader();
+
+            var self = this;
 
             this.DashboardCollection = new DashboardCollection();
             this.DashboardCollection.fetch({
@@ -120,7 +123,10 @@
         },
 
         list: function () {
-            var self = this; 
+            this.showView("#list", new ComponentListView({ collection: null }));
+            $("#list").loader();
+
+            var self = this;
 
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
@@ -138,6 +144,7 @@
                     self.showView("#list", new ComponentListView({ collection: null }));
                 }
             });
+
         },
 
         createById: function (id) {
