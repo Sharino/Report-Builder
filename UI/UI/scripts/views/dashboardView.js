@@ -35,7 +35,7 @@
         edit: function (e) {
             e.preventDefault();
 
-            var id = parseInt($(e.currentTarget).closest('i').attr('data-id'));
+            var id = parseInt($(e.currentTarget).closest('button').attr('data-id'));
 
             if (!isNaN(id)) {
                 var currentModel = this.model.get("Components")[id];
@@ -136,7 +136,7 @@
         render: function () {
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
 
-            this.renderSubview("#date-filter", new DateFilterView());
+//            this.renderSubview/**/("#date-filter", new DateFilterView());
 
             return this;
         }

@@ -1,25 +1,27 @@
 ﻿
-<div class="form-horizontal well component ">
-        <div class="table-toolbar">
-            <div class="group-label ">
-                <label><%= model.Title %> <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i></label>
+﻿<div class="form-horizontal well component ">
+    <div class="table-toolbar">
+        <div class="group-label ">
+            <label><%= model.Title %><button class="gen btn btn-primary pull-right" type="submit" data-id="<%= Position %>" id="edit">Edit</button>
+                </label>
                 <div id="component-edit-<%= Position %>"></div>
+
+                <br />
                 <hr />
-            </div>
-            <div id="date-filter"></div>
-        </div>
-        <div class="sparklines ">
-            <% _.each(Metrics, function(metric) { %>
-            <li>
-                <span class="headline"><%= metric.DisplayName %></span>
-                <span class="numbers">
-                    <% if (metric.DisplayName.indexOf("%") > -1) { %>
-                    <%= (Math.random() * 100 + 1).toFixed(3) %>
-                    <% } else { %>
-                    <%= (Math.random() * 100000 + 1).toFixed(3) %>
-                    <% } %>
-                </span>
-            </li>
-            <% }); %>
-        </div>
+</div>
+        <div id="date-filter"></div>
+        <div id="spinner"></div>
     </div>
+    <div class="sparklines ">
+     
+
+        <% _.each(Einstein.MetricValues, function(einsteinMetric, i) { %>
+        <li>
+            <span class="headline"><%= Metrics[i].DisplayName %></span>
+            <span class="numbers">
+                <%= einsteinMetric.Value %>
+            </span>
+        </li>
+        <% }); %>
+    </div>
+</div>

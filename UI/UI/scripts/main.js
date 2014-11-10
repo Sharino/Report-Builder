@@ -45,6 +45,7 @@
         'Dashboard':            'scripts/models/dashboard',
         'DashboardComponent':   'scripts/models/dashboardComponent',
         'Dimension':            'scripts/models/dimension',
+        'Einstein':             'scripts/models/einstein',
 
         /* Collection dependencies */
         'ComponentCollection':  'scripts/collections/componentCollection',
@@ -59,10 +60,10 @@
         'MetricView':           'scripts/views/metricView',
         'MetricListView':       'scripts/views/metricListView',
         'GenerateView':         'scripts/views/generateView',
-      'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
+        'ComponentGeneratedView': 'scripts/views/componentGeneratedView',
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
-      'DashboardComponentView': 'scripts/views/dashboardComponentView',
+        'DashboardComponentView': 'scripts/views/dashboardComponentView',
         'KPIView':              'scripts/views/kpiView',
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',

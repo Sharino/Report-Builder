@@ -89,6 +89,7 @@
     <Content Include="scripts\models\dashboard.js" />
     <Content Include="scripts\models\dashboardComponent.js" />
     <Content Include="scripts\models\dimension.js" />
+    <Content Include="scripts\models\einstein.js" />
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
