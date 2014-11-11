@@ -15,8 +15,17 @@
 
         events: {
             'click #component-submit': 'submit',
+            'click .radio-group': 'hide'
+
         },
 
+        hide: function () {
+            if (this.$el.find('#rb1').is(":checked")) {
+                $('#dimension-list').hide();
+            } else {
+                $('#dimension-list').show();
+            }
+        },
         inputTitle: function () {
             return $('#input').val();
         },
@@ -83,7 +92,7 @@
                 templVariables["data"]["model"] = this.model.toJSON();
                 this.$el.html(this.template(templVariables));
 
-                _.defer(function () { $("#metric-list").loader(); });
+//                _.defer(function () { $("#metric-list").loader(); });
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {
@@ -130,7 +139,7 @@
             }
 
             setTimeout(function() {
-                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
+//                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
 
                 $('#metric-list').find('.list-pop').tooltip({
                     delay: {
@@ -142,7 +151,9 @@
             }, 3000);
 
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
-
+            
+            this.$el.find('#dimension-list').hide();
+            
             return this;
         },
 

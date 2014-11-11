@@ -86,7 +86,10 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\DashboardComponentController.cs" />
     <Compile Include="Controllers\DimensionController.cs" />
+<<<<<<< HEAD
+=======
     <Compile Include="Controllers\ExportController.cs" />
+>>>>>>> 3d35b9adf0967db1670645e679a3878b28a6eebe
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MetricController.cs" />
     <Compile Include="Controllers\ReportComponentController.cs" />
