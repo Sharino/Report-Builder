@@ -1,32 +1,27 @@
 ﻿define('ComponentView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'Component',
+    'DashboardComponent',
     'MetricCollection',
+    'DimensionCollection',
     'MetricListView',
+    'DimensionListView',
     'text!templates/component.html',
+    'Config',
     'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
-    var ComponentView;
-
-    ComponentView = Backbone.View.extend({
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, componentTemplate, Config) {
+    var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
             'click #component-submit': 'submit',
         },
 
-        initialize: function () {
-            //console.log("componentView.childViews", this.childViews);
-            this.childViews = [];       // Store child views for easy closing.
-        },
-
         inputTitle: function () {
             return $('#input').val();
         },
 
-        inputType: function () {
+        inputType: function() {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
                 return parseInt(selected);
@@ -35,7 +30,32 @@
             }
         },
 
-        render: function () {
+        /* TODO: Should move validation to MetricListView */
+        inputMetrics: function() {
+            var result = [];
+
+            this.metricView.metricArray.forEach(function (metric) {
+                if (!metric.Placeholder) {
+                    result.push(metric);
+                }
+            });
+
+            return result;
+        },
+        inputDimensions: function () {
+            var result = [];
+
+            this.dimensionView.dimensionArray.forEach(function (dimension) {
+                if (!dimension.Placeholder) {
+                    result.push(dimension);
+                }
+            });
+
+            return result;
+        },
+
+        render: function() {
+            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
             var templVariables = {
                 "data": {
                     "viewTitle": "",
@@ -43,8 +63,14 @@
                     "activeList": ""
                 }
             };
+            $('#component').loader();
 
-            if (this.model) {       // Model exists
+            var allMetrics = new MetricCollection();
+            var allDimensions = new DimensionCollection();
+
+            var self = this;
+
+            if (this.model) {
                 if (this.model.isNew()) {
                     templVariables["data"]["viewTitle"] = "Create a New Component";
                     templVariables["data"]["activeNew"] = 'class="active"';
@@ -55,88 +81,127 @@
                     templVariables["data"]["activeList"] = '';
                 }
                 templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
                 this.$el.html(this.template(templVariables));
-            }
-            else {                  // Model does not exist
+
+                _.defer(function () { $("#metric-list").loader(); });
+
+                allMetrics.fetch({
+                    success: function(allMetrics, response) {
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    },
+                    error: function(allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
+                    }
+                });
+
+            } else {
                 templVariables["data"]["viewTitle"] = "Create a New Component";
                 templVariables["data"]["activeNew"] = 'class="active"';
                 templVariables["data"]["activeList"] = '';
                 templVariables["data"]["model"] = [];
                 this.$el.html(this.template(templVariables));
+
+                allMetrics.fetch({
+                    success: function (allMetrics) {
+                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    },
+                    error: function (allMetrics, response) {
+                        console.log("allMetric.fetch FAIL", allMetrics, response);
+                    }
+                });
+
+                allDimensions.fetch({
+                    success: function (allDimensions, response) {
+                        self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    },
+                    error: function (allDimensions, response) {
+                        console.log("allDimensions.fetch FAIL", allDimensions, response);
+                    }
+                });
             }
 
-            this.assign({
-                '#metric-list': new MetricListView
-            });
-            
+            setTimeout(function() {
+                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
+
+                $('#metric-list').find('.list-pop').tooltip({
+                    delay: {
+                        show: 1000,
+                        hide: 500
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
+            }, 3000);
+
+            this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
+
             return this;
         },
 
-        submit: function () {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
+        submit: function() {
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
             console.log(this.model.toJSON());
-            
-            // var which gets false on Validation error during .save()
-            var validationSuccess = this.model.save({}, {
-                // Success callback. NOTE: model and response SHOULD be taken.
-                success: function (model, response) {       // If validation pass and server responds with OK.
-                    console.log("Save OK", model);
 
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
+            var validationSuccess = this.model.save({}, {
+                success: function(model, response) {
+                    $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
-                        timeout: 5000
+                        timeout: Config.NotificationSettings.Timeout
                     });
-                    this.model = new Component();
-                    Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
+                    Backbone.history.navigate("list", { trigger: true });
                 },
-                // Error callback. NOTE: model and response SHOULD be taken.
-                error: function (model, response) {         // If validation pass, but server responds with failure.
-                    console.log("Save FAIL", response);
+                error: function(model, response) {
+                    console.log("Save FAIL", model, response);
 
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function(entry){
-                        AdformNotification.display({       // Show Adform notification.
+                    if (response.responseJSON) {
+                        response.responseJSON.forEach(function(error) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: error.Message,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        });
+                    } else {
+                        if (response.statusText) {
+                            $.notifications.display({
+                                type: 'error',
+                                content: response.statusText,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        } else {
+                            $.notifications.display({
+                                type: 'error',
+                                content: Config.ErrorSettings.ErrorMessages.NoResponse,
+                                timeout: Config.NotificationSettings.Timeout
+                            });
+                        }
+                    }
+                },
+                timeout: Config.NetworkSettings.Timeout
+            });
+
+            if (!validationSuccess) {
+                if (this.model.errors) {
+                    this.model.errors.forEach(function(error) {
+                        $.notifications.display({
                             type: 'error',
-                            content: entry.Message,         // Shows message from server
-                            timeout: 5000
+                            content: error.message,
+                            timeout: Config.NotificationSettings.Timeout
                         });
                     });
                 }
-            });
-            // Deeper validation error check.
-            if (!validationSuccess) {   // If save returns false we can check what went wrong.
-                console.log("Validation failed!");
-
-                AdformNotification.display({                // And show notifications.
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
-                });
             }
             return false;
-        },
-
-        assign: function (selector, view) {
-            var selectors;
-            if (_.isObject(selector)) {
-                selectors = selector;
-            }
-            else {
-                selectors = {};
-                selectors[selector] = view;
-            }
-            if (!selectors) return;
-            _.each(selectors, function (view, selector) {
-                this.childViews.push(view);
-                view.setElement(this.$(selector)).render();
-            }, this);
-            //console.log("componentView.assign this.childViews", this.childViews);
-
         }
-           
     });
 
     return ComponentView;

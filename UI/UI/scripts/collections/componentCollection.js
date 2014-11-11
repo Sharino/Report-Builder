@@ -9,7 +9,7 @@
 
     ComponentCollection = Backbone.Collection.extend({
         model: Component,
-        url: Config.ComponentSettings.ComponentURL
+        url: Config.ComponentSettings.URL
     });
 
     return ComponentCollection;

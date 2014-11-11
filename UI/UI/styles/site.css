@@ -1,33 +1,31 @@
-﻿.sortable>li, .sortable>button {
+﻿#app {
+    max-width: 800px;
+    margin: auto;
+}
+
+.sortable>li, .sortable>button {
     display: inline;
     list-style-type: none;
-   // padding-right: 20px;
     float: left;
 }
 
 .sortable .btn {
-    height: 30px;
+    height: 27px;
+    margin-top: 5px;
 }
 
 .sortable-placeholder{
+    width: 213px;
+    height: 23px;
     display: inline-block;
-    padding: 6px 6px;
-    margin-bottom: 0;
-    font-size: 14px;
-    font-weight: 400;
-    line-height: 1.42857143;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    border: 1px dashed;
+    background: #dddddd;
+    border: 1px solid;
     border-radius: 4px;
-    border-color: #353535;
-    height: auto;
+    border-color: #ccc;
+    margin: 7px;
 }
 
-
 .wizard-nav, .component-listView, .form-horizontal.well {
-    width: 800px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -45,7 +43,55 @@ li {
     display: flex;
 
     -webkit-flex-direction: row;
-   flex-direction: row;
-   -webkit-flex-wrap: wrap;
-   flex-wrap: wrap;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
+    height: 10px;
+}
+
+
+.metric-group{
+    vertical-align: top;
+}
+
+.dimension-group{
+    vertical-align: top;
+}
+
+
+.metric-group > .controls{
+    margin: 0 !important;
+}
+
+.dimension-group > .controls{
+    margin: 0 !important;
+}
+
+.adform-select-control {
+    vertical-align: top;
+}
+i[class*="adf-icon-alt"] {
+    display: inline-block;
+    width: 8px;
+    height: 26px;
+    line-height: 0;
+    vertical-align: -5px
+}
+
+.del {
+    vertical-align: -webkit-baseline-middle!important;
+}
+
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.invisible {
+  visibility: hidden;
 }

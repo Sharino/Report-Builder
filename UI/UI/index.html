@@ -1,38 +1,25 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title>Report Builder</title>
-    <link href="http://localhost/media/_adform/bootstrap/css/adform_base.css" rel="stylesheet" type="text/css" />
-    <link href="styles/site.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-    <div id="app">
-        <div id="menu"></div>
-        <div id="component">
-            <div id="metric"></div>
+    <head>
+        <title>Report Builder</title>
+        <link href="http://37.157.0.42:80/media/_adform/bootstrap/css/adform_base.css" rel="stylesheet" type="text/css" />
+        <link href="styles/styles.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="container" style="margin-left: auto">
+            <div class="row">
+                <div class="span12">
+                    <div class="row" style="margin-left: auto">
+                        <div id="app">
+                            <div id="menu"></div>
+                            <div id="list"></div>
+                            <div id="component"></div>
+                            <div id="generate"></div>
+                        </div>
+                        <script data-main="scripts/main" src="scripts/lib/require.js"></script>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="list"></div>
-    </div>
-
-    <script data-main="scripts/main" src="scripts/lib/require.js"></script>
-    
-    <script type="text/template" id="menu-template"></script>
-
-    <script type="text/template" id="metric-template">
-        <div class="btn-group">
-			<a class="btn single-btn" data-toggle="dropdown" href="#">
-				1 metric
-				<span class="caret"></span>
-			</a>
-			<ul class="dropdown-menu">
-				<li><a href="">Lorem ipsum dolor sit amet</a></li>
-				<li><a href="">Consectetur adipiscing elit</a></li>
-				<li><a href="">Integer molestie lorem at massa</a></li>
-			</ul>
-		</div>
-    </script>
-    <script src="scripts/lib/jquery.js"></script>
-    <script src="scripts/lib/bootstrap.js"></script>
-
-</body>
+    </body>
 </html>

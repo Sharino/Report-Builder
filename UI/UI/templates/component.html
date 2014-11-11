@@ -1,15 +1,10 @@
-﻿<div id="menu">
-    <ul class="wizard-nav">
-        <ul class="pull-right">
-            <li <%= data.activeReport %>><a href="#report">My Report</a></li>
-        </ul>
-        <li <%= data.activeNew %>><a href="#create">Create new</a></li>
-        <li <%= data.activeList %>><a href="#list">List</a></li>
-    </ul>
+﻿
+<div class="row" style="margin: auto;display: inline-block">
+    <h2 style="padding-left: 10px"><b><%= data.viewTitle %></b></h2>
 </div>
-
+<button class="btn btn-primary pull-right" type="submit" id="component-submit">Save</button>
 <div class="form-horizontal well">
-    <h1><%= data.viewTitle %></h1>
+   
     <div class="group-label">
         <label>General information</label>
         <hr />
@@ -27,20 +22,20 @@
         <div class="controls">
             <div class="radio-buttons horizontal">
                 <div class="radio-group">
-                    <input type="radio" name="type-options" id="rb1 comp-input" value="1" checked>
-                    <label for="rb1 comp-input">KPI</label>
+                    <input type="radio" name="type-options" id="rb1" value="1">
+                    <label for="rb1">KPI</label>
                 </div>
                 <div class="radio-group">
-                    <input type="radio" name="type-options" id="rb2 comp-input" value="2">
-                    <label for="rb2 comp-input">Table</label>
+                    <input type="radio" name="type-options" id="rb2" value="2">
+                    <label for="rb2">Table</label>
                 </div>
                 <div class="radio-group">
-                    <input type="radio" name="type-options" id="rb3 comp-input" value="3">
-                    <label for="rb3 comp-input">Timeline</label>
+                    <input type="radio" name="type-options" id="rb3" value="3">
+                    <label for="rb3">Timeline</label>
                 </div>
                 <div class="radio-group">
-                    <input type="radio" name="type-options" id="rb4 comp-input" value="4">
-                    <label for="rb4 comp-input">Chart</label>
+                    <input type="radio" name="type-options" id="rb4" value="4">
+                    <label for="rb4">Chart</label>
                 </div>
             </div>
             <span data-msg="type"></span>
@@ -49,9 +44,6 @@
     </div>
 </div>
 
-<div id="metric-list">
-</div>
+<div id="metric-list"></div>
+<div id="dimension-list"></div>
 
-<div class="form-horizontal well">
-    <button class="btn pull-right" type="submit" id="component-submit">Submit</button>
-</div>

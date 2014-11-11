@@ -1,142 +1,146 @@
 ﻿define('GenerateView', [
-    'jquery',
-    'underscore',
-    'backbone',
+    'BaseCompositeView',
     'Component',
     'MetricCollection',
     'MetricListView',
-    'text!templates/component.html',
-    'adform-notifications'
-], function ($, _, Backbone, Component, MetricCollection, MetricListView, componentTemplate, AdformNotification) {
-    var GenerateView;
-
-    GenerateView = Backbone.View.extend({
-        template: _.template(componentTemplate),
+    'KPIView',
+    'TimelineView',
+    'text!templates/generate.html',
+    'DateFilterView',
+    'text!templates/selectDashboardList.html',
+    'DashboardCollection',
+    'DashboardComponent',
+    'MessageView',
+    'adform-notifications',
+    'adform-modal'
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TimelineView,
+             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView) {
+    var GenerateView = BaseCompositeView.extend({
+        template: _.template(generateTemplate),
+        selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
-            'click #component-submit': 'submit',
+            'click #edit': 'edit',
+            'click #generate-submit': 'addToDashboard',
         },
 
-        initialize: function () {
-            //console.log("componentView.childViews", this.childViews);
-            this.childViews = [];       // Store child views for easy closing.
-        },
+        initialize: function(){
+            if (!this.collection) {
+                this.collection = new DashboardCollection();
 
-        inputTitle: function () {
-            return $('#input').val();
-        },
+                this.collection.fetch({
+                    success: function (collection, response) {
 
-        inputType: function () {
-            var selected = $("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
+                    },
+                    error: function (collection, response) {
+                        console.log(collection);
+                    }
+                });
             }
+        },
+        edit: function (e) {
+            e.preventDefault();
+
+            var id = $(e.currentTarget).attr("comp-id");
+            var routerUrl = "create/".concat(id);
+
+            Backbone.history.navigate(routerUrl, true, true);
+
         },
 
         render: function () {
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
+            this.$el.html(this.template());
+
+//            this.renderSubview("#date-filter", new DateFilterView());
+
+            switch (this.model.get("Type")) {
+                case 0:
+                {
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    break;
                 }
-            };
-
-            if (this.model) {       // Model exists
-                if (this.model.isNew()) {
-                    templVariables["data"]["viewTitle"] = "Create a New Component";
-                    templVariables["data"]["activeNew"] = 'class="active"';
-                    templVariables["data"]["activeList"] = '';
-                } else {
-                    templVariables["data"]["viewTitle"] = "Edit";
-                    templVariables["data"]["activeNew"] = '';
-                    templVariables["data"]["activeList"] = '';
+                case 1:
+                {
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    break;
                 }
-                templVariables["data"]["model"] = this.model.toJSON();
-                //console.log(templVariables);
-
-                this.$el.html(this.template(templVariables));
+                case 2:
+                {
+                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
+                    break;
+                }
+                case 3:
+                {
+                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0));
+                    break;
+                }
+                case 4:
+                {
+                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
+                    break;
+                }
             }
-            else {                  // Model does not exist
-                templVariables["data"]["viewTitle"] = "Create a New Component";
-                templVariables["data"]["activeNew"] = 'class="active"';
-                templVariables["data"]["activeList"] = '';
-                templVariables["data"]["model"] = [];
-                this.$el.html(this.template(templVariables));
-            }
-
-            this.assign({
-                '#metric-list': new MetricListView
-            });
 
             return this;
         },
 
-        submit: function () {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType() });
-            console.log(this.model.toJSON());
+        addToDashboard: function () {
+            var modal = $.modal();
 
-            // var which gets false on Validation error during .save()
-            var validationSuccess = this.model.save({}, {
-                // Success callback. NOTE: model and response SHOULD be taken.
-                success: function (model, response) {       // If validation pass and server responds with OK.
-                    console.log("Save OK", model);
-
-                    AdformNotification.display({            // Show Adform notification. See AformNotification(adform-notifications) dependency.
-                        type: 'success',
-                        content: 'Successfully saved!',
-                        timeout: 5000
-                    });
-                    this.model = new Component();
-                    Backbone.history.navigate("list", { trigger: true }); // Navigate user to list, triggering list events (fetch).
-                },
-                // Error callback. NOTE: model and response SHOULD be taken.
-                error: function (model, response) {         // If validation pass, but server responds with failure.
-                    console.log("Save FAIL", response);
-
-                    // For each error message entry display notification with message.
-                    response.responseJSON.forEach(function (entry) {
-                        AdformNotification.display({       // Show Adform notification.
-                            type: 'error',
-                            content: entry.Message,         // Shows message from server
-                            timeout: 5000
-                        });
-                    });
-                }
+            $.modal({
+                title: "Select Dashboard",
+                body: this.selectDashboardTemplate({Dashboards: this.collection.toJSON()}),
+                buttons: [
+                    //{
+                    //    title: "Submit",
+                    //    cssClass: "btn-success disabled",
+                    //    dismiss: false
+                    //},
+                    //{
+                    //    title: "Cancel",
+                    //    cssClass: "btn-cancel",
+                    //    id: "modalCancel"
+                    //}
+                ],
+                className: "form"
             });
-            // Deeper validation error check.
-            if (!validationSuccess) {   // If save returns false we can check what went wrong.
-                console.log("Validation failed!");
 
-                AdformNotification.display({                // And show notifications.
-                    type: 'error',
-                    content: 'Validation failed!',
-                    timeout: 5000
+            var self = this;
+
+            $(".dashboard-list-item").bind("click", function (e) {
+                var reportComponentId = self.model.get("Id");
+                var selectedDashboardId = parseInt(e.currentTarget.id);
+                
+//                console.log(reportComponentId, selectedDashboardId);
+
+                //
+                //var tempDashboardComponent = new DashboardComponent({ dashboardId: selectedDashboardId, reportComponentId: reportComponentId });
+                //tempDashboardComponent.save({}, {
+                //    success: function (collection, response) {
+                //        console.log("YAY", collection);
+                //    },
+                //    error: function (collection, response) {
+                //        console.log(collection);
+                //    }
+                //});
+
+                $.ajax({
+                    url: "http://37.157.0.42:33895/api/DashboardComponent?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
+
+                    type: 'post',
+                    success: function () {
+
+                    },
+                    error: function () {
+                        console.log('error!');
+                    }
                 });
-            }
+
+                modal.modal("hide");
+            });
+
             return false;
-        },
-
-        assign: function (selector, view) {
-            var selectors;
-            if (_.isObject(selector)) {
-                selectors = selector;
-            }
-            else {
-                selectors = {};
-                selectors[selector] = view;
-            }
-            if (!selectors) return;
-            _.each(selectors, function (view, selector) {
-                this.childViews.push(view);
-                view.setElement(this.$(selector)).render();
-            }, this);
-            //console.log("componentView.assign this.childViews", this.childViews);
-
         }
-
     });
 
     return GenerateView;

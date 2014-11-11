@@ -121,9 +121,32 @@ namespace BussinessLogic.Mappings
 
         #endregion
 
-        #region Report Component
+		#region Dimension
 
-        public ReportComponent DtoToReportComponent(ReportComponentDto dto)
+		public List<DimensionDto> DimensionToDto(List<Dimension> dimensions)
+		{
+			return dimensions.Select(DimensionToDto).ToList();
+		}
+
+		public DimensionDto DimensionToDto(Dimension dimension)
+		{
+			var dto = new DimensionDto();
+			dto.Description = dimension.Description;
+			dto.DisplayName = dimension.DisplayName;
+			dto.DataType = dimension.DataType;
+			dto.Mnemonic = dimension.Mnemonic;
+			dto.DimensionId = dimension.DimensionId;
+			dto.Group = dimension.Group;
+			return dto;
+		}
+	
+		#endregion
+
+
+
+		#region Report Component
+
+		public ReportComponent DtoToReportComponent(ReportComponentDto dto)
         {
             var report = new ReportComponent
             {

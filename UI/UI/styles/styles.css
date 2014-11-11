@@ -1,0 +1,136 @@
+﻿body {
+}
+/* centered columns styles */
+.row-centered {
+    text-align:center;
+}
+.col-centered {
+    display:inline-block;
+    float:none;
+    /* reset the text-align */
+    text-align:left;
+    /* inline-block space fix */
+    margin-right:-4px;
+}
+
+#metric-list {
+    min-height: 129px;
+}
+
+.component {
+        min-height: 129px;
+}
+
+#metric-list>.form-horizontal.well {
+    background: rgba(231,246,253,0.5);
+}
+
+#dimension-list>.form-horizontal.well {
+    background: rgba(250,128,114,0.1);
+}
+
+.form-horizontal.well {
+    background: rgba(224,224,224,0.2);
+}
+
+.btn {
+    background-color: white !important;
+}
+
+.sortable>li, .sortable>button {
+    display: inline;
+    list-style-type: none;
+    float: left;
+}
+
+.sortable .btn {
+    height: 27px;
+    margin-top: 5px;
+}
+
+.sortable-placeholder{
+    width: 213px;
+    height: 23px;
+    display: inline-block;
+    background: #dddddd;
+    border: 1px solid;
+    border-radius: 4px;
+    border-color: #ccc;
+    margin: 7px;
+}
+
+.wizard-nav, .component-listView, .form-horizontal.well {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.handle {
+    cursor: move;
+}
+
+li {
+    margin: 5px;
+}
+
+.form-horizontal.well .sortable {
+    display: -webkit-flex;
+    display: flex;
+
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
+    height: 10px;
+}
+
+
+.metric-group{
+    vertical-align: top;
+}
+
+.metric-group > .controls{
+    margin: 0 !important;
+}
+
+.dimension-group{
+    vertical-align: top;
+}
+
+.dimension-group > .controls{
+    margin: 0 !important;
+}
+.adform-select-control {
+    vertical-align: top;
+}
+i[class*="adf-icon-alt"] {
+    display: inline-block;
+    width: 8px;
+    height: 26px;
+    line-height: 0;
+    vertical-align: -5px
+}
+
+.del {
+    vertical-align: -webkit-baseline-middle!important;
+}
+
+.show {
+  display: block !important;
+}
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+}
+.invisible {
+  visibility: hidden;
+}
+.removeMetric, .removeDimension {
+    margin-top: -4px !important;
+    margin-left: -3px !important;
+}
+.notifications-container {
+    width: 220px !important;
+}

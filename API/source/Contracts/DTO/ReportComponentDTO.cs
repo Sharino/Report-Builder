@@ -5,7 +5,7 @@ using Models.Models;
 namespace Contracts.DTO
 {
     public class ReportComponentDto
-    {   //TODO dimensionsDTO filtersDTO
+    {   // TODO filtersDTO
         public string Title { get; set; }
         public int Id { get; set; }
         public string SubmissionDate { get; set; }
