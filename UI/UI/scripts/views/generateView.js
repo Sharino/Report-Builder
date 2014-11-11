@@ -4,6 +4,7 @@
     'MetricCollection',
     'MetricListView',
     'KPIView',
+    'TimelineView',
     'text!templates/generate.html',
     'DateFilterView',
     'text!templates/selectDashboardList.html',
@@ -12,7 +13,8 @@
     'MessageView',
     'adform-notifications',
     'adform-modal'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView) {
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TimelineView,
+             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
@@ -69,7 +71,7 @@
                 }
                 case 3:
                 {
-                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/bAmN3M9.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0));
                     break;
                 }
                 case 4:

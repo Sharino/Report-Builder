@@ -77,6 +77,7 @@
     <Content Include="scripts\lib\bootstrap.js" />
     <Content Include="scripts\lib\globalize.js" />
     <Content Include="scripts\lib\handlebars.js" />
+    <Content Include="scripts\lib\highcharts.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\jquery.sortable.js" />
     <Content Include="scripts\lib\moment.js" />
@@ -104,12 +105,14 @@
     <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\dimensionListView.js" />
     <Content Include="scripts\views\generateView.js" />
+    <Content Include="scripts\views\highchartsTimelineView.js" />
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\messageView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
+    <Content Include="scripts\views\timelineView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\styles.css" />
     <Content Include="templates\chart.html" />

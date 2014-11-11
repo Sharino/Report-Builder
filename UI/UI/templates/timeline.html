@@ -1,1 +1,19 @@
-﻿
+﻿<div class="form-horizontal well component ">
+    <div class="table-toolbar">
+        <div class="group-label ">
+            <label>
+                <%= model.Title %>
+                <div id="component-edit-<%= Position %>" class="pull-right">
+                    <button class="btn btn-primary timelineEdit" type="submit" data-id="<%= Position %>" id="<%= this.model.id %>">Edit</button>
+                </div>
+                <!--                <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i>-->
+            </label>
+            <br />
+            <!--            <div id="component-edit-<%= Position %>"></div>-->
+            <hr />
+        </div>
+        <div id="date-filter"></div>
+        <div id="spinner"></div>
+    </div>
+    <div id="highcharts-timeline"></div>
+</div>

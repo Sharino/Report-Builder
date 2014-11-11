@@ -174,3 +174,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\System.W
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\System.Web.Http.Cors.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
+D:\git\Report-Builder\API\source\Host\bin\Debug\ApiHost.exe.config
+D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
+D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb

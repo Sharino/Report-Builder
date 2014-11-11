@@ -12,7 +12,8 @@
 
         events: {
             'click #addDimension': 'dimensionAddedAction',
-            'AdformSelect:selectionChanged': 'dimensionSelectedAction'
+            'AdformSelect:selectionChanged': 'dimensionSelectedAction',
+            'click .removeDimension': 'dimensionRemovedAction'
         },
 
         fire: function (e) {
@@ -145,6 +146,16 @@
                 }
                 draggedItem.Order = ui.item.index();
             }
+            this.render();
+        },
+
+        dimensionRemovedAction: function (e) {
+            var myId = parseInt(e.currentTarget.id);
+
+            if (myId > -1) {
+                this.dimensionArray.splice(myId, 1);
+            }
+
             this.render();
         },
 
