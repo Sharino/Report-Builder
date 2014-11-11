@@ -2,6 +2,7 @@
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Cors;
 using Logging;
 
 namespace Controllers.Controllers
@@ -18,10 +19,16 @@ namespace Controllers.Controllers
     /// </summary>
     public class LogContent
     {
+        public LogContent(string msg, int logType = 1)
+        {
+            Message = msg;
+            LogType = logType;
+        }
+
         public int LogType { get; set; }
         public string Message { get; set; }
     }
-
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class LogController : ApiController
     {
         public HttpResponseMessage Log(LogContent content)
@@ -31,6 +38,7 @@ namespace Controllers.Controllers
             {
                 switch (content.LogType)
                 {
+                    case 0:
                     case 1:
                         log.Debug(content.Message);
                         break;
