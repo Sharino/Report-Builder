@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="QUnitTests">
+    <PropertyGroup>
+		<ExtensionTasksPath Condition="'$(ExtensionTasksPath)' == ''">$(MsBuildExtensionPackPath)</ExtensionTasksPath>
+		<QUnitTestRunner>C:\TeamCity\!_InstallFiles\Chutzpah.1.0.0\chutzpah.console.exe</QUnitTestRunner>
+		<QUnitTestRunner3>C:\TeamCity\!_InstallFiles\Chutzpah.3.2.3\chutzpah.console.exe</QUnitTestRunner3>
+    </PropertyGroup>
+
+	<ItemGroup>
+		<QUnitTestFiles Include="$(MSBuildProjectDirectory)\..\src\Adform.Reporting.Web.UI\Javascript\Tests\*.html" />
+	</ItemGroup>
+
+	<Target Name="QUnitTests">
+		<CallTarget Targets="QUnitShimTests" />
+		<CallTarget Targets="QUnitAMDTests" />
+	</Target>
+	
+	<Target Name="QUnitShimTests">
+		<Exec Command="$(QUnitTestRunner) %(QUnitTestFiles.Identity)" ContinueOnError="false" />
+	</Target>
+	
+	<Target Name="QUnitAMDTests">
+		<Exec Command="$(QUnitTestRunner3) $(MSBuildProjectDirectory)\..\src\Adform.Reporting.Web.UI\chutzpah.json /failOnError /timeoutMilliseconds 60000" ContinueOnError="false" />
+	</Target>
+</Project>
