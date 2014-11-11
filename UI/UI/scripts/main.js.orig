@@ -67,7 +67,7 @@
         'DashboardListView':    'scripts/views/dashboardListView',
         'DashboardView':        'scripts/views/dashboardView',
         'DashboardComponentView': 'scripts/views/dashboardComponentView',
-        'KPIView':              'scripts/views/kpiView',
+        'KPIView': 'scripts/views/kpiView',
         'TimelineView': 'scripts/views/timelineView',
         'HighchartsTimelineView': 'scripts/views/highchartsTimelineView',
         'DateFilterView':       'scripts/views/dateFilterView',
@@ -146,10 +146,13 @@
             deps: ['jquery'],
             exports: "Highcharts"
         },
+<<<<<<< HEAD
 
         'Export': {
             exports: "Export"
         },
+=======
+>>>>>>> f1b89f833c69acd0c13f9cc2a930b91ef045ecd9
     }
 });
 

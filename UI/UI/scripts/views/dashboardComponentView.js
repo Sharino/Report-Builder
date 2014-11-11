@@ -12,6 +12,17 @@
     var DashboardComponentView = BaseCompositeView.extend({
         template: _.template(dashboardComponentTemplate),
 
+        events: {
+            'click .radio-group': 'hide'
+        },
+
+        hide: function () {
+            if (this.$el.find('#rb1').is(":checked")) {
+                $('#dimension-list').hide();
+            } else {
+                $('#dimension-list').show();
+            }
+        },
 
         inputTitle: function() {
             return $('#input').val();
@@ -92,6 +103,9 @@
                 });
 
                 this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
+
+                this.$el.find('#dimension-list').hide();
+
                 return this;
             }
 
