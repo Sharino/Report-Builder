@@ -48,6 +48,7 @@
       <HintPath>..\..\packages\Swashbuckle.Core.4.0\lib\net40\Swashbuckle.Core.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Net.Http.Formatting, Version=5.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -85,6 +86,7 @@
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\DashboardComponentController.cs" />
     <Compile Include="Controllers\DimensionController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\LogController.cs" />
     <Compile Include="Controllers\MetricController.cs" />
     <Compile Include="Controllers\ReportComponentController.cs" />

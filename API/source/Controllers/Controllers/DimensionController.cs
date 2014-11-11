@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -7,10 +7,10 @@ using BussinessLogic.Handlers.DimensionHandlers;
 
 namespace Controllers.Controllers
 {
-	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class DimensionController : ApiController
-	{
-		[HttpGet]
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class DimensionController : ApiController
+    {
+        [HttpGet]
 		public HttpResponseMessage GetAll()
 		{
 			var handler = new DimensionGetAllHandler();
