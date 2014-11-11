@@ -63,6 +63,7 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\export.js" />
     <Content Include="scripts\lib\adform-calendar.v2.01.js" />
     <Content Include="scripts\lib\adform-checkbox.js" />
     <Content Include="scripts\lib\adform-date.js" />

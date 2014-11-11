@@ -35,6 +35,9 @@
         /* Config dependencies */
         'Config':               'scripts/config/config',
 
+        /* Other */
+        'Export':               'scripts/export',
+
         /* Base Views */
         'BaseDestructableView': 'scripts/views/baseDestructableView',
         'BaseCompositeView':    'scripts/views/baseCompositeView',
@@ -142,6 +145,10 @@
         'Highcharts': {
             deps: ['jquery'],
             exports: "Highcharts"
+        },
+
+        'Export': {
+            exports: "Export"
         },
     }
 });

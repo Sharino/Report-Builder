@@ -1,10 +1,12 @@
 ﻿define('ComponentListView', [
     'BaseCompositeView',
+    'Component',
     'ComponentCollection',
     'MenuView',
     'text!templates/componentList.html',
     'Config',
-], function (BaseCompositeView, ComponentCollection, MenuView, componentListTemplate, Config) {
+    'Export'
+], function (BaseCompositeView, Component, ComponentCollection, MenuView, componentListTemplate, Config, Export) {
     var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
 
@@ -12,8 +14,9 @@
             'click .del': 'handleDeleteAction',
             'click .gen': 'handleGenerateAction',
             'click .component-list-item>.click': 'handleClickAction',
-            'click .create': 'submitNewComponent'
+            'click .create': 'submitNewComponent',
         },
+
         submitNewComponent: function () {
             var routerUrl = "create";
             Backbone.history.navigate(routerUrl, true, true);

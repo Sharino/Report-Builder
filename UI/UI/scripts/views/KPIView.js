@@ -5,10 +5,11 @@
     'Einstein',
     'Metric',
     'Config',
+    'Export',
     'spin',
     'adform-loader',
     'adform-notifications'
-], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config) {
+], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config, Export) {
     var kpiView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
@@ -105,7 +106,8 @@
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                      self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
+                    self.einsteinData = response;
+                    self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
                     console.log("Stone Alone FAIL", error);
