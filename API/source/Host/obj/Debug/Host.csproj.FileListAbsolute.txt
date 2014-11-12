@@ -130,7 +130,6 @@ C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Host\bin\Debug\S
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\ApiHost.exe.config
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\ApiHost.pdb
@@ -172,5 +171,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\DataLaye
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\System.Web.Http.Cors.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb

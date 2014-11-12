@@ -24,4 +24,3 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newton
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache

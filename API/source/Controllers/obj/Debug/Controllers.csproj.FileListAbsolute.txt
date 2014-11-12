@@ -109,7 +109,6 @@ C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Controllers\bin\
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Controllers\obj\Debug\Controllers.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\Controllers.dll.config
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\Controllers.pdb
@@ -144,5 +143,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\S
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\System.Web.Http.Owin.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Debug\Controllers.pdb

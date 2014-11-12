@@ -55,7 +55,6 @@ C:\Users\Administrator\Desktop\newgit\Report-Builder\API\BussinessLogicTests\bin
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.dll
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\BussinessLogicTests.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\BussinessLogicTests.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\BussinessLogic.dll
@@ -72,5 +71,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\Moq.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\Logging.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.pdb

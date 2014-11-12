@@ -43,7 +43,6 @@ C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\BussinessLogic\b
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.dll
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\BussinessLogic.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\Contracts.dll
@@ -56,5 +55,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debu
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\Logging.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Debug\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Debug\BussinessLogic.pdb
