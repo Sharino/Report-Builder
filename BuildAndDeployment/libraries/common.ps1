@@ -1,3 +1,6 @@
+Set-StrictMode -Version 2.0
+$ErrorActionPreference = "Stop"  
+
 function Execute-Checked-Command(
     [string]$command = $(throw "command is required")
 )
