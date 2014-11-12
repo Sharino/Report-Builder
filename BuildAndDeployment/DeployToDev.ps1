@@ -2,7 +2,6 @@ param( # !! 'param' must be on first line !! parameters sample:  "-Configuration
     [string]$Configuration = $(throw "argument -Configuration is required"),
     [string]$Repo01Ip = $(throw "argument -Repo01Ip is required")
 )
-
 #*************************************************************************
 # Powershell settings
 #*************************************************************************
@@ -25,7 +24,7 @@ $programFiles = "D:\WindowsServices\Report.Builder.API\Service\*"
 $backupLocation = "\\{0}\WindowsServices\Report.Builder.API\Backup"
 $backupFolder = "D:\WindowsServices\Report.Builder.API\Backup"
 
-$serviceFilesLocation = "C:\Report Builder\API"
+$serviceFilesLocation = "C:\SHARO\API"
 
 $msBuildPath = "$env:windir\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe"
 $nugetPath = "..\.nuget\nuget.exe"
