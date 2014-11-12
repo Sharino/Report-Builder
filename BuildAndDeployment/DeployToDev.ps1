@@ -24,7 +24,7 @@ $programFiles = "D:\WindowsServices\Report.Builder.API\Service\*"
 $backupLocation = "\\{0}\WindowsServices\Report.Builder.API\Backup"
 $backupFolder = "D:\WindowsServices\Report.Builder.API\Backup"
 
-$serviceFilesLocation = "C:\SHARO\API"
+$serviceFilesLocation = "\\{0}\SHARO\API\"
 
 $msBuildPath = "$env:windir\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe"
 $nugetPath = "..\.nuget\nuget.exe"
