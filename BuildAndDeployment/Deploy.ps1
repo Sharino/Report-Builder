@@ -19,49 +19,6 @@ $_currentDirectory = Split-Path $MyInvocation.MyCommand.Path
 #*************************************************************************
 $deploymentTime = ((Get-Date).ToUniversalTime()).ToString("yyyy-MM-dd_HH.mm")
 
-### WEB deployment
-
-$serviceFilesLocation = "\\{0}\d\ASP\Reporting\Reporting\"
-$backupFolder = "\\{0}\d\Backup\Reporting\"
-$backupFileNameTemplate = "teamcity-Reporting_{0}.zip"
-
-Write-Host `n:: Getting REWE server list`n
-
-$wc = New-Object System.Net.WebClient
-
-[xml]$serversXml = $wc.DownloadString("http://deployment.adform.com/Config/Browse/$Environment/servers.config?xpath=//Servers/Server[./Name/text()=%22REWE%22]/Static")
-
-$servers = $serversXml.Static.Server
-
-foreach ($server in $servers)
-{
-    $serverDomain = $server.Domain
-
-    Write-Host `n:: Deploying to server $serverDomain`n
-
-    Write-Host `n:: Backing up files`n
-    Backup-Folder ($serviceFilesLocation -f $serverDomain) (Join-Path ($backupFolder -f $serverDomain) $backupFileNameTemplate) $deploymentTime
-    Write-Host "Done"
-
-    Write-Host `n:: Transforming Web.config file`n
-    $sourceFile = (Resolve-Path "..\src\Adform.Reporting.Web.UI\Web.config").Path
-    $transformFile = (Resolve-Path "..\src\Adform.Reporting.Web.UI\Web.$Configuration.config").Path
-    $tempWebConfigFile = [System.IO.Path]::GetTempFileName()
-    Transform-ConfigXml $sourceFile $transformFile $tempWebConfigFile
-
-    Write-Host `n:: Deleting old files`n
-    $serviceFolder = ($serviceFilesLocation -f $serverDomain)
-    Remove-Item-With-Retry "$serviceFolder\bin\*"
-    Write-Host "Done"
-
-    Write-Host `n:: Copying new files`n
-    $source = "..\src\Adform.Reporting.Web.UI\build\*"
-    $destination = ($serviceFilesLocation -f $serverDomain)
-    Copy-Item -Path $source -Destination "$destination\" -Recurse -Force -Verbose -ErrorAction Stop
-    Copy-Item -Path $tempWebConfigFile -Destination "$destination\Web.config" -Force -Verbose -ErrorAction Stop
-    Remove-Item -Path $tempWebConfigFile -Force
-    Write-Host "Done"
-}
 
 ### IAPI deployment
 
