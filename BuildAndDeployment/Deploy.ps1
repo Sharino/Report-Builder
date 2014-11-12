@@ -18,7 +18,7 @@ $_currentDirectory = Split-Path $MyInvocation.MyCommand.Path
 #*************************************************************************
 
 
-$serviceName = "Report Builder"
+$serviceName = "ApiHost.exe"
 $sevenZipPath = "D:\WindowsServices\Tools\7-Zip\7za.exe"
 $programFiles = "D:\WindowsServices\Report.Builder.API\Service\*"
 $backupLocation = "\\{0}\WindowsServices\Report.Builder.API\Backup"
@@ -42,16 +42,7 @@ foreach ($server in $servers)
 {
     $serverIP = $server.IP
 
-    Write-Host `n:: Deploying to server $serverIP`n   
-
-    Write-Host `n:: [REMOTE] Stopping service`n
-    $stopCommand = 'sc stop "$serviceName"'
-    Start-And-Wait-For-Remote-Process $serverIP $stopCommand
-	
-	Write-Host `n:: [REMOTE] Deleting service`n
-	Write-Host `n:: "sc delete "$serviceName""
-    $stopCommand = "sc stop "$serviceName""
-    Start-And-Wait-For-Remote-Process $serverIP $stopCommand
+    Write-Host `n:: Deploying to server $serverIP`n    
 
     Write-Host `n:: Deleting old files`n
     $serviceFilesShare = ($serviceFilesLocation -f $serverIP)+"*.*"
@@ -63,11 +54,11 @@ foreach ($server in $servers)
     Write-Host `n:: Source  $source`n
     Write-Host `n:: Destination $destination`n
 
-    Copy-Item -Path $source -Destination $destination -Recurse -Force
-  
-
-    Write-Host `n:: [REMOTE] Starting service`n
-    $startCommand = "sc start "$serviceName""
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  
+	
+	Write-Host `n:: [REMOTE] Starting service`n
+    Write-Host `n:: &source -install`n
+    $startCommand = "$source -install"
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
 }
 
