@@ -58,7 +58,7 @@ foreach ($server in $servers)
 	
 	Write-Host `n:: [REMOTE] Starting service`n
     Write-Host `n:: ..\API\source\Host\bin\Debug\ApiHost.exe -install`n
-    $startCommand = "..\API\source\Host\bin\Debug\ApiHost.exe -install"
+    $startCommand = "C:\Report Builder\API\ApiHost.exe -install"
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
 }
 
