@@ -53,7 +53,7 @@ foreach ($server in $servers)
     Remove-Item -path $serviceFilesShare -Force
 
     Write-Host `n:: Copying new files`n
-    $source = "..\API\source\Host\bin\$Configuration\*"
+    $source = "..\API\source\Host\bin\Debug\*"
     $destination = ($serviceFilesLocation -f $serverIP)
     Write-Host `n:: Source  $source`n
     Write-Host `n:: Destination $destination`n
