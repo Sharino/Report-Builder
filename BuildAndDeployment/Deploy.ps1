@@ -45,6 +45,12 @@ foreach ($server in $servers)
     Write-Host `n:: Deploying to server $serverIP`n   
 
     Write-Host `n:: [REMOTE] Stopping service`n
+	 Write-Host `n:: "sc stop $serviceName"
+    $stopCommand = "sc stop $serviceName"
+    Start-And-Wait-For-Remote-Process $serverIP $stopCommand
+	
+	Write-Host `n:: [REMOTE] Deleting service`n
+	Write-Host `n:: "sc delete $serviceName"
     $stopCommand = "sc stop $serviceName"
     Start-And-Wait-For-Remote-Process $serverIP $stopCommand
 
