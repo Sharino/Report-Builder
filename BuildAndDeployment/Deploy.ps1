@@ -18,7 +18,7 @@ $_currentDirectory = Split-Path $MyInvocation.MyCommand.Path
 #*************************************************************************
 
 
-$serviceName = "API"
+$serviceName = "Report Builder"
 $sevenZipPath = "D:\WindowsServices\Tools\7-Zip\7za.exe"
 $programFiles = "D:\WindowsServices\Report.Builder.API\Service\*"
 $backupLocation = "\\{0}\WindowsServices\Report.Builder.API\Backup"
