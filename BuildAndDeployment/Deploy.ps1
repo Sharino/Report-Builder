@@ -57,8 +57,8 @@ foreach ($server in $servers)
     Copy-Item -Path $source -Destination $destination -Recurse -Force  
 	
 	Write-Host `n:: [REMOTE] Starting service`n
-    Write-Host `n:: $source -install`n
-    $startCommand = "$source -install"
+    Write-Host `n:: ..\API\source\Host\bin\Debug\ApiHost.exe -install`n
+    $startCommand = "..\API\source\Host\bin\Debug\ApiHost.exe -install"
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
 }
 
