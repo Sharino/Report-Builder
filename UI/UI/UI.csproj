@@ -81,6 +81,7 @@
     <Content Include="scripts\lib\highcharts.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\jquery.sortable.js" />
+    <Content Include="scripts\lib\Kinvey.js" />
     <Content Include="scripts\lib\moment.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />

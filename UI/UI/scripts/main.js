@@ -16,6 +16,7 @@
         'globalize':            'scripts/lib/globalize',
         'moment':               'scripts/lib/moment',
         'Highcharts':           'scripts/lib/highcharts',
+        'Kinvey':               'scripts/lib/Kinvey',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',

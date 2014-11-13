@@ -1,8 +1,9 @@
 ﻿define('Export', [
     'jquery',
     'underscore',
+    'Kinvey',
     'backbone'
-], function ($, _, Backbone) {
+], function ($, _, Kinvey, Backbone) {
     var Export = {
 
         exportCsv: function (data) {
@@ -14,9 +15,12 @@
                 type: 'GET',
                 success: function (response) {
                     console.log(response);
-                    console.log("success");
-                    window.location(response.toString);
-                    Backbone.history.navigate(response.toString);
+                    var promise = Kinvey.File.download(response + "", {
+                        ttl     : 7200,// Two hours
+                        success : function(file) {
+                            console.log(file);
+                        }
+                    });
                 },
                 error: function() {
                     console.log("fail");
