@@ -34,7 +34,8 @@ $servers = @(
     @{Name="REPO01"; IP=$Repo01Ip}
 )
 
-# Deploy
+
+# Deploy API
 
 $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
 
@@ -54,7 +55,7 @@ foreach ($server in $servers)
     Write-Host `n:: Source  $source`n
     Write-Host `n:: Destination $destination`n
 
-    Copy-Item -Path $source -Destination $destination -Recurse -Force  
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  	
 	
 	Write-Host `n:: [REMOTE] Starting service`n
     Write-Host `n:: ..\API\source\Host\bin\Debug\ApiHost.exe -install`n
@@ -62,4 +63,28 @@ foreach ($server in $servers)
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
 }
 
+# Deploy UI
+
+$serviceFilesLocation = "\\{0}\Client\"
+
+foreach ($server in $servers)
+{ 
+	$serverIP = $server.IP
+	
+	Write-Host `n:: Deploying to server $serverIP`n    
+
+    Write-Host `n:: Deleting old UI files`n
+    $serviceFilesShare = ($serviceFilesLocation -f $serverIP)+"*.*"
+    Remove-Item -path $serviceFilesShare -Force
+
+    Write-Host `n:: Copying new UI files`n
+    $source = "..\API\*"
+    $destination = ($serviceFilesLocation -f $serverIP)
+    Write-Host `n:: Source  $source`n
+    Write-Host `n:: Destination $destination`n
+
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  
+	
+
+}
 Write-Host `n:: Finished`n
