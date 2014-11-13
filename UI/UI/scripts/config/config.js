@@ -40,7 +40,7 @@
                 },
                 {
                     link: "#dashboards",
-                    title: "Dashboards",
+                    title: "DashboardsZZZ NO SCOPE",
                 }
             ]
         },
