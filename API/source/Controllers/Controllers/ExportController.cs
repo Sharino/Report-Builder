@@ -55,7 +55,7 @@ namespace Controllers.Controllers
         [HttpGet]
         public string D()
         {
-            string filePath = @"C:\Report Builder\2014-11-13 13;11 - 8923.csv";
+            string filePath = @"file://172.22.3.236/Exports/2014-11-13 13;11 - 8923.csv";
             return filePath;
         }
 

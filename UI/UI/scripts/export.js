@@ -15,6 +15,7 @@
                 success: function (response) {
                     console.log(response);
                     console.log("success");
+                    window.location(response);
                 },
                 error: function() {
                     console.log("fail");
