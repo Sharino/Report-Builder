@@ -13,7 +13,7 @@ namespace Controllers.Controllers
     public class ExportController : ApiController
     {
         [HttpPost]
-        public HttpResponseMessage KpiToCsv(List<Values> request, string separator = ",")
+        public string KpiToCsv(List<Values> request, string separator = ",")
         {
             if (request != null)
                 if (request.Count > 0)
@@ -25,7 +25,7 @@ namespace Controllers.Controllers
                     int randomNumber = random.Next(100, 10000);
 
                     string fileName = DateTime.UtcNow.ToString("yyyy-M-d dd;mm") + " - " + randomNumber + ".csv";
-                    string filePath = @"C:\Report Builder\" + fileName;
+                    string filePath = @"C:\Report Builder\Exports\" + fileName;
 
                     foreach (var val in request)
                     {
@@ -47,9 +47,9 @@ namespace Controllers.Controllers
                     response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
                     response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
                     response.Content.Headers.ContentDisposition.FileName = fileName;
-                    return response;
+                    return "http://172.22.3.236/Exports/" + fileName;
                 }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
+            return "";
         }
 
         [HttpGet]

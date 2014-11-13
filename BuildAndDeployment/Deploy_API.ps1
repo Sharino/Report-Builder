@@ -34,7 +34,6 @@ $servers = @(
     @{Name="REPO01"; IP=$Repo01Ip}
 )
 
-
 # Deploy API
 
 $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
@@ -61,6 +60,35 @@ foreach ($server in $servers)
     Write-Host `n:: ..\API\source\Host\bin\Debug\ApiHost.exe -install`n
     $startCommand = "C:\Report Builder\API\ApiHost.exe -install"
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
+}
+foreach ($server in $servers)
+{
+    $serverDomain = $server.Domain
+
+    Write-Host `n:: Deploying to server $serverDomain`n
+
+    Write-Host `n:: Backing up files`n
+    Backup-Folder ($serviceFilesLocation -f $serverDomain) (Join-Path ($backupFolder -f $serverDomain) $backupFileNameTemplate) $deploymentTime
+    Write-Host "Done"
+
+    Write-Host `n:: Transforming Web.config file`n
+    $sourceFile = (Resolve-Path "..\src\Adform.Reporting.Web.UI\Web.config").Path
+    $transformFile = (Resolve-Path "..\src\Adform.Reporting.Web.UI\Web.$Configuration.config").Path
+    $tempWebConfigFile = [System.IO.Path]::GetTempFileName()
+    Transform-ConfigXml $sourceFile $transformFile $tempWebConfigFile
+
+    Write-Host `n:: Deleting old files`n
+    $serviceFolder = ($serviceFilesLocation -f $serverDomain)
+    Remove-Item-With-Retry "$serviceFolder\bin\*"
+    Write-Host "Done"
+
+    Write-Host `n:: Copying new files`n
+    $source = "..\src\Adform.Reporting.Web.UI\build\*"
+    $destination = ($serviceFilesLocation -f $serverDomain)
+    Copy-Item -Path $source -Destination "$destination\" -Recurse -Force -Verbose -ErrorAction Stop
+    Copy-Item -Path $tempWebConfigFile -Destination "$destination\Web.config" -Force -Verbose -ErrorAction Stop
+    Remove-Item -Path $tempWebConfigFile -Force
+    Write-Host "Done"
 }
 
 Write-Host `n:: Finished`n
