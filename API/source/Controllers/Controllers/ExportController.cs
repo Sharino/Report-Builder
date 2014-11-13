@@ -52,6 +52,13 @@ namespace Controllers.Controllers
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
+        [HttpGet]
+        public string D()
+        {
+            string filePath = @"C:\Report Builder\2014-11-13 13;11 - 8923.csv";
+            return filePath;
+        }
+
         //[HttpPost]
         //public HttpResponseMessage ExportToCsv(List<Request> requests, string separator = ", ")
         //{
