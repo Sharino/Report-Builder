@@ -8,7 +8,7 @@
         exportCsv: function (data) {
             console.log("IM HERE AT EXPORT",  JSON.stringify(data));
             $.ajax({
-                url: 'http://172.22.22.33:33894/api/Export',
+                url: 'http://172.22.3.236:33894/api/Export',
                 //data: JSON.stringify(data),
                 //contentType: 'application/json',
                 type: 'GET',
