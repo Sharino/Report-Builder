@@ -70,13 +70,9 @@ $serviceFilesLocation = "\\{0}\Client\"
 foreach ($server in $servers)
 { 
 	$serverIP = $server.IP
-
+	
 	Write-Host `n:: Deploying to server $serverIP`n    
 
-	Write-Host `n:: [REMOTE] Stopping service`n
-    $stopCommand = "sc stop \"Report Builder\""
-    Start-And-Wait-For-Remote-Process $serverIP $stopCommand
-	
     Write-Host `n:: Deleting old UI files`n
     $serviceFilesShare = ($serviceFilesLocation -f $serverIP)+"*.*"
     Remove-Item -path $serviceFilesShare -Force
