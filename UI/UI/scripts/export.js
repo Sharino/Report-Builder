@@ -15,7 +15,8 @@
                 success: function (response) {
                     console.log(response);
                     console.log("success");
-                    window.location(response);
+                    window.location(response.toString);
+                    Backbone.history.navigate(response.toString);
                 },
                 error: function() {
                     console.log("fail");
