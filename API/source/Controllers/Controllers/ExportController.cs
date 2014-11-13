@@ -47,7 +47,7 @@ namespace Controllers.Controllers
                     response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
                     response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
                     response.Content.Headers.ContentDisposition.FileName = fileName;
-                    return "http://172.22.3.236/Exports/" + fileName;
+                    return "http://37.157.0.42//Exports/" + fileName;
                 }
             return "";
         }
