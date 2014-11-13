@@ -63,36 +63,4 @@ foreach ($server in $servers)
     Start-And-Wait-For-Remote-Process $serverIP $startCommand  
 }
 
-# Deploy UI
-
-$serviceFilesLocation = "\\{0}\Client\"
-
-foreach ($server in $servers)
-{ 
-	$serverIP = $server.IP
-	
-	Write-Host `n:: Deploying to server $serverIP`n    
-
-    Write-Host `n:: Deleting old UI files`n
-    $serviceFilesShare = ($serviceFilesLocation -f $serverIP)+"*.*"
-    Remove-Item -path $serviceFilesShare -Force
-
-    Write-Host `n:: Copying new UI files`n
-    $source = "..\UI\UI\*"
-    $destination = ($serviceFilesLocation -f $serverIP)
-    Write-Host `n:: Source  $source`n
-    Write-Host `n:: Destination $destination`n
-
-    Copy-Item -Path $source -Destination $destination -Recurse -Force  
-	
-	# Load IIS module:
-	Import-Module WebAdministration
-	# Set a name of the site we want to recycle the pool for:
-	$site = "Default Web Site"
-	# Get pool name by the site name:
-	$pool = (Get-Item "IIS:\Sites\$site"| Select-Object applicationPool).applicationPool
-	# Recycle the application pool:
-	Restart-WebAppPool $pool
-
-}
 Write-Host `n:: Finished`n
