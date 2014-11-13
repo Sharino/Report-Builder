@@ -24,7 +24,7 @@ namespace Controllers.Controllers
                     Random random = new Random();
                     int randomNumber = random.Next(100, 10000);
 
-                    string fileName = DateTime.UtcNow.ToString("yyyy-M-d dd;mm") + " - " + randomNumber + ".csv";
+                    string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
                     string filePath = @"C:\Report Builder\Exports\" + fileName;
 
                     foreach (var val in request)
@@ -43,10 +43,6 @@ namespace Controllers.Controllers
                         sw.Close();
                         fs.Close();
                     }
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-                    response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-                    response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-                    response.Content.Headers.ContentDisposition.FileName = fileName;
                     return "http://37.157.0.42//Exports/" + fileName;
                 }
             return "";
