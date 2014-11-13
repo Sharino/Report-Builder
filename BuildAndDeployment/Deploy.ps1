@@ -85,6 +85,14 @@ foreach ($server in $servers)
 
     Copy-Item -Path $source -Destination $destination -Recurse -Force  
 	
+	# Load IIS module:
+	Import-Module WebAdministration
+	# Set a name of the site we want to recycle the pool for:
+	$site = "Default Web Site"
+	# Get pool name by the site name:
+	$pool = (Get-Item "IIS:\Sites\$site"| Select-Object applicationPool).applicationPool
+	# Recycle the application pool:
+	Restart-WebAppPool $pool
 
 }
 Write-Host `n:: Finished`n
