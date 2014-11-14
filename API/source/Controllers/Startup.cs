@@ -24,11 +24,16 @@ namespace Controllers
             configuration.Routes.MapHttpRoute(
                 name: "API",
                 routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional });
+                defaults: new { id = RouteParameter.Optional },
+			constraints: new { controller = @"^(?:(?!export).)*$" }
 
-            //configuration.Routes.MapHttpRoute(
-            //    name: "DashComponentAdd",
-            //    routeTemplate: "api/{controller}/{dashboardId}/{reportComponentId}");
+			);
+
+            configuration.Routes.MapHttpRoute(
+                name: "Export",
+                routeTemplate: "api/{controller}/{action}",
+				defaults: new { controller = "Export" }
+			);
 
 
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));

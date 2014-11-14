@@ -21,18 +21,11 @@
         template: _.template(dashboardTemplate),
 
         events: {
-            'click #edit-form': 'edit',
-            'click #csv': 'csv',
+            'click .edit-form': 'edit',
+            'click .csv': 'csv',
+            'click .pdf': 'pdf'
         },
 
-        csv: function (e) {
-            e.preventDefault();
-            var id = parseInt($(e.currentTarget).closest("#csv").attr('data-id'));
-
-            console.log(this.componentView);
-            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportCsv(compValues);
-        },
 
         initialize: function () {
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
@@ -47,7 +40,7 @@
         edit: function (e) {
             e.preventDefault();
 
-            var id = parseInt($(e.currentTarget).closest("#edit-form").attr('data-id'));
+            var id = parseInt($(e.currentTarget).attr('data-id'));
 
             if (!isNaN(id)) {
                 var currentModel = this.model.get("Components")[id];
@@ -94,15 +87,6 @@
 
         },
 
-        initialize: function () {
-            Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
-            this.render();
-            for (var i = 0; i < this.model.get('ComponentIds').length; i++) {
-                var id = this.model.get('ComponentIds')[i];
-                this.populate(id, i);
-            }
-        },
-
         populate: function (id, position) {
             var self = this;
             this.componentView = [];
@@ -147,7 +131,22 @@
         render: function () {
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
             return this;
-        }
+        },
+
+        csv: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            console.log(this.componentView);
+            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
+            Export.exportCsv(compValues);
+        },
+
+        pdf: function (e) {
+            // TODO To be implemented.
+        },
+
+
     });
 
     return DashboardView;
