@@ -137,13 +137,23 @@
             e.preventDefault();
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
-            console.log(this.componentView);
             var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
             Export.exportCsv(compValues);
         },
 
         pdf: function (e) {
-            // TODO To be implemented.
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
+            Export.exportPdf(compValues, {
+                success: function(data, status, jqXHR) {
+                    console.log(data, status, jqXHR);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    console.log(xhr, ajaxOptions, thrownError);
+                }
+           });
         },
 
 
