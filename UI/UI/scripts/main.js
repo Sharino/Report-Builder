@@ -23,15 +23,15 @@
         'bootstrap-tooltip':    'scripts/lib/bootstrap/bootstrap-tooltip',
 
         /* Adform dependencies */
-        'adform-checkbox':      'scripts/lib/adform-checkbox',
-        'adform-select':        'scripts/lib/adform-select',
-        'adform-select-group':  'scripts/lib/adform-select-group',
-        'adform-notifications': 'scripts/lib/adform-notifications',
-        'adform-loader':        'scripts/lib/adform-loader',
-        'adform-modal':         'scripts/lib/adform-modal',
-        'adform-calendar':      'scripts/lib/adform-calendar.v2.01',
-        'adform-date':          'scripts/lib/adform-date',
-        'adform-datepicker':    'scripts/lib/adform-datepicker',
+        'adform-checkbox':      'scripts/lib/adform/adform-checkbox',
+        'adform-select':        'scripts/lib/adform/adform/adform-select',
+        'adform-select-group':  'scripts/lib/adform/adform-select-group',
+        'adform-notifications': 'scripts/lib/adform/adform-notifications',
+        'adform-loader':        'scripts/lib/adform/adform-loader',
+        'adform-modal':         'scripts/lib/adform/adform-modal',
+        'adform-calendar':      'scripts/lib/adform/adform-calendar.v2.01',
+        'adform-date':          'scripts/lib/adform/adform-date',
+        'adform-datepicker':    'scripts/lib/adform/adform-datepicker',
 
         /* Config dependencies */
         'Config':               'scripts/config/config',

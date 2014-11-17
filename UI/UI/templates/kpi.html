@@ -3,9 +3,12 @@
         <div class="group-label ">
             <label>
                 <%= model.Title %>
-                <button class="gen btn btn-primary pull-right" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>" id="edit-form">Edit</button>
+                <label class="pull-right">
+                    <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
+                    <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
+                    <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
+                </label>
             </label>
-            <button class="csv btn btn-transparent pull-right" data-id="<%= Position %>" comp-id="<%= this.model.id %>" id="csv">CSV</button>
             <div id="component-edit-<%= Position %>"></div>
             <br />
             <hr />
