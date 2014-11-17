@@ -48,6 +48,7 @@ namespace Controllers.Controllers
             return "";
         }
 
+<<<<<<< HEAD
         [HttpGet]
         public string D()
         {
@@ -102,7 +103,7 @@ namespace Controllers.Controllers
         //        }
         //    return Request.CreateResponse(HttpStatusCode.BadRequest);
         //}
-
+=======
 		[HttpPost]
 		public string KpiToPdf(List<Values> request)
 		{
