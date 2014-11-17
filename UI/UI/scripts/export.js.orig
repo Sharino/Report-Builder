@@ -6,9 +6,6 @@
 ], function ($, _, Kinvey, Backbone) {
     var Export = {
 
-        // Seip pamascius, reiktu tokius velnius sudet i Component modeli, kur butu Component.exportCsv(), Component.exportPdf()
-        // Kad automatiskai is modelio pasiimtu einsteinData ir pustu i CSV/PDF // Tony
-
         exportCsv: function (data) {
             $.ajax({
                 url: 'http://37.157.0.42:33895/api/Export',
@@ -19,16 +16,9 @@
                     window.location.assign(dlUrl);
                 },
                 error: function () {
-                success: function (data, status, jqXHR) {
-                    console.log(data, jqXHR);
-                    console.log(jqXHR.getResponseHeader("Content-Disposition"));
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log("fail", this);
-                }
-            });
-        },
 
+<<<<<<< HEAD
+=======
         exportPdf: function (data, opt) {
             $.ajax({
                 url: Config.ExportSettings.KpiToPDF,
@@ -43,6 +33,8 @@
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (opt.error != null) {
                         opt.error(xhr, ajaxOptions, thrownError);//awdawd
+                    }
+>>>>>>> origin/master
                 }
             });
         }
