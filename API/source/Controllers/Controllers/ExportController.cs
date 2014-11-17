@@ -48,6 +48,7 @@ namespace Controllers.Controllers
             return "";
         }
 
+<<<<<<< HEAD
         [HttpGet]
         public string D()
         {
@@ -102,6 +103,77 @@ namespace Controllers.Controllers
         //        }
         //    return Request.CreateResponse(HttpStatusCode.BadRequest);
         //}
+=======
+		[HttpPost]
+		public string KpiToPdf(List<Values> request)
+		{
+			if (request != null)
+				if (request.Count > 0)
+				{
+					Random random = new Random();
+					int randomNumber = random.Next(100, 10000);
+
+					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".pdf";
+					string filePath = @"C:\Report Builder\Exports\";
+
+					Document doc = new Document();
+					doc.PageInfo.Margin.Left = 40;
+					doc.PageInfo.Margin.Right = 40;
+
+					Page a = doc.Pages.Add();
+
+					// Initializes a new instance of the Table
+					Table table = new Table
+					{
+						DefaultColumnWidth = "127",
+						Border = new BorderInfo(BorderSide.All, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236))),
+						BackgroundColor = Color.FromRgb(System.Drawing.Color.FromArgb(1, 240, 252, 255)),
+						DefaultCellBorder = new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
+					};
+
+					Row keyRow = table.Rows.Add();
+					keyRow.DefaultCellPadding = new MarginInfo(10, 0, 5, 5);
+
+					Row valueRow = table.Rows.Add();
+					valueRow.DefaultCellPadding = new MarginInfo(10, 5, 5, 2);
+
+					for (int i = 0; i < request.Count; i++)
+					{
+						if (i%4 == 0 && i != 0)
+						{
+							a.Paragraphs.Add(table);
+							a.Paragraphs.Add(new TextFragment());
+
+							table = new Table
+							{
+								DefaultColumnWidth = "127",
+								Border = new BorderInfo(BorderSide.All, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236))),
+								BackgroundColor = Color.FromRgb(System.Drawing.Color.FromArgb(1, 240, 252, 255)),
+								DefaultCellBorder = new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
+							};
+							
+							keyRow = table.Rows.Add();
+							valueRow = table.Rows.Add();
+
+							keyRow.DefaultCellPadding = new MarginInfo(10, 0, 5, 5);
+							valueRow.DefaultCellPadding = new MarginInfo(10, 5, 5, 2);
+						}
+
+						keyRow.Cells.Add(request[i].Key);
+						valueRow.Cells.Add(request[i].Value);
+					}
+
+					a.Paragraphs.Add(table);
+
+					doc.Save(filePath + fileName);
+
+					return "http://37.157.0.42//Exports//" + fileName;            
+				}
+			return "";
+		}
+
+        
+>>>>>>> origin/master
     }
 
     public class Values
