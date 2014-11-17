@@ -1,8 +1,9 @@
 ﻿define('Export', [
     'jquery',
     'underscore',
-    'backbone'
-], function ($, _, Backbone) {
+    'backbone',
+    'Config'
+], function ($, _, Backbone, Config) {
     var Export = {
 
         // Seip pamascius, reiktu tokius velnius sudet i Component modeli, kur butu Component.exportCsv(), Component.exportPdf()
@@ -10,7 +11,7 @@
 
         exportCsv: function (data) {
             $.ajax({
-                url: 'http://localhost:5000/api/Export/KpiToCsv',
+                url: Config.ExportSettings.KpiToCSV,
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 type: 'POST',
@@ -26,7 +27,7 @@
 
         exportPdf: function (data, opt) {
             $.ajax({
-                url: 'http://localhost:5000/api/Export/KpiToPdf',
+                url: Config.ExportSettings.KpiToPDF,
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 type: 'POST',

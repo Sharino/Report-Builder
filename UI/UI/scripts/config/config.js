@@ -20,8 +20,13 @@
             URL: "http://37.157.0.42:33896/api/Einstein",
             // URL: "http://37.157.0.42:33859/einstein"    
         },
-        DimensionSettings: {//FIX WHEN BACK-END IS AVAILABLE
+        DimensionSettings: {
             URL: "http://37.157.0.42:33895/api/Dimension"
+        },
+
+        ExportSettings: {
+            KpiToCSV: "http://localhost:5000/api/Export/KpiToCsv",
+            KpiToPDF: "http://localhost:5000/api/Export/KpiToPdf"
         },
 
         NotificationSettings: {
