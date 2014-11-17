@@ -38,7 +38,7 @@
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     if (opt.error != null) {
-                        opt.error(xhr, ajaxOptions, thrownError);
+                        opt.error(xhr, ajaxOptions, thrownError);//awdawd
                     }
                 }
             });
