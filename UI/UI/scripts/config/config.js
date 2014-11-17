@@ -25,8 +25,8 @@
         },
 
         ExportSettings: {
-            KpiToCSV: "http://localhost:5000/api/Export/KpiToCsv",
-            KpiToPDF: "http://localhost:5000/api/Export/KpiToPdf"
+            KpiToCSV: "http://37.157.0.42:33895/api/Export/KpiToCsv",
+            KpiToPDF: "http://37.157.0.42:33895/api/Export/KpiToPdf"
         },
 
         NotificationSettings: {

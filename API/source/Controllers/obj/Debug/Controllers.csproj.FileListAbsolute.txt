@@ -184,3 +184,4 @@ D:\git\Report-Builder\API\source\Controllers\bin\Debug\log4net.xml
 D:\git\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Controllers\obj\Debug\Controllers.dll
 D:\git\Report-Builder\API\source\Controllers\obj\Debug\Controllers.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Debug\Aspose.Pdf.dll

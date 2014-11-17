@@ -219,3 +219,4 @@ D:\git\Report-Builder\API\source\Host\bin\Debug\System.Web.Http.Cors.xml
 D:\git\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\Aspose.Pdf.dll
