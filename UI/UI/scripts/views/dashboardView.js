@@ -149,6 +149,7 @@
             Export.exportPdf(compValues, {
                 success: function(data, status, jqXHR) {
                     console.log(data, status, jqXHR);
+                    window.location.assign(data);
                 },
                 error: function(xhr, ajaxOptions, thrownError) {
                     console.log(xhr, ajaxOptions, thrownError);

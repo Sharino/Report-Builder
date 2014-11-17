@@ -26,3 +26,10 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Debug\Mod
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Debug\Contracts.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Debug\Contracts.pdb
+D:\git\Report-Builder\API\source\Contracts\bin\Debug\Contracts.dll
+D:\git\Report-Builder\API\source\Contracts\bin\Debug\Contracts.pdb
+D:\git\Report-Builder\API\source\Contracts\bin\Debug\Models.dll
+D:\git\Report-Builder\API\source\Contracts\bin\Debug\Models.pdb
+D:\git\Report-Builder\API\source\Contracts\obj\Debug\Contracts.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder\API\source\Contracts\obj\Debug\Contracts.dll
+D:\git\Report-Builder\API\source\Contracts\obj\Debug\Contracts.pdb

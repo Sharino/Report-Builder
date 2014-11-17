@@ -32,8 +32,8 @@ namespace Controllers.Controllers
                     Random random = new Random();
                     int randomNumber = random.Next(100, 10000);
 
-                    string fileName = DateTime.UtcNow.ToString("yyyy-M-d dd;mm") + " - " + randomNumber + ".csv";
-                    string filePath = @"C:\Report Builder\" + fileName;
+                    string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
+                    string filePath = @"C:\Report Builder\Exports\" + fileName;
 
                     foreach (var val in request)
                     {
@@ -61,7 +61,7 @@ namespace Controllers.Controllers
         }
 
 		[HttpPost]
-		public HttpResponseMessage KpiToPdf(List<Values> request)
+		public string KpiToPdf(List<Values> request)
 		{
 			if (request != null)
 				if (request.Count > 0)
@@ -69,8 +69,8 @@ namespace Controllers.Controllers
 					Random random = new Random();
 					int randomNumber = random.Next(100, 10000);
 
-					string fileName = DateTime.UtcNow.ToString("yyyy-M-d dd;mm") + "-" + randomNumber + ".pdf";
-					string filePath = @"C:\Report Builder\";
+					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".pdf";
+					string filePath = @"C:\Report Builder\Exports\";
 
 					Document doc = new Document();
 					doc.PageInfo.Margin.Left = 40;
@@ -123,14 +123,9 @@ namespace Controllers.Controllers
 
 					doc.Save(filePath + fileName);
 
-					HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-					//response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-					//response.Content.Headers.ContentDisposition = new System.Net.Http.Headers.ContentDispositionHeaderValue("attachment");
-					//response.Content.Headers.ContentDisposition.FileName = fileName;
-					return response;
-            
+					return "http://37.157.0.42//Exports//" + fileName;            
 				}
-			return Request.CreateResponse(HttpStatusCode.BadRequest);
+			return "";
 		}
 
         

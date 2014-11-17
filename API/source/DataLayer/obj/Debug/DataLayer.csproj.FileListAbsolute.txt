@@ -34,3 +34,12 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\bin\Debug\New
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.pdb
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\DataLayer.dll
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\DataLayer.pdb
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\Models.dll
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\Newtonsoft.Json.dll
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\Models.pdb
+D:\git\Report-Builder\API\source\DataLayer\bin\Debug\Newtonsoft.Json.xml
+D:\git\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.dll
+D:\git\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.pdb

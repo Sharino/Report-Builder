@@ -42,3 +42,14 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Debug\Loggi
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Debug\Logging.csproj.GenerateResource.Cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Debug\Logging.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Debug\Logging.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Debug\Logging.dll
+D:\git\Report-Builder\API\source\Logging\bin\Debug\Logging.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Debug\log4net.dll
+D:\git\Report-Builder\API\source\Logging\bin\Debug\Models.dll
+D:\git\Report-Builder\API\source\Logging\bin\Debug\Models.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Debug\log4net.xml
+D:\git\Report-Builder\API\source\Logging\obj\Debug\Logging.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder\API\source\Logging\obj\Debug\Logging.Properties.Resources.resources
+D:\git\Report-Builder\API\source\Logging\obj\Debug\Logging.csproj.GenerateResource.Cache
+D:\git\Report-Builder\API\source\Logging\obj\Debug\Logging.dll
+D:\git\Report-Builder\API\source\Logging\obj\Debug\Logging.pdb
