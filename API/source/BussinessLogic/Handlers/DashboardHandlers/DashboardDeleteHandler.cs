@@ -18,6 +18,11 @@ namespace BussinessLogic.Handlers.DashboardHandlers
         {
             var mapping = new Mapping();
             DashboardDto toDelete = mapping.DashboardToDto(_repository.Get(request));
+            var componentRepository = new DashboardComponentRepository();
+            foreach (var id in toDelete.ComponentIds)
+            {
+                componentRepository.Remove(id);
+            }
             _repository.Remove(request);
             return new DashboardResponse(toDelete);
         }
