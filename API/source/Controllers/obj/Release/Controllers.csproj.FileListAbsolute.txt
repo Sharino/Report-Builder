@@ -35,7 +35,6 @@ C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Control
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Controllers\obj\Release\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Controllers\obj\Release\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Controllers\obj\Release\Controllers.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Release\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\Controllers.dll.config
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\Controllers.pdb
@@ -71,5 +70,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\System.Web.Http.Owin.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\System.Web.Http.WebHost.xml
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\bin\Release\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Release\Controllers.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Release\Controllers.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Release\Controllers.pdb

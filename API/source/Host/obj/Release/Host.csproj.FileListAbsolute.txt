@@ -65,6 +65,7 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\WebAct
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\System.Web.Http.WebHost.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\Swashbuckle.Core.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\System.Web.Http.Cors.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\Aspose.Pdf.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\System.Web.Cors.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\BussinessLogic.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\Contracts.pdb
@@ -86,4 +87,3 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\System
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\ApiHost.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Release\Aspose.Pdf.dll
