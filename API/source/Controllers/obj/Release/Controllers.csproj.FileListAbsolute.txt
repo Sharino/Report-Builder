@@ -111,3 +111,4 @@ D:\git\Report-Builder\API\source\Controllers\bin\Release\log4net.xml
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.dll
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.pdb
+D:\git\Report-Builder\API\source\Controllers\bin\Release\Aspose.Cells.dll
