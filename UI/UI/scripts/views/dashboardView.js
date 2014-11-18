@@ -23,9 +23,26 @@
         events: {
             'click .edit-form': 'edit',
             'click .csv': 'csv',
-            'click .pdf': 'pdf'
+            'click .pdf': 'pdf',
+            'click .del': 'deleteDashboardComponent'
         },
 
+        deleteDashboardComponent: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var shit = new DashboardComponent({ Id: id });
+            shit.destroy({
+                success: function() {
+                    alert("yay");
+                },
+                error: function() {
+                    alert("gay");
+                }
+            });
+            Backbone.history.loadUrl(Backbone.history.fragment);
+            return false;
+        },
 
         initialize: function () {
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
@@ -96,7 +113,7 @@
                     model.set(jQuery.parseJSON(model.get('Definition')));
 
                     self.model.get("Components")[position] = model;
-                    
+
                     switch (model.get("Type")) {
                         case 1:
                             {
@@ -147,15 +164,15 @@
 
             var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
             Export.exportPdf(compValues, {
-                success: function(data, status, jqXHR) {
+                success: function (data, status, jqXHR) {
                     console.log(data, status, jqXHR);
                     window.location.assign(data);
                     // Ye
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     console.log(xhr, ajaxOptions, thrownError);
                 }
-           });
+            });
         },
 
 

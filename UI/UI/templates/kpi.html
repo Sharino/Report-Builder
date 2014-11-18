@@ -7,6 +7,7 @@
                     <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
                     <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
                     <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
+                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">x</button>
                 </label>
             </label>
             <div id="component-edit-<%= Position %>"></div>
@@ -17,8 +18,6 @@
         <div id="spinner"></div>
     </div>
     <div class="sparklines ">
-
-
         <% _.each(Einstein.MetricValues, function(einsteinMetric, i) { %>
         <li>
             <span class="headline"><%= Metrics[i].DisplayName %></span>
