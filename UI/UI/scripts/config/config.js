@@ -24,8 +24,8 @@
         },
 
         ExportSettings: {
-            KpiToCSV: "http://172.22.22.33:33894/api/Export"
-          //KpiToPDF: baseUrl + "Export/KpiToPdf"
+            KpiToCSV: baseUrl + "Export/KpiToCsv",
+            KpiToPDF: baseUrl + "Export/KpiToPdf"
         },
 
         NotificationSettings: {

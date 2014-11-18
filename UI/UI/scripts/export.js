@@ -2,12 +2,15 @@
     'jquery',
     'underscore',
     'backbone',
-    'Config'
+    'Config',
+    'adform-notifications'
 ], function ($, _, Backbone, Config) {
     var Export = {
 
         // Seip pamascius, reiktu tokius velnius sudet i Component modeli, kur butu Component.exportCsv(), Component.exportPdf()
         // Kad automatiskai is modelio pasiimtu einsteinData ir pustu i CSV/PDF // Tony
+
+        // Butu gerai kad exportinti būt galima ir dashboard componentus ir report componentus, todėl į modelius kišti nepanorau // mikoloj
 
         exportCsv: function (data) {
             $.ajax({
@@ -15,12 +18,15 @@
                 data: JSON.stringify(data),
                 contentType: 'application/json',
                 type: 'POST',
-                success: function (data, status, jqXHR) {
-                    console.log(data, jqXHR);
-                    console.log(jqXHR.getResponseHeader("Content-Disposition"));
+                success: function(dlUrl) {
+                    window.location.assign(dlUrl);
                 },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    console.log("fail", this);
+                error: function() {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Unable to export component data",
+                        timeout: Config.NotificationSettings.Timeout
+                    });
                 }
             });
         },
