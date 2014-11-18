@@ -20,6 +20,18 @@
             $(e.target.nextElementSibling).toggle();
         },
 
+        inputMetrics: function () {
+            var result = [];
+
+            this.metricArray.forEach(function (metric) {
+                if (!metric.Placeholder) {
+                    result.push(metric);
+                }
+            });
+
+            return result;
+        },
+
         initialize: function (parentModel, allMetrics) {
             var self = this;
 

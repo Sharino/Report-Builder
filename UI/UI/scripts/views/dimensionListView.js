@@ -20,6 +20,18 @@
             $(e.target.nextElementSibling).toggle();
         },
 
+        inputDimensions: function () {
+            var result = [];
+
+            this.dimensionArray.forEach(function (dimension) {
+                if (!dimension.Placeholder) {
+                    result.push(dimension);
+                }
+            });
+
+            return result;
+        },
+
         initialize: function (parentModel, allDimensions) {
             var self = this;
             this.dimensionArray = [];

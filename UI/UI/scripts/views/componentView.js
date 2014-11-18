@@ -16,22 +16,21 @@
         events: {
             'click #component-submit': 'submit',
             'click .radio-group': 'hide'
-
         },
 
-        hide: function () {
-            if (this.$el.find('#rb1').is(":checked")) {
-                $('#dimension-list').hide();
+        toggleDimensionList: function () {
+            if (this.inputType() === 1) {
+                this.$el.find('#dimension-list').hide();
             } else {
-                $('#dimension-list').show();
+                this.$el.find('#dimension-list').show();
             }
         },
         inputTitle: function () {
             return $('#input').val();
         },
 
-        inputType: function() {
-            var selected = $("input:radio[name=type-options]:checked").val();
+        inputType: function () {
+            var selected = this.$el.find("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
                 return parseInt(selected);
             } else {
@@ -39,39 +38,7 @@
             }
         },
 
-        /* TODO: Should move validation to MetricListView */
-        inputMetrics: function() {
-            var result = [];
-
-            this.metricView.metricArray.forEach(function (metric) {
-                if (!metric.Placeholder) {
-                    result.push(metric);
-                }
-            });
-
-            return result;
-        },
-        inputDimensions: function () {
-            var result = [];
-
-            this.dimensionView.dimensionArray.forEach(function (dimension) {
-                if (!dimension.Placeholder) {
-                    result.push(dimension);
-                }
-            });
-
-            return result;
-        },
-
-        render: function() {
-            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF!!!
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
-                }
-            };
+        render: function () {
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
@@ -79,90 +46,59 @@
 
             var self = this;
 
-            if (this.model) {
-                if (this.model.isNew()) {
-                    templVariables["data"]["viewTitle"] = "Create a New Component";
-                    templVariables["data"]["activeNew"] = 'class="active"';
-                    templVariables["data"]["activeList"] = '';
-                } else {
-                    templVariables["data"]["viewTitle"] = "Edit";
-                    templVariables["data"]["activeNew"] = '';
-                    templVariables["data"]["activeList"] = '';
-                }
-                templVariables["data"]["model"] = this.model.toJSON();
-                this.$el.html(this.template(templVariables));
+            _.defer(function () {
+                $("#metric-list").loader();
+                $("#dimension-list").loader();
+            });
 
-//                _.defer(function () { $("#metric-list").loader(); });
-
-                allMetrics.fetch({
-                    success: function(allMetrics, response) {
-                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
-                    },
-                    error: function(allMetrics, response) {
-                        console.log("allMetric.fetch FAIL", allMetrics, response);
-                    }
-                });
-
-                allDimensions.fetch({
-                    success: function (allDimensions, response) {
-                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
-                    },
-                    error: function (allDimensions, response) {
-                        console.log("allDimensions.fetch FAIL", allDimensions, response);
-                    }
-                });
-
-            } else {
-                templVariables["data"]["viewTitle"] = "Create a New Component";
-                templVariables["data"]["activeNew"] = 'class="active"';
-                templVariables["data"]["activeList"] = '';
-                templVariables["data"]["model"] = [];
-                this.$el.html(this.template(templVariables));
-
-                allMetrics.fetch({
-                    success: function (allMetrics) {
-                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
-                    },
-                    error: function (allMetrics, response) {
-                        console.log("allMetric.fetch FAIL", allMetrics, response);
-                    }
-                });
-
-                allDimensions.fetch({
-                    success: function (allDimensions, response) {
-                        self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
-                    },
-                    error: function (allDimensions, response) {
-                        console.log("allDimensions.fetch FAIL", allDimensions, response);
-                    }
-                });
-            }
-
-            setTimeout(function() {
-//                console.log("awdawdawdawdawd", $('#metric-list').find('.list-pop'));
-
-                $('#metric-list').find('.list-pop').tooltip({
-                    delay: {
-                        show: 1000,
-                        hide: 500
-                    },
-                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
-                });
-            }, 3000);
-
+            this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
-            
-            this.$el.find('#dimension-list').hide();
-            
+
+            allMetrics.fetch({
+                success: function (allMetrics) {
+                    self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                },
+                error: function (allMetrics, response) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: response.statusText,
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+
+            allDimensions.fetch({
+                success: function (allDimensions) {
+                    self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
+                    self.toggleDimensionList();
+                },
+                error: function (allDimensions, response) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: response.statusText,
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+
+            //TODO FIX ME
+            $('#metric-list').find('.list-pop').tooltip({
+                delay: {
+                    show: 1000,
+                    hide: 500
+                },
+                template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+            });
+
             return this;
         },
 
-        submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
+        submit: function () {
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
-                success: function(model, response) {
+                success: function (model, response) {
                     $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
@@ -170,11 +106,11 @@
                     });
                     Backbone.history.navigate("list", { trigger: true });
                 },
-                error: function(model, response) {
+                error: function (model, response) {
                     console.log("Save FAIL", model, response);
 
                     if (response.responseJSON) {
-                        response.responseJSON.forEach(function(error) {
+                        response.responseJSON.forEach(function (error) {
                             $.notifications.display({
                                 type: 'error',
                                 content: error.Message,
@@ -202,7 +138,7 @@
 
             if (!validationSuccess) {
                 if (this.model.errors) {
-                    this.model.errors.forEach(function(error) {
+                    this.model.errors.forEach(function (error) {
                         $.notifications.display({
                             type: 'error',
                             content: error.message,

@@ -1,32 +1,31 @@
 ﻿define('Config', [
 ], function () {
+    var baseUrl = "http://37.157.0.42:33895/api/";
+    var einsteinUrl = "http://37.157.0.42:33896/api/";
+
     var Config = {
         ComponentSettings: {
-            URL: "http://37.157.0.42:33895/api/reportComponent"
-        },
-        ReportSettings: {
-            URL: "http://37.157.0.42:33895/api/reportComponent"
+            URL: baseUrl + "ReportComponent"
         },
         DashboardSettings: {
-            URL: "http://37.157.0.42:33895/api/dashboard"
+            URL: baseUrl + "Dashboard"
         },
         DashboardComponentSettings: {
-            URL: "http://37.157.0.42:33895/api/dashboardcomponent"
+            URL: baseUrl + "DashboardComponent"
         },
         MetricSettings: {
-            URL: "http://37.157.0.42:33895/api/Metric"
+            URL: baseUrl + "Metric"
         },
         EinsteinSettings: {
-            URL: "http://37.157.0.42:33896/api/Einstein",
-            // URL: "http://37.157.0.42:33859/einstein"    
+            URL: einsteinUrl + "Einstein"
         },
         DimensionSettings: {
-            URL: "http://37.157.0.42:33895/api/Dimension"
+            URL: baseUrl + "Dimension"
         },
 
         ExportSettings: {
-            KpiToCSV: "http://37.157.0.42:33895/api/Export/KpiToCsv",
-            KpiToPDF: "http://37.157.0.42:33895/api/Export/KpiToPdf"
+            KpiToCSV: "http://172.22.22.33:33894/api/Export"
+          //KpiToPDF: baseUrl + "Export/KpiToPdf"
         },
 
         NotificationSettings: {

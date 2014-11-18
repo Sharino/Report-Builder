@@ -2,30 +2,35 @@
 }
 /* centered columns styles */
 .row-centered {
-    text-align:center;
+    text-align: center;
 }
+
 .col-centered {
-    display:inline-block;
-    float:none;
+    display: inline-block;
+    float: none;
     /* reset the text-align */
-    text-align:left;
+    text-align: left;
     /* inline-block space fix */
-    margin-right:-4px;
+    margin-right: -4px;
 }
 
 #metric-list {
     min-height: 129px;
 }
 
-.component {
-        min-height: 129px;
+#dimension-list {
+    min-height: 129px;
 }
 
-#metric-list>.form-horizontal.well {
+.component {
+    min-height: 129px;
+}
+
+#metric-list > .form-horizontal.well {
     background: rgba(231,246,253,0.5);
 }
 
-#dimension-list>.form-horizontal.well {
+#dimension-list > .form-horizontal.well {
     background: rgba(250,128,114,0.1);
 }
 
@@ -37,7 +42,7 @@
     background-color: white !important;
 }
 
-.sortable>li, .sortable>button {
+.sortable > li, .sortable > button {
     display: inline;
     list-style-type: none;
     float: left;
@@ -48,7 +53,7 @@
     margin-top: 5px;
 }
 
-.sortable-placeholder{
+.sortable-placeholder {
     width: 213px;
     height: 23px;
     display: inline-block;
@@ -75,7 +80,6 @@ li {
 .form-horizontal.well .sortable {
     display: -webkit-flex;
     display: flex;
-
     -webkit-flex-direction: row;
     flex-direction: row;
     -webkit-flex-wrap: wrap;
@@ -87,50 +91,56 @@ i[class^="adf-icon-alt"], i[class*=" adf-icon-alt"] {
 }
 
 
-.metric-group{
+.metric-group {
     vertical-align: top;
 }
 
-.metric-group > .controls{
-    margin: 0 !important;
-}
+    .metric-group > .controls {
+        margin: 0 !important;
+    }
 
-.dimension-group{
+.dimension-group {
     vertical-align: top;
 }
 
-.dimension-group > .controls{
-    margin: 0 !important;
-}
+    .dimension-group > .controls {
+        margin: 0 !important;
+    }
+
 .adform-select-control {
     vertical-align: top;
 }
+
 i[class*="adf-icon-alt"] {
     display: inline-block;
     width: 8px;
     height: 26px;
     line-height: 0;
-    vertical-align: -5px
+    vertical-align: -5px;
 }
 
 .del {
-    vertical-align: -webkit-baseline-middle!important;
+    vertical-align: -webkit-baseline-middle !important;
 }
 
 .show {
-  display: block !important;
+    display: block !important;
 }
+
 .hidden {
-  display: none !important;
-  visibility: hidden !important;
+    display: none !important;
+    visibility: hidden !important;
 }
+
 .invisible {
-  visibility: hidden;
+    visibility: hidden;
 }
+
 .removeMetric, .removeDimension {
     margin-top: -4px !important;
     margin-left: -3px !important;
 }
+
 .notifications-container {
     width: 220px !important;
 }

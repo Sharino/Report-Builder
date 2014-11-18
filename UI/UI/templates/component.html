@@ -1,5 +1,12 @@
 ﻿<div class="row" style="margin: auto;display: inline-block">
-    <h2 style="padding-left: 10px"><b><%= data.viewTitle %></b></h2>
+    <h2 style="padding-left: 10px">
+        <b><% if(model.Id){ %>
+                Edit
+            <% } else{ %>
+                Create
+            <% } %>
+        </b>
+    </h2>
 </div>
 <button class="btn btn-primary pull-right" type="submit" id="component-submit">Save</button>
 <div class="form-horizontal well">
@@ -11,7 +18,7 @@
     <div class="control-group">
         <label class="control-label">Title</label>
         <div class="controls">
-            <input class="input-large" type="text" id="input" data-validate="required" value="<%=data.model.Title%>" required>
+            <input class="input-large" type="text" id="input" data-validate="required" value="<%=model.Title%>" required>
             <span data-msg="title"></span>
             <span class="help-inline"></span>
         </div>
