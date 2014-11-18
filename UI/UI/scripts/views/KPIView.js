@@ -115,14 +115,14 @@
             });
         },
 
-        edit: function (e) {
-            e.preventDefault();
+        //edit: function (e) {
+        //    e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
-            var routerUrl = "create/".concat(id);
+        //    var id = $(e.currentTarget).attr("id");
+        //    var routerUrl = "create/".concat(id);
 
-            Backbone.history.navigate(routerUrl, true, true);
-        }
+        //    Backbone.history.navigate(routerUrl, true, true);
+        //}
 
     });
 

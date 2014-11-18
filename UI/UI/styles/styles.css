@@ -144,3 +144,12 @@ i[class*="adf-icon-alt"] {
 .notifications-container {
     width: 220px !important;
 }
+
+
+.modal-body {
+    overflow-y: auto;
+}
+
+.modal-footer {
+    margin: 20px;
+}

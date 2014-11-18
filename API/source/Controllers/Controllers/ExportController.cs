@@ -17,9 +17,9 @@ using Table = Aspose.Pdf.Table;
 
 namespace Controllers.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
-    public class ExportController : ApiController
-    {
+	[EnableCors(origins: "*", headers: "*", methods: "*")]
+	public class ExportController : ApiController
+	{
 		[HttpPost]
 		public HttpResponseMessage KpiToCsv(List<Values> request, string separator = ",")
 		{
@@ -61,11 +61,9 @@ namespace Controllers.Controllers
 		public HttpResponseMessage KpiToPdf(List<Values> request)
 		{
 			if (request != null)
+			{
 				if (request.Count > 0)
 				{
-					Random random = new Random();
-					int randomNumber = random.Next(100, 10000);
-
 					Document doc = new Document();
 					doc.PageInfo.Margin.Left = 40;
 					doc.PageInfo.Margin.Right = 40;
@@ -77,7 +75,8 @@ namespace Controllers.Controllers
 						DefaultColumnWidth = "127",
 						Border = new BorderInfo(BorderSide.All, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236))),
 						BackgroundColor = Color.FromRgb(System.Drawing.Color.FromArgb(1, 240, 252, 255)),
-						DefaultCellBorder = new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
+						DefaultCellBorder =
+							new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
 					};
 
 					Row keyRow = table.Rows.Add();
@@ -88,7 +87,7 @@ namespace Controllers.Controllers
 
 					for (int i = 0; i < request.Count; i++)
 					{
-						if (i%4 == 0 && i != 0)
+						if (i % 4 == 0 && i != 0)
 						{
 							a.Paragraphs.Add(table);
 							a.Paragraphs.Add(new TextFragment());
@@ -98,9 +97,10 @@ namespace Controllers.Controllers
 								DefaultColumnWidth = "127",
 								Border = new BorderInfo(BorderSide.All, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236))),
 								BackgroundColor = Color.FromRgb(System.Drawing.Color.FromArgb(1, 240, 252, 255)),
-								DefaultCellBorder = new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
+								DefaultCellBorder =
+									new BorderInfo(BorderSide.Right, .5f, Color.FromRgb(System.Drawing.Color.FromArgb(1, 202, 230, 236)))
 							};
-							
+
 							keyRow = table.Rows.Add();
 							valueRow = table.Rows.Add();
 
@@ -115,31 +115,42 @@ namespace Controllers.Controllers
 					a.Paragraphs.Add(table);
 
 					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + doc.GetHashCode() + ".pdf";
-					Console.WriteLine(doc.GetHashCode());
 
-					doc.Save( ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
+					doc.Save(ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
 
 
 					return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
-
 				}
+			}
 			return Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
 
-        
-    }
+		[HttpPost]
+		public HttpResponseMessage KpiToXls(List<Values> request)
+		{
+			if (request != null)
+			{
+				if (request.Count > 0)
+				{
+				}
+			}
 
-    public class Values
-    {
-        public string Key { get; set; }
-        public string Value { get; set; }
-    }
+			return Request.CreateResponse(HttpStatusCode.BadRequest);
+		}
 
-    public class Request
-    {
-        public List<Values> ComponentValues { get; set; }
-        public string Date { get; set; }
-    }
+	}
+
+	public class Values
+	{
+		public string Key { get; set; }
+		public string Value { get; set; }
+	}
+
+	public class Request
+	{
+		public List<Values> ComponentValues { get; set; }
+		public string Date { get; set; }
+	}
 }
 
 

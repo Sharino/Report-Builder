@@ -20,19 +20,53 @@ namespace Controllers
             //http://www.asp.net/web-api/overview/security/enabling-cross-origin-requests-in-web-api
             configuration.EnableCors();
 
+			configuration.Routes.MapHttpRoute(
+				name: "Dashboard",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "Dashboard", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)Dashboard(\W|$)" }
+			);
 
-            configuration.Routes.MapHttpRoute(
-                name: "API",
-                routeTemplate: "api/{controller}/{id}",
-                defaults: new { id = RouteParameter.Optional },
-			constraints: new { controller = @"^(?:(?!export).)*$" }
+			configuration.Routes.MapHttpRoute(
+				name: "DashboardComponent",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "DashboardComponent", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)DashboardComponent(\W|$)" }
+			);
 
+			configuration.Routes.MapHttpRoute(
+				name: "Dimension",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "Dimension", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)Dimension(\W|$)" }
 			);
 
             configuration.Routes.MapHttpRoute(
                 name: "Export",
                 routeTemplate: "api/{controller}/{action}",
-				defaults: new { controller = "Export" }
+				defaults: new { controller = "Export" },
+				constraints: new { controller = @"(\W|^)Export(\W|$)" }
+			);
+
+			configuration.Routes.MapHttpRoute(
+				name: "Log",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "Log", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)Log(\W|$)" }
+			);
+
+			configuration.Routes.MapHttpRoute(
+				name: "Metric",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "Metric", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)Metric(\W|$)" }
+			);
+
+			configuration.Routes.MapHttpRoute(
+				name: "ReportComponent",
+				routeTemplate: "api/{controller}/{id}",
+				defaults: new { controller = "ReportComponent", id = RouteParameter.Optional },
+				constraints: new { controller = @"(\W|^)ReportComponent(\W|$)" }
 			);
 
 
