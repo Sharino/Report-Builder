@@ -54,7 +54,7 @@ foreach ($server in $servers)
     Remove-Item -path $serviceFilesShare -Force
 
     Write-Host `n:: Copying new files`n
-    $source = "..\API\source\Host\bin\Debug\*"
+    $source = "..\API\source\Host\bin\*"
     $destination = ($serviceFilesLocation -f $serverDomain)
     Copy-Item -Path $source -Destination $destination -Recurse -Force -Verbose -ErrorAction Stop
     Write-Host "Done"
