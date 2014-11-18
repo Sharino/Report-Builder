@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Aspose.Pdf;
@@ -21,7 +21,7 @@ namespace Controllers.Controllers
     public class ExportController : ApiController
     {
 		[HttpPost]
-		public string KpiToCsv(List<Values> request, string separator = ",")
+		public HttpResponseMessage KpiToCsv(List<Values> request, string separator = ",")
 		{
 			if (request != null)
 				if (request.Count > 0)
@@ -32,9 +32,6 @@ namespace Controllers.Controllers
 					Random random = new Random();
 					int randomNumber = random.Next(100, 10000);
 
-					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
-					string filePath = @"C:\Report Builder\Exports\" + fileName;
-
 					foreach (var val in request)
 					{
 						header += val.Key + separator;
@@ -42,6 +39,10 @@ namespace Controllers.Controllers
 					}
 					header = header.TrimEnd(separator.ToCharArray());
 					content = content.TrimEnd(separator.ToCharArray());
+
+					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
+
+					string filePath = ConfigurationManager.AppSettings["exportsFilePath"] + fileName;
 
 					using (var fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
 					using (var sw = new StreamWriter(fs))
@@ -51,22 +52,19 @@ namespace Controllers.Controllers
 						sw.Close();
 						fs.Close();
 					}
-					return "http://37.157.0.42//Exports//" + fileName;
+					return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
 				}
-			return "";
+			return Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
 
 		[HttpPost]
-		public string KpiToPdf(List<Values> request)
+		public HttpResponseMessage KpiToPdf(List<Values> request)
 		{
 			if (request != null)
 				if (request.Count > 0)
 				{
 					Random random = new Random();
 					int randomNumber = random.Next(100, 10000);
-
-					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".pdf";
-					string filePath = @"C:\Report Builder\Exports\";
 
 					Document doc = new Document();
 					doc.PageInfo.Margin.Left = 40;
@@ -116,11 +114,16 @@ namespace Controllers.Controllers
 
 					a.Paragraphs.Add(table);
 
-					doc.Save(filePath + fileName);
+					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + doc.GetHashCode() + ".pdf";
+					Console.WriteLine(doc.GetHashCode());
 
-					return "http://37.157.0.42//Exports//" + fileName;            
+					doc.Save( ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
+
+
+					return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+
 				}
-			return "";
+			return Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
 
         
