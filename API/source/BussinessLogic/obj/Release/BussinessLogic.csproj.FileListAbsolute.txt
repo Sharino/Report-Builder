@@ -13,7 +13,6 @@ C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Bussine
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\BussinessLogic.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\Contracts.dll
@@ -26,5 +25,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Rele
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\Logging.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\Models.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\log4net.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.pdb
