@@ -15,7 +15,7 @@
 
         events: {
             'click #component-submit': 'submit',
-            'click .radio-group': 'hide'
+            'click .radio-group': 'toggleDimensionList'
         },
 
         toggleDimensionList: function () {
