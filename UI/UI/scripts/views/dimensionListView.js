@@ -118,8 +118,9 @@
 
             var selectedValue = parseInt(reference.getValues());
             var displayName = this.allDimensions.get(selectedValue).get("DisplayName");
+            var mnemonic = this.allDimensions.get(selectedValue).get("Mnemonic");
 
-            this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName }).toJSON();
+            this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
             delete this.dimensionArray[selectReferenceID].Placeholder;
         },
 

@@ -76,10 +76,12 @@
     <Content Include="scripts\lib\adform\adform-select.js" />
     <Content Include="scripts\lib\adform\adform-validation-2.0.js" />
     <Content Include="scripts\lib\backbone.js" />
+    <Content Include="scripts\lib\bootstrap\bootstrap-dropdown.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-modal.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-tooltip.js" />
     <Content Include="scripts\lib\globalize.js" />
     <Content Include="scripts\lib\handlebars.js" />
+    <Content Include="scripts\lib\highcharts-theme.js" />
     <Content Include="scripts\lib\highcharts.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\jquery.sortable.js" />

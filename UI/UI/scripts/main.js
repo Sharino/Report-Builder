@@ -16,10 +16,12 @@
         'globalize':            'scripts/lib/globalize',
         'moment':               'scripts/lib/moment',
         'Highcharts':           'scripts/lib/highcharts',
+        'HighchartsTheme':     'scripts/lib/highcharts-theme',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
         'bootstrap-tooltip':    'scripts/lib/bootstrap/bootstrap-tooltip',
+        'bootstrap-dropdown':   'scripts/lib/bootstrap/bootstrap-dropdown',
 
         /* Adform dependencies */
         'adform-checkbox':      'scripts/lib/adform/adform-checkbox',
@@ -102,6 +104,11 @@
         'bootstrap-modal': {
             deps: ['jquery']
         },
+
+        'bootstrap-dropdown': {
+            deps: ['jquery']
+        },
+
         'spin':{
             deps: ['jquery'],
             exports: 'Spinner'
@@ -140,6 +147,11 @@
         
         'adform-modal': {
             deps: ['bootstrap-modal', 'spin']
+        },
+
+        'HighchartsTheme': {
+            deps: ['Highcharts'],
+            exports: 'HighchartsTheme'
         },
 
         'Highcharts': {

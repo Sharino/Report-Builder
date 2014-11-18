@@ -153,3 +153,8 @@ i[class*="adf-icon-alt"] {
 .modal-footer {
     margin: 20px;
 }
+
+.timeline-menu .wizard-nav {
+    background: rgba(255,255,255,0.7);
+    margin: 0px;
+}
