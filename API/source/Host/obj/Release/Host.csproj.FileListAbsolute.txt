@@ -132,3 +132,4 @@ D:\git\Report-Builder\API\source\Host\bin\Release\Models.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.WebHost.xml
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.Cors.xml
 D:\git\Report-Builder\API\source\Host\obj\Release\Host.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder\API\source\Host\bin\Release\Aspose.Cells.dll
