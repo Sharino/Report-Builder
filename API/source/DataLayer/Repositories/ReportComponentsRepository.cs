@@ -162,5 +162,22 @@ namespace DataLayer.Repositories
                 return count > 0;
             }
         }
+
+        public bool MetricDimensionMetricRelations(int metricId, int dimensionId)
+        {
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[MetricDimensionMetric] WHERE [MetricId] = @MetricId AND [DimensionId] = @DimensionId";
+            using (var command = new SqlCommand(sql, _connection))
+            {
+                _connection.Open();
+
+                command.Parameters.AddWithValue("@MetricId", metricId);
+                command.Parameters.AddWithValue("@DimensionId", dimensionId);
+
+                int count = (int)command.ExecuteScalar();
+
+                _connection.Close();
+                return count > 0;
+            }
+        }
     }
 }

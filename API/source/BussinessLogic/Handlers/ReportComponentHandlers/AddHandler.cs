@@ -28,6 +28,27 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 
         public override bool Validate(ReportComponentDto request)
         {
+//            NOTE KPI 
+            if (!request.Type.Equals(1))
+            {
+                var dimensions = request.Dimensions;
+                var metrics = request.Metrics;
+                var map = new ReportComponentRepository();
+
+                foreach (var metric in metrics)
+                {
+                    foreach (var dimension in dimensions)
+                    {
+                        if (!map.MetricDimensionMetricRelations(metric.MetricId, dimension.DimensionId))
+                        {
+                            Errors.Add(new ErrorDto("EN", "Report Component Metrics doesn't map with Dimensions"));
+                        }
+                       
+                    }
+                }
+            }
+          
+
             if (request.Title.Length > 30)
             {
                 Errors.Add(new ErrorDto("EN", "Report Component title cannot exceed 30 symbols"));
