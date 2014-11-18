@@ -20,45 +20,41 @@ namespace Controllers.Controllers
     [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ExportController : ApiController
     {
-        [HttpPost]
-        public HttpResponseMessage KpiToCsv(List<Values> request, string separator = ",")
-        {
-            if (request != null)
-                if (request.Count > 0)
-                {
-                    string header = "";
-                    string content = "";
+		[HttpPost]
+		public string KpiToCsv(List<Values> request, string separator = ",")
+		{
+			if (request != null)
+				if (request.Count > 0)
+				{
+					string header = "";
+					string content = "";
 
-                    Random random = new Random();
-                    int randomNumber = random.Next(100, 10000);
+					Random random = new Random();
+					int randomNumber = random.Next(100, 10000);
 
-                    string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
-                    string filePath = @"C:\Report Builder\Exports\" + fileName;
+					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
+					string filePath = @"C:\Report Builder\Exports\" + fileName;
 
-                    foreach (var val in request)
-                    {
-                        header += val.Key + separator;
-                        content += val.Value + separator;
-                    }
-                    header = header.TrimEnd(separator.ToCharArray());
-                    content = content.TrimEnd(separator.ToCharArray());
+					foreach (var val in request)
+					{
+						header += val.Key + separator;
+						content += val.Value + separator;
+					}
+					header = header.TrimEnd(separator.ToCharArray());
+					content = content.TrimEnd(separator.ToCharArray());
 
-                    using (var fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
-                    using (var sw = new StreamWriter(fs))
-                    {
-                        sw.WriteLine(header);
-                        sw.Write(content);
-                        sw.Close();
-                        fs.Close();
-                    }
-                    HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK);
-                    response.Content = new StreamContent(new FileStream(filePath, FileMode.Open, FileAccess.Read));
-                    response.Content.Headers.ContentDisposition = new ContentDispositionHeaderValue("attachment");
-                    response.Content.Headers.ContentDisposition.FileName = fileName;
-                    return response;
-                }
-            return Request.CreateResponse(HttpStatusCode.BadRequest);
-        }
+					using (var fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
+					using (var sw = new StreamWriter(fs))
+					{
+						sw.WriteLine(header);
+						sw.Write(content);
+						sw.Close();
+						fs.Close();
+					}
+					return "http://37.157.0.42//Exports//" + fileName;
+				}
+			return "";
+		}
 
 		[HttpPost]
 		public string KpiToPdf(List<Values> request)
@@ -78,7 +74,6 @@ namespace Controllers.Controllers
 
 					Page a = doc.Pages.Add();
 
-					// Initializes a new instance of the Table
 					Table table = new Table
 					{
 						DefaultColumnWidth = "127",
