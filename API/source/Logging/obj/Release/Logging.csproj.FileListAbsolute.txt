@@ -20,3 +20,14 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Release\Log
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Release\Logging.csproj.GenerateResource.Cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Release\Logging.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Logging\obj\Release\Logging.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Release\Logging.dll
+D:\git\Report-Builder\API\source\Logging\bin\Release\Logging.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Release\log4net.dll
+D:\git\Report-Builder\API\source\Logging\bin\Release\Models.dll
+D:\git\Report-Builder\API\source\Logging\bin\Release\Models.pdb
+D:\git\Report-Builder\API\source\Logging\bin\Release\log4net.xml
+D:\git\Report-Builder\API\source\Logging\obj\Release\Logging.csprojResolveAssemblyReference.cache
+D:\git\Report-Builder\API\source\Logging\obj\Release\Logging.Properties.Resources.resources
+D:\git\Report-Builder\API\source\Logging\obj\Release\Logging.csproj.GenerateResource.Cache
+D:\git\Report-Builder\API\source\Logging\obj\Release\Logging.dll
+D:\git\Report-Builder\API\source\Logging\obj\Release\Logging.pdb
