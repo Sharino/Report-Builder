@@ -18,12 +18,6 @@ C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\bin\Debug
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.dll
 C:\Users\Administrator\Desktop\newgit\Report-Builder\API\source\Models\obj\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.pdb
 D:\git\Report-Builder\API\source\Models\bin\Debug\Models.dll
 D:\git\Report-Builder\API\source\Models\bin\Debug\Models.pdb
 D:\git\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
@@ -31,4 +25,9 @@ D:\git\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
 D:\git\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Models\obj\Debug\Models.dll
 D:\git\Report-Builder\API\source\Models\obj\Debug\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Models\obj\Debug\Models.pdb
