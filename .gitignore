@@ -397,3 +397,10 @@ API/source/Logging/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
 API/source/Models/obj/Debug/Models.csproj.FileListAbsolute.txt
 API/source/Models/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
 API/source/Models/obj/Release/Models.csproj.FileListAbsolute.txt
+API/source/Host/obj/Debug/Host.csproj.FileListAbsolute.txt
+API/source/Controllers/obj/Debug/Controllers.csproj.FileListAbsolute.txt
+API/source/Controllers/obj/Debug/Controllers.csproj.FileListAbsolute.txt
+API/source/BussinessLogic/obj/Debug/BussinessLogic.csproj.FileListAbsolute.txt
+API/source/BussinessLogic/Handlers/ReportComponentHandlers/UpdateHandler.cs
+API/source/BussinessLogic/BussinessLogic.csproj
+API/BussinessLogicTests/obj/Debug/BussinessLogicTests.csproj.FileListAbsolute.txt
