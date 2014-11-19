@@ -118,7 +118,6 @@ API/source/BussinessLogic/bin/Release/DataLayer.dll
 API/source/BussinessLogic/bin/Release/DataLayer.pdb
 API/source/BussinessLogic/bin/Release/Logging.dll
 API/source/BussinessLogic/bin/Release/Logging.pdb
-API/source/BussinessLogic/Handlers/ReportComponentHandlers/AddHandler.cs
 API/source/BussinessLogic/obj/Debug/BussinessLogic.csprojResolveAssemblyReference.cache
 API/source/BussinessLogic/obj/Debug/BussinessLogic.dll
 API/source/BussinessLogic/obj/Debug/BussinessLogic.pdb
@@ -274,7 +273,6 @@ API/source/BussinessLogic/bin/Release/DataLayer.dll
 API/source/BussinessLogic/bin/Release/DataLayer.pdb
 API/source/BussinessLogic/bin/Release/Logging.dll
 API/source/BussinessLogic/bin/Release/Logging.pdb
-API/source/BussinessLogic/Handlers/ReportComponentHandlers/AddHandler.cs
 API/source/BussinessLogic/obj/Debug/BussinessLogic.csprojResolveAssemblyReference.cache
 API/source/BussinessLogic/obj/Debug/BussinessLogic.dll
 API/source/BussinessLogic/obj/Debug/BussinessLogic.pdb
@@ -404,3 +402,4 @@ API/source/BussinessLogic/obj/Debug/BussinessLogic.csproj.FileListAbsolute.txt
 API/source/BussinessLogic/Handlers/ReportComponentHandlers/UpdateHandler.cs
 API/source/BussinessLogic/BussinessLogic.csproj
 API/BussinessLogicTests/obj/Debug/BussinessLogicTests.csproj.FileListAbsolute.txt
+UI/UI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache

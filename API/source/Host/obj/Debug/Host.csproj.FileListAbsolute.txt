@@ -177,3 +177,5 @@ D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 D:\git\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\bin\Debug\ApiHost.exe.config
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
