@@ -12,8 +12,6 @@
     'bootstrap-dropdown'
 ], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, Highcharts) {
 
-    var startDate = moment().format('YYYY-MM-DD');
-
     var timelineView = BaseCompositeView.extend({
         template: _.template(TimelineTemplate),
 
@@ -24,10 +22,12 @@
             'click .timeline-menu .selectedDimension': 'selectDimension'
         },
 
+        startDate: moment().format('YYYY-MM-DD'),
+
         initialize: function (parent, pos) {
             this.model = parent;
             this.position = pos;
-            this.initEinstein(startDate, startDate);
+            this.initEinstein(this.startDate, this.startDate);
 
             this.selectedMetrics = [];
 
@@ -43,8 +43,8 @@
         render: function (einstein, dataFiler) {
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = startDate;
-                to = startDate;
+                from = this.startDate;
+                to = this.startDate;
             } else {
                 //                console.log(dataFiler);
                 from = $("#picker").find("input")[0].value;
@@ -93,6 +93,9 @@
                 from: from,
                 to: to
             }));
+
+            this.einstein = einstein;
+            this.dataFilter = dataFiler;
 
             return this;
         },
@@ -165,6 +168,7 @@
                     console.log(error);
                 }
             });
+
         },
 
         edit: function (e) {
@@ -192,10 +196,12 @@
 
             if ($(e.currentTarget).attr('class').contains("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
-                this.render(this.einstein, this.dataFilter);
+                //this.render(this.einstein, this.dataFilter);
+                this.generateNewData();
             } else if ($(e.currentTarget).attr('class').contains("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
-                this.render(this.einstein, this.dataFilter);
+                //this.render(this.einstein, this.dataFilter);
+                this.generateNewData();
             }
         },
 
@@ -214,8 +220,11 @@
             }
 
             this.selectedDimension = selectedDimension;
-            this.render(this.einstein, this.dataFilter);
+            this.generateNewData();
+            //this.render(this.einstein, this.dataFilter);
         },
+
+
 
 
 
