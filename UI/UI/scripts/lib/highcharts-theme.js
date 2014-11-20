@@ -1,7 +1,23 @@
 ﻿var outputColor = "#26ACF5";
 var outputSecondaryColor = "#87CF03";
 
+var markerPrimary = {
+    symbol: 'circle',
+    lineWidth: 1,
+    lineColor: outputColor,
+    fillColor: "white",
+    radius: 4
+};
+var markerSecondary = {
+    symbol: 'circle',
+    lineWidth: 1,
+    lineColor: outputSecondaryColor,
+    fillColor: "white",
+    radius: 4
+};
+
 Highcharts.theme = {
+    markers: [markerPrimary, markerSecondary],
     credits: {
         enabled: false
     },
