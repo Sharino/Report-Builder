@@ -29,7 +29,7 @@ namespace BussinessLogic.Handlers.Base
                 return Response;
             }
             return Response;
-        }
+         }
 
         public abstract TResponse HandleCore(TRequest request);
         public abstract bool Validate(TRequest request);

@@ -142,8 +142,6 @@ namespace BussinessLogic.Mappings
 	
 		#endregion
 
-
-
 		#region Report Component
 
 		public ReportComponent DtoToReportComponent(ReportComponentDto dto)
@@ -185,5 +183,7 @@ namespace BussinessLogic.Mappings
         }
 
         #endregion
+
+    
     }
 }

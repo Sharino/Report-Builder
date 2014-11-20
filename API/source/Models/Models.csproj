@@ -58,6 +58,7 @@
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Metric.cs" />
     <Compile Include="Models\Dashboard.cs" />
+    <Compile Include="Models\MetricDimensionMap.cs" />
     <Compile Include="Models\ReportComponent.cs" />
     <Compile Include="Models\ComponentData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

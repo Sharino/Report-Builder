@@ -4,12 +4,13 @@
     'DashboardComponent',
     'MetricCollection',
     'DimensionCollection',
+    'MetricDimensionView',
     'MetricListView',
     'DimensionListView',
     'text!templates/component.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, componentTemplate, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
@@ -56,7 +57,10 @@
 
             allMetrics.fetch({
                 success: function (allMetrics) {
-                    self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
+                    self.allMetrics = allMetrics;
+
+                    self.metricViewDone = true;
+                    self.await();
                 },
                 error: function (allMetrics, response) {
                     $.notifications.display({
@@ -69,8 +73,9 @@
 
             allDimensions.fetch({
                 success: function (allDimensions) {
-                    self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
-                    self.toggleDimensionList();
+                    self.allDimensions = allDimensions;
+                    self.dimensionViewDone = true;
+                    self.await();
                 },
                 error: function (allDimensions, response) {
                     $.notifications.display({
@@ -80,17 +85,18 @@
                     });
                 }
             });
-
-            //TODO FIX ME
-            $('#metric-list').find('.list-pop').tooltip({
-                delay: {
-                    show: 1000,
-                    hide: 500
-                },
-                template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
-            });
-
             return this;
+        },
+
+        await: function () {
+            var self = this;
+            if (self.metricViewDone == true && self.dimensionViewDone == true) {
+                self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
+                self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
+                self.toggleDimensionList();
+                self.metricView.sibling = self.dimensionView;
+                self.dimensionView.sibling = self.metricView;
+            }
         },
 
         submit: function () {

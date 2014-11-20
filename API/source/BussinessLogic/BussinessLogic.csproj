@@ -55,6 +55,7 @@
     <Compile Include="Handlers\DashboardComponentHandlers\DashboardComponentUpdateHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetAllHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetHandlers.cs" />
+    <Compile Include="Handlers\MetricDimensionMapHandlers\MetricDimensionMapGetHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetAllHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetHandler.cs" />
     <Compile Include="Handlers\ReportComponentHandlers\AddHandler.cs" />

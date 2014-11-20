@@ -13,14 +13,16 @@
         events: {
             'click #addMetric': 'metricAddedAction',
             'AdformSelect:selectionChanged': 'metricSelectedAction',
-            'click .removeMetric': 'metricRemovedAction'
+            'click .removeMetric': 'metricRemovedAction',
+            'click .adform-select-dropper': 'fire'
         },
 
         fire: function (e) {
-            $(e.target.nextElementSibling).toggle();
+            alert("asdasd");
         },
 
         inputMetrics: function () {
+//            alert('input');
             var result = [];
 
             this.metricArray.forEach(function (metric) {
@@ -32,7 +34,7 @@
             return result;
         },
 
-        initialize: function (parentModel, allMetrics) {
+        initialize: function (parentModel, allMetrics, sibling) {
             var self = this;
 
             this.metricArray = [];
@@ -46,7 +48,6 @@
             for (var i = 0; i < this.metricArray.length; i++) {
                 this.metricArray[i].Order = i;
             }
-
             this.allMetrics = allMetrics;
 
             this.grouped = _.groupBy(allMetrics.toJSON(), function (metric) {
@@ -57,13 +58,13 @@
 
         render: function () {
             var self = this;
-
+            alert('YOLO');
             this.metricArray.sort(this.compareNumbers);
 
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
 
             //var adfSelectReference1 = new ASG(this.$el.find('select.adf-select1'), { groups: true, adjustDropperWidth: true, search: 6, width: 'container' });
-
+        
             this.initializeMetricSelects();
 
             this.initializeSortableList();
@@ -72,11 +73,13 @@
         },
 
         metricAddedAction: function () {
+
             this.metricArray.push({ Placeholder: true, Order: this.metricArray.length });
             this.render();
         },
 
         initializeMetricSelects: function () {
+          
             var self = this;
 
             var metricSelectArray = this.$el.find('select.metric-select').get();
@@ -92,7 +95,7 @@
 
                 this.selectReferences = [];
 
-                metricSelectArray.forEach(function (singleMetricSelect) {
+                metricSelectArray.forEach(function(singleMetricSelect) {
                     var reference = $(singleMetricSelect).data("AdformSelect");
                     self.selectReferences.push(reference);
                 });
@@ -111,9 +114,11 @@
                     template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
                 });
             }
+           
         },
 
         metricSelectedAction: function (e) {
+            
             var reference = $(e.target).data("AdformSelect");
 
             var selectReferenceID = null;
@@ -123,7 +128,6 @@
                     break;
                 }
             }
-
             var selectedValue = parseInt(reference.getValues());
             var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
             var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
@@ -149,6 +153,7 @@
         },
 
         metricDraggedAction: function (e, ui) {
+
             var draggedItem = null;
             for (var i = 0; i < this.metricArray.length; i++) {
                 if (this.metricArray[i].Order == ui.oldindex) {

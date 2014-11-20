@@ -69,6 +69,15 @@ namespace Controllers
 				constraints: new { controller = @"(\W|^)ReportComponent(\W|$)" }
 			);
 
+            configuration.Routes.MapHttpRoute(
+                name: "MetricDimensionMap",
+                routeTemplate: "api/{controller}",
+                defaults: new { controller = "MetricDimensionMap"},
+                constraints: new { controller = @"(\W|^)MetricDimensionMap(\W|$)" }
+            );
+
+
+
 
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 

@@ -2,7 +2,7 @@
     baseUrl: '',
 
 
-    urlArgs: "bust=" + (new Date()).getTime(),
+//    urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
@@ -16,7 +16,7 @@
         'globalize':            'scripts/lib/globalize',
         'moment':               'scripts/lib/moment',
         'Highcharts':           'scripts/lib/highcharts',
-        'HighchartsTheme':     'scripts/lib/highcharts-theme',
+        'HighchartsTheme':      'scripts/lib/highcharts-theme',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
@@ -75,6 +75,7 @@
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',
         'DimensionListView':    'scripts/views/dimensionListView',
+        'MetricDimensionView':  'scripts/views/metricDimensionView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router',

@@ -110,7 +110,6 @@ namespace DataLayer.Repositories
 				}
 			}
 		}
-
 		public bool Exists(int id)
 		{
 			const string sql = @"SELECT COUNT(*) FROM [dbo].[Dimensions] WHERE [ID] = @DimensionId";

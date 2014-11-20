@@ -53,7 +53,8 @@
             return this;
         },
 
-        initEinstein: function(start, end) {
+        initEinstein: function (start, end) {
+   
             var einstein = new Einstein({
                 Metrics: this.getMnemonics(this.model.get("Metrics")),
                 Dimensions: [],

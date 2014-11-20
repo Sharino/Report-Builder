@@ -32,7 +32,7 @@
             return result;
         },
 
-        initialize: function (parentModel, allDimensions) {
+        initialize: function (parentModel, allDimensions, sibling) {
             var self = this;
             this.dimensionArray = [];
             this.selectReferences = [];
@@ -43,7 +43,6 @@
                 this.dimensionArray[i].Order = i;
             }
             this.allDimensions = allDimensions;
-
             this.grouped = _.groupBy(allDimensions.toJSON(), function (dimension) {
                 return dimension.Group.GroupId;
             });
@@ -95,13 +94,13 @@
                     }
                 }
 
-                //$('.list-pop').tooltip({
-                //    delay: {
-                //        show: 1000,
-                //        hide: 500
-                //    },
-                //    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
-                //});
+                $('.list-pop').tooltip({
+                    delay: {
+                        show: 1000,
+                        hide: 500
+                    },
+                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                });
             }
         },
 

@@ -99,6 +99,7 @@
     <Content Include="scripts\models\metric.js" />
     <Content Include="scripts\models\component.js" />
     <Content Include="scripts\models\report.js" />
+    <Content Include="scripts\models\Session.js" />
     <Content Include="scripts\routers\router.js" />
     <Content Include="scripts\views\componentGeneratedView.js" />
     <Content Include="scripts\views\baseCompositeView.js" />
@@ -113,6 +114,7 @@
     <Content Include="scripts\views\highchartsTimelineView.js" />
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\messageView.js" />
+    <Content Include="scripts\views\metricDimensionView.js" />
     <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
@@ -133,6 +135,7 @@
     <Content Include="templates\kpi.html" />
     <Content Include="templates\menu.html" />
     <Content Include="templates\message.html" />
+    <Content Include="templates\metricDimensions.html" />
     <Content Include="templates\report.html" />
     <Content Include="templates\metricList.html" />
     <Content Include="templates\selectDashboardList.html" />
