@@ -19,6 +19,14 @@
 
         render: function () {
 
+            var yAxisData = this.getYAxisData();
+            var xAxisData = this.getXAxisData();
+
+            var yAxis = [];
+            yAxis.push(this.setYAxis(yAxisData.length, 0));
+            if (yAxisData.length > 1) {
+                yAxis.push(this.setYAxis(yAxisData.length, 1));
+            }
 
             this.$el.highcharts({
                 title: {
@@ -27,9 +35,9 @@
                 xAxis: {
                     gridLineColor: '#cbe5f5',
                     lineColor: '#cbe5f5',
-                    categories: this.getXAxis(),
+                    categories: xAxisData,
                     labels: {
-                        step: Math.round(this.getXAxis().length / 5),
+                        step: Math.round(xAxisData.length / 5),
                         staggerLines: 1,
                         y: 20,
                         style: {
@@ -40,28 +48,9 @@
                     minPadding: 12,
                     maxPadding: 12,
                 },
-                yAxis: {
-                    title: {
-                        text: null,
-                    },
-                    showFirstLabel: true,
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#cbe5f5'
-                    }],
-                    gridLineColor: '#cbe5f5',
-                    lineColor: '#cbe5f5',
-                    labels: {
-                        align: 'center',
-                        x: -25,
-                        y: 5,
-                        style: {
-                            'font-family': "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
-                        }
-                    }
-                },
-                series: this.getYAxis(),/*[{                    
+                yAxis: yAxis,
+                series: yAxisData,
+                /*[{                    
                     name: 'Tokyo',
                     data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
                 }, {
@@ -70,9 +59,11 @@
                 }]*/
             });
 
+            //this.$el.highcharts.yAxis = yAxis;
+
         },
        
-        getXAxis: function () {
+        getXAxisData: function () {
             var xAxis = [];
 
             for (var i = 0, len = this.einstein.length; i < len && this.einstein != "garbage"; i++) {
@@ -82,7 +73,7 @@
             return xAxis;
         },
 
-        getYAxis: function() {
+        getYAxisData: function() {
             var yAxis = [];
 
             if (this.einstein != "garbage" && this.selectedMetricsNames) {
@@ -95,10 +86,46 @@
                         metricValues.push(parseInt(this.einstein[j].MetricValues[i].Value));
                     }
 
-                    yAxis.push({ name: name, data: metricValues });
+                    yAxis.push({
+                        name: name,
+                        data: metricValues,
+                        yAxis: i === 0 ? 0 : 1,
+                        marker: Highcharts.getOptions().markers[i],
+                    });
                 }
             }
 
+            return yAxis;
+        },
+
+        setYAxis: function(dataLength, isSecondAxis) {
+            var yAxis = {
+                title: {
+                    text: null,
+                },
+                showFirstLabel: true,
+                plotLines: [
+                    {
+                        value: 0,
+                        width: 1,
+                        color: '#cbe5f5'
+                    }
+                ],
+                minPadding: dataLength > 1 ? 1 : 0,
+                maxPadding: dataLength > 1 ? 1 : null,
+                gridLineColor: '#cbe5f5',
+                lineColor: '#cbe5f5',
+                labels: {
+                    align: 'center',
+                    x: isSecondAxis ? 20 : -25,
+                    y: 5,
+                    style: {
+                        'color': Highcharts.getOptions().colors[isSecondAxis],
+                        'font-family': "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
+                    }
+                },
+                opposite: isSecondAxis,
+            };
             return yAxis;
         }
 

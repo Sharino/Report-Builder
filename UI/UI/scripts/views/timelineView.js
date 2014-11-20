@@ -88,7 +88,7 @@
                 selectedMetricsNames: selectedMetricsNames,
             }));
 
-            //            alert("Before render");
+
             this.renderSubview("#date-filter", new DateFilterView({
                 from: from,
                 to: to
@@ -121,7 +121,7 @@
             }
 
             var einstein = new Einstein({
-                Metrics: metricMnemonics,//this.getMetricMnemonics([this.selectedMetric1, this.selectedMetric2]),
+                Metrics: metricMnemonics,
                 Dimensions: [this.selectedDimension.get("Mnemonic")],
                 Filters: {
                     "DateFilter": {
@@ -152,7 +152,7 @@
             
             stoneAlone.fetch({
                 url: 'http://37.157.0.42:33896/api/Einstein/Data',
-               // url: 'http://localhost:5000/api/Einstein/Data',
+                //url: 'http://localhost:5000/api/Einstein/Data',
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
@@ -196,11 +196,9 @@
 
             if ($(e.currentTarget).attr('class').contains("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
-                //this.render(this.einstein, this.dataFilter);
                 this.generateNewData();
             } else if ($(e.currentTarget).attr('class').contains("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
-                //this.render(this.einstein, this.dataFilter);
                 this.generateNewData();
             }
         },
@@ -221,12 +219,7 @@
 
             this.selectedDimension = selectedDimension;
             this.generateNewData();
-            //this.render(this.einstein, this.dataFilter);
         },
-
-
-
-
 
     });
 
