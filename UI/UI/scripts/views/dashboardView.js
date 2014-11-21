@@ -21,10 +21,7 @@
         template: _.template(dashboardTemplate),
 
         events: {
-            'click .edit-form': 'edit',
-            'click .csv': 'csv',
-            'click .pdf': 'pdf',
-            'click .xls': 'xls',
+            'click .edit-form': 'editDashboardComponent',
             'click .del': 'deleteDashboardComponent'
         },
 
@@ -45,17 +42,15 @@
             var shit = new DashboardComponent({ Id: id });
             shit.destroy({
                 success: function() {
-                    alert("yay");
                 },
                 error: function() {
-                    alert("gay");
                 }
             });
             Backbone.history.loadUrl(Backbone.history.fragment);
             return false;
         },
 
-        edit: function (e) {
+        editDashboardComponent: function (e) {
             e.preventDefault();
 
             var id = parseInt($(e.currentTarget).attr('data-id'));
@@ -150,63 +145,6 @@
         render: function () {
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
             return this;
-        },
-
-        csv: function (e) {
-            e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
-            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportCsv(compValues, {
-                success: function (data, status, jqXHR) {
-                    window.location.assign(data);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    $.notifications.display({
-                        type: 'error',
-                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                }
-            });
-        },
-
-        pdf: function (e) {
-            e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
-            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportPdf(compValues, {
-                success: function (data, status, jqXHR) {
-                    window.location.assign(data);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    $.notifications.display({
-                        type: 'error',
-                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                }
-            });
-        },
-
-        xls: function (e) {
-            e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
-            var compValues = this.componentView[id].einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportXls(compValues, {
-                success: function (data, status, jqXHR) {
-                    window.location.assign(data);
-                },
-                error: function (xhr, ajaxOptions, thrownError) {
-                    $.notifications.display({
-                        type: 'error',
-                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                }
-            });
         }
     });
 

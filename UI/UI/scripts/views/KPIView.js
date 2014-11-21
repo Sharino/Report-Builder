@@ -1,31 +1,34 @@
-﻿﻿define('KPIView', [
-    'BaseCompositeView',
-    'text!templates/kpi.html',
-    'DateFilterView',
-    'Einstein',
-    'Metric',
-    'Config',
-    'Export',
-    'spin',
-    'adform-loader',
-    'adform-notifications'
+﻿define('KPIView', [
+   'BaseCompositeView',
+   'text!templates/kpi.html',
+   'DateFilterView',
+   'Einstein',
+   'Metric',
+   'Config',
+   'Export',
+   'spin',
+   'adform-loader',
+   'adform-notifications'
 ], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config, Export) {
     var kpiView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
         events: {
             'click #generateByDate': 'generateNewData',
-            'click .KpiEdit': 'edit'
+            'click .KpiEdit': 'edit',
+            'click .csv': 'csv',
+            'click .pdf': 'pdf',
+            'click .xls': 'xls',
         },
 
-        initialize: function(parent, pos) {
+        initialize: function (parent, pos) {
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
             this.initEinstein(this.startDate, this.startDate);
         },
 
-        render: function(einstein, dataFiler) {
+        render: function (einstein, dataFiler) {
             var from, to;
 
             if (!einstein && !dataFiler) {
@@ -54,7 +57,7 @@
         },
 
         initEinstein: function (start, end) {
-   
+
             var einstein = new Einstein({
                 Metrics: this.getMnemonics(this.model.get("Metrics")),
                 Dimensions: [],
@@ -69,7 +72,7 @@
             this.workEinstein(einstein);
         },
 
-        generateNewData: function() {
+        generateNewData: function () {
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
 
@@ -84,18 +87,18 @@
             }
         },
 
-        getMnemonics: function(metrics) {
+        getMnemonics: function (metrics) {
             var metricMnemonics = [];
 
-            _.each(metrics, function(metric) {
+            _.each(metrics, function (metric) {
                 var newMetric = new Metric(metric);
                 metricMnemonics.push(newMetric.get("Mnemonic"));
             });
 
             return metricMnemonics;
         },
-      
-     
+
+
         workEinstein: function (stoneAlone) {
             var self = this;
 
@@ -116,15 +119,62 @@
             });
         },
 
-        //edit: function (e) {
-        //    e.preventDefault();
+        csv: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
 
-        //    var id = $(e.currentTarget).attr("id");
-        //    var routerUrl = "create/".concat(id);
+            var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
+            Export.exportCsv(compValues, {
+                success: function (data, status, jqXHR) {
+                    window.location.assign(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+        },
 
-        //    Backbone.history.navigate(routerUrl, true, true);
-        //}
+        pdf: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
 
+            var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
+            Export.exportPdf(compValues, {
+                success: function (data, status, jqXHR) {
+                    window.location.assign(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+        },
+
+        xls: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
+            Export.exportXls(compValues, {
+                success: function (data, status, jqXHR) {
+                    window.location.assign(data);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+        }
     });
 
     return kpiView;
