@@ -31,29 +31,15 @@
             this.collection.on('fetch', this.render, this);
         },
         render: function () {
-            // TODO: CREATE SEPARATE VIEWS INSTEAD OF THIS STUFF
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
-                }
-            };
 
             if (this.collection) {
-                templVariables["activeNew"] = '';
-                templVariables["activeList"] = 'class="active"';
                 this.$el.html(this.template({
                     "Components": this.collection.toJSON(),
-                    "data": templVariables
                 }));
             }
             else {
-                templVariables["activeNew"] = '';
-                templVariables["activeList"] = 'class="active"';
                 this.$el.html(this.template({
                     "Components": [],
-                    "data": templVariables
                 }));
             }
 

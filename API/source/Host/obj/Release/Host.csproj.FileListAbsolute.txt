@@ -88,8 +88,6 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\Host.c
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\ApiHost.exe
 C:\Users\Administrator\Desktop\Report-Builder\API\source\Host\obj\Release\ApiHost.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\ApiHost.exe.config
-D:\git\Report-Builder\API\source\Host\obj\Release\ApiHost.exe
-D:\git\Report-Builder\API\source\Host\obj\Release\ApiHost.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\ApiHost.exe
 D:\git\Report-Builder\API\source\Host\bin\Release\ApiHost.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\BussinessLogic.dll
@@ -113,6 +111,7 @@ D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.WebHost.dll
 D:\git\Report-Builder\API\source\Host\bin\Release\Swashbuckle.Core.dll
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.Cors.dll
 D:\git\Report-Builder\API\source\Host\bin\Release\Aspose.Pdf.dll
+D:\git\Report-Builder\API\source\Host\bin\Release\Aspose.Cells.dll
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Cors.dll
 D:\git\Report-Builder\API\source\Host\bin\Release\BussinessLogic.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\Contracts.pdb
@@ -132,4 +131,5 @@ D:\git\Report-Builder\API\source\Host\bin\Release\Models.pdb
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.WebHost.xml
 D:\git\Report-Builder\API\source\Host\bin\Release\System.Web.Http.Cors.xml
 D:\git\Report-Builder\API\source\Host\obj\Release\Host.csprojResolveAssemblyReference.cache
-D:\git\Report-Builder\API\source\Host\bin\Release\Aspose.Cells.dll
+D:\git\Report-Builder\API\source\Host\obj\Release\ApiHost.exe
+D:\git\Report-Builder\API\source\Host\obj\Release\ApiHost.pdb

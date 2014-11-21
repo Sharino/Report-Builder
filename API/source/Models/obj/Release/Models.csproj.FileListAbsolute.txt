@@ -15,6 +15,5 @@ D:\git\Report-Builder\API\source\Models\bin\Release\Models.dll
 D:\git\Report-Builder\API\source\Models\bin\Release\Models.pdb
 D:\git\Report-Builder\API\source\Models\bin\Release\Newtonsoft.Json.dll
 D:\git\Report-Builder\API\source\Models\bin\Release\Newtonsoft.Json.xml
-D:\git\Report-Builder\API\source\Models\obj\Release\Models.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Models\obj\Release\Models.dll
 D:\git\Report-Builder\API\source\Models\obj\Release\Models.pdb

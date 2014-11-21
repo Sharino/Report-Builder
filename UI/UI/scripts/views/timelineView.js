@@ -194,10 +194,10 @@
                 }
             }
 
-            if ($(e.currentTarget).attr('class').contains("selectedMetric1")) {
+            if ($(e.currentTarget).hasClass("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
                 this.generateNewData();
-            } else if ($(e.currentTarget).attr('class').contains("selectedMetric2")) {
+            } else if ($(e.currentTarget).hasClass("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
                 this.generateNewData();
             }
