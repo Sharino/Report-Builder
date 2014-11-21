@@ -1,15 +1,17 @@
 ﻿﻿<div class="form-horizontal well component ">
     <div class="table-toolbar">
         <div class="group-label ">
-            <label>
+            <div>
                 <%= model.Title %>
-                <label class="pull-right">
+                <div class="pull-right">
                     <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
                     <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
+                    <button class="xls btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">XLS</button>
+
                     <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
-                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">x</button>
-                </label>
-            </label>
+                    <button class="del btn btn-transparent" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">x</button>
+                </div>
+            </div>
             <div id="component-edit-<%= Position %>"></div>
             <br />
             <hr />

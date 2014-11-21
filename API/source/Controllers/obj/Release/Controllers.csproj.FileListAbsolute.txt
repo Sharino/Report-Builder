@@ -76,6 +76,7 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\Controllers\obj\Release
 D:\git\Report-Builder\API\source\Controllers\bin\Release\Controllers.dll.config
 D:\git\Report-Builder\API\source\Controllers\bin\Release\Controllers.dll
 D:\git\Report-Builder\API\source\Controllers\bin\Release\Controllers.pdb
+D:\git\Report-Builder\API\source\Controllers\bin\Release\Aspose.Cells.dll
 D:\git\Report-Builder\API\source\Controllers\bin\Release\Aspose.Pdf.dll
 D:\git\Report-Builder\API\source\Controllers\bin\Release\BussinessLogic.dll
 D:\git\Report-Builder\API\source\Controllers\bin\Release\Contracts.dll
@@ -111,4 +112,3 @@ D:\git\Report-Builder\API\source\Controllers\bin\Release\log4net.xml
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.dll
 D:\git\Report-Builder\API\source\Controllers\obj\Release\Controllers.pdb
-D:\git\Report-Builder\API\source\Controllers\bin\Release\Aspose.Cells.dll

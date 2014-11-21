@@ -58,7 +58,6 @@
 
         render: function () {
             var self = this;
-            alert('YOLO');
             this.metricArray.sort(this.compareNumbers);
 
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));

@@ -22,7 +22,7 @@ namespace Controllers
 
 			configuration.Routes.MapHttpRoute(
 				name: "Dashboard",
-				routeTemplate: "api/{controller}/{id}",
+				routeTemplate: "api/Dashboard/{id}",
 				defaults: new { controller = "Dashboard", id = RouteParameter.Optional },
 				constraints: new { controller = @"(\W|^)Dashboard(\W|$)" }
 			);
@@ -76,9 +76,6 @@ namespace Controllers
                 constraints: new { controller = @"(\W|^)MetricDimensionMap(\W|$)" }
             );
 
-
-
-
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
 
             // Register the WebAPI to the pipeline  
@@ -91,7 +88,7 @@ namespace Controllers
                 owinContext.Response.ContentType = "text/plain";
                 // here comes the performance, everythign in the Katana is Async. Living in the current century.  
                 // Let's print our obvious message: :)  
-                return owinContext.Response.WriteAsync("Api is available at:  /swagger");
+                return owinContext.Response.WriteAsync("Api is available at: /swagger");
             });
         }
     }
