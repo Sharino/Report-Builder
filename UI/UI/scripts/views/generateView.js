@@ -24,7 +24,7 @@
             'click #generate-submit': 'addToDashboard',
         },
 
-        initialize: function(){
+        initialize: function () {
             if (!this.collection) {
                 this.collection = new DashboardCollection();
 
@@ -50,8 +50,6 @@
 
         render: function () {
             this.$el.html(this.template());
-
-//            this.renderSubview("#date-filter", new DateFilterView());
 
             switch (this.model.get("Type")) {
                 case 0:
