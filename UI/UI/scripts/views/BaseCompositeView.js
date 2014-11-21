@@ -40,6 +40,28 @@
             });
 
             this.subViews = [];
+        },
+
+        destroySubView: function (view) {
+            if (view != null) {
+                if (typeof view === "object") {
+                    for (var i = 0; i < this.subViews.length; i++) {
+                        var tempSubview = this.subViews[i];
+                        if (tempSubview === view) {
+                            tempSubview.destroy();
+                            this.subViews.splice(i, 1);
+                            break;
+                        }
+                    }
+                } else if (typeof view === "number") {
+                    if (view > -1) {
+                        if (view > -1) {
+                            this.subViews[view].destroy();
+                            this.subViews.splice(view, 1);
+                        }
+                    }
+                }
+            }
         }
     });
 

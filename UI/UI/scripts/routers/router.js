@@ -164,6 +164,7 @@
     generateById: function (id) {
         var self = this;
         var tempComponentModel = new Component({ Id: id });
+
         tempComponentModel.fetch({
             success: function (model, response) {
                 self.showView("#generate", new GenerateView({ model: model }));
