@@ -143,8 +143,8 @@
             });
 
             if (!validationSuccess) {
-                if (this.model.errors) {
-                    this.model.errors.forEach(function (error) {
+                if (this.model.validationError) {
+                    this.model.validationError.forEach(function (error) {
                         $.notifications.display({
                             type: 'error',
                             content: error.message,
