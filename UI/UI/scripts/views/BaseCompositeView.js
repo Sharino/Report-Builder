@@ -48,14 +48,16 @@
                     for (var i = 0; i < this.subViews.length; i++) {
                         var tempSubview = this.subViews[i];
                         if (tempSubview === view) {
-                            tempSubview.destroy();
-                            this.subViews.splice(i, 1);
+                            if (tempSubview.destroy) {
+                                tempSubview.destroy();
+                                this.subViews.splice(i, 1);
+                            }
                             break;
                         }
                     }
                 } else if (typeof view === "number") {
                     if (view > -1) {
-                        if (view > -1) {
+                        if (this.subViews[view].destroy) {
                             this.subViews[view].destroy();
                             this.subViews.splice(view, 1);
                         }

@@ -66,13 +66,6 @@
         },
 
         render: function() {
-            var templVariables = {
-                "data": {
-                    "viewTitle": "",
-                    "activeNew": "",
-                    "activeList": ""
-                }
-            };
 
             var allMetrics = new MetricCollection();
             var allDimensions = new DimensionCollection();
@@ -81,8 +74,7 @@
             var self = this;
 
             if (this.model) {
-                templVariables["data"]["model"] = this.model.toJSON();
-                this.$el.html(this.template(templVariables));
+                this.$el.html(this.template({ model: this.model }));
 
                 allMetrics.fetch({
                     success: function(allMetrics, response) {

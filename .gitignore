@@ -403,3 +403,4 @@ API/source/BussinessLogic/Handlers/ReportComponentHandlers/UpdateHandler.cs
 API/source/BussinessLogic/BussinessLogic.csproj
 API/BussinessLogicTests/obj/Debug/BussinessLogicTests.csproj.FileListAbsolute.txt
 UI/UI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+*.orig
