@@ -1,23 +1,24 @@
-﻿<div class="form-horizontal well component ">
+﻿﻿<div class="form-horizontal well component" id="component-<%= Position %>">
     <div class="table-toolbar">
         <div class="group-label ">
-            <label>
+            <div>
                 <%= model.Title %>
-                <div id="component-edit-<%= Position %>" class="pull-right">
-                    <button class="btn btn-primary timelineEdit" type="submit" data-id="<%= Position %>" id="<%= this.model.id %>">Edit</button>
+                <div class="pull-right">
+                    <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
+                    <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
+                    <button class="xls btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">XLS</button>
+                    <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
+                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">X</button>
                 </div>
-                <!--                <i style="margin-top: -6px;" class="gen adf-icon-big-bars-vertical pull-right" data-id="<%= Position %>" id="edit"></i>-->
-            </label>
+            </div>
+            <div id="component-edit-<%= Position %>"></div>
             <br />
-            <!--            <div id="component-edit-<%= Position %>"></div>-->
             <hr />
         </div>
-        <div id="date-filter"></div>
-        
-        <div id="spinner"></div>
+        <div id="date-filter" style="min-height: 46px;"></div>
     </div>
-    
-    
+
+
 
 
 
@@ -66,7 +67,7 @@
                 <% } %>
             </ul>
         </div>
-        
+
         <div id="highcharts"></div>
     </div>
 </div>
