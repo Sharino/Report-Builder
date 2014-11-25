@@ -331,7 +331,7 @@ require([
 
     /* DASHBOARD */
 
-    module("Dashboard initializaion");
+    module("Dashboard Initializaion");
     test("Can be instantiated with correct default values", function () {
         expect(4);
 
@@ -355,6 +355,34 @@ require([
         deepEqual(dashboard.get("Components"), [], "Components sets/gets correctly.");
         deepEqual(dashboard.get("ComponentIds"), [], "ComponentIds sets/gets correctly.");
     });
+
+    test("No title", function () {
+        expect(2);
+
+        var dashboard = new Dashboard({Title: ""});
+
+        deepEqual(dashboard.isValid(), false, validationErrorToString(dashboard.validationError));
+        deepEqual(dashboard.validationError[0].code, 621, "Title error fired.");
+    });
+
+    test("Short title", function () {
+        expect(2);
+
+        var dashboard = new Dashboard({ Title: "sh" });
+
+        deepEqual(dashboard.isValid(), false, validationErrorToString(dashboard.validationError));
+        deepEqual(dashboard.validationError[0].code, 622, "Title error fired.");
+    });
+
+    test("Long title", function () {
+        expect(2);
+
+        var dashboard = new Dashboard({ Title: "hurr durr yolo sweg awadawd kawdk awkd awkd kawd kawkd awkd awkd akwd a" });
+
+        deepEqual(dashboard.isValid(), false, validationErrorToString(dashboard.validationError));
+        deepEqual(dashboard.validationError[0].code, 623, "Title error fired.");
+    });
+
 
     /* Utility */
     function validationErrorToString(errObj) {
