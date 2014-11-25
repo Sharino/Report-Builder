@@ -101,6 +101,7 @@
     <Content Include="scripts\models\report.js" />
     <Content Include="scripts\models\Session.js" />
     <Content Include="scripts\routers\router.js" />
+    <Content Include="scripts\views\chartView.js" />
     <Content Include="scripts\views\componentGeneratedView.js" />
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
@@ -111,6 +112,7 @@
     <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\dimensionListView.js" />
     <Content Include="scripts\views\generateView.js" />
+    <Content Include="scripts\views\highchartsChartView.js" />
     <Content Include="scripts\views\highchartsTimelineView.js" />
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\messageView.js" />

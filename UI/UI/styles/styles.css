@@ -153,3 +153,8 @@ i[class*="adf-icon-alt"] {
 .modal-footer {
     margin: 20px;
 }
+
+#chart .wizard-nav, #timeline .wizard-nav {
+    margin: 0 5px !important;
+    background: white;
+}

@@ -8,6 +8,7 @@
     'text!templates/dashboard.html',
     'KPIView',
     'TimelineView',
+    'ChartView',
     'MessageView',
     'Config',
     'Export',
@@ -15,7 +16,7 @@
     'adform-notifications',
     'adform-modal'
 ], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate,
-             KPIView, TimelineView, MessageView, Config, Export, DateFilterView) {
+             KPIView, TimelineView, ChartView, MessageView, Config, Export, DateFilterView) {
 
     var startDate = moment().format('YYYY-MM-DD');
 
@@ -145,7 +146,7 @@
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position));
                                 break;
                             }
                     }
