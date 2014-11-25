@@ -63,6 +63,8 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\config\Debug.js" />
+    <Content Include="scripts\config\Release.js" />
     <Content Include="scripts\export.js" />
     <Content Include="scripts\lib\adform\adform-accordion.js" />
     <Content Include="scripts\lib\adform\adform-calendar.v2.01.js" />
@@ -150,6 +152,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <BuildFlagSource Include="scripts\config\$(Configuration).js" />
+  </ItemGroup>
+  <ItemGroup>
+    <BuildFlagDestination Include="config.js" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -183,11 +191,12 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
+    <Copy SourceFiles="@(BuildFlagSource)" DestinationFiles="@(BuildFlagDestination)" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="true" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  -->
+  <PropertyGroup>
+    <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
 </Project>
