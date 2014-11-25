@@ -61,7 +61,6 @@
                 this.$el.loader();
             }
 
-
             return this;
         },
 
@@ -133,7 +132,16 @@
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportCsv(compValues, {
+
+            var request = {
+                Title: this.model.get("Title"),
+                Values: compValues,
+                StartDate: $("#picker").find("input")[0].value,
+                EndDate: $("#picker2").find("input")[0].value,
+                GeneratedDate: moment().format('YYYY-MM-DD')
+            }
+
+            Export.exportCsv(request, {
                 success: function (data, status, jqXHR) {
                     window.location.assign(data);
                 },
@@ -152,7 +160,16 @@
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportPdf(compValues, {
+
+            var request = {
+                Title: this.model.get("Title"),
+                Values: compValues,
+                StartDate: $("#picker").find("input")[0].value,
+                EndDate: $("#picker2").find("input")[0].value,
+                GeneratedDate: moment().format('YYYY-MM-DD')
+            }
+
+            Export.exportPdf(request, {
                 success: function (data, status, jqXHR) {
                     window.location.assign(data);
                 },
@@ -171,7 +188,16 @@
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
-            Export.exportXls(compValues, {
+
+            var request = {
+                Title: this.model.get("Title"),
+                Values: compValues,
+                StartDate: $("#picker").find("input")[0].value,
+                EndDate: $("#picker2").find("input")[0].value,
+                GeneratedDate: moment().format('YYYY-MM-DD')
+            }
+
+            Export.exportXls(request, {
                 success: function (data, status, jqXHR) {
                     window.location.assign(data);
                 },
