@@ -115,7 +115,6 @@
     <Content Include="scripts\views\kpiView.js" />
     <Content Include="scripts\views\messageView.js" />
     <Content Include="scripts\views\metricDimensionView.js" />
-    <Content Include="scripts\views\reportView.js" />
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />

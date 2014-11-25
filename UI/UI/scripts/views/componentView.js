@@ -16,7 +16,7 @@
 
         events: {
             'click #component-submit': 'submit',
-            'click .radio-group': 'toggleDimensionList'
+            'click .radio-group': 'toggleDimensionList',
         },
 
         toggleDimensionList: function () {
@@ -58,7 +58,7 @@
             allMetrics.fetch({
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
-
+                    self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                     self.metricViewDone = true;
                     self.await();
                 },
@@ -74,6 +74,7 @@
             allDimensions.fetch({
                 success: function (allDimensions) {
                     self.allDimensions = allDimensions;
+                    self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
                     self.dimensionViewDone = true;
                     self.await();
                 },
@@ -91,8 +92,6 @@
         await: function () {
             var self = this;
             if (self.metricViewDone == true && self.dimensionViewDone == true) {
-                self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
-                self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
                 self.toggleDimensionList();
                 self.metricView.sibling = self.dimensionView;
                 self.dimensionView.sibling = self.metricView;

@@ -16,13 +16,17 @@
             'click .removeMetric': 'metricRemovedAction',
         },
 
-        calculateMap: function (e) {
-            var array = this.sibling.dimensionArray;
-            var configMap = Config.map.DimensionMappings;
-            this.lastIntersection = configMap[0].MetricIds;
-            for (var i = 0; i < array.length; i++) {
-                this.lastIntersection = _.intersection(configMap[array[i].DimensionId].MetricIds, this.lastIntersection);
-            }//todo slice
+        initialize: function (parentModel, allMetrics) {
+            Config.metricView = this;
+            this.metricArray = [];
+            this.selectReferences = [];
+            this.model = parentModel;
+            this.metricArray = this.model.get("Metrics").slice(0);
+
+            for (var i = 0; i < this.metricArray.length; i++) {
+                this.metricArray[i].Order = i;
+            }
+            this.allMetrics = allMetrics;
         },
 
         inputMetrics: function () {
@@ -37,47 +41,15 @@
             return result;
         },
 
-        initialize: function (parentModel, allMetrics) {
-            this.metricArray = [];
-            this.selectReferences = [];
-            this.model = parentModel;
-            this.metricArray = this.model.get("Metrics").slice(0);
-
-            for (var i = 0; i < this.metricArray.length; i++) {
-                this.metricArray[i].Order = i;
-            }
-            this.allMetrics = allMetrics;
-        },
-
         render: function () {
             var self = this;
 
             this.metricArray.sort(this.compareNumbers);
+            //GET MAP
+            var metrics = Config.calculateMetricMap();
 
-            var metrics = this.allMetrics.toJSON().slice(0);
-            var intersect = self.lastIntersection;
-            var toRemove = [];
-
-            for (var i = 0; i < metrics.length; i++) {
-                if (intersect) {
-                    var flag = false;
-                    for (var j = 0; j < intersect.length; j++) {
-                        if (metrics[i].MetricId == intersect[j]) {
-                            flag = false;
-                            break;
-                        } else {
-                            flag = true;
-                        }
-                    }
-                    if (flag === true) {
-                        toRemove.push(metrics[i]);
-                    }
-                }
-            }
-            
-            for (var i = 0; i < toRemove.length; i++) {
-                console.log("Deleting metric - ", toRemove[i].DisplayName);
-                metrics = _.without(metrics, toRemove[i]);
+            if (!metrics) {
+                metrics = this.allMetrics.toJSON();
             }
 
             this.grouped = _.groupBy(metrics, function (metric) {
@@ -86,8 +58,6 @@
 
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
 
-            //var adfSelectReference1 = new ASG(this.$el.find('select.adf-select1'), { groups: true, adjustDropperWidth: true, search: 6, width: 'container' });
-
             this.initializeMetricSelects();
             this.initializeSortableList();
             return this;
@@ -95,7 +65,6 @@
 
         metricAddedAction: function () {
             this.metricArray.push({ Placeholder: true, Order: this.metricArray.length });
-            this.calculateMap();
             this.render();
         },
 
@@ -199,7 +168,6 @@
 
 
         metricRemovedAction: function (e) {
-            this.calculateMap();
             var myId = parseInt(e.currentTarget.id);
 
             if (myId > -1) {

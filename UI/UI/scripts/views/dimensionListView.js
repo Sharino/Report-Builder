@@ -16,14 +16,19 @@
             'click .removeDimension': 'dimensionRemovedAction'
         },
 
-        calculateMap: function (e) {
-            var array = this.sibling.metricArray;
-            var configMap = Config.map.MetricMappings;
-            this.lastIntersection = configMap[0].DimensionIds;
-            for (var i = 0; i < array.length; i++) {
-                this.lastIntersection = _.intersection(configMap[array[i].MetricId].DimensionIds, this.lastIntersection);
+        initialize: function (parentModel, allDimensions) {
+            Config.dimensionView = this;
+            this.dimensionArray = [];
+            this.selectReferences = [];
+            this.model = parentModel;
+            this.dimensionArray = this.model.get("Dimensions").slice(0);
+
+            for (var i = 0; i < this.dimensionArray.length; i++) {
+                this.dimensionArray[i].Order = i;
             }
+            this.allDimensions = allDimensions;
         },
+
 
         inputDimensions: function () {
             var result = [];
@@ -37,51 +42,17 @@
             return result;
         },
 
-        initialize: function (parentModel, allDimensions) {
-            this.dimensionArray = [];
-            this.selectReferences = [];
-            this.model = parentModel;
-            this.dimensionArray = this.model.get("Dimensions").slice(0);
-
-            for (var i = 0; i < this.dimensionArray.length; i++) {
-                this.dimensionArray[i].Order = i;
-            }
-            this.allDimensions = allDimensions;
-        },
-
         render: function () {
             var self = this;
 
             this.dimensionArray.sort(this.compareNumbers);
 
-
-            ///
-            var dimensions = this.allDimensions.toJSON().slice(0);
-            var intersect = self.lastIntersection;
-            var toRemove = [];
-
-            for (var i = 0; i < dimensions.length; i++) {
-                if (intersect) {
-                    var flag = false;
-                    for (var j = 0; j < intersect.length; j++) {
-                        if (dimensions[i].DimensionId == intersect[j]) {
-                            flag = false;
-                            break;
-                        } else {
-                            flag = true;
-                        }
-                    }
-                    if (flag === true) {
-                        toRemove.push(dimensions[i]);
-                    }
-                }
-            }
-
-            for (var i = 0; i < toRemove.length; i++) {
-                console.log("Deleting dimension - ", toRemove[i].DisplayName);
-                dimensions = _.without(dimensions, toRemove[i]);
-            }
+            var dimensions = Config.calculateDimensionMap();
             
+            if (!dimensions) {
+                dimensions = this.allDimensions.toJSON();
+            }
+
             this.grouped = _.groupBy(dimensions, function (dimension) {
                 return dimension.Group.GroupId;
             });
@@ -97,7 +68,6 @@
 
         dimensionAddedAction: function () {
             this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length });
-            this.calculateMap();
             this.render();
         },
 
@@ -201,7 +171,6 @@
             if (myId > -1) {
                 this.dimensionArray.splice(myId, 1);
             }
-            this.calculateMap();
             this.render();
         },
 
