@@ -404,3 +404,9 @@ API/source/BussinessLogic/BussinessLogic.csproj
 API/BussinessLogicTests/obj/Debug/BussinessLogicTests.csproj.FileListAbsolute.txt
 UI/UI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 *.orig
+API/source/BussinessLogic/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+API/source/Contracts/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+API/source/Controllers/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+API/source/DataLayer/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+API/source/Models/obj/Release/DesignTimeResolveAssemblyReferencesInput.cache
+UI/UI/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
