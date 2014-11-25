@@ -5,6 +5,7 @@ using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
 using Aspose.Cells;
@@ -17,34 +18,38 @@ namespace Controllers.Controllers
 	public class ExportController : ApiController
 	{
 		[HttpPost]
-		public HttpResponseMessage KpiToCsv(List<Values> request, string separator = ",")
+		public HttpResponseMessage KpiToCsv(Request request, string separator = ",")
 		{
 			if (request != null)
-				if (request.Count > 0)
+				if (request.Values.Count > 0)
 				{
-					string header = "";
-					string content = "";
+					var generatedDate = new StringBuilder(request.GeneratedDate);
+					var dates = new StringBuilder(request.StartDate + separator + request.EndDate);
+					var header = new StringBuilder();
+					var content = new StringBuilder();
 
-					Random random = new Random();
-					int randomNumber = random.Next(100, 10000);
+					var random = new Random();
+					var randomNumber = random.Next(100, 10000);
 
-					foreach (var val in request)
+					foreach (var val in request.Values)
 					{
-						header += val.Key + separator;
-						content += val.Value + separator;
+						header.Append(val.Key + separator);
+						content.Append(val.Value + separator);
 					}
-					header = header.TrimEnd(separator.ToCharArray());
-					content = content.TrimEnd(separator.ToCharArray());
+					header.Remove(header.Length - 1, 1);
+					content.Remove(content.Length - 1, 1);
 
-					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + randomNumber + ".csv";
+					string fileName = request.Title + "-" + Environment.TickCount + ".csv";
 
 					string filePath = ConfigurationManager.AppSettings["exportsFilePath"] + fileName;
 
 					using (var fs = new FileStream(filePath, FileMode.Append, FileAccess.Write))
 					using (var sw = new StreamWriter(fs))
 					{
+						sw.WriteLine(generatedDate);
 						sw.WriteLine(header);
-						sw.Write(content);
+						sw.WriteLine(content);
+						sw.WriteLine(dates);
 						sw.Close();
 						fs.Close();
 					}
@@ -54,17 +59,22 @@ namespace Controllers.Controllers
 		}
 
 		[HttpPost]
-		public HttpResponseMessage KpiToPdf(List<Values> request)
+		public HttpResponseMessage KpiToPdf(Request request)
 		{
 			if (request != null)
 			{
-				if (request.Count > 0)
+				if (request.Values.Count > 0)
 				{
 					var document = new Document();
 					document.PageInfo.Margin.Left = 40;
 					document.PageInfo.Margin.Right = 40;
 
 					var page = document.Pages.Add();
+
+					page.Paragraphs.Add(new TextFragment(request.GeneratedDate) { HorizontalAlignment = HorizontalAlignment.Right });
+					page.Paragraphs.Add(new TextFragment());
+					page.Paragraphs.Add(new TextFragment(request.StartDate + " - " + request.EndDate) { HorizontalAlignment = HorizontalAlignment.Left });
+					page.Paragraphs.Add(new TextFragment());
 
 					var table = new Table
 					{
@@ -80,7 +90,7 @@ namespace Controllers.Controllers
 					var valueRow = table.Rows.Add();
 					valueRow.DefaultCellPadding = new MarginInfo(10, 5, 5, 2);
 
-					for (int i = 0; i < request.Count; i++)
+					for (int i = 0; i < request.Values.Count; i++)
 					{
 						if (i % 4 == 0 && i != 0)
 						{
@@ -102,13 +112,13 @@ namespace Controllers.Controllers
 							valueRow.DefaultCellPadding = new MarginInfo(10, 5, 5, 2);
 						}
 
-						keyRow.Cells.Add(request[i].Key);
-						valueRow.Cells.Add(request[i].Value);
+						keyRow.Cells.Add(request.Values[i].Key);
+						valueRow.Cells.Add(request.Values[i].Value);
 					}
 
 					page.Paragraphs.Add(table);
 
-					string fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + document.GetHashCode() + ".pdf";
+					string fileName = request.Title + "-" + Environment.TickCount + ".pdf";
 
 					document.Save(ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
 
@@ -120,18 +130,23 @@ namespace Controllers.Controllers
 		}
 
 		[HttpPost]
-		public HttpResponseMessage KpiToXls(List<Values> request)
+		public HttpResponseMessage KpiToXls(Request request)
 		{
 			if (request != null)
 			{
-				if (request.Count > 0)
+				if (request.Values.Count > 0)
 				{
 					var workbook = new Workbook();
 					var worksheet = workbook.Worksheets[0];
 
 					var cells = worksheet.Cells;
-					var row = 1;
-					var col = 1;
+
+					cells[0, 0].PutValue(request.GeneratedDate);
+					cells[2, 0].PutValue(request.StartDate);
+					cells[2, 1].PutValue(request.EndDate);
+
+					var row = 4;
+					var col = 0;
 
 					worksheet.AutoFitRow(row);
 					worksheet.AutoFitRow(row + 1);
@@ -141,12 +156,9 @@ namespace Controllers.Controllers
 
 					cellStyle.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Medium;
 					cellStyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Medium;
-
-
 					cellStyle.Borders.SetColor(borderColor);
 
-
-					foreach (var req in request)
+					foreach (var req in request.Values)
 					{
 						cellStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Medium;
 						cellStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.None;
@@ -169,8 +181,8 @@ namespace Controllers.Controllers
 					}
 
 					worksheet.AutoFitColumns();
-					
-					var fileName = DateTime.UtcNow.ToString("yyyy-M-d") + "-" + workbook.GetHashCode() + ".xls";
+
+					var fileName = request.Title + "-" + Environment.TickCount + ".xls";
 
 					workbook.Save(ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
 
@@ -191,8 +203,11 @@ namespace Controllers.Controllers
 
 	public class Request
 	{
-		public List<Values> ComponentValues { get; set; }
-		public string Date { get; set; }
+		public string Title { get; set; }
+		public string StartDate { get; set; }
+		public string EndDate { get; set; }
+		public string GeneratedDate { get; set; }
+		public List<Values> Values { get; set; }
 	}
 }
 
