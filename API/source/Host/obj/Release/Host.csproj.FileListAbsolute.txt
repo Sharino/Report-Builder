@@ -157,7 +157,6 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\Swashbuckle.Core.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\System.Web.Http.Cors.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\Aspose.Pdf.dll
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\Aspose.Cells.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\System.Web.Cors.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\BussinessLogic.pdb
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Release\Contracts.pdb

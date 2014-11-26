@@ -43,12 +43,3 @@ C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\bin\Debug\New
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.dll
 C:\Users\Administrator\Desktop\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.pdb
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\DataLayer.dll
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\DataLayer.pdb
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\Models.dll
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\Models.pdb
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\bin\Debug\Newtonsoft.Json.xml
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.dll
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\DataLayer\obj\Debug\DataLayer.pdb

@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Aspose.Cells;
 using Aspose.Pdf;
 using Aspose.Pdf.Text;
+using Table = Aspose.Pdf.Table;
 
 namespace Controllers.Controllers
 {
@@ -27,9 +26,6 @@ namespace Controllers.Controllers
 					var dates = new StringBuilder(request.StartDate + separator + request.EndDate);
 					var header = new StringBuilder();
 					var content = new StringBuilder();
-
-					var random = new Random();
-					var randomNumber = random.Next(100, 10000);
 
 					foreach (var val in request.Values)
 					{
@@ -129,69 +125,69 @@ namespace Controllers.Controllers
 			return Request.CreateResponse(HttpStatusCode.BadRequest);
 		}
 
-		[HttpPost]
-		public HttpResponseMessage KpiToXls(Request request)
-		{
-			if (request != null)
-			{
-				if (request.Values.Count > 0)
-				{
-					var workbook = new Workbook();
-					var worksheet = workbook.Worksheets[0];
+        //[HttpPost]
+        //public HttpResponseMessage KpiToXls(Request request)
+        //{
+        //    if (request != null)
+        //    {
+        //        if (request.Values.Count > 0)
+        //        {
+        //            var workbook = new Workbook();
+        //            var worksheet = workbook.Worksheets[0];
 
-					var cells = worksheet.Cells;
+        //            var cells = worksheet.Cells;
 
-					cells[0, 0].PutValue(request.GeneratedDate);
-					cells[2, 0].PutValue(request.StartDate);
-					cells[2, 1].PutValue(request.EndDate);
+        //            cells[0, 0].PutValue(request.GeneratedDate);
+        //            cells[2, 0].PutValue(request.StartDate);
+        //            cells[2, 1].PutValue(request.EndDate);
 
-					var row = 4;
-					var col = 0;
+        //            var row = 4;
+        //            var col = 0;
 
-					worksheet.AutoFitRow(row);
-					worksheet.AutoFitRow(row + 1);
+        //            worksheet.AutoFitRow(row);
+        //            worksheet.AutoFitRow(row + 1);
 
-					var cellStyle = new Style { Number = 0, Pattern = BackgroundType.Solid, ForegroundColor = System.Drawing.Color.FromArgb(255, 240, 252, 255) };
-					var borderColor = System.Drawing.Color.FromArgb(255, 202, 230, 236);
+        //            var cellStyle = new Style { Number = 0, Pattern = BackgroundType.Solid, ForegroundColor = System.Drawing.Color.FromArgb(255, 240, 252, 255) };
+        //            var borderColor = System.Drawing.Color.FromArgb(255, 202, 230, 236);
 
-					cellStyle.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Medium;
-					cellStyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Medium;
-					cellStyle.Borders.SetColor(borderColor);
+        //            cellStyle.Borders[BorderType.LeftBorder].LineStyle = CellBorderType.Medium;
+        //            cellStyle.Borders[BorderType.RightBorder].LineStyle = CellBorderType.Medium;
+        //            cellStyle.Borders.SetColor(borderColor);
 
-					foreach (var req in request.Values)
-					{
-						cellStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Medium;
-						cellStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.None;
+        //            foreach (var req in request.Values)
+        //            {
+        //                cellStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.Medium;
+        //                cellStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.None;
 
-						var keyCell = cells[row, col];
-						keyCell.SetStyle(cellStyle);
-						keyCell.PutValue(req.Key);
+        //                var keyCell = cells[row, col];
+        //                keyCell.SetStyle(cellStyle);
+        //                keyCell.PutValue(req.Key);
 
-						double parsedReqValue;
-						double.TryParse(req.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out parsedReqValue);
+        //                double parsedReqValue;
+        //                double.TryParse(req.Value, NumberStyles.Any, CultureInfo.InvariantCulture, out parsedReqValue);
 
-						cellStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.None;
-						cellStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Medium;
+        //                cellStyle.Borders[BorderType.TopBorder].LineStyle = CellBorderType.None;
+        //                cellStyle.Borders[BorderType.BottomBorder].LineStyle = CellBorderType.Medium;
 
-						var valueCell = cells[row + 1, col];
-						valueCell.SetStyle(cellStyle);
-						valueCell.PutValue(parsedReqValue);
+        //                var valueCell = cells[row + 1, col];
+        //                valueCell.SetStyle(cellStyle);
+        //                valueCell.PutValue(parsedReqValue);
 
-						col++;
-					}
+        //                col++;
+        //            }
 
-					worksheet.AutoFitColumns();
+        //            worksheet.AutoFitColumns();
 
-					var fileName = request.Title + "-" + Environment.TickCount + ".xls";
+        //            var fileName = request.Title + "-" + Environment.TickCount + ".xls";
 
-					workbook.Save(ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
+        //            workbook.Save(ConfigurationManager.AppSettings["exportsFilePath"] + fileName);
 
-					return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
-				}
-			}
+        //            return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+        //        }
+        //    }
 
-			return Request.CreateResponse(HttpStatusCode.BadRequest);
-		}
+        //    return Request.CreateResponse(HttpStatusCode.BadRequest);
+        //}
 
 	}
 

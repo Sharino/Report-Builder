@@ -147,7 +147,7 @@ namespace DataLayer.Repositories
 
         public void Remove(int id)
         {
-            const string sql = @"UPDATE [dbo].[DashboardComponents] SET [IS_DELETED] = 1, [DeletionDate] = @deletionDate WHERE [Id] = @id";
+            const string sql = @"UPDATE [dbo].[DashboardComponents] SET [IsDeleted] = 1, [DeletionDate] = @deletionDate WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -208,7 +208,7 @@ namespace DataLayer.Repositories
 
         public bool DashboardExists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboards] WHERE [Id] = @id AND [IS_DELETED] = 0";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboards] WHERE [Id] = @id AND [IsDeleted] = 0";
        
             using (var command = new SqlCommand(sql, _connection))
             {
@@ -224,7 +224,7 @@ namespace DataLayer.Repositories
 
         public bool ReportComponentExists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[ReportComponents] WHERE [Id] = @id AND [IS_DELETED] = 0";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[ReportComponents] WHERE [Id] = @id AND [IsDeleted] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -239,7 +239,7 @@ namespace DataLayer.Repositories
 
         public bool Exists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[DashboardComponents] WHERE [Id] = @id AND [IS_DELETED] = 0";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[DashboardComponents] WHERE [Id] = @id AND [IsDeleted] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
