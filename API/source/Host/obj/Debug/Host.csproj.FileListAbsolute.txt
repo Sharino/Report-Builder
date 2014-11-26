@@ -266,3 +266,4 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Debug\S
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\obj\Debug\Host.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\obj\Debug\ApiHost.exe
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\obj\Debug\ApiHost.pdb
+C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Host\bin\Debug\Aspose.Cells.dll
