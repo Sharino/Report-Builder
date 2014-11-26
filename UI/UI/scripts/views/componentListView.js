@@ -61,27 +61,38 @@
             var id = $(e.currentTarget.parentElement).attr("id");
             var item = this.collection.get(id);
 
-            item.destroy({
-                success: function (model, response) {
-                    $.notifications.display({
-                        type: 'success',
-                        content: 'Successfully deleted!',
-                        timeout: Config.NotificationSettings.Timeout
-                    });
-                },
-                error: function (model, response) {
-                    console.log("Delete Fail", model, response);
-                    
-                    if (response.responseJSON) {
-                        response.responseJSON.forEach(function (entry) {
-                            $.notifications.display({       
-                                type: 'error',
-                                content: entry.Message,      
-                                timeout: Config.NotificationSettings.Timeout
+            $.modal({
+                title: "Confirmation",
+                body: "Do you really want to delete this report component?",
+                buttons: [
+                    {
+                        title: "Yes",
+                        cssClass: "btn-success",
+                        callback: function() {
+                            item.destroy({
+                                success: function () {
+                                    $.notifications.display({
+                                        type: 'success',
+                                        content: 'Successfully deleted!',
+                                        timeout: Config.NotificationSettings.Timeout
+                                    });
+                                },
+                                error: function (model, response) {
+                                    if (response.responseJSON) {
+                                        response.responseJSON.forEach(function (entry) {
+                                            $.notifications.display({
+                                                type: 'error',
+                                                content: entry.Message,
+                                                timeout: Config.NotificationSettings.Timeout
+                                            });
+                                        });
+                                    }
+                                }
                             });
-                        });
-                    }
-                }
+                        }
+                    },
+                    { title: "Cancel", cssClass: "btn-cancel" }
+                ]
             });
         },
 

@@ -29,8 +29,11 @@
 
         initialize: function () {
             Backbone.View.prototype.submitEvent = _.extend({}, Backbone.Events);
-            //this.model.on('change', this.render, this);
-            var self = this;
+            var compIds = this.model.get('ComponentIds');
+            for (var i = 0; i < compIds.length; i++) {
+                var id = compIds[i];
+                this.populate(id, i);
+            }
             this.render();
         },
 
@@ -40,37 +43,55 @@
             console.log("Sitas id: ", id);
 
             var self = this;
-            var shit = new DashboardComponent({ Id: id });
-            shit.destroy({
-                success: function () {
-                    var compIds = self.model.get("ComponentIds");
-                    if (compIds.length > 0) {
-                        var idIndex = compIds.indexOf(id);
-                        if (idIndex > -1) {
-                            compIds.splice(idIndex, 1);
+            var comp = new DashboardComponent({ Id: id });
 
-                            self.componentView.splice(idIndex, 1);
+            $.modal({
+                title: "Confirmation",
+                body: "Do you really want to delete this dashboard component?",
+                buttons: [
+                    {
+                        title: "Yes",
+                        cssClass: "btn-success",
+                        callback: function() {
+                            comp.destroy({
+                                success: function() {
+                                    var compIds = self.model.get("ComponentIds");
+                                    if (compIds.length > 0) {
+                                        var idIndex = compIds.indexOf(id);
+                                        if (idIndex > -1) {
+                                            compIds.splice(idIndex, 1);
 
-                            for (var i = 0, len = self.subViews.length; i < len; i++) {
-                                if (self.subViews[i].id == id) {
-                                    self.destroySubView(i);
-                                    break;
+                                            self.componentView.splice(idIndex, 1);
+
+                                            for (var i = 0, len = self.subViews.length; i < len; i++) {
+                                                if (self.subViews[i].id == id) {
+                                                    self.destroySubView(i);
+                                                    break;
+                                                }
+                                            }
+                                            if (compIds.length == 0) {
+                                                self.componentView[0] = self.renderSubview(("#message"), new MessageView("Dashboard is currently empty : ("));
+                                            }
+                                        }
+                                    }
+                                },
+                                error: function(response) {
+                                    if (response.responseJSON) {
+                                        response.responseJSON.forEach(function (entry) {
+                                            $.notifications.display({
+                                                type: 'error',
+                                                content: entry.Message,
+                                                timeout: Config.NotificationSettings.Timeout
+                                            });
+                                        });
+                                    }
                                 }
-                            }
-
-                            if (compIds.length == 0) {
-                                self.componentView[0] = self.renderSubview(("#message"), new MessageView("Dashboard is currently empty : ("));
-                            }
-                        }
-                    }
-                },
-                error: function (error) {
-                    console.log(error);
-                }
+                            });
+                        },
+                    },
+                    { title: "Cancel", cssClass: "btn-cancel" }
+                ]
             });
-
-            //Backbone.history.loadUrl(Backbone.history.fragment);
-           // return false;
         },
 
         edit: function (e) {
@@ -162,12 +183,7 @@
             this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
 
             var compIds = this.model.get('ComponentIds');
-            if (compIds.length > 0) {
-                for (var i = 0; i < compIds.length; i++) {
-                    var id = compIds[i];
-                    this.populate(id, i);
-                }
-            } else {
+            if (compIds.length === 0) {
                 this.componentView = [];
                 this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
             }
