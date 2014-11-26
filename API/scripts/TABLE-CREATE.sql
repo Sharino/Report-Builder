@@ -16,7 +16,7 @@ CREATE TABLE [dbo].[Dashboards](
 	[CreationDate] [nvarchar](30) NULL,
 	[ModificationDate] [nvarchar](30) NULL,
 	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
+	[IsDeleted] [bit] NULL,
  CONSTRAINT [PK_Dashboard] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -25,7 +25,7 @@ CREATE TABLE [dbo].[Dashboards](
 
 GO
 
-ALTER TABLE [dbo].[Dashboards] ADD  DEFAULT ((0)) FOR [IS_DELETED]
+ALTER TABLE [dbo].[Dashboards] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 
 /* DASHBOARD COMPONENT */
@@ -42,7 +42,7 @@ CREATE TABLE [dbo].[DashboardComponents](
 	[CreationDate] [nvarchar](30)  NULL,
 	[ModificationDate] [nvarchar](30) NULL,
 	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
+	[IsDeleted] [bit] NULL,
  CONSTRAINT [PK_DashboardComponents] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
@@ -54,7 +54,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-ALTER TABLE [dbo].[DashboardComponents] ADD  DEFAULT ((0)) FOR [IS_DELETED]
+ALTER TABLE [dbo].[DashboardComponents] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 
 /* RERPORT COMPONENT */
@@ -67,7 +67,7 @@ CREATE TABLE [dbo].[ReportComponents](
 	[CreationDate] [nvarchar](30) NULL,
 	[ModificationDate] [nvarchar](30) NULL,
 	[DeletionDate] [nvarchar](30) NULL,
-	[IS_DELETED] [bit] NULL,
+	[IsDeleted] [bit] NULL,
  CONSTRAINT [PK_ReportComponents] PRIMARY KEY CLUSTERED 
 (
 	[ReportId] ASC
@@ -76,7 +76,7 @@ CREATE TABLE [dbo].[ReportComponents](
 
 GO
 
-ALTER TABLE [dbo].[ReportComponents] ADD  DEFAULT ((0)) FOR [IS_DELETED]
+ALTER TABLE [dbo].[ReportComponents] ADD  DEFAULT ((0)) FOR [IsDeleted]
 GO
 
 

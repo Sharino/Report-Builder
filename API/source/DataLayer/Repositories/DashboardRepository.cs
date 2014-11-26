@@ -38,7 +38,7 @@ namespace DataLayer.Repositories
 
         public IEnumerable<Dashboard> GetAll()
         {
-            const string sql = @"SELECT * FROM [dbo].[Dashboards] WHERE [IS_DELETED] = 0";
+            const string sql = @"SELECT * FROM [dbo].[Dashboards] WHERE [IsDeleted] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -103,7 +103,7 @@ namespace DataLayer.Repositories
 
         public void Remove(int id)
         {
-            const string sql = @"UPDATE [dbo].[Dashboards] SET [IS_DELETED] = @q, [DeletionDate] = @deletionDate WHERE [Id] = @id";
+            const string sql = @"UPDATE [dbo].[Dashboards] SET [IsDeleted] = @q, [DeletionDate] = @deletionDate WHERE [Id] = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -133,7 +133,7 @@ namespace DataLayer.Repositories
 
         public bool Exists(int id)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboards] WHERE [Id] = @id AND [IS_DELETED] = 0";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dashboards] WHERE [Id] = @id AND [IsDeleted] = 0";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
