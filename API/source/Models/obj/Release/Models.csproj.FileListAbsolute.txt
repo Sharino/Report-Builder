@@ -21,6 +21,6 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\bin\Relea
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\bin\Release\Models.pdb
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\bin\Release\Newtonsoft.Json.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\bin\Release\Newtonsoft.Json.xml
-C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\obj\Release\Models.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\obj\Release\Models.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\obj\Release\Models.pdb
+C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Models\obj\Release\Models.csprojResolveAssemblyReference.cache

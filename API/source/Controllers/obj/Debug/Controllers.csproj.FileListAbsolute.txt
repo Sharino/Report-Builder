@@ -223,5 +223,6 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\bin\
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\bin\Debug\System.Web.Http.WebHost.xml
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\bin\Debug\log4net.xml
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\obj\Debug\Controllers.csproj.ResolveComReference.cache
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\obj\Debug\Controllers.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Controllers\obj\Debug\Controllers.pdb

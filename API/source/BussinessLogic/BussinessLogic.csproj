@@ -39,8 +39,16 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Aspose.Cells">
+      <HintPath>..\..\packages\Aspose.Cells.8.3.0\lib\net40\Aspose.Cells.dll</HintPath>
+    </Reference>
+    <Reference Include="Aspose.Pdf">
+      <HintPath>..\..\packages\Aspose.Pdf.9.8.0\lib\net40-client\Aspose.Pdf.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -55,6 +63,9 @@
     <Compile Include="Handlers\DashboardComponentHandlers\DashboardComponentUpdateHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetAllHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetHandlers.cs" />
+    <Compile Include="Handlers\ExportHandlers\KpiToCsvHandler.cs" />
+    <Compile Include="Handlers\ExportHandlers\KpiToPdfHandler.cs" />
+    <Compile Include="Handlers\ExportHandlers\KpiToXlsHandler.cs" />
     <Compile Include="Handlers\MetricDimensionMapHandlers\MetricDimensionMapGetHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetAllHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetHandler.cs" />
