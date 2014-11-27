@@ -110,7 +110,7 @@
         workEinstein: function (stoneAlone) {
             var self = this;
 
-            stoneAlone.fetch({
+            stoneAlone.fetch({//TODO
                 url: 'http://37.157.0.42:33896/api/Einstein/Data',
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
@@ -139,7 +139,7 @@
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
                 GeneratedDate: moment().format('YYYY-MM-DD')
-            }
+            };
 
             Export.exportCsv(request, {
                 success: function (data, status, jqXHR) {
@@ -167,7 +167,7 @@
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
                 GeneratedDate: moment().format('YYYY-MM-DD')
-            }
+            };
 
             Export.exportPdf(request, {
                 success: function (data, status, jqXHR) {
@@ -195,7 +195,7 @@
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
                 GeneratedDate: moment().format('YYYY-MM-DD')
-            }
+            };
 
             Export.exportXls(request, {
                 success: function (data, status, jqXHR) {
