@@ -92,7 +92,9 @@
                 var dimensionMap = this.map.DimensionMappings;
                 this.metricIntersection = dimensionMap[0].MetricIds;
                 for (var i = 0; i < array.length; i++) {
-                    this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
+                    if (array[i].DimensionId != -1) {
+                        this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
+                    }
                     console.log("calcmet id", dimensionMap[array[i].DimensionId - 1], "iteration", i);
                     console.log("array", array);
                     console.log("look at me", array[i].DimensionId);
@@ -133,7 +135,9 @@
                 var metricMap = this.map.MetricMappings;
                 this.dimensionIntersection = metricMap[0].DimensionIds;
                 for (var i = 0; i < array.length; i++) {
-                    this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
+                    if (array[i].MetricId != -1) {
+                        this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
+                    }
                     console.log("calcdim id", metricMap[array[i].MetricId - 1], "iteration", i);
                 }
 

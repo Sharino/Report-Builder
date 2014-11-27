@@ -13,7 +13,8 @@
         events: {
             'click #addDimension': 'dimensionAddedAction',
             'AdformSelect:selectionChanged': 'dimensionSelectedAction',
-            'click .removeDimension': 'dimensionRemovedAction'
+            'click .removeDimension': 'dimensionRemovedAction',
+            'click li': 'dimensionEngagedAction'
         },
 
         initialize: function (parentModel, allDimensions) {
@@ -47,13 +48,13 @@
 
             this.dimensionArray.sort(this.compareNumbers);
 
-            var dimensions = Config.calculateDimensionMap();
+            this.mappedDimensions = Config.calculateDimensionMap();
             
-            if (!dimensions) {
-                dimensions = this.allDimensions.toJSON();
+            if (!this.mappedDimensions) {
+                this.mappedDimensions = this.allDimensions.toJSON();
             }
 
-            this.grouped = _.groupBy(dimensions, function (dimension) {
+            this.grouped = _.groupBy(this.mappedDimensions, function (dimension) {
                 return dimension.Group.GroupId;
             });
 
@@ -66,8 +67,14 @@
             return this;
         },
 
+        dimensionEngagedAction: function() {
+//            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dimension");
+//            //this.mappedDimensions = Config.calculateDimensionMap();
+//            Config.metricView.render();
+        },
+
         dimensionAddedAction: function () {
-            this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length });
+            this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length, DimensionId: -1 });
             this.render();
         },
 

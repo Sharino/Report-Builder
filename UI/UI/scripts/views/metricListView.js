@@ -14,6 +14,7 @@
             'click #addMetric': 'metricAddedAction',
             'AdformSelect:selectionChanged': 'metricSelectedAction',
             'click .removeMetric': 'metricRemovedAction',
+            'click li': 'metricEngagedAction'
         },
 
         initialize: function (parentModel, allMetrics) {
@@ -46,13 +47,13 @@
 
             this.metricArray.sort(this.compareNumbers);
             //GET MAP
-            var metrics = Config.calculateMetricMap();
+            this.mappedMetrics = Config.calculateMetricMap();
 
-            if (!metrics) {
-                metrics = this.allMetrics.toJSON();
+            if (!this.mappedMetrics) {
+                this.mappedMetrics = this.allMetrics.toJSON();
             }
 
-            this.grouped = _.groupBy(metrics, function (metric) {
+            this.grouped = _.groupBy(this.mappedMetrics, function (metric) {
                 return metric.Group.GroupId;
             });
 
@@ -63,8 +64,14 @@
             return this;
         },
 
+        metricEngagedAction: function () {
+//            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Metric");
+//            //this.mappedMetrics = Config.calculateMetricMap();
+//            Config.dimensionView.render();
+        },
+
         metricAddedAction: function () {
-            this.metricArray.push({ Placeholder: true, Order: this.metricArray.length });
+            this.metricArray.push({ Placeholder: true, Order: this.metricArray.length, MetricId: -1 });
             this.render();
         },
 
