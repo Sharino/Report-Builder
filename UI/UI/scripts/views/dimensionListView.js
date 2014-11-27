@@ -12,9 +12,9 @@
 
         events: {
             'click #addDimension': 'dimensionAddedAction',
-            'AdformSelect:selectionChanged': 'dimensionSelectedAction',
+            //'AdformSelect:selectionChanged': 'dimensionSelectedAction',
             'click .removeDimension': 'dimensionRemovedAction',
-            'click li': 'dimensionEngagedAction'
+            'AdformSelect:close': 'dimensionSelectedAction'
         },
 
         initialize: function (parentModel, allDimensions) {
@@ -96,6 +96,7 @@
 
                 dimensionSelectArray.forEach(function (singleDimensionSelect) {
                     var reference = $(singleDimensionSelect).data("AdformSelect");
+                    reference.on("AdformSelect:close", function () { self.dimensionSelectedAction(this); });
                     self.selectReferences.push(reference);
                 });
 
@@ -116,7 +117,9 @@
         },
 
         dimensionSelectedAction: function (e) {
-            var reference = $(e.target).data("AdformSelect");
+            //var reference = $(e.target).data("AdformSelect");
+
+            var reference = e;
 
             var selectReferenceID = null;
             for (var i = 0; i < this.selectReferences.length; i++) {
@@ -127,17 +130,22 @@
             }
 
             var selectedValue = parseInt(reference.getValues());
-            var displayName = this.allDimensions.get(selectedValue).get("DisplayName");
-            var mnemonic = this.allDimensions.get(selectedValue).get("Mnemonic");
 
-            this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
-            delete this.dimensionArray[selectReferenceID].Placeholder;
+            if (!isNaN(selectedValue)) {
+                var displayName = this.allDimensions.get(selectedValue).get("DisplayName");
+                var mnemonic = this.allDimensions.get(selectedValue).get("Mnemonic");
+
+                this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
+                delete this.dimensionArray[selectReferenceID].Placeholder;
+            }
+
+            Config.metricView.render();
         },
 
         initializeSortableList: function () {
             var self = this;
 
-            $('.sortable').sortable({
+            $('#sortable-dimensions').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
                 placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>'
@@ -178,6 +186,8 @@
             if (myId > -1) {
                 this.dimensionArray.splice(myId, 1);
             }
+
+            Config.metricView.render();
             this.render();
         },
 

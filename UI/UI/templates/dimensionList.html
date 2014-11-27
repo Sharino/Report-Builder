@@ -3,26 +3,26 @@
         <label>Dimensions</label>
         <hr />
     </div>
-    <ul class="sortable">
+    <ul id="sortable-dimensions" class="sortable">
         <% _.each(Dimensions, function(model, i) { %>
-            <li draggable="true" class="">
-                <div class="control-group dimension-group">
-                    <div class="controls dimension-controls">
-                        <i class="handle adf-icon-alt-drag"></i>
-                        <select class="dimension-select" placeholder="Select Dimension" data-no-results="No results">
-                            <option></option>
-                            <% _.each(Grouped, function(group){ %>
-                                <optgroup label="<%= group[0].Group.GroupName %>">
-                                    <% _.each(group, function(Dimension){ %>
-                                    <option value="<%= Dimension.DimensionId %>" data-desc="<%= Dimension.Description %>"><%= Dimension.DisplayName %></option>
-                                    <% }); %>
-                                </optgroup>
+        <li draggable="true" class="">
+            <div class="control-group dimension-group">
+                <div class="controls dimension-controls">
+                    <i class="handle adf-icon-alt-drag"></i>
+                    <select class="dimension-select" placeholder="Select Dimension" data-no-results="No results">
+                        <option></option>
+                        <% _.each(Grouped, function(group){ %>
+                        <optgroup label="<%= group[0].Group.GroupName %>">
+                            <% _.each(group, function(Dimension){ %>
+                            <option value="<%= Dimension.DimensionId %>" data-desc="<%= Dimension.Description %>"><%= Dimension.DisplayName %></option>
                             <% }); %>
-                        </select>
-                        <a><i class="removeDimension adf-icon-small-reset" id="<%= i %>"></i></a>
-                    </div>
+                        </optgroup>
+                        <% }); %>
+                    </select>
+                    <a><i class="removeDimension adf-icon-small-reset" id="<%= i %>"></i></a>
                 </div>
-            </li>
+            </div>
+        </li>
         <% }); %>
 
         <button type="button" id="addDimension" class="btn btn-transparent btn-add">

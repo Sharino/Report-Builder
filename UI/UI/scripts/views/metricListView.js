@@ -12,9 +12,8 @@
 
         events: {
             'click #addMetric': 'metricAddedAction',
-            'AdformSelect:selectionChanged': 'metricSelectedAction',
+            //'AdformSelect:selectionChanged': 'metricSelectedAction',
             'click .removeMetric': 'metricRemovedAction',
-            'click li': 'metricEngagedAction'
         },
 
         initialize: function (parentModel, allMetrics) {
@@ -65,9 +64,9 @@
         },
 
         metricEngagedAction: function () {
-//            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Metric");
-//            //this.mappedMetrics = Config.calculateMetricMap();
-//            Config.dimensionView.render();
+            //            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Metric");
+            //            //this.mappedMetrics = Config.calculateMetricMap();
+            //            Config.dimensionView.render();
         },
 
         metricAddedAction: function () {
@@ -92,6 +91,7 @@
 
                 metricSelectArray.forEach(function (singleMetricSelect) {
                     var reference = $(singleMetricSelect).data("AdformSelect");
+                    reference.on("AdformSelect:close", function () { self.metricSelectedAction(this); });
                     self.selectReferences.push(reference);
                 });
 
@@ -113,7 +113,9 @@
         },
 
         metricSelectedAction: function (e) {
-            var reference = $(e.target).data("AdformSelect");
+            //var reference = $(e.target).data("AdformSelect");
+
+            var reference = e;
 
             var selectReferenceID = null;
             for (var i = 0, len = this.selectReferences.length; i < len; i++) {
@@ -123,20 +125,24 @@
                 }
             }
             var selectedValue = parseInt(reference.getValues());
-            var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
-            var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
 
-            this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
-            delete this.metricArray[selectReferenceID].Placeholder;
+            if (!isNaN(selectedValue)) {
+                var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
+                var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
+
+                this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
+                delete this.metricArray[selectReferenceID].Placeholder;
+            }
+
+            Config.dimensionView.render(); // TODO: Possibly if nothing is selected we could not render this at all. Look into it.
         },
 
         initializeSortableList: function () {
             var self = this;
 
-            var sort = $('.sortable').sortable({
+            var sort = $('#sortable-metrics').sortable({
                 handle: '.handle.adf-icon-alt-drag',
                 items: 'li',
-                //forcePlaceholderSize: true,
                 placeholder: '<div class="sortable-placeholder"><label id="sortable-placeholder-text"></label></div>',
             });
 
@@ -147,7 +153,6 @@
         },
 
         metricDraggedAction: function (e, ui) {
-
             var draggedItem = null;
             for (var i = 0; i < this.metricArray.length; i++) {
                 if (this.metricArray[i].Order == ui.oldindex) {
@@ -181,6 +186,7 @@
                 this.metricArray.splice(myId, 1);
             }
 
+            Config.dimensionView.render();
             this.render();
         },
 
