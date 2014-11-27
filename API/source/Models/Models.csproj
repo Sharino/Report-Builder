@@ -55,6 +55,7 @@
     <Compile Include="Models\ComponentId.cs" />
     <Compile Include="Models\DashboardComponent.cs" />
     <Compile Include="Models\Dimension.cs" />
+    <Compile Include="Models\Export.cs" />
     <Compile Include="Models\Filter.cs" />
     <Compile Include="Models\Metric.cs" />
     <Compile Include="Models\Dashboard.cs" />
