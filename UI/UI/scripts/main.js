@@ -1,7 +1,7 @@
 ﻿requirejs.config({
     baseUrl: '',
 
-    urlArgs: "bust=" + (new Date()).getTime(),
+    //urlArgs: "bust=" + (new Date()).getTime(),
 
     paths: {
         /* External dependencies */
@@ -16,6 +16,7 @@
         'moment':               'scripts/lib/moment',
         'Highcharts':           'scripts/lib/highcharts',
         'HighchartsTheme':      'scripts/lib/highcharts-theme',
+        'page-split':           'scripts/lib/page-split',
 
         /* Bootstrap components */
         'bootstrap-modal':      'scripts/lib/bootstrap/bootstrap-modal',
@@ -161,6 +162,11 @@
             exports: "Highcharts"
         },
 
+        'page-split': {
+            deps: ['jquery'],
+            exports: "jquery"
+        },
+
         'Export': {
             exports: "Export"
         },
@@ -168,10 +174,10 @@
 });
 
 
-require(['Router', 'Config', 'adform-loader'],
+require(['Router', 'Config', 'adform-loader', 'page-split'],
     function (Router, Config) {
         //console.log(Config);
 
         var app = new Router();
         Backbone.history.start();
-});
+    });

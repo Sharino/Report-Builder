@@ -40,17 +40,17 @@
         },
 
         render: function () {
-            $('#component').loader();
+//            $('#component').loader();
 
             var allMetrics = new MetricCollection();
             var allDimensions = new DimensionCollection();
 
             var self = this;
 
-            _.defer(function () {
-                $("#metric-list").loader();
-                $("#dimension-list").loader();
-            });
+//            _.defer(function () {
+//                $("#metric-list").loader();
+//                $("#dimension-list").loader();
+//            });
 
             this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
@@ -58,6 +58,7 @@
             allMetrics.fetch({
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
+                    console.log($("#metric-list"));
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                     self.metricViewDone = true;
                     self.await();

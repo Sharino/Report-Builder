@@ -107,11 +107,14 @@
         },
 
         createById: function (id) {
+            console.log($("#component"));
+
             var self = this;
             var tempComponent = new Component({ Id: id });
             tempComponent.fetch({
                 success: function (model, response) {
                     self.showView("#component", new ComponentView({ model: model }));
+                    $("#app > div > div").addClass('page-split').pageSplit();
                 },
                 error: function (model, response) {
                     console.log("GET", id, "Fail", model, response);
@@ -137,8 +140,12 @@
             if (this.currentView) {
                 this.currentView.destroy();
             }
-
-            $(selector).html(view.render().el);
+//            var cont = view.render().$el.first("div");
+//            $(selector).html(cont[0].innerHTML);
+//            view.setElement(view.$(selector)).render();
+//            console.log($(view.render().el).first("div").innerHTML);
+//            $("#app").html($($(view.render().el).first("div")[0].innerHTML));
+            $("#app").html(view.render().el);
 
             this.currentView = view;
 
@@ -146,6 +153,7 @@
         },
 
         showMenu: function (view) {
+
             if (this.menu) {
                 this.menu.destroy();
             }

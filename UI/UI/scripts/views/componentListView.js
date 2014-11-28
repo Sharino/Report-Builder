@@ -9,7 +9,7 @@
 ], function (BaseCompositeView, Component, ComponentCollection, MenuView, componentListTemplate, Config, Export) {
     var ComponentListView = BaseCompositeView.extend({
         template: _.template(componentListTemplate),
-
+     
         events: {
             'click .del': 'handleDeleteAction',
             'click .gen': 'handleGenerateAction',

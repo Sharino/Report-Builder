@@ -43,7 +43,6 @@
 
         render: function () {
             var self = this;
-
             this.metricArray.sort(this.compareNumbers);
             //GET MAP
             var metrics = Config.calculateMetricMap();
@@ -55,9 +54,9 @@
             this.grouped = _.groupBy(metrics, function (metric) {
                 return metric.Group.GroupId;
             });
-
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
 
+            console.log("CIA", this.$el);
             this.initializeMetricSelects();
             this.initializeSortableList();
             return this;

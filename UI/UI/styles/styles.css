@@ -13,7 +13,7 @@
     /* inline-block space fix */
     margin-right: -4px;
 }
-
+/*
 #metric-list {
     min-height: 129px;
 }
@@ -21,7 +21,10 @@
 #dimension-list {
     min-height: 129px;
 }
-
+    */
+.adform-ui-v2 .page-split>.page-split-row>section, .adform-ui-v2 .main-content>.page-split-row>section {
+    overflow: visible;
+}
 .component {
     min-height: 129px;
 }

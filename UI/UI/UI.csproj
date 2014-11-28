@@ -63,8 +63,6 @@
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
     <Content Include="scripts\config\config.js" />
-    <Content Include="scripts\config\Debug.js" />
-    <Content Include="scripts\config\Release.js" />
     <Content Include="scripts\export.js" />
     <Content Include="scripts\lib\adform\adform-accordion.js" />
     <Content Include="scripts\lib\adform\adform-calendar.v2.01.js" />
@@ -122,6 +120,7 @@
     <Content Include="scripts\views\menuView.js" />
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
+    <Content Include="scripts\lib\page-split.js" />
     <Content Include="scripts\views\timelineView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\styles.css" />
@@ -150,12 +149,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <BuildFlagSource Include="scripts\config\$(Configuration).js" />
-  </ItemGroup>
-  <ItemGroup>
-    <BuildFlagDestination Include="config.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -192,7 +185,6 @@
     </VisualStudio>
   </ProjectExtensions>
   <Target Name="BeforeBuild">
-    <Copy SourceFiles="@(BuildFlagSource)" DestinationFiles="@(BuildFlagDestination)" OverwriteReadOnlyFiles="true" SkipUnchangedFiles="true" />
   </Target>
   <Target Name="AfterBuild">
   </Target>
