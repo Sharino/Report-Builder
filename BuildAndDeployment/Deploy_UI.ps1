@@ -8,10 +8,7 @@ param( # !! 'param' must be on first line !! parameters sample:  "-Configuration
 Set-StrictMode -Version 2.0
 $ErrorActionPreference = "Stop"
 
-$_currentDirectory = Split-Path $MyInvocation.MyCommand.Path
-.(Join-Path $_currentDirectory "libraries\Common.ps1")
-.(Join-Path $_currentDirectory "libraries\WmiRemoteRun.ps1")
-.(Join-Path $_currentDirectory "libraries\7-Zip.ps1")
+
 
 #*************************************************************************
 # Execute release
