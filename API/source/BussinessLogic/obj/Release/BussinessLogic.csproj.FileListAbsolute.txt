@@ -60,3 +60,5 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\BussinessLogic\o
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\BussinessLogic\obj\Release\BussinessLogic.pdb
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\BussinessLogic\bin\Release\Aspose.Cells.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\BussinessLogic\bin\Release\Aspose.Pdf.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\Aspose.Cells.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\BussinessLogic\bin\Release\Aspose.Pdf.dll

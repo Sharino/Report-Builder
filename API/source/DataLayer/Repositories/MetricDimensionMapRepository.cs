@@ -31,7 +31,7 @@ namespace DataLayer.Repositories
 
         public List<int> GetMetricDimensions(int id)
         {
-            const string sql = @"SELECT [DimensionId] FROM [ReportBuilder].[dbo].[MetricDimensionMetric] WHERE MetricId = @id";
+            const string sql = @"SELECT [DimensionId] FROM [ReportBuilder].[dbo].[MetricDimensionMappings] WHERE MetricId = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
@@ -51,7 +51,7 @@ namespace DataLayer.Repositories
 
         public List<int> GetDimensionMetrics(int id)
         {
-            const string sql = @"SELECT [MetricId] FROM [ReportBuilder].[dbo].[MetricDimensionMetric] WHERE DimensionId = @id";
+            const string sql = @"SELECT [MetricId] FROM [ReportBuilder].[dbo].[MetricDimensionMappings] WHERE DimensionId = @id";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
