@@ -62,7 +62,9 @@
     <Content Include="scripts\collections\dimensionCollection.js" />
     <Content Include="scripts\collections\metricCollection.js" />
     <Content Include="scripts\collections\componentCollection.js" />
+    <Content Include="scripts\config\config.Debug.js" />
     <Content Include="scripts\config\config.js" />
+    <Content Include="scripts\config\config.Release.js" />
     <Content Include="scripts\export.js" />
     <Content Include="scripts\lib\adform\adform-accordion.js" />
     <Content Include="scripts\lib\adform\adform-calendar.v2.01.js" />
@@ -151,6 +153,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="scripts\config\copyifnewer.bat" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -190,5 +193,8 @@
   </Target>
   <PropertyGroup>
     <DisableFastUpToDateCheck>true</DisableFastUpToDateCheck>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>"$(ProjectDir)scripts\config\copyifnewer.bat" "$(ProjectDir)scripts\config\config.$(ConfigurationName).js" "$(ProjectDir)scripts\config\config.js"</PreBuildEvent>
   </PropertyGroup>
 </Project>
