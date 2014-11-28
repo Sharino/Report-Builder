@@ -9,7 +9,6 @@ Set-StrictMode -Version 2.0
 $ErrorActionPreference = "Stop"
 
 
-
 #*************************************************************************
 # Execute release
 #*************************************************************************
@@ -34,11 +33,11 @@ $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
 
 # Build
 
-Write-Host `n:: Restoring nuget packages`n
-Execute-Checked-Command "$nugetPath restore ..\UI\UI.sln -verbosity detailed"
+#Write-Host `n:: Restoring nuget packages`n
+#Execute-Checked-Command "$nugetPath restore ..\UI\UI.sln -verbosity detailed"
 
-Write-Host `n:: Building solution`n
-Execute-Checked-Command "$msBuildPath ..\UI\UI.sln /p:Configuration=$Configuration /p:Platform=`"Any CPU`" /p:verbosity=diag"
+#Write-Host `n:: Building solution`n
+#Execute-Checked-Command "$msBuildPath ..\UI\UI.sln /p:Configuration=$Configuration /p:Platform=`"Any CPU`" /p:verbosity=diag"
 
 
 # Deploy UI
