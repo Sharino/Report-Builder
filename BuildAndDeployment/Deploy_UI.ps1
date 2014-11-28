@@ -1,4 +1,5 @@
 param( # !! 'param' must be on first line !! parameters sample:  "-Configuration 'DEV3' -Repo01Ip '172.22.3.10'"
+    [string]$Configuration = $(throw "argument -Configuration is required"),
     [string]$Repo01Ip = $(throw "argument -Repo01Ip is required")
 )
 #*************************************************************************
@@ -33,6 +34,14 @@ $servers = @(
 )
 
 $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
+
+# Build
+
+Write-Host `n:: Restoring nuget packages`n
+Execute-Checked-Command "$nugetPath restore ..\UI\UI.sln -verbosity detailed"
+
+Write-Host `n:: Building solution`n
+Execute-Checked-Command "$msBuildPath ..\UI\UI.sln /p:Configuration=$Configuration /p:Platform=`"Any CPU`" /p:verbosity=diag"
 
 
 # Deploy UI
