@@ -34,11 +34,21 @@
         inputDimensions: function () {
             var result = [];
 
-            this.dimensionArray.forEach(function (dimension) {
-                if (!dimension.Placeholder) {
-                    result.push(dimension);
-                }
-            });
+            if (this.model.get("Type") === 3) {
+                this.dimensionArray.forEach(function (dimension) {
+                    if (!dimension.Placeholder && dimension.Group.GroupId === 1) {
+                        result.push(dimension);
+                    }
+                });
+            }
+            else
+            {
+                this.dimensionArray.forEach(function (dimension) {
+                    if (!dimension.Placeholder) {
+                        result.push(dimension);
+                    }
+                });
+            }
 
             return result;
         },
@@ -52,6 +62,10 @@
             
             if (!this.mappedDimensions) {
                 this.mappedDimensions = this.allDimensions.toJSON();
+            }
+
+            if (this.model.get("Type") === 3) {
+                this.mappedDimensions = _.filter(this.mappedDimensions, function (item) { return item.Group.GroupId === 1; });
             }
 
             this.grouped = _.groupBy(this.mappedDimensions, function (dimension) {
@@ -132,10 +146,9 @@
             var selectedValue = parseInt(reference.getValues());
 
             if (!isNaN(selectedValue)) {
-                var displayName = this.allDimensions.get(selectedValue).get("DisplayName");
-                var mnemonic = this.allDimensions.get(selectedValue).get("Mnemonic");
+                var dimension = this.allDimensions.get(selectedValue);
 
-                this.dimensionArray[selectReferenceID] = new Dimension({ DimensionId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
+                this.dimensionArray[selectReferenceID] = dimension.toJSON();
                 delete this.dimensionArray[selectReferenceID].Placeholder;
             }
 

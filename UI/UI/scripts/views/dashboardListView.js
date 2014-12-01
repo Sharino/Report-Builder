@@ -1,12 +1,13 @@
 ﻿define('DashboardListView', [
     'BaseCompositeView',
+    'Dashboard',
     'DashboardCollection',
     'text!templates/dashboardList.html',
     'text!templates/dashboardCreate.html',
     'adform-notifications',
     'Config',
     'adform-modal'
-], function (BaseCompositeView, DashboardCollection, dashboardListTemplate, DashboardCreate, AdformNotification, Config) {
+], function (BaseCompositeView, Dashboard, DashboardCollection, dashboardListTemplate, DashboardCreate, AdformNotification, Config) {
     var DashboardListView = BaseCompositeView.extend({
         template: _.template(dashboardListTemplate),
 
