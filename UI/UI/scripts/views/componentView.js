@@ -17,29 +17,7 @@
         events: {
             'click #component-submit': 'submit',
             'click .radio-group': 'toggleDimensionList',
-        },
-
-        toggleDimensionList: function () {
-            if (this.inputType() === 1) {
-                this.$el.find('#dimension-list').hide();
-            } else {
-                this.$el.find('#dimension-list').show();
-            }
-            this.model.set({ Type: this.inputType() });
-
-            Config.dimensionView.render();
-        },
-        inputTitle: function () {
-            return $('#input').val();
-        },
-
-        inputType: function () {
-            var selected = this.$el.find("input:radio[name=type-options]:checked").val();
-            if (selected != undefined) {
-                return parseInt(selected);
-            } else {
-                return 0;
-            }
+            'click .adf-icon-small-edit': 'toggleComponentName'
         },
 
         render: function () {
@@ -62,7 +40,6 @@
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
-                    self.metricViewDone = true;
                 },
                 error: function (allMetrics, response) {
                     $.notifications.display({
@@ -77,7 +54,6 @@
                 success: function (allDimensions) {
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
-                    self.dimensionViewDone = true;
                     self.toggleDimensionList();
                 },
                 error: function (allDimensions, response) {
@@ -109,7 +85,6 @@
                     Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function (model, response) {
-                    console.log("Save FAIL", model, response);
 
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (error) {
@@ -150,6 +125,33 @@
                 }
             }
             return false;
+        },
+
+        toggleComponentName: function () {
+            this.$el.find('#basicName').toggle();
+            this.$el.find('#editName').toggle();
+        },
+        toggleDimensionList: function () {
+            if (this.inputType() === 1) {
+                this.$el.find('#dimension-list').hide();
+            } else {
+                this.$el.find('#dimension-list').show();
+            }
+            this.model.set({ Type: this.inputType() });
+
+            Config.dimensionView.render();
+        },
+        inputTitle: function () {
+            return $('#input').val();
+        },
+
+        inputType: function () {
+            var selected = this.$el.find("input:radio[name=type-options]:checked").val();
+            if (selected != undefined) {
+                return parseInt(selected);
+            } else {
+                return 0;
+            }
         }
     });
 

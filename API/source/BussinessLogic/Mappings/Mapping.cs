@@ -16,6 +16,8 @@ namespace BussinessLogic.Mappings
             var dashboardComponent = new DashboardComponent();
             dashboardComponent.Title = reportComponent.Title;
             dashboardComponent.Type = reportComponent.Type;
+            dashboardComponent.CreationDate = DateTime.UtcNow.ToString("yyyy-MM-dd hh:mm:ss");
+            dashboardComponent.ModificationDate = dashboardComponent.CreationDate;
 
             var serializer = new JavaScriptSerializer();
             dashboardComponent.Definition = serializer.Serialize(reportComponent.Data);
@@ -32,6 +34,7 @@ namespace BussinessLogic.Mappings
             component.CreationDate = dto.CreationDate;
             component.Title = dto.Title;
             component.Type = dto.Type;
+            component.ModificationDate = dto.ModificationDate;
 
             return component;
         }
@@ -45,6 +48,7 @@ namespace BussinessLogic.Mappings
             dto.CreationDate = component.CreationDate;
             dto.Title = component.Title;
             dto.Type = component.Type;
+            dto.ModificationDate = component.ModificationDate;
 
             return dto;
         }
@@ -152,6 +156,7 @@ namespace BussinessLogic.Mappings
                 Title = dto.Title,
                 CreationDate = dto.SubmissionDate,
                 Type = dto.Type,
+                ModificationDate = dto.ModificationDate,
                 Data = new ComponentData { Dimensions = dto.Dimensions, Filters = dto.Filters, Metrics = DtoToMetric(dto.Metrics)}
             };
             return report;
@@ -164,6 +169,7 @@ namespace BussinessLogic.Mappings
                 Id = report.Id, 
                 Title = report.Title, 
                 Type = report.Type,
+                ModificationDate = report.ModificationDate,
                 Metrics = MetricToDto(report.Data.Metrics),
                 SubmissionDate = report.CreationDate,
                 Dimensions = report.Data.Dimensions,

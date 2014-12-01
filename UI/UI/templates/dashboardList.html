@@ -5,7 +5,6 @@
 <table class="table table-striped heading-separation table-hover selectable-rows">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
             <th>Delete</th>
         </tr>
@@ -13,7 +12,6 @@
     <tbody>
         <% _.each(Dashboards, function(model) { %>
         <tr class="dashboard-list-item">
-            <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
             <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
             <td id="<%= model.Id %>">
                 <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>

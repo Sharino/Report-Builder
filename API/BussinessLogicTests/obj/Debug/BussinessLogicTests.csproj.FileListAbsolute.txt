@@ -93,3 +93,5 @@ D:\git\Report-Builder\API\BussinessLogicTests\bin\Debug\log4net.xml
 D:\git\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.csprojResolveAssemblyReference.cache
 D:\git\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.dll
 D:\git\Report-Builder\API\BussinessLogicTests\obj\Debug\BussinessLogicTests.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\Aspose.Pdf.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\BussinessLogicTests\bin\Debug\Aspose.Cells.dll

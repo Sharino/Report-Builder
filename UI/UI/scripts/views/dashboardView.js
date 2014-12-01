@@ -151,7 +151,7 @@
                     switch (model.get("Type")) {
                         case 1:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, true));
                                 break;
                             }
                         case 2:
@@ -161,19 +161,18 @@
                             }
                         case 3:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, true));
                                 break;
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, true));
                                 break;
                             }
                     }
                     return model;
                 },
                 error: function (model, response) {
-                    console.log("GET", id, "Fail", model, response);
                     return null;
                 }
             });

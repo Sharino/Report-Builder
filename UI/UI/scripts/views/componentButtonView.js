@@ -1,0 +1,27 @@
+﻿define('ComponentButtonView', [
+    'BaseCompositeView',
+    'text!templates/componentButtons.html'
+], function (BaseCompositeView, ButtonTemplate) {
+    var ComponentButtons = BaseCompositeView.extend({
+        template: _.template(ButtonTemplate),
+
+        initialize: function (position, model, dashboard) {
+            this.model = model;
+            this.position = position;
+            this.originDashboard = dashboard;
+            console.log(dashboard);
+        },
+
+        render: function () {
+            console.log(this.model, this.position, this.originDashboard);
+            this.$el.html(this.template({
+                Dashboard: this.originDashboard,
+                Position: this.position,
+                model: this.model,
+            }));
+            return this;
+        },
+    });
+
+    return ComponentButtons;
+});

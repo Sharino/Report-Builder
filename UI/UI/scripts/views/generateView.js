@@ -55,12 +55,12 @@
             switch (this.model.get("Type")) {
                 case 0:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 1:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 2:
@@ -70,12 +70,12 @@
                 }
                 case 3:
                 {
-                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0, false));
                     break;
                 }
                 case 4:
                 {
-                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0));//new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0, false));//new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
                     break;
                 }
             }

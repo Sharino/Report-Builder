@@ -4,11 +4,7 @@
             <div>
                 <%= model.Title %>
                 <div class="pull-right">
-                    <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
-                    <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
-                    <button class="xls btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">XLS</button>
-                    <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
-                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">X</button>
+                    <div id="component-buttons"></div>
                 </div>
             </div>
             <div id="component-edit-<%= Position %>"></div>
@@ -17,13 +13,7 @@
         </div>
         <div id="date-filter" style="min-height: 46px;"></div>
     </div>
-
-
-
-
-
     <div id="timeline">
-
         <div class="timeline-menu">
             <ul class="wizard-nav">
                 <ul class="pull-right">
