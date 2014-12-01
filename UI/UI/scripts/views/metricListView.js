@@ -126,10 +126,9 @@
             var selectedValue = parseInt(reference.getValues());
 
             if (!isNaN(selectedValue)) {
-                var displayName = this.allMetrics.get(selectedValue).get("DisplayName");
-                var mnemonic = this.allMetrics.get(selectedValue).get("Mnemonic");
+                var metric = this.allMetrics.get(selectedValue); 
 
-                this.metricArray[selectReferenceID] = new Metric({ MetricId: selectedValue, Order: selectReferenceID, DisplayName: displayName, Mnemonic: mnemonic }).toJSON();
+                this.metricArray[selectReferenceID] = metric.toJSON();
                 delete this.metricArray[selectReferenceID].Placeholder;
             }
 
