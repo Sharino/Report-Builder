@@ -95,6 +95,9 @@
                     if (array[i].DimensionId != -1) {
                         this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
                     }
+//                    console.log("calcmet id", dimensionMap[array[i].DimensionId - 1], "iteration", i);
+//                    console.log("array", array);
+//                    console.log("look at me", array[i].DimensionId);
                 }
 
                 var metrics = this.metricView.allMetrics.toJSON().slice(0);
@@ -135,6 +138,7 @@
                     if (array[i].MetricId != -1) {
                         this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
                     }
+//                    console.log("calcdim id", metricMap[array[i].MetricId - 1], "iteration", i);
                 }
 
                 var dimensions = this.dimensionView.allDimensions.toJSON().slice(0);

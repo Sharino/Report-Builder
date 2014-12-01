@@ -25,6 +25,9 @@
             } else {
                 this.$el.find('#dimension-list').show();
             }
+            this.model.set({ Type: this.inputType() });
+
+            Config.dimensionView.render();
         },
         inputTitle: function () {
             return $('#input').val();
@@ -60,7 +63,6 @@
                     self.allMetrics = allMetrics;
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                     self.metricViewDone = true;
-                    self.await();
                 },
                 error: function (allMetrics, response) {
                     $.notifications.display({
@@ -76,7 +78,7 @@
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
                     self.dimensionViewDone = true;
-                    self.await();
+                    self.toggleDimensionList();
                 },
                 error: function (allDimensions, response) {
                     $.notifications.display({
@@ -89,17 +91,13 @@
             return this;
         },
 
-        await: function () {
-            var self = this;
-            if (self.metricViewDone == true && self.dimensionViewDone == true) {
-                self.toggleDimensionList();
-                self.metricView.sibling = self.dimensionView;
-                self.dimensionView.sibling = self.metricView;
-            }
-        },
-
         submit: function () {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
+            if (this.inputType() == 1) {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
+            }
+            else {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
+            }
             console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
