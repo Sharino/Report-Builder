@@ -9,6 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Scripts", "Scripts", "{1333
 		scripts\CREATE_DROP.sql = scripts\CREATE_DROP.sql
 		..\..\..\..\User\Desktop\DimensionsPopulate.sql = ..\..\..\..\User\Desktop\DimensionsPopulate.sql
 		..\..\..\..\User\Desktop\DimensionsTableCreate.sql = ..\..\..\..\User\Desktop\DimensionsTableCreate.sql
+		scripts\MetricDimensionMapping.sql = scripts\MetricDimensionMapping.sql
 		scripts\POPULATE.sql = scripts\POPULATE.sql
 		scripts\TABLE-CREATE.sql = scripts\TABLE-CREATE.sql
 	EndProjectSection

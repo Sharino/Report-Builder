@@ -14,6 +14,10 @@
     /* inline-block space fix */
     margin-right: -4px;
 }
+.control-group {
+    height: 30px;
+    margin-bottom: 0px;
+}
 /*
 #metric-list {
     min-height: 129px;
@@ -23,6 +27,10 @@
     min-height: 129px;
 }
     */
+.formated {
+    min-width: 260px;
+    max-width: 260px;
+}
 .adform-ui-v2 .page-split>.page-split-row>section, .adform-ui-v2 .main-content>.page-split-row>section {
     overflow: visible;
 }
