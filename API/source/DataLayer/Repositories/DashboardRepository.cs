@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
 using System.Web.Script.Serialization;
 using System.Web.UI.WebControls;
 using Models.Models;
@@ -54,7 +55,7 @@ namespace DataLayer.Repositories
                         list.Add(item);
                     }
                     _connection.Close();
-                    return list;
+                    return list.AsEnumerable();
                 }
             }
         }
