@@ -80,10 +80,7 @@
         'MetricDimensionView':  'scripts/views/metricDimensionView',
 
         /* Router dependencies */
-        'Router':               'scripts/routers/router',
-
-        'Tests': 'tests',
-
+        'Router':               'scripts/routers/router'
     },
 
     shim: {
@@ -169,7 +166,7 @@
 
         'Export': {
             exports: "Export"
-        },
+        }
     }
 });
 

@@ -1,41 +1,55 @@
 ﻿<div style="text-align: right; margin-bottom: 6px;">
     <a class="create btn btn-success"><i class="adf-icon-small-add-circle"></i><b>New Component</b></a>
 </div>
-<table class="component-listView table table-striped heading-separation table-hover selectable-rows">
+<table class="table heading-separation table-hover align-middle">
     <thead>
-        <tr style="text-align: center">
-            <th>Title</th>
-            <th>Actions</th>
+        <tr>
+            <th class="col-row-start"></th>
+            <th class="col-type sortable" style="width: 85px;">Type
+                <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+            </th>
+            <th class="col-title sortable">Name</th>
+            <th class="col-date sortable">Created</th>
+            <th class="col-date sortable">Edited</th>
+            <th class="col-actions" style="width: 125px;"></th>
+            <th class="col-row-end"></th>
         </tr>
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
-        <tr class="component-list-item">
-<!--            <td class="click" id="<%= model.Id %>">-->
-               
-<!--            </td>-->
-            <td class="click" id="<%= model.Id %>">
+        <tr id="<%= model.Id %>">
+            <td class="col-row-start click"></td>
+            <td class="col-type click">
                 <% if (!model.IsGenerated) { %>
                 <% if (model.Type === 0) { %>
-                    <span class="label label-orange1">KPI</span>
-                    <% } else if (model.Type === 1) { %>
-                    <span class="label label-orange1">KPI</span>
-                    <% } else if (model.Type === 2) { %>
-                    <span class="label label-green2">Table</span>
-                    <% } else if (model.Type === 3) { %>
-                    <span class="label label-blue2">Timeline</span>
-                    <% } else if (model.Type === 4) { %>
-                    <span class="label label-yellow1">Chart</span>
-                    <% } %>
+                <span class="label label-orange1">KPI</span>
+                <% } else if (model.Type === 1) { %>
+                <span class="label label-blue1">KPI</span>
+                <% } else if (model.Type === 2) { %>
+                <span class="label label-green1">Table</span>
+                <% } else if (model.Type === 3) { %>
+                <span class="label label-orange2">Timeline</span>
+                <% } else if (model.Type === 4) { %>
+                <span class="label label-yellow1">Chart</span>
+                <% } %>
                 <% } else { %>
                 <i class="adf-icon-alt-check"></i>
                 <% } %>
-                <a style="margin-left: 15px;"><%= model.Title %></a>
             </td>
-            <td id="<%= model.Id %>">
+            <td class="col-title click">
+                <div class="in-fixed-cell"> <a href=""><%= model.Title %></a></div>
+            </td>
+            <td class="col-created click">
+                <div class="date-container"> <div class="year"><%= model.SubmissionDate %></div></div>
+            </td>
+            <td class="col-edited click">
+                <div class="date-container"> <div class="year"><%= model.ModificationDate %></div></div>
+            </td>
+            <td class="col-actions">
                 <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
                 <a class="edit btn btn-transparent pull-right">Edit</a>
             </td>
+            <td class="col-row-end"></td>
         </tr>
         <% }); %>
     </tbody>
