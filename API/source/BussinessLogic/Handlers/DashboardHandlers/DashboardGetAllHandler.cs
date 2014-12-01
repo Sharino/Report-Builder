@@ -18,7 +18,7 @@ namespace BussinessLogic.Handlers.DashboardHandlers
         public override DashboardResponse HandleCore(int request)
         {
             var mapping = new Mapping();
-            var reports = _repository.GetAll().OrderBy(x => x.Id).ToList();
+            var reports = _repository.GetAll().OrderBy(x => x.Id).Reverse().ToList();
             var reportDtos = mapping.ReportToDto(reports);
             return new DashboardResponse(reportDtos);
         }
