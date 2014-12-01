@@ -3,33 +3,35 @@
 </div>
 <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
     <thead>
-        <tr>
-            <th></th>
+        <tr style="text-align: center">
             <th>Title</th>
-            <th style="text-align: center">Actions</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
         <tr class="component-list-item">
+<!--            <td class="click" id="<%= model.Id %>">-->
+               
+<!--            </td>-->
             <td class="click" id="<%= model.Id %>">
                 <% if (!model.IsGenerated) { %>
                 <% if (model.Type === 0) { %>
-                <span class="label label-orange1">KPI</span>
-                <% } else if (model.Type === 1) { %>
-                <span class="label label-orange1">KPI</span>
-                <% } else if (model.Type === 2) { %>
-                <span class="label label-green2">Table</span>
-                <% } else if (model.Type === 3) { %>
-                <span class="label label-blue2">Timeline</span>
-                <% } else if (model.Type === 4) { %>
-                <span class="label label-yellow1">Chart</span>
-                <% } %>
+                    <span class="label label-orange1">KPI</span>
+                    <% } else if (model.Type === 1) { %>
+                    <span class="label label-orange1">KPI</span>
+                    <% } else if (model.Type === 2) { %>
+                    <span class="label label-green2">Table</span>
+                    <% } else if (model.Type === 3) { %>
+                    <span class="label label-blue2">Timeline</span>
+                    <% } else if (model.Type === 4) { %>
+                    <span class="label label-yellow1">Chart</span>
+                    <% } %>
                 <% } else { %>
                 <i class="adf-icon-alt-check"></i>
                 <% } %>
+                <a style="margin-left: 15px;"><%= model.Title %></a>
             </td>
-            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
             <td id="<%= model.Id %>">
                 <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
                 <a class="gen btn btn-transparent pull-right">Generate</a>

@@ -1,4 +1,5 @@
-﻿body {
+﻿#app {
+    padding: 15px;
 }
 /* centered columns styles */
 .row-centered {
