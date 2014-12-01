@@ -56,8 +56,6 @@
                     self.allMetrics = allMetrics;
                     console.log($("#metric-list"));
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
-                    self.metricViewDone = true;
-                    self.await();
                 },
                 error: function (allMetrics, response) {
                     $.notifications.display({
@@ -72,8 +70,7 @@
                 success: function (allDimensions) {
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
-                    self.dimensionViewDone = true;
-                    self.await();
+                    self.toggleDimensionList();
                 },
                 error: function (allDimensions, response) {
                     $.notifications.display({
@@ -86,33 +83,22 @@
             return this;
         },
 
-        await: function () {
-            var self = this;
-            if (self.metricViewDone == true && self.dimensionViewDone == true) {
-                self.toggleDimensionList();
-                self.metricView.sibling = self.dimensionView;
-                self.dimensionView.sibling = self.metricView;
+        submit: function () {
+            if (this.inputType() == 1) {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
             }
-        },
-
-        submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
-
-            var def = JSON.stringify({Metrics: this.model.get("Metrics"), Dimensions: this.model.get("Dimensions"), Filters: this.model.get("Filters")});
-
-            this.model.set("Definition", def);
+            else {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
+            }
 
             var validationSuccess = this.model.save({}, {
-                success: function (model, response) {
-                    console.log("Save OK", model, response);
-
+                success: function () {
                     $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-
-                    Backbone.history.loadUrl(Backbone.history.fragment);
+                    Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function (model, response) {
                     console.log("Save FAIL", model, response);
@@ -145,10 +131,8 @@
             });
 
             if (!validationSuccess) {
-                console.log("Validation failed!", this.model.errors);
-
-                if (this.model.errors) {
-                    this.model.errors.forEach(function (error) {
+                if (this.model.validationError) {
+                    this.model.validationError.forEach(function (error) {
                         $.notifications.display({
                             type: 'error',
                             content: error.message,
