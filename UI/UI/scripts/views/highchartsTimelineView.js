@@ -124,6 +124,7 @@
                         'font-family': "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
                     }
                 },
+                min: 0,
                 opposite: isSecondAxis,
             };
             return yAxis;

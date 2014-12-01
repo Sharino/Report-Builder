@@ -72,6 +72,7 @@
         'KPIView':              'scripts/views/kpiView',
         'TimelineView':         'scripts/views/timelineView',
         'ChartView':            'scripts/views/chartView',
+        'TableView':            'scripts/views/tableView',
         'HighchartsTimelineView': 'scripts/views/highchartsTimelineView',
         'HighchartsChartView':  'scripts/views/highchartsChartView',
         'DateFilterView':       'scripts/views/dateFilterView',
