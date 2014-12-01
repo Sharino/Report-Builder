@@ -101,10 +101,9 @@
 
         submit: function () {
             this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
-            console.log(this.model.toJSON());
 
             var validationSuccess = this.model.save({}, {
-                success: function (model, response) {
+                success: function () {
                     $.notifications.display({
                         type: 'success',
                         content: 'Successfully saved!',

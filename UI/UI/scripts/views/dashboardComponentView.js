@@ -13,10 +13,10 @@
         template: _.template(dashboardComponentTemplate),
 
         events: {
-            'click .radio-group': 'hide'
+            'click .radio-group': 'toggleDimensionList',
         },
 
-        hide: function () {
+        toggleDimensionList: function () {
             if (this.$el.find('#rb1').is(":checked")) {
                 $('#dimension-list').hide();
             } else {
@@ -24,12 +24,12 @@
             }
         },
 
-        inputTitle: function() {
-            return $('#input').val();
+        initialize: function () {
+            this.submitEvent.bind('submitEvent', this.submit, this);
         },
 
-        initialize: function() {
-            this.submitEvent.bind('submitEvent', this.submit, this);
+        inputTitle: function() {
+            return $('#input').val();
         },
 
         inputType: function() {
@@ -41,72 +41,62 @@
             }
         },
 
-        inputMetrics: function() {
-            var result = [];
-
-            this.metricView.metricArray.forEach(function(metric) {
-                if (!metric.Placeholder) {
-                    result.push(metric);
-                }
-            });
-
-            return result;
-        },
-
-        inputDimensions: function () {
-            var result = [];
-
-            this.dimensionView.dimensionArray.forEach(function (dimension) {
-                if (!dimension.Placeholder) {
-                    result.push(dimension);
-                }
-            });
-
-            return result;
-        },
-
         render: function() {
 
             var allMetrics = new MetricCollection();
             var allDimensions = new DimensionCollection();
 
-
             var self = this;
 
-            if (this.model) {
-                this.$el.html(this.template({ model: this.model }));
+            this.$el.html(this.template({ model: this.model.toJSON() }));
+            this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
-                allMetrics.fetch({
-                    success: function(allMetrics, response) {
-                        self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, allMetrics));
-                    },
-                    error: function(allMetrics, response) {
-                        console.log("allMetric.fetch FAIL", allMetrics, response);
-                    }
-                });
+            allMetrics.fetch({
+                success: function (allMetrics) {
+                    self.allMetrics = allMetrics;
+                    console.log($("#metric-list"));
+                    self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
+                    self.metricViewDone = true;
+                    self.await();
+                },
+                error: function (allMetrics, response) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: response.statusText,
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
 
-                allDimensions.fetch({
-                    success: function (allDimensions, response) {
-                        self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, allDimensions));
-                    },
-                    error: function (allDimensions, response) {
-                        console.log("allDimensions.fetch FAIL", allDimensions, response);
-                    }
-                });
-
-                this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
-
-                this.$el.find('#dimension-list').hide();
-
-                return this;
-            }
-
+            allDimensions.fetch({
+                success: function (allDimensions) {
+                    self.allDimensions = allDimensions;
+                    self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
+                    self.dimensionViewDone = true;
+                    self.await();
+                },
+                error: function (allDimensions, response) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: response.statusText,
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
             return this;
         },
 
+        await: function () {
+            var self = this;
+            if (self.metricViewDone == true && self.dimensionViewDone == true) {
+                self.toggleDimensionList();
+                self.metricView.sibling = self.dimensionView;
+                self.dimensionView.sibling = self.metricView;
+            }
+        },
+
         submit: function() {
-            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.inputMetrics(), Dimensions: this.inputDimensions() });
-            console.log(this.model.toJSON());
+            this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
 
             var def = JSON.stringify({Metrics: this.model.get("Metrics"), Dimensions: this.model.get("Dimensions"), Filters: this.model.get("Filters")});
 

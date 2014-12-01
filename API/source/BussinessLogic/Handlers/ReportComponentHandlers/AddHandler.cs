@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
@@ -28,7 +29,7 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
 
         public override bool Validate(ReportComponentDto request)
         {
-          if (!request.Type.Equals(1))
+            if (request.Type != 1)
             {
                 var dimensions = request.Dimensions;
                 var metrics = request.Metrics;
@@ -44,6 +45,14 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
                         }
 
                     }
+                }
+            }
+
+            if (request.Type == 3)
+            {
+                if (request.Dimensions.Any(dimension => dimension.Group.GroupName.ToLower() != "time"))
+                {
+                    Errors.Add(new ErrorDto("EN", "Timeline component can only have dimensions with Time category"));
                 }
             }
 
