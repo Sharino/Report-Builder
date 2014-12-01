@@ -24,7 +24,7 @@
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
     var Router = Backbone.Router.extend({
         routes: {
-            "": "list",
+            "": "dashboards",
             "create": "create",
             "create/:id": "createById",
             "list": "list",

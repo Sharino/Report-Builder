@@ -12,14 +12,9 @@
      
         events: {
             'click .del': 'handleDeleteAction',
-            'click .gen': 'handleGenerateAction',
-            'click .component-list-item>.click': 'handleClickAction',
+            'click .edit': 'handleEditAction',
+            'click .component-list-item>.click': 'handleGenerateAction',
             'click .create': 'submitNewComponent',
-        },
-
-        submitNewComponent: function () {
-            var routerUrl = "create";
-            Backbone.history.navigate(routerUrl, true, true);
         },
 
         initialize: function () {
@@ -30,6 +25,12 @@
             this.collection.on('remove', this.render, this);
             this.collection.on('fetch', this.render, this);
         },
+
+        submitNewComponent: function () {
+            var routerUrl = "create";
+            Backbone.history.navigate(routerUrl, true, true);
+        },
+
         render: function () {
 
             if (this.collection) {
@@ -46,10 +47,10 @@
             return this;
         },
         
-        handleClickAction: function (e) {
+        handleEditAction: function (e) {
             e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
+            var id = $(e.currentTarget.parentElement).attr("id");
             var routerUrl = "create/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
@@ -99,11 +100,11 @@
         handleGenerateAction: function (e) {
             e.preventDefault();
 
-            var id = $(e.currentTarget.parentElement).attr("id");
+            var id = $(e.currentTarget).attr("id");
             var routerUrl = "generate/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
-        },
+        }
        
     });
 

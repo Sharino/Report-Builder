@@ -50,12 +50,12 @@
         MenuSettings: {
             items: [
                 {
-                    link: "#list",
-                    title: "Components"
-                },
-                {
                     link: "#dashboards",
                     title: "Dashboards",
+                },
+                {
+                    link: "#list",
+                    title: "Components"
                 }
             ]
         },
