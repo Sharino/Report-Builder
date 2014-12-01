@@ -62,12 +62,6 @@
             return this;
         },
 
-        metricEngagedAction: function () {
-            //            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Metric");
-            //            //this.mappedMetrics = Config.calculateMetricMap();
-            //            Config.dimensionView.render();
-        },
-
         metricAddedAction: function () {
             this.metricArray.push({ Placeholder: true, Order: this.metricArray.length, MetricId: -1 });
             this.render();
