@@ -22,6 +22,8 @@
             } else {
                 $('#dimension-list').show();
             }
+            this.model.set({ Type: this.inputType() });
+            Config.dimensionView.render();
         },
 
         initialize: function () {
@@ -48,13 +50,17 @@
 
             var self = this;
 
+            _.defer(function () {
+                $("#metric-list").loader();
+                $("#dimension-list").loader();
+            });
+
             this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
             allMetrics.fetch({
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
-                    console.log($("#metric-list"));
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                 },
                 error: function (allMetrics, response) {
@@ -101,8 +107,6 @@
                     Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function (model, response) {
-                    console.log("Save FAIL", model, response);
-
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (error) {
                             $.notifications.display({

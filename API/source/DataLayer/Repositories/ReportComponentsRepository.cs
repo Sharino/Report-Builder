@@ -50,10 +50,13 @@ namespace DataLayer.Repositories
                         component.Id = reader.GetInt32(0);
                         component.Title = reader.GetString(1);
                         component.Type = reader.GetInt32(2);
-
+                        
                         var json = new JavaScriptSerializer();
                         var data = json.Deserialize<ComponentData>(reader.GetString(3));
                         component.Data = data;
+
+                        component.CreationDate = reader.GetString(4);
+                        component.ModificationDate = reader.GetString(5);
                         list.Add(component);
                     }
                     _connection.Close();

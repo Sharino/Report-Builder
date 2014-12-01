@@ -62,7 +62,6 @@
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
-                    self.metricViewDone = true;
                 },
                 error: function (allMetrics, response) {
                     $.notifications.display({
@@ -77,7 +76,6 @@
                 success: function (allDimensions) {
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
-                    self.dimensionViewDone = true;
                     self.toggleDimensionList();
                 },
                 error: function (allDimensions, response) {
@@ -109,7 +107,6 @@
                     Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function (model, response) {
-                    console.log("Save FAIL", model, response);
 
                     if (response.responseJSON) {
                         response.responseJSON.forEach(function (error) {

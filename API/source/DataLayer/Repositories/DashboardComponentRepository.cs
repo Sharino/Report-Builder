@@ -54,6 +54,8 @@ namespace DataLayer.Repositories
                     component.Title = reader.GetString(2);
                     component.Type = reader.GetInt32(3);
                     component.Definition = reader.GetString(4);
+                    component.CreationDate = reader.GetString(5);
+                    component.ModificationDate = reader.GetString(6);
 
                     _connection.Close();
                     return component;
@@ -143,7 +145,6 @@ namespace DataLayer.Repositories
                 return component.Id;
             }
         }
-
 
         public void Remove(int id)
         {

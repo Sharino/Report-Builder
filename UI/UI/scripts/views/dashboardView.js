@@ -173,7 +173,6 @@
                     return model;
                 },
                 error: function (model, response) {
-                    console.log("GET", id, "Fail", model, response);
                     return null;
                 }
             });
