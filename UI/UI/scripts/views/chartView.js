@@ -6,11 +6,12 @@
     'Einstein',
     'Metric',
     'Dimension',
+    'ComponentButtonView',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, Highcharts) {
+], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
 
     var chartView = BaseCompositeView.extend({
         template: _.template(ChartTemplate),
@@ -24,7 +25,8 @@
 
         startDate: moment().format('YYYY-MM-DD'),
 
-        initialize: function (parent, pos) {
+        initialize: function (parent, pos, origin) {
+            this.originDashboard = origin;
             this.model = parent;
             this.position = pos;
             this.initEinstein(this.startDate, this.startDate);
@@ -38,6 +40,8 @@
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
             }
             this.selectedDimension = new Dimension(dimensions[0]);
+
+            
         },
 
         render: function (einstein, dataFiler) {
@@ -93,6 +97,8 @@
                 from: from,
                 to: to
             }));
+
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;

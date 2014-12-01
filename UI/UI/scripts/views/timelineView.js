@@ -6,11 +6,12 @@
     'Einstein',
     'Metric',
     'Dimension',
+    'ComponentButtonView',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, Highcharts) {
+], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
 
     var timelineView = BaseCompositeView.extend({
         template: _.template(TimelineTemplate),
@@ -24,7 +25,8 @@
 
         startDate: moment().format('YYYY-MM-DD'),
 
-        initialize: function (parent, pos) {
+        initialize: function (parent, pos, origin) {
+            this.originDashboard = origin;
             this.model = parent;
             this.position = pos;
             this.initEinstein(this.startDate, this.startDate);
@@ -93,6 +95,8 @@
                 from: from,
                 to: to
             }));
+
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;

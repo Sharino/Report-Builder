@@ -60,8 +60,6 @@
 
             this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
-            
-
             if (not) {
                 this.$el.loader();
             }

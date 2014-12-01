@@ -161,12 +161,12 @@
                             }
                         case 3:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, true));
                                 break;
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, true));
                                 break;
                             }
                     }
