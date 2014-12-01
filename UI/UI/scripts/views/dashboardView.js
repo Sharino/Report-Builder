@@ -41,7 +41,6 @@
         deleteDashboardComponent: function (e) {
             e.preventDefault();
             var id = parseInt($(e.currentTarget).attr('data-id'));
-            console.log("Sitas id: ", id);
 
             var self = this;
             var comp = new DashboardComponent({ Id: id });

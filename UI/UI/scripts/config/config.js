@@ -1,6 +1,6 @@
 ﻿define('Config', [
 ], function () {
-    var baseUrl = "http://37.157.0.42:33895/api/";
+    var baseUrl = "http://localhost:33894/api/";
     var einsteinUrl = "http://37.157.0.42:33896/api/";
 
     var Config = {
@@ -94,9 +94,6 @@
                 for (var i = 0; i < array.length; i++) {
                     if (array[i].DimensionId != -1) {
                         this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
-                        console.log("calcmet id", dimensionMap[array[i].DimensionId - 1], "iteration", i);
-                        console.log("array", array);
-                        console.log("look at me", array[i].DimensionId);
                     }
                 }
 
@@ -137,7 +134,6 @@
                 for (var i = 0; i < array.length; i++) {
                     if (array[i].MetricId != -1) {
                         this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
-                        console.log("calcdim id", metricMap[array[i].MetricId - 1], "iteration", i);
                     }
                 }
 

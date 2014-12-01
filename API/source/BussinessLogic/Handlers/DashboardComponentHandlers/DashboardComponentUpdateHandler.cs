@@ -1,8 +1,11 @@
-﻿using BussinessLogic.Handlers.Base;
+﻿using System.Linq;
+using System.Web.Script.Serialization;
+using BussinessLogic.Handlers.Base;
 using BussinessLogic.Mappings;
 using Contracts.DTO;
 using Contracts.Responses;
 using DataLayer.Repositories;
+using Models.Models;
 
 namespace BussinessLogic.Handlers.DashboardComponentHandlers
 {
@@ -26,6 +29,17 @@ namespace BussinessLogic.Handlers.DashboardComponentHandlers
 
         public override bool Validate(DashboardComponentDto request)
         {
+            var serializer = new JavaScriptSerializer();
+            var data = serializer.Deserialize<ComponentData>(request.Definition);
+
+            if (request.Type == 3)
+            {
+                if (data.Dimensions.Any(dimension => dimension.Group.GroupName.ToLower() != "time"))//TODO GROUP MNEMONICS
+                {
+                    Errors.Add(new ErrorDto("EN", "Timeline component can only have dimensions with Time category"));
+                }
+            }
+
             if (_repository.Exists(request.Id))
                 return true;
             Errors.Add(new ErrorDto("404", "A Dashboard Component with such ID does not exist."));
