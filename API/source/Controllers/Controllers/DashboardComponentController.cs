@@ -55,7 +55,6 @@ namespace Controllers.Controllers
         [HttpDelete]
         public HttpResponseMessage Delete(int id)
         {
-//            var handler = new DashboardComponentDeleteHandler();
             var handler = new DashboardComponentDeleteHandler();
             var response = handler.Handle(id);
             if (handler.Errors == null || handler.Errors.Count < 1)

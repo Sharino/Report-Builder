@@ -56,16 +56,9 @@
             });
             this.$el.html(this.template({ "Metrics": this.metricArray, "Grouped": this.grouped }));
 
-            console.log("CIA", this.$el);
             this.initializeMetricSelects();
             this.initializeSortableList();
             return this;
-        },
-
-        metricEngagedAction: function () {
-            //            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Metric");
-            //            //this.mappedMetrics = Config.calculateMetricMap();
-            //            Config.dimensionView.render();
         },
 
         metricAddedAction: function () {
@@ -102,8 +95,8 @@
 
                 $('.list-pop').tooltip({
                     delay: {
-                        show: 1000,
-                        hide: 500
+                        show: 300,
+                        hide: 200
                     },
                     template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
                 });

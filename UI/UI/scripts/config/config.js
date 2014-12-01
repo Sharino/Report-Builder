@@ -50,12 +50,12 @@
         MenuSettings: {
             items: [
                 {
-                    link: "#list",
-                    title: "Components"
-                },
-                {
                     link: "#dashboards",
                     title: "Dashboards",
+                },
+                {
+                    link: "#list",
+                    title: "Components"
                 }
             ]
         },
@@ -74,7 +74,6 @@
                 type: 'GET',
                 success: function (response) {
                     self.map = response;
-                    console.log(response);
                 },
                 error: function () {
                     $.notifications.display({
@@ -92,10 +91,9 @@
                 var dimensionMap = this.map.DimensionMappings;
                 this.metricIntersection = dimensionMap[0].MetricIds;
                 for (var i = 0; i < array.length; i++) {
-                    this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
-                    console.log("calcmet id", dimensionMap[array[i].DimensionId - 1], "iteration", i);
-                    console.log("array", array);
-                    console.log("look at me", array[i].DimensionId);
+                    if (array[i].DimensionId != -1) {
+                        this.metricIntersection = _.intersection(dimensionMap[array[i].DimensionId - 1].MetricIds, this.metricIntersection);
+                    }
                 }
 
                 var metrics = this.metricView.allMetrics.toJSON().slice(0);
@@ -119,7 +117,6 @@
                 }
 
                 for (var i = 0; i < toRemove.length; i++) {
-                    console.log("Deleting metric - ", toRemove[i].DisplayName);
                     metrics = _.without(metrics, toRemove[i]);
                 }
                 return metrics;
@@ -133,8 +130,9 @@
                 var metricMap = this.map.MetricMappings;
                 this.dimensionIntersection = metricMap[0].DimensionIds;
                 for (var i = 0; i < array.length; i++) {
-                    this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
-                    console.log("calcdim id", metricMap[array[i].MetricId - 1], "iteration", i);
+                    if (array[i].MetricId != -1) {
+                        this.dimensionIntersection = _.intersection(metricMap[array[i].MetricId - 1].DimensionIds, this.dimensionIntersection);
+                    }
                 }
 
                 var dimensions = this.dimensionView.allDimensions.toJSON().slice(0);
@@ -158,7 +156,6 @@
                 }
 
                 for (var i = 0; i < toRemove.length; i++) {
-                    console.log("Deleting dimension - ", toRemove[i].DisplayName);
                     dimensions = _.without(dimensions, toRemove[i]);
                 }
                 return dimensions;

@@ -1,41 +1,40 @@
 ﻿<div style="text-align: right; margin-bottom: 6px;">
-    <a class="create btn btn-primary"><b>New Component</b></a>
+    <a class="create btn btn-success"><i class="adf-icon-small-add-circle"></i><b>New Component</b></a>
 </div>
 <table class="component-listView table table-striped heading-separation table-hover selectable-rows">
     <thead>
-        <tr>
-            <th>Id</th>
+        <tr style="text-align: center">
             <th>Title</th>
-            <th>Type</th>
-            <th style="text-align: center">Actions</th>
+            <th>Actions</th>
         </tr>
     </thead>
     <tbody>
         <% _.each(Components, function(model) { %>
         <tr class="component-list-item">
-            <td class="click" id="<%= model.Id %>"><%= model.Id %></td>
-            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
-
+<!--            <td class="click" id="<%= model.Id %>">-->
+               
+<!--            </td>-->
             <td class="click" id="<%= model.Id %>">
                 <% if (!model.IsGenerated) { %>
                 <% if (model.Type === 0) { %>
-                <i class=" adf-icon-alt-sadface"></i>
-                <% } else if (model.Type === 1) { %>
-                <i class=" adf-icon-big-bars-vertical"></i>
-                <% } else if (model.Type === 2) { %>
-                <i class=" adf-icon-big-table"></i>
-                <% } else if (model.Type === 3) { %>
-                <i class=" adf-icon-big-graph"></i>
-                <% } else if (model.Type === 4) { %>
-                <i class=" adf-icon-big-bars-horizontal"></i>
-                <% } %>
+                    <span class="label label-orange1">KPI</span>
+                    <% } else if (model.Type === 1) { %>
+                    <span class="label label-orange1">KPI</span>
+                    <% } else if (model.Type === 2) { %>
+                    <span class="label label-green2">Table</span>
+                    <% } else if (model.Type === 3) { %>
+                    <span class="label label-blue2">Timeline</span>
+                    <% } else if (model.Type === 4) { %>
+                    <span class="label label-yellow1">Chart</span>
+                    <% } %>
                 <% } else { %>
                 <i class="adf-icon-alt-check"></i>
                 <% } %>
+                <a style="margin-left: 15px;"><%= model.Title %></a>
             </td>
             <td id="<%= model.Id %>">
                 <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
-                <a class="gen btn btn-transparent pull-right">Generate</a>
+                <a class="edit btn btn-transparent pull-right">Edit</a>
             </td>
         </tr>
         <% }); %>

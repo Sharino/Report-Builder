@@ -12,10 +12,11 @@
     'DashboardCollection',
     'DashboardComponent',
     'MessageView',
+    'Config',
     'adform-notifications',
     'adform-modal'
 ], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TimelineView, ChartView,
-             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView) {
+             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView, Config) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
@@ -30,11 +31,11 @@
                 this.collection = new DashboardCollection();
 
                 this.collection.fetch({
-                    success: function (collection, response) {
+                    success: function () {
 
                     },
-                    error: function (collection, response) {
-                        console.log(collection);
+                    error: function () {
+                        console.log("Failed to load dashboard collection");
                     }
                 });
             }
@@ -46,7 +47,6 @@
             var routerUrl = "create/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
-
         },
 
         render: function () {
@@ -89,18 +89,6 @@
             $.modal({
                 title: "Select Dashboard",
                 body: this.selectDashboardTemplate({Dashboards: this.collection.toJSON()}),
-                buttons: [
-                    //{
-                    //    title: "Submit",
-                    //    cssClass: "btn-success disabled",
-                    //    dismiss: false
-                    //},
-                    //{
-                    //    title: "Cancel",
-                    //    cssClass: "btn-cancel",
-                    //    id: "modalCancel"
-                    //}
-                ],
                 className: "form"
             });
 
@@ -109,26 +97,17 @@
             $(".dashboard-list-item").bind("click", function (e) {
                 var reportComponentId = self.model.get("Id");
                 var selectedDashboardId = parseInt(e.currentTarget.id);
-                
-//                console.log(reportComponentId, selectedDashboardId);
-
-                //
-                //var tempDashboardComponent = new DashboardComponent({ dashboardId: selectedDashboardId, reportComponentId: reportComponentId });
-                //tempDashboardComponent.save({}, {
-                //    success: function (collection, response) {
-                //        console.log("YAY", collection);
-                //    },
-                //    error: function (collection, response) {
-                //        console.log(collection);
-                //    }
-                //});
 
                 $.ajax({
                     url: "http://37.157.0.42:33895/api/DashboardComponent?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
 
                     type: 'post',
                     success: function () {
-
+                        $.notifications.display({
+                            type: 'success',
+                            content: "Successfully added to dashboard",
+                            timeout: Config.NotificationSettings.Timeout
+                        });
                     },
                     error: function () {
                         console.log('error!');

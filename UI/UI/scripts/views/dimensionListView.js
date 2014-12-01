@@ -81,12 +81,6 @@
             return this;
         },
 
-        dimensionEngagedAction: function() {
-//            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dimension");
-//            //this.mappedDimensions = Config.calculateDimensionMap();
-//            Config.metricView.render();
-        },
-
         dimensionAddedAction: function () {
             this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length, DimensionId: -1 });
             this.render();
@@ -122,8 +116,8 @@
 
                 $('.list-pop').tooltip({
                     delay: {
-                        show: 1000,
-                        hide: 500
+                        show: 300,
+                        hide: 200
                     },
                     template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
                 });

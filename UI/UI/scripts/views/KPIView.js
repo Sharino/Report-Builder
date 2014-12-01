@@ -30,7 +30,6 @@
 
         render: function (einstein, dataFiler) {
             var from, to;
-            var self = this;
             var not = false;
 
             if (!einstein && !dataFiler) {
@@ -122,7 +121,6 @@
                     self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
-                    console.log("Stone Alone FAIL", error);
                 }
             });
         },

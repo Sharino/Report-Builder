@@ -24,7 +24,7 @@
 ], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
     var Router = Backbone.Router.extend({
         routes: {
-            "": "list",
+            "": "dashboards",
             "create": "create",
             "create/:id": "createById",
             "list": "list",
@@ -50,9 +50,7 @@
                 success: function (model, response) {
                     self.showView("#generate", new DashboardView({ model: model }));
                 },
-                error: function (model, response) {
-                    console.log("GET", id, "Fail", model, response);
-                }
+                error: function () {}
             });
         },
 
@@ -68,8 +66,6 @@
                     self.showView("#list", new DashboardListView({ collection: collection }));
                 },
                 error: function (collection, response) {
-                    console.log("fetch FAIL", response);
-
                     $.notifications.display({
                         type: 'error',
                         content: "Error fetching from server.",
@@ -89,12 +85,10 @@
 
             this.ComponentsCollection = new ComponentCollection();
             this.ComponentsCollection.fetch({
-                success: function (model, response) {
+                success: function (model) {
                     self.showView("#list", new ComponentListView({ collection: model }));
                 },
-                error: function (model, response) {
-                    console.log("fetch FAIL", response);
-
+                error: function () {
                     $.notifications.display({
                         type: 'error',
                         content: "Error fetching from server.",
@@ -107,8 +101,6 @@
         },
 
         createById: function (id) {
-            console.log($("#component"));
-
             var self = this;
             var tempComponent = new Component({ Id: id });
             tempComponent.fetch({
@@ -117,7 +109,6 @@
                     $("#app > div > div").addClass('page-split').pageSplit();
                 },
                 error: function (model, response) {
-                    console.log("GET", id, "Fail", model, response);
                 }
             });
         },
@@ -131,7 +122,6 @@
                     self.showView("#generate", new GenerateView({ model: model }));
                 },
                 error: function (model, response) {
-                    console.log("GET", id, "Fail", model, response);
                 }
             });
         },

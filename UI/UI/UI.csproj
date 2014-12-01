@@ -104,7 +104,6 @@
     <Content Include="scripts\models\Session.js" />
     <Content Include="scripts\routers\router.js" />
     <Content Include="scripts\views\chartView.js" />
-    <Content Include="scripts\views\componentGeneratedView.js" />
     <Content Include="scripts\views\baseCompositeView.js" />
     <Content Include="scripts\views\baseDestructableView.js" />
     <Content Include="scripts\views\componentListView.js" />

@@ -17,7 +17,7 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
         public override ReportComponentResponse HandleCore(int request)
         {
             var mapping = new Mapping();
-            var reportComponents = _repository.GetAll().OrderBy(x => x.Id).ToList();
+            var reportComponents = _repository.GetAll().OrderBy(x => x.Id).Reverse().ToList();
             var reportComponentDtos = mapping.ReportComponentToDto(reportComponents);
             return new ReportComponentResponse(reportComponentDtos);
         }

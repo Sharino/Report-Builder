@@ -4,11 +4,20 @@
             <div>
                 <%= model.Title %>
                 <div class="pull-right">
-                    <button class="csv btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">CSV</button>
-                    <button class="pdf btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">PDF</button>
-                    <button class="xls btn btn-transparent" data-id="<%= Position %>" comp-id="<%= this.model.id %>">XLS</button>
+                    <div class="btn-group">
+                        <a class="btn single-btn" data-toggle="dropdown" href="#">
+                            <i class="adf-icon-toolbar-export"></i>
+                            <!--<span class="caret"></span>-->
+                        </a>
+                        <ul class="dropdown-menu" style="overflow: hidden">
+                            <li class="csv"><a href="">CSV</a></li>
+                            <li class="pdf"><a href="">PDF</a></li>
+                            <li class="xls"><a href="">XLS</a></li>
+                        </ul>
+                    </div>
+
                     <button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= this.model.id %>">Edit</button>
-                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>">X</button>
+                    <button class="del btn btn-primary" data-id="<%= this.model.id %>" comp-id="<%= this.model.id %>"><i class="adf-icon-small-delete white-icon"></i></button>
                 </div>
             </div>
             <div id="component-edit-<%= Position %>"></div>
