@@ -41,7 +41,6 @@ namespace BussinessLogic.Handlers.ReportComponentHandlers
                         {
                             Errors.Add(new ErrorDto("EN", "Report Component Metrics doesn't map with Dimensions"));
                         }
-
                     }
                 }
             }

@@ -165,7 +165,7 @@ namespace DataLayer.Repositories
 
         public bool MetricDimensionMetricRelations(int metricId, int dimensionId)
         {
-            const string sql = @"SELECT COUNT(*) FROM [dbo].[MetricDimensionMetric] WHERE [MetricId] = @MetricId AND [DimensionId] = @DimensionId";
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[MetricDimensionMappings] WHERE [MetricId] = @MetricId AND [DimensionId] = @DimensionId";
             using (var command = new SqlCommand(sql, _connection))
             {
                 _connection.Open();
