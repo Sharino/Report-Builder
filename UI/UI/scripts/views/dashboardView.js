@@ -151,7 +151,7 @@
                     switch (model.get("Type")) {
                         case 1:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, true));
                                 break;
                             }
                         case 2:

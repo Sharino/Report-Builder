@@ -55,12 +55,12 @@
             switch (this.model.get("Type")) {
                 case 0:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 1:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 2:

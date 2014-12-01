@@ -78,6 +78,7 @@
         'MessageView':          'scripts/views/messageView',
         'DimensionListView':    'scripts/views/dimensionListView',
         'MetricDimensionView':  'scripts/views/metricDimensionView',
+        'ComponentButtonView':  'scripts/views/componentButtonView',
 
         /* Router dependencies */
         'Router':               'scripts/routers/router',

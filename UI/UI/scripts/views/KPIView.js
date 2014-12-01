@@ -6,10 +6,11 @@
    'Metric',
    'Config',
    'Export',
+   'ComponentButtonView',
    'spin',
    'adform-loader',
    'adform-notifications'
-], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config, Export) {
+], function (BaseCompositeView, KPITemplate, DateFilterView, Einstein, Metric, Config, Export, ComponentButtonView) {
     var kpiView = BaseCompositeView.extend({
         template: _.template(KPITemplate),
 
@@ -21,7 +22,8 @@
             'click .xls': 'xls',
         },
 
-        initialize: function (parent, pos) {
+        initialize: function (parent, pos, origin) {
+            this.originDashboard = origin;
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
@@ -55,6 +57,10 @@
                 from: from,
                 to: to
             }));
+
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
+
+            
 
             if (not) {
                 this.$el.loader();
