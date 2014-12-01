@@ -81,12 +81,6 @@
             return this;
         },
 
-        dimensionEngagedAction: function() {
-//            console.log("ENGAGED !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Dimension");
-//            //this.mappedDimensions = Config.calculateDimensionMap();
-//            Config.metricView.render();
-        },
-
         dimensionAddedAction: function () {
             this.dimensionArray.push({ Placeholder: true, Order: this.dimensionArray.length, DimensionId: -1 });
             this.render();
