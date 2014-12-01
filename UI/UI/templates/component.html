@@ -1,80 +1,81 @@
 ﻿
-   
-        <header>
-            <table class="x--ph-l">
-                <thead>
-                    <tr>
-                        <th>
-                            <h2>
-                                <b>
-                                    <% if(model.Id){ %>
-                                    Edit
-                                    <% } else{ %>
-                                    Create
-                                    <% } %>
-                                </b>
-                            </h2>
-                        </th>
-                        <th>
-                            <div class="control-group">
-<!--                                <label class="control-label">Title</label>-->
-                                <div class="controls">
-                                    <input style="margin-bottom: 0px"class="input-large" type="text" id="input" data-validate="required" value="<%=model.Title%>" required>
-                                    <span data-msg="title"></span>
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                        </th>
-                        <th>
-                            <div class="control-group">
-<!--                                <label class="control-label">Type</label>-->
-                                <div class="controls">
-                                    <div class="radio-buttons horizontal">
-                                        <div class="radio-group">
-                                            <input type="radio" name="type-options" id="rb1" value="1">
-                                            <label for="rb1">KPI</label>
-                                        </div>
-                                        <div class="radio-group">
-                                            <input type="radio" name="type-options" id="rb2" value="2">
-                                            <label for="rb2">Table</label>
-                                        </div>
-                                        <div class="radio-group">
-                                            <input type="radio" name="type-options" id="rb3" value="3">
-                                            <label for="rb3">Timeline</label>
-                                        </div>
-                                        <div class="radio-group">
-                                            <input type="radio" name="type-options" id="rb4" value="4">
-                                            <label for="rb4">Chart</label>
-                                        </div>
-                                    </div>
-                                    <span data-msg="type"></span>
-                                    <span class="help-inline"></span>
-                                </div>
-                            </div>
-                        </th>
-                        <th><button class="btn btn-primary" type="submit" id="component-submit">Save</button></th>
-                    </tr>
-                </thead>
-            </table>
-        </header>
-  
-<div>
-    <section data-cols="5" data-fluid="true">
 
-    </section>
+<header>
+    <table class="x--ph-l">
+        <thead>
+            <tr>
+                <th style="width: 10%;height: 65px;">
+                    <div id="basicName">
+                        <h2><%=model.Title%> <i style="margin-top: 3px;" class="adf-icon-small-edit"></i></h2>
+                    </div>
+                    <div class="control-group" id="editName" style="display: none; margin-top: 11px; ">
+                        <!--                                <label class="control-label">Title</label>-->
+                        <div class="controls">
+                            <input style="padding: 0px; max-width: 100px;" class="input-large" type="text" id="input" data-validate="required" value="<%=model.Title%>" required>
+
+                            <span data-msg="title"></span>
+                            <span class="help-inline"></span>
+                            <i  style="margin-top: -1px;"class="adf-icon-small-edit"></i>
+                        </div>
+                    </div>
+                </th>
+                <th>
+                    <div class="control-group">
+                        <!--                                <label class="control-label">Type</label>-->
+                        <div class="controls">
+                            <div class="radio-buttons horizontal">
+                                <div class="radio-group">
+                                    <input type="radio" name="type-options" id="rb1" value="1">
+                                    <label for="rb1">KPI</label>
+                                </div>
+                                <div class="radio-group">
+                                    <input type="radio" name="type-options" id="rb2" value="2">
+                                    <label for="rb2">Table</label>
+                                </div>
+                                <div class="radio-group">
+                                    <input type="radio" name="type-options" id="rb3" value="3">
+                                    <label for="rb3">Timeline</label>
+                                </div>
+                                <div class="radio-group">
+                                    <input type="radio" name="type-options" id="rb4" value="4">
+                                    <label for="rb4">Chart</label>
+                                </div>
+                            </div>
+                            <span data-msg="type"></span>
+                            <span class="help-inline"></span>
+                        </div>
+                    </div>
+                </th>
+                <th style="width: 10%"><button class="btn btn-primary pull-right" type="submit" id="component-submit">Save</button></th>
+            </tr>
+        </thead>
+    </table>
+</header>
+
+<div>
+    <section data-cols="2" data-fluid="true"></section>
     <section data-cols="4" data-fluid="true">
 
         <div id="metric-list"></div>
 
     </section>
+    <section data-cols="2" data-fluid="true"></section>
     <section data-cols="4" data-fluid="true">
         <div id="dimension-list"></div>
     </section>
-    <section data-cols="5" data-fluid="true">
-
-    </section>
+    <section data-cols="2" data-fluid="true"></section>
 </div>
 
+<script>
+    $(document).ready(function () {
+        $(".adf-icon-small-edit").hover(function () {
+            $(".adf-icon-small-edit").addClass("blue-icon");
+        }, function () {
+            $(".adf-icon-small-edit").removeClass("blue-icon");
+        });
+    });
+  
 
+</script>
 
 
