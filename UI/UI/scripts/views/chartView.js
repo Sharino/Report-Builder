@@ -6,11 +6,12 @@
     'Einstein',
     'Metric',
     'Dimension',
+    'ComponentButtonView',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, Highcharts) {
+], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
 
     var chartView = BaseCompositeView.extend({
         template: _.template(ChartTemplate),
@@ -24,7 +25,8 @@
 
         startDate: moment().format('YYYY-MM-DD'),
 
-        initialize: function (parent, pos) {
+        initialize: function (parent, pos, origin) {
+            this.originDashboard = origin;
             this.model = parent;
             this.position = pos;
             this.initEinstein(this.startDate, this.startDate);
@@ -37,7 +39,7 @@
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
             }
-            this.selectedDimension = new Dimension(dimensions[0]);
+            this.selectedDimension = new Dimension(dimensions[0]);  
         },
 
         render: function (einstein, dataFiler) {
@@ -46,7 +48,6 @@
                 from = this.startDate;
                 to = this.startDate;
             } else {
-                //                console.log(dataFiler);
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
             }
@@ -93,6 +94,8 @@
                 from: from,
                 to: to
             }));
+
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;
@@ -151,21 +154,18 @@
             var self = this;
 
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
-//                url: 'http://localhost:5000/api/Einstein/Data',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                    this.einstein = response.attributes.ComponentValues;
-                    this.dataFilter = response.attributes.Filters.DateFilter;
+                    self.einstein = response.attributes.ComponentValues;
+                    self.dataFilter = response.attributes.Filters.DateFilter;
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
                 }
             });
 

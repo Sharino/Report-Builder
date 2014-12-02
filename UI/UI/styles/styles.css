@@ -54,13 +54,13 @@
     background-color: white !important;
 }
 
-.sortable > li, .sortable > button {
+ul.sortable > li, ul.sortable > button {
     display: inline;
     list-style-type: none;
     float: left;
 }
 
-.sortable .btn {
+ul.sortable .btn {
     height: 27px;
     margin-top: 5px;
 }
@@ -89,7 +89,7 @@ li {
     margin: 5px;
 }
 
-.form-horizontal.well .sortable {
+.form-horizontal.well ul.sortable {
     display: -webkit-flex;
     display: flex;
     -webkit-flex-direction: row;
@@ -166,7 +166,7 @@ i[class*="adf-icon-alt"] {
     margin: 20px;
 }
 
-#chart .wizard-nav, #timeline .wizard-nav {
+#chart .wizard-nav, #timeline .wizard-nav, #table .wizard-nav {
     margin: 0 5px !important;
     background: white;
 }

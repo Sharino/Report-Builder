@@ -5,15 +5,21 @@
     'DimensionCollection',
     'MetricListView',
     'DimensionListView',
+    'MetricDimensionMap',
     'text!templates/dashboardComponent.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, dashboardComponentTemplate, Config) {
+], function (BaseCompositeView, DashboardComponent, MetricCollection, DimensionCollection, MetricListView, DimensionListView, MetricDimensionMap, dashboardComponentTemplate, Config) {
     var DashboardComponentView = BaseCompositeView.extend({
         template: _.template(dashboardComponentTemplate),
 
         events: {
             'click .radio-group': 'toggleDimensionList',
+        },
+
+        initialize: function () {
+            this.submitEvent.bind('submitEvent', this.submit, this);
+            MetricDimensionMap.getMap();
         },
 
         toggleDimensionList: function () {
@@ -26,15 +32,11 @@
             Config.dimensionView.render();
         },
 
-        initialize: function () {
-            this.submitEvent.bind('submitEvent', this.submit, this);
-        },
-
-        inputTitle: function() {
+        inputTitle: function () {
             return $('#input').val();
         },
 
-        inputType: function() {
+        inputType: function () {
             var selected = $("input:radio[name=type-options]:checked").val();
             if (selected != undefined) {
                 return parseInt(selected);
@@ -43,7 +45,7 @@
             }
         },
 
-        render: function() {
+        render: function () {
 
             var allMetrics = new MetricCollection();
             var allDimensions = new DimensionCollection();
@@ -148,7 +150,7 @@
             return false;
         },
 
-        beforeClose: function(){
+        beforeClose: function () {
             this.submitEvent.unbind();
         }
     });

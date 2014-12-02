@@ -7,10 +7,11 @@
     'MetricDimensionView',
     'MetricListView',
     'DimensionListView',
+    'MetricDimensionMap',
     'text!templates/component.html',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
@@ -18,6 +19,10 @@
             'click #component-submit': 'submit',
             'click .radio-group': 'toggleDimensionList',
             'click .adf-icon-small-edit': 'toggleComponentName'
+        },
+
+        initialize: function() {
+            MetricDimensionMap.getMap();
         },
 
         render: function () {

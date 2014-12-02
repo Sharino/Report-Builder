@@ -39,16 +39,5 @@ namespace BussinessLogicTests
             Assert.IsNotNull(handler.Errors);
             Assert.IsTrue(handler.Errors.Count > 0);
         }
-
-        [TestMethod]
-        public void Method()
-        {
-
-            //Arrange
-
-            //Act
-
-            //Assert
-        }
     }
 }

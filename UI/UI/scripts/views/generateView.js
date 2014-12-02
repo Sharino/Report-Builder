@@ -4,6 +4,7 @@
     'MetricCollection',
     'MetricListView',
     'KPIView',
+    'TableView',
     'TimelineView',
     'ChartView',
     'text!templates/generate.html',
@@ -15,14 +16,14 @@
     'Config',
     'adform-notifications',
     'adform-modal'
-], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TimelineView, ChartView,
+], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TableView, TimelineView, ChartView,
              generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView, Config) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
-            'click #edit': 'edit',
+            'click .edit-form': 'edit',
             'click #generate-submit': 'addToDashboard',
         },
 
@@ -55,27 +56,27 @@
             switch (this.model.get("Type")) {
                 case 0:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 1:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
                     break;
                 }
                 case 2:
                 {
-                    this.renderSubview(("#component-by-type"), new MessageView('<img src="http://i.imgur.com/5wKFPkc.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new TableView(this.model, 0, false));
                     break;
                 }
                 case 3:
                 {
-                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0));
+                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0, false));
                     break;
                 }
                 case 4:
                 {
-                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0));//new MessageView('<img src="http://i.imgur.com/iScdHje.png"></img>'));
+                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0, false));
                     break;
                 }
             }

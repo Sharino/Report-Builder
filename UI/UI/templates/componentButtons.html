@@ -1,0 +1,17 @@
+﻿<% if (Dashboard === false) { %>
+    <div class="btn-group">
+        <a class="btn single-btn" data-toggle="dropdown" href="#">
+            <i class="adf-icon-toolbar-export"></i>
+        </a>
+        <ul class="dropdown-menu" style="overflow: hidden">
+            <li class="csv"><a href="">CSV</a></li>
+            <li class="pdf"><a href="">PDF</a></li>
+            <li class="xls"><a href="">XLS</a></li>
+        </ul>
+    </div>
+<% } %>
+
+<button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
+<% if (Dashboard === true) { %>
+    <button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-delete white-icon"></i></button>
+<% } %>

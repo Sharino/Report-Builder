@@ -1,79 +1,23 @@
-﻿define('Config', [
-], function () {
-    var baseUrl = "http://37.157.0.42:33895/api/";
-    var einsteinUrl = "http://37.157.0.42:33896/api/";
+﻿define('MetricDimensionMap', [
+    'jquery',
+    'underscore',
+    'backbone',
+    'Config',
+    'adform-notifications'
+], function ($, _, Backbone, Config) {
 
-    var Config = {
-        ComponentSettings: {
-            URL: baseUrl + "ReportComponent"
-        },
+    var map;
 
-        DashboardSettings: {
-            URL: baseUrl + "Dashboard"
-        },
-
-        DashboardComponentSettings: {
-            URL: baseUrl + "DashboardComponent"
-        },
-
-        MetricSettings: {
-            URL: baseUrl + "Metric"
-        },
-
-        EinsteinSettings: {
-            URL: einsteinUrl + "Einstein"
-        },
-
-        DimensionSettings: {
-            URL: baseUrl + "Dimension"
-        },
-
-        MetricDimensionMap: {
-            URL: baseUrl + "MetricDimensionMap",
-        },
-
-        ExportSettings: {
-            KpiToCSV: baseUrl + "Export/KpiToCsv",
-            KpiToPDF: baseUrl + "Export/KpiToPdf",
-            KpiToXLS: baseUrl + "Export/KpiToXls"
-        },
-
-
-        NotificationSettings: {
-            Timeout: 1500
-        },
-
-        NetworkSettings: {
-            Timeout: 5000
-        },
-
-        MenuSettings: {
-            items: [
-                {
-                    link: "#dashboards",
-                    title: "Dashboards",
-                },
-                {
-                    link: "#list",
-                    title: "Components"
-                }
-            ]
-        },
-
-        ErrorSettings: {
-            ErrorMessages: {
-                NoResponse: "Server did not respond."
-            }
-        },
-
+    var Map = {
         getMap: function () {
             var self = this;
             $.ajax({
-                url: baseUrl + "MetricDimensionMap",
+                url: Config.MetricDimensionMap.URL,
                 contentType: 'application/json',
                 type: 'GET',
                 success: function (response) {
                     self.map = response;
+                    map = response;
                 },
                 error: function () {
                     $.notifications.display({
@@ -86,9 +30,10 @@
         },
 
         calculateMetricMap: function () {
-            if (this.metricView && this.dimensionView && this.map) {
+            this.getMap();
+            if (this.metricView && this.dimensionView && map) {
                 var array = this.dimensionView.dimensionArray;
-                var dimensionMap = this.map.DimensionMappings;
+                var dimensionMap = map.DimensionMappings;
                 this.metricIntersection = dimensionMap[0].MetricIds;
                 for (var i = 0; i < array.length; i++) {
                     if (array[i].DimensionId != -1) {
@@ -125,9 +70,10 @@
         },
 
         calculateDimensionMap: function () {
-            if (this.metricView && this.dimensionView && this.map) {
+            this.getMap();
+            if (this.metricView && this.dimensionView && map) {
                 var array = this.metricView.metricArray;
-                var metricMap = this.map.MetricMappings;
+                var metricMap = map.MetricMappings;
                 this.dimensionIntersection = metricMap[0].DimensionIds;
                 for (var i = 0; i < array.length; i++) {
                     if (array[i].MetricId != -1) {
@@ -163,6 +109,5 @@
             return null;
         },
     };
-
-    return Config;
+    return Map;
 });

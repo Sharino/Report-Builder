@@ -20,11 +20,21 @@ namespace BussinessLogic.Handlers.ExportHandlers
 
                 var cells = worksheet.Cells;
 
-                cells[0, 0].PutValue(request.GeneratedDate);
-                cells[2, 0].PutValue(request.StartDate);
-                cells[2, 1].PutValue(request.EndDate);
+                cells[0, 0].PutValue("Generated on");
+                cells[0, 1].PutValue(request.GeneratedDate);
 
-                var row = 4;
+                if (!string.IsNullOrEmpty(request.Language))
+                {
+                    cells[1, 0].PutValue("Language");
+                    cells[1, 1].PutValue(request.Language);
+                }
+
+                cells[2, 0].PutValue("From:");
+                cells[2, 1].PutValue(request.StartDate);
+                cells[3, 0].PutValue("To:");
+                cells[3, 1].PutValue(request.EndDate);
+                
+                var row = 5;
                 var col = 0;
 
                 worksheet.AutoFitRow(row);

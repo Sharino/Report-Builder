@@ -3,20 +3,21 @@
    'Metric',
    'MetricCollection',
    'text!templates/metricList.html',
+   'MetricDimensionMap',
    'Config',
    'adform-select-group',
    'jquery-sortable'
-], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, Config, ASG) {
+], function (BaseCompositeView, Metric, MetricCollection, MetricListTemplate, MetricDimensionMap, Config, ASG) {
     var MetricListView = BaseCompositeView.extend({
         template: _.template(MetricListTemplate),
 
         events: {
             'click #addMetric': 'metricAddedAction',
-            //'AdformSelect:selectionChanged': 'metricSelectedAction',
             'click .removeMetric': 'metricRemovedAction',
         },
 
         initialize: function (parentModel, allMetrics) {
+            MetricDimensionMap.metricView = this;
             Config.metricView = this;
             this.metricArray = [];
             this.selectReferences = [];
@@ -44,8 +45,8 @@
         render: function () {
             var self = this;
             this.metricArray.sort(this.compareNumbers);
-            //GET MAP
-            this.mappedMetrics = Config.calculateMetricMap();
+
+            this.mappedMetrics = MetricDimensionMap.calculateMetricMap();
 
             if (!this.mappedMetrics) {
                 this.mappedMetrics = this.allMetrics.toJSON();

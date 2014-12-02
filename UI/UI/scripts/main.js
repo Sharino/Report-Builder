@@ -39,6 +39,7 @@
 
         /* Other */
         'Export':               'scripts/export',
+        'MetricDimensionMap':   'scripts/metricDimensionMap',
 
         /* Base Views */
         'BaseDestructableView': 'scripts/views/baseDestructableView',
@@ -72,18 +73,17 @@
         'KPIView':              'scripts/views/kpiView',
         'TimelineView':         'scripts/views/timelineView',
         'ChartView':            'scripts/views/chartView',
+        'TableView':            'scripts/views/tableView',
         'HighchartsTimelineView': 'scripts/views/highchartsTimelineView',
         'HighchartsChartView':  'scripts/views/highchartsChartView',
         'DateFilterView':       'scripts/views/dateFilterView',
         'MessageView':          'scripts/views/messageView',
         'DimensionListView':    'scripts/views/dimensionListView',
         'MetricDimensionView':  'scripts/views/metricDimensionView',
+        'ComponentButtonView':  'scripts/views/componentButtonView',
 
         /* Router dependencies */
-        'Router':               'scripts/routers/router',
-
-        'Tests': 'tests',
-
+        'Router':               'scripts/routers/router'
     },
 
     shim: {
@@ -169,15 +169,13 @@
 
         'Export': {
             exports: "Export"
-        },
+        }
     }
 });
 
 
 require(['Router', 'Config', 'adform-loader', 'page-split'],
     function (Router, Config) {
-        //console.log(Config);
-
         var app = new Router();
         Backbone.history.start();
     });

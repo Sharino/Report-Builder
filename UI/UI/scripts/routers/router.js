@@ -2,6 +2,7 @@
     'jquery',
     'underscore',
     'backbone',
+    'MetricDimensionMap',
     'Component',
     'ComponentCollection',
     'ComponentView',
@@ -21,7 +22,7 @@
     'moment',
     'adform-datepicker',
     'adform-loader'
-], function ($, _, Backbone, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
+], function ($, _, Backbone, MetricDimensionMap, Component, ComponentCollection, ComponentView, ComponentListView, Dashboard, DashboardView, DashboardComponent, DashboardCollection, DashboardListView, MenuView, GenerateView, Config, DashboardCreate) {
     var Router = Backbone.Router.extend({
         routes: {
             "": "dashboards",
@@ -35,6 +36,7 @@
 
         initialize: function () {
             Config.getMap();
+          
             this.showMenu(new MenuView());
             this.on("route", this.menu.routeChangedAction);
         },
@@ -130,11 +132,6 @@
             if (this.currentView) {
                 this.currentView.destroy();
             }
-//            var cont = view.render().$el.first("div");
-//            $(selector).html(cont[0].innerHTML);
-//            view.setElement(view.$(selector)).render();
-//            console.log($(view.render().el).first("div").innerHTML);
-//            $("#app").html($($(view.render().el).first("div")[0].innerHTML));
             $("#app").html(view.render().el);
 
             this.currentView = view;

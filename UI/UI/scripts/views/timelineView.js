@@ -6,11 +6,13 @@
     'Einstein',
     'Metric',
     'Dimension',
+    'ComponentButtonView',
+    'Config',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, Highcharts) {
+], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, ComponentButtonView, Config, Highcharts) {
 
     var timelineView = BaseCompositeView.extend({
         template: _.template(TimelineTemplate),
@@ -24,7 +26,8 @@
 
         startDate: moment().format('YYYY-MM-DD'),
 
-        initialize: function (parent, pos) {
+        initialize: function (parent, pos, origin) {
+            this.originDashboard = origin;
             this.model = parent;
             this.position = pos;
             this.initEinstein(this.startDate, this.startDate);
@@ -94,6 +97,8 @@
                 to: to
             }));
 
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
+
             this.einstein = einstein;
             this.dataFilter = dataFiler;
 
@@ -151,16 +156,15 @@
             var self = this;
             
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
-                //url: 'http://localhost:5000/api/Einstein/Data',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                    this.einstein = response.attributes.ComponentValues;
-                    this.dataFilter = response.attributes.Filters.DateFilter;
+                    self.einstein = response.attributes.ComponentValues;
+                    self.dataFilter = response.attributes.Filters.DateFilter;
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
