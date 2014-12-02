@@ -35,6 +35,7 @@ $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
 
 $serviceFilesLocation = "\\{0}\Client\"
 $configFilesLocation = "\\{0}\Client\scripts\config\config.js"
+
 foreach ($server in $servers)
 { 
 	$serverIP = $server.IP
