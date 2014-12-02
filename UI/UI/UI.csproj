@@ -125,6 +125,7 @@
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
     <Content Include="scripts\lib\page-split.js" />
+    <Content Include="scripts\views\tableView.js" />
     <Content Include="scripts\views\timelineView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\styles.css" />
