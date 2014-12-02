@@ -35,8 +35,7 @@
         },
 
         initialize: function () {
-            Config.getMap();
-          
+        
             this.showMenu(new MenuView());
             this.on("route", this.menu.routeChangedAction);
         },

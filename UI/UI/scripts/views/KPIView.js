@@ -43,6 +43,7 @@
             } else {
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
+                not = false;
             }
 
             this.$el.html(this.template({
@@ -60,9 +61,6 @@
 
             this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
-            if (not) {
-                this.$el.loader();
-            }
 
             return this;
         },
