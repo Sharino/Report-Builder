@@ -1,17 +1,17 @@
-﻿<div class="product-navigation">
+﻿<div class="product-navigation" style="height: 55px">
     <ul>
         <% _.each(items, function(item) { %>
         <% if(item.position === "right"){ %>
         <ul id="menu-right" class="pull-right">
             <% if(active === item.link){ %>
-            <li class="active"><a href="<%= item.link %>"><%= item.title %></a></li>
+            <li><a class="active" href="<%= item.link %>"><%= item.title %></a></li>
             <% } else { %>
             <li><a href="<%= item.link %>"><%= item.title %></a></li>
             <% } %>
         </ul>
         <% } else{ %>
         <% if(active === item.link){ %>
-        <li class="active"><a href="<%= item.link %>"><%= item.title %></a></li>
+        <li ><a class="active" a href="<%= item.link %>"><%= item.title %></a></li>
         <% } else { %>
         <li><a href="<%= item.link %>"><%= item.title %></a></li>
         <% } %>
