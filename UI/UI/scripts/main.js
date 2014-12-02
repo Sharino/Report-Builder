@@ -14,6 +14,7 @@
         'spin':                 'scripts/lib/spin',
         'globalize':            'scripts/lib/globalize',
         'moment':               'scripts/lib/moment',
+        'moment-2.8.4':         'scripts/lib/moment-2.8.4',
         'Highcharts':           'scripts/lib/highcharts',
         'HighchartsTheme':      'scripts/lib/highcharts-theme',
         'page-split':           'scripts/lib/page-split',
@@ -97,6 +98,10 @@
 
         'underscore': {
             exports: '_'
+        },
+
+        "moment-2.8.4": {
+            exports: "moment"
         },
 
         'bootstrap-tooltip': {
