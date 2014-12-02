@@ -154,8 +154,7 @@
             var self = this;
 
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein',
-                //url: 'http://localhost:5000/api/Einstein',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',

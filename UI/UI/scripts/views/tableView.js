@@ -6,10 +6,11 @@
     'Metric',
     'Dimension',
     'ComponentButtonView',
+    'Config',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, TableTemplate, DateFilterView, Einstein, Metric, Dimension, ComponentButtonView) {
+], function (BaseCompositeView, TableTemplate, DateFilterView, Einstein, Metric, Dimension, ComponentButtonView, Config) {
 
     var tableView = BaseCompositeView.extend({
         template: _.template(TableTemplate),
@@ -122,8 +123,7 @@
             var self = this;
 
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
-               // url: 'http://localhost:5000/api/Einstein/Data',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
