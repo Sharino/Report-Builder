@@ -43,6 +43,7 @@
             } else {
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
+                not = false;
             }
 
             this.$el.html(this.template({
@@ -60,9 +61,6 @@
 
             this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
 
-            if (not) {
-                this.$el.loader();
-            }
 
             return this;
         },
@@ -140,7 +138,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportCsv(request, {
@@ -168,7 +166,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportPdf(request, {
@@ -196,7 +194,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportXls(request, {

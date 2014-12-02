@@ -23,7 +23,7 @@
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
-            'click #edit': 'edit',
+            'click .edit-form': 'edit',
             'click #generate-submit': 'addToDashboard',
         },
 

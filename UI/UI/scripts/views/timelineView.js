@@ -7,11 +7,12 @@
     'Metric',
     'Dimension',
     'ComponentButtonView',
+    'Config',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
+], function (BaseCompositeView, TimelineTemplate, DateFilterView, HighchartsTimelineView, Einstein, Metric, Dimension, ComponentButtonView, Config, Highcharts) {
 
     var timelineView = BaseCompositeView.extend({
         template: _.template(TimelineTemplate),
@@ -155,8 +156,7 @@
             var self = this;
             
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
-                //url: 'http://localhost:5000/api/Einstein/Data',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',

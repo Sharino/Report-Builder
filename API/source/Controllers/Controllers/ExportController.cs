@@ -12,7 +12,7 @@ namespace Controllers.Controllers
 	public class ExportController : ApiController
 	{
 		[HttpPost]
-		public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ",")
+        public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ",")
 		{
 			if (request != null)
 				if (request.Values.Count > 0)

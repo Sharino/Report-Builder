@@ -25,86 +25,98 @@ namespace Controllers.Contollers
             public const string Integer = "int";
         }
 
-        private static readonly MetricRepository MetricRepository = new MetricRepository();
-        private static readonly DimensionRepository DimensionRepository = new DimensionRepository();
-        private static readonly string[] Lines = File.ReadAllLines("RandomWords.txt");
+        private MetricRepository _metricRepository;// = new MetricRepository();
+        private DimensionRepository _dimensionRepository;// = new DimensionRepository();
+        private string[] _lines;// = File.ReadAllLines("RandomWords.txt");
 
         [HttpPost]
         public HttpResponseMessage Data([FromBody]Request input)
         {
-            var response = new EinsteinDTO
-            {
-                ComponentValues = new List<IDimensionMetricPair>()
-            };
+            _lines = File.ReadAllLines("RandomWords.txt");
+            _dimensionRepository = new DimensionRepository();
+            _metricRepository = new MetricRepository();
 
-            var fromDate = input.Filters.DateFilter.From;
-            var endDate = input.Dimensions.Count == 0 ? input.Filters.DateFilter.From : input.Filters.DateFilter.To;
-
-            IEnumerable<DateTime> iterator = null;
-            var dateMnemonic = "d_Date";
-            foreach (var dimension in input.Dimensions)
+            try
             {
-                if (DimensionRepository.Exists(dimension))
+                var response = new EinsteinDTO
                 {
-                    switch (dimension)
-                    {
-                        case "d_Day":
-                            iterator = EachDay(fromDate, endDate);
-                            dateMnemonic = "d_Date";
-                            break;
-                        case "d_Month":
-                            iterator = EachMonth(fromDate, endDate);
-                            dateMnemonic = "d_Month";
-                            break;
-                        case "d_Year":
-                            iterator = EachYear(fromDate, endDate);
-                            dateMnemonic = "d_Year";
-                            break;
-                    }
+                    ComponentValues = new List<IDimensionMetricPair>()
+                };
 
-                    if (iterator != null)
+                var fromDate = input.Filters.DateFilter.From;
+                var endDate = input.Dimensions.Count == 0 ? input.Filters.DateFilter.From : input.Filters.DateFilter.To;
+
+                IEnumerable<DateTime> iterator = null;
+                var dateMnemonic = "d_Date";
+                foreach (var dimension in input.Dimensions)
+                {
+                    if (_dimensionRepository.Exists(dimension))
                     {
-                        foreach (DateTime day in iterator)
+                        switch (dimension)
                         {
-                            response.ComponentValues.Add(SetData(input, dateMnemonic, day.ToShortDateString()));
+                            case "d_Day":
+                                iterator = EachDay(fromDate, endDate);
+                                dateMnemonic = "d_Date";
+                                break;
+                            case "d_Month":
+                                iterator = EachMonth(fromDate, endDate);
+                                dateMnemonic = "d_Month";
+                                break;
+                            case "d_Year":
+                                iterator = EachYear(fromDate, endDate);
+                                dateMnemonic = "d_Year";
+                                break;
                         }
 
-                        break;
+                        if (iterator != null)
+                        {
+                            foreach (DateTime day in iterator)
+                            {
+                                response.ComponentValues.Add(SetData(input, dateMnemonic, day.ToShortDateString()));
+                            }
+
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (iterator == null)
-            {
-                if (input.Dimensions.Count == 0)
+                if (iterator == null)
                 {
-                    response.ComponentValues.Add(SetData(input, "d_Date", GetRandomWord()));
-                }
-                else
-                {
-                    var rand = (new Random().Next(25)) + 1;
-                    for (int i = 0; i < rand; i++)
+                    if (input.Dimensions.Count == 0)
                     {
-                        response.ComponentValues.Add(SetData(input, input.Dimensions[0], GetRandomWord()));
+                        response.ComponentValues.Add(SetData(input, "d_Date", GetRandomWord()));
+                    }
+                    else
+                    {
+                        var rand = (new Random().Next(25)) + 1;
+                        for (int i = 0; i < rand; i++)
+                        {
+                            response.ComponentValues.Add(SetData(input, input.Dimensions[0], GetRandomWord()));
+                        }
                     }
                 }
-            }
 
-            var ret = Request.CreateResponse(HttpStatusCode.OK, response);
-            ret.Headers.Add("Access-Control-Allow-Origin", "*");
-            return ret;
+                var ret = Request.CreateResponse(HttpStatusCode.OK, response);
+                //       ret.Headers.Add("Access-Control-Allow-Origin", "*");
+                return ret;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+            return null;
         }
 
-        private static string GetRandomWord()
+        private string GetRandomWord()
         {
             var r = new Random();
-            var randomLineNumber = r.Next(0, Lines.Length - 1);
-            var line = Lines[randomLineNumber];
+            var randomLineNumber = r.Next(0, _lines.Length - 1);
+            var line = _lines[randomLineNumber];
 
             return line;
         }
 
-        private static DimensionMetricPair SetData(Request input, string dimensionMnemonic, string dimensionValue)
+        private DimensionMetricPair SetData(Request input, string dimensionMnemonic, string dimensionValue)
         {   
             var dimensionList = new DimensionValuesList();
             var metricList = new MetricValuesList();
@@ -117,12 +129,12 @@ namespace Controllers.Contollers
 
             foreach (var metric in input.Metrics)
             {
-                if (MetricRepository.Exists(metric))
+                if (_metricRepository.Exists(metric))
                 {
                     var comp = new MetricValues
                     {
                         Key = metric,
-                        Value = GenerateData(MetricRepository.GetType(metric))
+                        Value = GenerateData(_metricRepository.GetType(metric))
                     };
 
                     metricList.Add(comp);

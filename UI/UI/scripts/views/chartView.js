@@ -7,13 +7,15 @@
     'Metric',
     'Dimension',
     'ComponentButtonView',
+    'Config',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
+], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Config, Highcharts) {
 
     var chartView = BaseCompositeView.extend({
+
         template: _.template(ChartTemplate),
 
         events: {
@@ -39,9 +41,7 @@
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
             }
-            this.selectedDimension = new Dimension(dimensions[0]);
-
-            
+            this.selectedDimension = new Dimension(dimensions[0]);  
         },
 
         render: function (einstein, dataFiler) {
@@ -50,7 +50,6 @@
                 from = this.startDate;
                 to = this.startDate;
             } else {
-                //                console.log(dataFiler);
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
             }
@@ -157,8 +156,7 @@
             var self = this;
 
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein',
-                //url: 'http://localhost:5000/api/Einstein',
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
@@ -170,8 +168,6 @@
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
                 }
             });
 

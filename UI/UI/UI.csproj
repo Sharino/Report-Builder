@@ -94,6 +94,7 @@
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
+    <Content Include="scripts\metricDimensionMap.js" />
     <Content Include="scripts\models\dashboard.js" />
     <Content Include="scripts\models\dashboardComponent.js" />
     <Content Include="scripts\models\dimension.js" />
@@ -113,7 +114,6 @@
     <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\dimensionListView.js" />
-    <Content Include="scripts\views\generateButtons.js" />
     <Content Include="scripts\views\generateView.js" />
     <Content Include="scripts\views\highchartsChartView.js" />
     <Content Include="scripts\views\highchartsTimelineView.js" />
@@ -124,6 +124,7 @@
     <Content Include="scripts\views\metricListView.js" />
     <Content Include="scripts\views\componentView.js" />
     <Content Include="scripts\lib\page-split.js" />
+    <Content Include="scripts\views\tableView.js" />
     <Content Include="scripts\views\timelineView.js" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\styles.css" />

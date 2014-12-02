@@ -40,6 +40,7 @@
 
         /* Other */
         'Export':               'scripts/export',
+        'MetricDimensionMap':   'scripts/metricDimensionMap',
 
         /* Base Views */
         'BaseDestructableView': 'scripts/views/baseDestructableView',
@@ -180,8 +181,6 @@
 
 require(['Router', 'Config', 'adform-loader', 'page-split'],
     function (Router, Config) {
-        //console.log(Config);
-
         var app = new Router();
         Backbone.history.start();
     });

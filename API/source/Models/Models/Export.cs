@@ -11,6 +11,7 @@ namespace Models.Models
     public class ExportRequest
     {
         public string Title { get; set; }
+        public string Language { get; set; }
         public string StartDate { get; set; }
         public string EndDate { get; set; }
         public string GeneratedDate { get; set; }

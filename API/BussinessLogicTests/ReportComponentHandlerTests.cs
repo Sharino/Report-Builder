@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using BussinessLogic.Handlers.ReportComponentHandlers;
-using Contracts.Responses;
 using DataLayer.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Contracts.DTO;
 using Models.Models;
 using Moq;
 
