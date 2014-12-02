@@ -34,11 +34,17 @@
             this.selectedDimension = new Dimension(dimensions[0]);
             this.selectedDimension.fetch();
 
+            if (!String.prototype.includes) {
+                String.prototype.includes = function () {
+                    return String.prototype.indexOf.apply(this, arguments) !== -1;
+                };
+            }
         },
 
         render: function (einstein, dataFiler) {
             if (!einstein || !dataFiler) {
-                this.initEinstein(this.startDate, this.startDate);
+                //this.initEinstein(this.startDate, this.startDate);
+                einstein = 'garbage';
                 from = this.startDate;
                 to = this.startDate;
             } else {
@@ -70,6 +76,8 @@
             }));
 
             this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
+
+            //this.$el.find('#table th').append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;
@@ -195,6 +203,7 @@
                     this.render(this.einstein, this.dataFilter);
 
                     this.$el.find(sortableHeader).append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-up"></i></a></div>');
+
                 }
                 this.sortDirection *= -1;
             }
@@ -203,7 +212,6 @@
             this.$el.find(sortableHeader).addClass('active');
             this.$el.find(sortableHeader).siblings('th').append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
 
-            this.$el.find(e.currentTarget).addClass('active');
         },
 
         getTotalValues: function () {
@@ -214,7 +222,7 @@
                         var sum = 0;
                         for (var j = 0, jLen = this.einstein.length; j < jLen; j++) {
                             var strVal = this.einstein[j].MetricValues[i].Value;
-                            sum += strVal.contains(".") || strVal.contains(",") ? parseFloat(strVal) : parseInt(strVal);
+                            sum += strVal.includes(".") || strVal.includes(",") ? parseFloat(strVal) : parseInt(strVal);
                         }
                         values.push(Math.round(sum * 100) / 100);
                     }
