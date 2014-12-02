@@ -90,8 +90,7 @@
                 einstein: einstein,
                 selectedMetricsNames: selectedMetricsNames,
             }));
-
-
+            
             this.renderSubview("#date-filter", new DateFilterView({
                 from: from,
                 to: to

@@ -7,13 +7,15 @@
 
         initialize: function (position, model, dashboard) {
             this.model = model;
-            this.position = position;
+            this.position = position - 1; 
             this.originDashboard = dashboard;
-            console.log(dashboard);
+
+            console.log("buttonview", this.model);
+            console.log("buttonview", this.position);
+            console.log("buttonview", this.originDashboard);
         },
 
         render: function () {
-            console.log(this.model, this.position, this.originDashboard);
             this.$el.html(this.template({
                 Dashboard: this.originDashboard,
                 Position: this.position,
