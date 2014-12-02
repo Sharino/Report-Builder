@@ -11,7 +11,6 @@
 
         defaults: function () {
             this.set({
-                Title: ""
             });
         },
 

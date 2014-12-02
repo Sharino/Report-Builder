@@ -157,16 +157,16 @@
             var self = this;
 
             stoneAlone.fetch({
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
-//                url: 'http://localhost:5000/api/Einstein/Data',
+                url: 'http://37.157.0.42:33896/api/Einstein',
+                //url: 'http://localhost:5000/api/Einstein',
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                    this.einstein = response.attributes.ComponentValues;
-                    this.dataFilter = response.attributes.Filters.DateFilter;
+                    self.einstein = response.attributes.ComponentValues;
+                    self.dataFilter = response.attributes.Filters.DateFilter;
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {

@@ -73,6 +73,7 @@
         'KPIView':              'scripts/views/kpiView',
         'TimelineView':         'scripts/views/timelineView',
         'ChartView':            'scripts/views/chartView',
+        'TableView':            'scripts/views/tableView',
         'HighchartsTimelineView': 'scripts/views/highchartsTimelineView',
         'HighchartsChartView':  'scripts/views/highchartsChartView',
         'DateFilterView':       'scripts/views/dateFilterView',
@@ -82,10 +83,7 @@
         'ComponentButtonView':  'scripts/views/componentButtonView',
 
         /* Router dependencies */
-        'Router':               'scripts/routers/router',
-
-        'Tests': 'tests',
-
+        'Router':               'scripts/routers/router'
     },
 
     shim: {
@@ -171,7 +169,7 @@
 
         'Export': {
             exports: "Export"
-        },
+        }
     }
 });
 

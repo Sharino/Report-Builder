@@ -163,8 +163,8 @@
                 type: 'POST',
                 processData: false,
                 success: function (response) {
-                    this.einstein = response.attributes.ComponentValues;
-                    this.dataFilter = response.attributes.Filters.DateFilter;
+                    self.einstein = response.attributes.ComponentValues;
+                    self.dataFilter = response.attributes.Filters.DateFilter;
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
