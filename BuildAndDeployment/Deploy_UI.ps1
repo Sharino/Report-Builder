@@ -31,15 +31,6 @@ $servers = @(
 
 $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
 
-# Build
-
-#Write-Host `n:: Restoring nuget packages`n
-#Execute-Checked-Command "$nugetPath restore ..\UI\UI.sln -verbosity detailed"
-
-#Write-Host `n:: Building solution`n
-#Execute-Checked-Command "$msBuildPath ..\UI\UI.sln /p:Configuration=$Configuration /p:Platform=`"Any CPU`" /p:verbosity=diag"
-
-
 # Deploy UI
 
 $serviceFilesLocation = "\\{0}\Client\"
@@ -61,6 +52,17 @@ foreach ($server in $servers)
     Write-Host `n:: Destination $destination`n
 
     Copy-Item -Path $source -Destination $destination -Recurse -Force  
+	
+	Write-Host `n:: Copying new Congif files`n
+    $source = "C:\Report Builder\Client\scripts\config\config.Release.js"
+    $destination = "C:\Report Builder\Client\scripts\config\config.js"
+    Write-Host `n:: Source  $source`n
+    Write-Host `n:: Destination $destination`n
+	
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  
+	
+	Write-Host `n:: Transforming config to $Configuration`n  
+	
 	
 	# Load IIS module:
 	Import-Module WebAdministration
