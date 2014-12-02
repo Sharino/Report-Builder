@@ -11,7 +11,6 @@ $ErrorActionPreference = "Stop"
 # Execute release
 #*************************************************************************
 
-
 $serviceName = "Report Builder"
 $sevenZipPath = "D:\WindowsServices\Tools\7-Zip\7za.exe"
 $programFiles = "D:\WindowsServices\Report.Builder.API\Service\*"
@@ -19,10 +18,10 @@ $backupLocation = "\\{0}\WindowsServices\Report.Builder.API\Backup"
 $backupFolder = "D:\WindowsServices\Report.Builder.API\Backup"
 
 $serviceFilesLocation = "\\{0}\api\"
+$configFilesLocation = "\\{0}\api\ApiHost.exe.config"
 
 $msBuildPath = "$env:windir\Microsoft.NET\Framework64\v4.0.30319\MSBuild.exe"
 $nugetPath = "..\.nuget\nuget.exe"
-
 
 $servers = @(
     @{Name="WIN-5UJ4T7I4AS4"; IP="172.22.3.236"; Domain="WIN-5UJ4T7I4AS4.dev3.adform.com";}
@@ -58,6 +57,11 @@ foreach ($server in $servers)
     $destination = ($serviceFilesLocation -f $serverDomain)
     Copy-Item -Path $source -Destination $destination -Recurse -Force -Verbose -ErrorAction Stop
     Write-Host "Done"
+
+	Write-Host `n:: Copying new Config files`n
+    $source = "..\API\source\Host\App.config.release"
+	$destination = ($configFilesLocation -f $serverDomain)
+    Copy-Item -Path $source -Destination $destination -Recurse -Force -Verbose -ErrorAction Stop
 
     Write-Host `n:: Starting service`n
     Invoke-Command -Session $session { param($serviceName) Start-Service $serviceName; Write-Host "Service status: " (Get-Service $serviceName).Status } -ArgumentList $serviceName
