@@ -34,7 +34,7 @@ $deploymentTime = (Get-Date -UFormat %Y-%m-%d_%H.%M)
 # Deploy UI
 
 $serviceFilesLocation = "\\{0}\Client\"
-
+$configFilesLocation = "\\{0}\Client\scripts\config\config.js"
 foreach ($server in $servers)
 { 
 	$serverIP = $server.IP
@@ -50,19 +50,15 @@ foreach ($server in $servers)
     $destination = ($serviceFilesLocation -f $serverIP)
     Write-Host `n:: Source  $source`n
     Write-Host `n:: Destination $destination`n
-
-    Copy-Item -Path $source -Destination $destination -Recurse -Force  
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  	
 	
-	Write-Host `n:: Copying new Congif files`n
-    $source = "C:\Report Builder\Client\scripts\config\config.Release.js"
-    $destination = "C:\Report Builder\Client\scripts\config\config.js"
+	#CONFIG
+	Write-Host `n:: Copying new Config files`n
+    $source = "..\UI\UI\scripts\config\config.Release.js"
+	$destination = ($configFilesLocation -f $serverIP)
     Write-Host `n:: Source  $source`n
-    Write-Host `n:: Destination $destination`n
-	
-    Copy-Item -Path $source -Destination $destination -Recurse -Force  
-	
-	Write-Host `n:: Transforming config to $Configuration`n  
-	
+    Write-Host `n:: Destination $destination`n	
+    Copy-Item -Path $source -Destination $destination -Recurse -Force  	
 	
 	# Load IIS module:
 	Import-Module WebAdministration
