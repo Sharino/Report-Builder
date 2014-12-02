@@ -22,10 +22,10 @@ namespace BussinessLogic.Handlers.ExportHandlers
 
                 var page = document.Pages.Add();
 
-                page.Paragraphs.Add(new TextFragment("Generated on " + request.GeneratedDate) { HorizontalAlignment = HorizontalAlignment.Right });
+                page.Paragraphs.Add(new TextFragment("Generated on " + request.GeneratedDate) { HorizontalAlignment = HorizontalAlignment.Left });
                 if (!string.IsNullOrEmpty(request.Language))
                 {
-                    page.Paragraphs.Add(new TextFragment("Language: " + request.Language) {HorizontalAlignment = HorizontalAlignment.Right});
+                    page.Paragraphs.Add(new TextFragment("Language: " + request.Language) {HorizontalAlignment = HorizontalAlignment.Left});
                 }
                 page.Paragraphs.Add(new TextFragment());
                 page.Paragraphs.Add(new TextFragment("From: " + request.StartDate) { HorizontalAlignment = HorizontalAlignment.Left });

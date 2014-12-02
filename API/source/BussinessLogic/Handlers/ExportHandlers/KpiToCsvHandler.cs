@@ -41,9 +41,9 @@ namespace BussinessLogic.Handlers.ExportHandlers
                 using (var sw = new StreamWriter(fs))
                 {
                     sw.WriteLine(generatedDate);
+                    sw.WriteLine(dates);
                     sw.WriteLine(header);
                     sw.WriteLine(content);
-                    sw.WriteLine(dates);
                     sw.Close();
                     fs.Close();
                 }

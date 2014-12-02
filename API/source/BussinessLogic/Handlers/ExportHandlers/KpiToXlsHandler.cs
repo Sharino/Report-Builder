@@ -29,9 +29,9 @@ namespace BussinessLogic.Handlers.ExportHandlers
                     cells[1, 1].PutValue(request.Language);
                 }
 
-                cells[2, 0].PutValue("From: ");
+                cells[2, 0].PutValue("From:");
                 cells[2, 1].PutValue(request.StartDate);
-                cells[3, 0].PutValue("To " + request.EndDate);
+                cells[3, 0].PutValue("To:");
                 cells[3, 1].PutValue(request.EndDate);
                 
                 var row = 5;
