@@ -1,56 +1,89 @@
-﻿<div style="text-align: right; margin-bottom: 6px;">
-    <a class="create btn btn-success"><i class="adf-icon-small-add-circle"></i><b>New Component</b></a>
+﻿<div id="table-container">
+    <div class="table-toolbar">
+        <div class="btn-group control-buttons">
+            <div style="margin-bottom: 6px;">
+                <a class="create btn btn-success"><i class="adf-icon-small-add-circle"></i><b>New Component</b></a>
+            </div>
+
+        </div>
+        <div class="search-container pull-right">
+            <input id="components-search" type="text" class="input-xlarge" title="Search by full name, email or company" placeholder="Search..." />
+            <span class="add-in"><i class="adf-icon-small-search"></i></span>
+        </div>
+    </div>
+    <table class="table heading-separation table-hover align-middle">
+        <thead>
+            <tr>
+                <th class="col-row-start"></th>
+                <th class="col-type sortable" style="width: 85px;">
+                    Type
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-title sortable">
+                    Name
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-created sortable">
+                    Created
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-edited sortable">
+                    Edited
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-actions" style="width: 125px;"></th>
+                <th class="col-row-end"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(Components, function(model) { %>
+            <tr id="<%= model.Id %>">
+                <td class="col-row-start click"></td>
+                <td class="col-type click">
+                    <% if (!model.IsGenerated) { %>
+                    <% if (model.Type === 0) { %>
+                    <span class="label label-orange1">KPI</span>
+                    <% } else if (model.Type === 1) { %>
+                    <span class="label label-blue1">KPI</span>
+                    <% } else if (model.Type === 2) { %>
+                    <span class="label label-green1">Table</span>
+                    <% } else if (model.Type === 3) { %>
+                    <span class="label label-orange2">Timeline</span>
+                    <% } else if (model.Type === 4) { %>
+                    <span class="label label-yellow1">Chart</span>
+                    <% } %>
+                    <% } else { %>
+                    <i class="adf-icon-alt-check"></i>
+                    <% } %>
+                </td>
+                <td class="col-title click">
+                    <div class="in-fixed-cell"> <a href=""><%= model.Title %></a></div>
+                </td>
+                <td class="col-created click">
+                    <div class="date-container">
+                        <%
+                        var dateOffset = new Date().getTimezoneOffset()*(-1);
+                        var creationDate = moment(new Date(model.SubmissionDate)).add(dateOffset, "m");
+                        var modificationDate = moment(new Date(model.ModificationDate)).add(dateOffset, "m");
+                        %>
+                        <div class="year"><%= creationDate.format("YYYY-MM-DD") %></div>
+                        <div class="time"><%= creationDate.format("HH:mm") %> </div>
+                    </div>
+                </td>
+                <td class="col-edited click">
+                    <div class="date-container">
+                        <div class="year"><%= modificationDate.format("YYYY-MM-DD") %></div>
+                        <div class="time"><%= modificationDate.format("HH:mm") %> </div>
+                    </div>
+                </td>
+                <td class="col-actions">
+                    <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
+                    <a class="edit btn btn-transparent pull-right">Edit</a>
+                </td>
+                <td class="col-row-end"></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div id="components-search-noresults" style="text-align: center; display: none; padding: 5px;">No results.</div>
 </div>
-<table class="table heading-separation table-hover align-middle">
-    <thead>
-        <tr>
-            <th class="col-row-start"></th>
-            <th class="col-type sortable" style="width: 85px;">Type
-                <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
-            </th>
-            <th class="col-title sortable">Name</th>
-            <th class="col-date sortable">Created</th>
-            <th class="col-date sortable">Edited</th>
-            <th class="col-actions" style="width: 125px;"></th>
-            <th class="col-row-end"></th>
-        </tr>
-    </thead>
-    <tbody>
-        <% _.each(Components, function(model) { %>
-        <tr id="<%= model.Id %>">
-            <td class="col-row-start click"></td>
-            <td class="col-type click">
-                <% if (!model.IsGenerated) { %>
-                <% if (model.Type === 0) { %>
-                <span class="label label-orange1">KPI</span>
-                <% } else if (model.Type === 1) { %>
-                <span class="label label-blue1">KPI</span>
-                <% } else if (model.Type === 2) { %>
-                <span class="label label-green1">Table</span>
-                <% } else if (model.Type === 3) { %>
-                <span class="label label-orange2">Timeline</span>
-                <% } else if (model.Type === 4) { %>
-                <span class="label label-yellow1">Chart</span>
-                <% } %>
-                <% } else { %>
-                <i class="adf-icon-alt-check"></i>
-                <% } %>
-            </td>
-            <td class="col-title click">
-                <div class="in-fixed-cell"> <a href=""><%= model.Title %></a></div>
-            </td>
-            <td class="col-created click">
-                <div class="date-container"> <div class="year"><%= model.SubmissionDate %></div></div>
-            </td>
-            <td class="col-edited click">
-                <div class="date-container"> <div class="year"><%= model.ModificationDate %></div></div>
-            </td>
-            <td class="col-actions">
-                <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
-                <a class="edit btn btn-transparent pull-right">Edit</a>
-            </td>
-            <td class="col-row-end"></td>
-        </tr>
-        <% }); %>
-    </tbody>
-</table>

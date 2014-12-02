@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using Models.Models;
+
 namespace DataLayer.Repositories
 {
     public interface IDimensionsRepository
@@ -12,13 +13,16 @@ namespace DataLayer.Repositories
         //string GetType(string mnemonic);
         bool Exists(string dimension);
     }
+
     public class DimensionRepository : IDimensionsRepository
     {
         private readonly SqlConnection _connection;
+
         public DimensionRepository()
         {
             _connection = CreateDbConnection();
         }
+
         private static SqlConnection CreateDbConnection()
         {
             var connectionString = ConfigurationManager.AppSettings["connectionString"];
@@ -27,34 +31,23 @@ namespace DataLayer.Repositories
 
         public bool Exists(string mnemonic)
         {
-            int count = 0;
-            try
-            {
-                const string sql = @"SELECT COUNT(*) FROM [dbo].[Dimensions] WHERE [Mnemonic] = @DimensionMnemonic";
-                using (var command = new SqlCommand(sql, _connection))
-                {
-                    _connection.Open();
-                    command.Parameters.AddWithValue("@DimensionMnemonic", mnemonic);
-                    object result = command.ExecuteScalar();
-                    if (result != null)
-                    {
-                        count = Convert.ToInt32(result);
-                    }
-                    _connection.Close();
-                }
-            }
-            catch (Exception exception)
-            {
-                const string filePath = @"..\EinsteinError.txt";
+           // int count = 0;
 
-                using (StreamWriter writer = new StreamWriter(filePath, true))
-                {
-                    writer.WriteLine("Message :" + exception.Message + "<br/>" + Environment.NewLine + "StackTrace :" + exception.StackTrace +
-                       "" + Environment.NewLine + "Date :" + DateTime.Now.ToString());
-                    writer.WriteLine(Environment.NewLine + "-----------------------------------------------------------------------------" + Environment.NewLine);
-                }
+            const string sql = @"SELECT COUNT(*) FROM [dbo].[Dimensions] WHERE [Mnemonic] = @DimensionMnemonic";
+            using (var command = new SqlCommand(sql, _connection))
+            {
+                _connection.Open();
+                command.Parameters.AddWithValue("@DimensionMnemonic", mnemonic);
+                int count = (int)command.ExecuteScalar();
+                //if (result != null)
+                //{
+                //    count = Convert.ToInt32(result);
+                //}
+
+                _connection.Close();
+                Console.WriteLine(count);
+                return count > 0;
             }
-            return count > 0;
         }
     }
 }

@@ -7,13 +7,15 @@
     'Metric',
     'Dimension',
     'ComponentButtonView',
+    'Config',
     'Highcharts',
     'spin',
     'adform-loader',
     'bootstrap-dropdown'
-], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Highcharts) {
+], function (BaseCompositeView, ChartTemplate, DateFilterView, HighchartsChartView, Einstein, Metric, Dimension, ComponentButtonView, Config, Highcharts) {
 
     var chartView = BaseCompositeView.extend({
+
         template: _.template(ChartTemplate),
 
         events: {
@@ -88,8 +90,7 @@
                 einstein: einstein,
                 selectedMetricsNames: selectedMetricsNames,
             }));
-
-
+            
             this.renderSubview("#date-filter", new DateFilterView({
                 from: from,
                 to: to

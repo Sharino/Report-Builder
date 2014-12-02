@@ -1,7 +1,8 @@
 ﻿define('Config', [
 ], function () {
     var baseUrl = "http://localhost:33894/api/";
-    var einsteinUrl = "http://37.157.0.42:33896/api/";
+    //var einsteinUrl = "http://37.157.0.42:33896/api/";
+    var einsteinUrl = "http://localhost:5000/api/";
 
     var Config = {
         ComponentSettings: {

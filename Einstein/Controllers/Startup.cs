@@ -1,7 +1,5 @@
 ﻿using System.Net.Http.Headers;
 using System.Web.Http;
-using System.Web.Http.Cors;
-using BussinessLogic.Handlers;
 using Owin;
 
 
@@ -21,13 +19,13 @@ namespace Controllers
             configuration.EnableCors();
             configuration.Routes.MapHttpRoute(
                 name: "API",
-                routeTemplate: "api/{controller}/{request}",//"/{action}/{request}"//,
+                routeTemplate: "api/{controller}/{request}",
                 defaults: new { request = RouteParameter.Optional }
             );
 
             //configuration.MessageHandlers.Add(new CorsHandler());
-            configuration.Formatters.Clear();
-            configuration.Formatters.Add(new System.Net.Http.Formatting.JsonMediaTypeFormatter());
+            //configuration.Formatters.Clear();
+            //configuration.Formatters.Add(new System.Net.Http.Formatting.JsonMediaTypeFormatter());
             configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("application/json"));
             //configuration.Formatters.JsonFormatter.SupportedMediaTypes.Add(new MediaTypeHeaderValue("text/html"));
             // Register the WebAPI to the pipeline

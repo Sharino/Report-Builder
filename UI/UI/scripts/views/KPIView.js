@@ -32,14 +32,11 @@
 
         render: function (einstein, dataFiler) {
             var from, to;
-            var not = false;
 
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
                 from = this.startDate;
                 to = this.startDate;
-
-                not = true;
             } else {
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
@@ -58,11 +55,7 @@
                 to: to
             }));
 
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
-
-            if (not) {
-                this.$el.loader();
-            }
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.originDashboard));
 
             return this;
         },
