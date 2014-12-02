@@ -108,7 +108,7 @@
             tempComponent.fetch({
                 success: function (model, response) {
                     self.showView("#component", new ComponentView({ model: model }));
-                    $("#app > div > div").addClass('page-split').pageSplit();
+                    $("#app > div > div > div").addClass('page-split').pageSplit();
                 },
                 error: function (model, response) {
                 }
