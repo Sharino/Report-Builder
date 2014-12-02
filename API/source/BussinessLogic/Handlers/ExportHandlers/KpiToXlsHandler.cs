@@ -11,7 +11,7 @@ namespace BussinessLogic.Handlers.ExportHandlers
     public class KpiToXlsHandler
     {
         public List<ErrorDto> Errors; 
-        public string HandleCore(ExportRequest request)
+        public string HandleCore(ExportRequest request, string language)
         {
             try
             {
@@ -20,7 +20,7 @@ namespace BussinessLogic.Handlers.ExportHandlers
 
                 var cells = worksheet.Cells;
 
-                cells[0, 0].PutValue(request.GeneratedDate);
+                cells[0, 0].PutValue("Generated on " + request.GeneratedDate + " (" + language + ")");
                 cells[2, 0].PutValue(request.StartDate);
                 cells[2, 1].PutValue(request.EndDate);
 

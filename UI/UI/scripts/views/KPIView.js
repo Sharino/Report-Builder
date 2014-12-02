@@ -140,7 +140,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportCsv(request, {
@@ -168,7 +168,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportPdf(request, {
@@ -196,7 +196,7 @@
                 Values: compValues,
                 StartDate: $("#picker").find("input")[0].value,
                 EndDate: $("#picker2").find("input")[0].value,
-                GeneratedDate: moment().format('YYYY-MM-DD')
+                GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
             Export.exportXls(request, {

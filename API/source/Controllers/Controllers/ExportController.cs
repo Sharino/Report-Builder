@@ -12,13 +12,13 @@ namespace Controllers.Controllers
 	public class ExportController : ApiController
 	{
 		[HttpPost]
-		public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ",")
+        public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ",", string language = "EN")
 		{
 			if (request != null)
 				if (request.Values.Count > 0)
 				{
 				    var handler = new KpiToCsvHandler();
-                    var fileName = handler.HandleCore(request, separator);
+                    var fileName = handler.HandleCore(request, separator, language);
 
 				    if (handler.Errors != null && handler.Errors.Count > 0)
 				    {
@@ -30,14 +30,14 @@ namespace Controllers.Controllers
 		}
 
 		[HttpPost]
-		public HttpResponseMessage KpiToPdf(ExportRequest request)
+		public HttpResponseMessage KpiToPdf(ExportRequest request, string language = "EN")
 		{
 			if (request != null)
 			{
 				if (request.Values.Count > 0)
 				{
 				    var handler = new KpiToPdfHandler();
-				    var fileName = handler.HandleCore(request);
+				    var fileName = handler.HandleCore(request, language);
 
                     if (handler.Errors != null && handler.Errors.Count > 0)
                     {
@@ -50,14 +50,14 @@ namespace Controllers.Controllers
 		}
 
         [HttpPost]
-        public HttpResponseMessage KpiToXls(ExportRequest request)
+        public HttpResponseMessage KpiToXls(ExportRequest request, string language = "EN")
         {
             if (request != null)
             {
                 if (request.Values.Count > 0)
                 {
                     var handler = new KpiToXlsHandler();
-                    var fileName = handler.HandleCore(request);
+                    var fileName = handler.HandleCore(request, language);
 
                     if (handler.Errors != null && handler.Errors.Count > 0)
                     {

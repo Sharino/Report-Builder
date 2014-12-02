@@ -12,7 +12,7 @@ namespace BussinessLogic.Handlers.ExportHandlers
     {
         public List<ErrorDto> Errors;
 
-        public string HandleCore(ExportRequest request)
+        public string HandleCore(ExportRequest request, string language)
         {
             try
             {
@@ -22,7 +22,7 @@ namespace BussinessLogic.Handlers.ExportHandlers
 
                 var page = document.Pages.Add();
 
-                page.Paragraphs.Add(new TextFragment(request.GeneratedDate) { HorizontalAlignment = HorizontalAlignment.Right });
+                page.Paragraphs.Add(new TextFragment("Generated on " + request.GeneratedDate + " (" + language + ")") { HorizontalAlignment = HorizontalAlignment.Right });
                 page.Paragraphs.Add(new TextFragment());
                 page.Paragraphs.Add(new TextFragment(request.StartDate + " - " + request.EndDate) { HorizontalAlignment = HorizontalAlignment.Left });
                 page.Paragraphs.Add(new TextFragment());

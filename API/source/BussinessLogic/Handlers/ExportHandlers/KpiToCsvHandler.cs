@@ -12,11 +12,11 @@ namespace BussinessLogic.Handlers.ExportHandlers
     {
         public List<ErrorDto> Errors;
 
-        public string HandleCore(ExportRequest request, string separator)
+        public string HandleCore(ExportRequest request, string separator, string language)
         {
             try
             {
-                var generatedDate = new StringBuilder(request.GeneratedDate);
+                var generatedDate = new StringBuilder("Generated on " + request.GeneratedDate + separator + language);
                 var dates = new StringBuilder(request.StartDate + separator + request.EndDate);
                 var header = new StringBuilder();
                 var content = new StringBuilder();
