@@ -17,6 +17,7 @@
         },
 
         initialize: function (parentModel, allMetrics) {
+            MetricDimensionMap.metricView = this;
             Config.metricView = this;
             this.metricArray = [];
             this.selectReferences = [];

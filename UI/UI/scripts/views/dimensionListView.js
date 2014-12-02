@@ -19,6 +19,7 @@
 
         initialize: function (parentModel, allDimensions) {
             Config.dimensionView = this;
+            MetricDimensionMap.dimensionView = this;
             this.dimensionArray = [];
             this.selectReferences = [];
             this.model = parentModel;

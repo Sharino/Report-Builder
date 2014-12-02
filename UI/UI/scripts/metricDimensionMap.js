@@ -31,7 +31,6 @@
 
         calculateMetricMap: function () {
             this.getMap();
-            console.log(map);
             if (this.metricView && this.dimensionView && map) {
                 var array = this.dimensionView.dimensionArray;
                 var dimensionMap = map.DimensionMappings;

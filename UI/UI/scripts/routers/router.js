@@ -36,7 +36,7 @@
 
         initialize: function () {
             Config.getMap();
-            MetricDimensionMap.getMap();
+          
             this.showMenu(new MenuView());
             this.on("route", this.menu.routeChangedAction);
         },

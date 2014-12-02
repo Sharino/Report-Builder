@@ -39,9 +39,7 @@
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
             }
-            this.selectedDimension = new Dimension(dimensions[0]);
-
-            
+            this.selectedDimension = new Dimension(dimensions[0]);  
         },
 
         render: function (einstein, dataFiler) {
@@ -50,7 +48,6 @@
                 from = this.startDate;
                 to = this.startDate;
             } else {
-                //                console.log(dataFiler);
                 from = $("#picker").find("input")[0].value;
                 to = $("#picker2").find("input")[0].value;
             }
@@ -170,8 +167,6 @@
                     self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
                 },
                 error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
                 }
             });
 
