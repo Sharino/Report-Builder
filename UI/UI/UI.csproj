@@ -94,6 +94,7 @@
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
+    <Content Include="scripts\metricDimensionMap.js" />
     <Content Include="scripts\models\dashboard.js" />
     <Content Include="scripts\models\dashboardComponent.js" />
     <Content Include="scripts\models\dimension.js" />

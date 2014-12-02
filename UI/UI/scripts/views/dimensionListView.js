@@ -3,16 +3,16 @@
     'Dimension',
     'DimensionCollection',
     'text!templates/dimensionList.html',
+    'MetricDimensionMap',
     'Config',
     'adform-select-group',
     'jquery-sortable'
-], function (BaseCompositeView, Dimension, DimensionCollection, DimensionListTemplate, Config, ASG) {
+], function (BaseCompositeView, Dimension, DimensionCollection, DimensionListTemplate, MetricDimensionMap, Config, ASG) {
     var DimensionListView = BaseCompositeView.extend({
         template: _.template(DimensionListTemplate),
 
         events: {
             'click #addDimension': 'dimensionAddedAction',
-            //'AdformSelect:selectionChanged': 'dimensionSelectedAction',
             'click .removeDimension': 'dimensionRemovedAction',
             'AdformSelect:close': 'dimensionSelectedAction'
         },
@@ -58,7 +58,7 @@
 
             this.dimensionArray.sort(this.compareNumbers);
 
-            this.mappedDimensions = Config.calculateDimensionMap();
+            this.mappedDimensions = MetricDimensionMap.calculateDimensionMap();
             
             if (!this.mappedDimensions) {
                 this.mappedDimensions = this.allDimensions.toJSON();
@@ -125,8 +125,6 @@
         },
 
         dimensionSelectedAction: function (e) {
-            //var reference = $(e.target).data("AdformSelect");
-
             var reference = e;
 
             var selectReferenceID = null;
@@ -168,8 +166,7 @@
                     draggedItem = this.dimensionArray[i];
                 }
             }
-
-
+            
             if (ui.oldindex > ui.item.index()) {                                    // User dragged left
                 for (var i = ui.item.index() ; i < ui.oldindex; i++) {              // For every item in between new id and old id we increase Order, because it shifted right by 1
                     var item = this.dimensionArray[i];

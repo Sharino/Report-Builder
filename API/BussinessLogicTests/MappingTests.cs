@@ -55,23 +55,7 @@ namespace UnitTests
                 {
                     Dimensions = new List<Dimension> {new Dimension {DimensionId = 1}},
                     Filters = new List<Filter> {new Filter {FilterId = 1}},
-                    Metrics = new List<Metric>
-                    {
-                        new Metric
-                        {
-                            MetricId = 1,
-                            DataType = "integer",
-                            Description = "Test Metric",
-                            DisplayName = "Test Metric",
-                            Mnemonic = "TestMetric",
-                            Group = new MetricGroup
-                            {
-                                GroupName = "Test Group",
-                                GroupId = 1,
-                            }
-
-                        }
-                    }
+                    Metrics = new List<Metric> {new Metric {MetricId = 1}}
                 }
             };
 
@@ -83,9 +67,9 @@ namespace UnitTests
             Assert.IsInstanceOfType(destination, typeof(ReportComponentDto));
             Assert.AreEqual(source.Title, destination.Title);
             Assert.AreEqual(source.Id, destination.Id);
-            Assert.AreEqual(source.Data.Metrics, destination.Metrics);
-            Assert.AreEqual(source.Data.Filters, destination.Filters);
-            Assert.AreEqual(source.Data.Dimensions, destination.Dimensions);
+            Assert.AreEqual(source.Data.Metrics.Count, destination.Metrics.Count);
+            Assert.AreEqual(source.Data.Filters.Count, destination.Filters.Count);
+            Assert.AreEqual(source.Data.Dimensions.Count, destination.Dimensions.Count);
             Assert.AreEqual(source.Type, destination.Type);
         }
 
