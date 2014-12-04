@@ -26,7 +26,9 @@
 
         events: {
             'click .edit-form': 'edit',
-            'click .del': 'deleteDashboardComponent'
+            'click .del': 'deleteDashboardComponent',
+            'click .up': 'moveDashboardComponentUp',
+            'click .down': 'moveDashboardComponentDown',
         },
 
         initialize: function () {
@@ -93,6 +95,98 @@
                     { title: "Cancel", cssClass: "btn-cancel" }
                 ]
             });
+        },
+
+        moveDashboardComponentUp: function(e) {
+            e.preventDefault();
+
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+            console.log("id", id);
+
+            var compIds = this.model.get("ComponentIds");
+            console.log("cds", compIds);
+
+            if (compIds.length > 0) {
+                var idIndex = compIds.indexOf(id);
+                console.log("idIndex", idIndex);
+                var prevIdIndex = idIndex - 1;
+
+                if (idIndex > 0) {
+
+                    var prevId = compIds[prevIdIndex];
+                    console.log("prevId", prevId);
+
+                    compIds = this.arrayMove(compIds, idIndex, prevIdIndex);
+                    //this.model.set("ComponentIds", compIds);
+                    console.log("cds after", compIds);
+                    this.componentView = this.arrayMove(this.componentView, idIndex, prevIdIndex);
+                    console.log("this.componentView", this.componentView);
+                
+
+                    for (var i = 0, len = this.subViews.length; i < len; i++) {
+                        if (this.subViews[i].id == id) {
+                            for (var j = 0; j < len; j++) {
+                                if (this.subViews[j].id == prevId) {
+                                    this.subViews = this.arrayMove(this.subViews, i, j);
+                                    console.log("this.subViews", this.subViews);
+
+                                    //this.model.set("ComponentIds", this.subViews);
+
+                                    console.log(i, j);
+
+                                    $(this.el).find("#component-" + i).before($(this.el).find("#component-" + j));
+                                    //$(this.el).find("#component-" + i + ".form-horizontal.well.component").parent().insertBefore("#component-" + j + ".form-horizontal.well.component").parent();
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        },
+
+        moveDashboardComponentDown: function (e) {
+            e.preventDefault();
+
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var compIds = this.model.get("ComponentIds");
+
+            if (compIds.length > 0) {
+                var idIndex = compIds.indexOf(id);
+                var nextIdIndex = idIndex + 1;
+
+                if (idIndex > -1 && idIndex < compIds.length - 2) {
+
+                    var nextId = compIds[nextIdIndex];
+
+                    compIds = this.arrayMove(compIds, idIndex, nextIdIndex);
+                    this.componentView = this.arrayMove(this.componentView, idIndex, nextIdIndex);
+
+                    for (var i = 0, len = this.subViews.length; i < len; i++) {
+                        if (this.subViews[i].id == id) {
+                            for (var j = 0; j < len; j++) {
+                                if (this.subViews[j].id == nextId) {
+                                    this.subViews = this.arrayMove(this.subViews, i, j);
+
+                                    //this.model.set("ComponentIds", this.subViews);
+                                    $(this.el).find("#component-" + i).after($(this.el).find("#component-" + j));
+                                    break;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
+        },
+
+        arrayMove: function (arr, fromIndex, toIndex) {
+            var element = arr[fromIndex];
+            arr.splice(fromIndex, 1);
+            arr.splice(toIndex, 0, element);
+            return arr;
         },
 
         edit: function (e) {
