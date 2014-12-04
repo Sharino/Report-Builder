@@ -18,6 +18,12 @@
     height: 30px;
     margin-bottom: 0px;
 }
+label.control-label {
+    font-weight: bold;
+}
+label.MetricDimensionTitles {
+    color: #000;
+}
 /*
 #metric-list {
     min-height: 129px;
@@ -30,6 +36,18 @@
 .formated {
     min-width: 260px;
     max-width: 260px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.formated-main {
+    min-width: 260px;
+    max-width: 260px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+.centered {
+    margin-left: auto !important;
+    margin-right: auto !important;
 }
 .adform-ui-v2 .page-split>.page-split-row>section, .adform-ui-v2 .main-content>.page-split-row>section {
     overflow: visible;

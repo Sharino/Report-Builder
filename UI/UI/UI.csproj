@@ -74,6 +74,7 @@
     <Content Include="scripts\lib\adform\adform-loader.js" />
     <Content Include="scripts\lib\adform\adform-modal.js" />
     <Content Include="scripts\lib\adform\adform-notifications.js" />
+    <Content Include="scripts\lib\adform\adform-range-selector.js" />
     <Content Include="scripts\lib\adform\adform-select-group.js" />
     <Content Include="scripts\lib\adform\adform-select.js" />
     <Content Include="scripts\lib\adform\adform-validation-2.0.js" />
@@ -82,6 +83,7 @@
     <Content Include="scripts\lib\bootstrap\bootstrap-modal.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-tooltip.js" />
     <Content Include="scripts\lib\globalize.js" />
+    <Content Include="scripts\lib\handlebars-tpl.js" />
     <Content Include="scripts\lib\handlebars.js" />
     <Content Include="scripts\lib\highcharts-theme.js" />
     <Content Include="scripts\lib\highcharts.js" />
