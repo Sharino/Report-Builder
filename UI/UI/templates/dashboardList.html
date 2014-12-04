@@ -7,20 +7,27 @@
     </div>
 </div>
 
-<table class="table table-striped heading-separation table-hover selectable-rows">
+<table class="table heading-separation table-hover align-middle">
     <thead>
         <tr>
-            <th>Title</th>
-            <th>Delete</th>
+            <th class="col-row-start"></th>
+            <th class="col-title sortable">
+                Title
+                <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+            </th>
+            <th class="col-actions" style="width: 65px;"></th>
+            <th class="col-row-end"></th>
         </tr>
     </thead>
     <tbody>
         <% _.each(Dashboards, function(model) { %>
-        <tr class="dashboard-list-item">
-            <td class="click" id="<%= model.Id %>"><%= model.Title %></td>
-            <td id="<%= model.Id %>">
+        <tr id="<%= model.Id %>">
+            <td class="col-row-start click"></td>
+            <td class="col-title click" id="<%= model.Id %>"><a href=""><%= model.Title %></a></td>
+            <td class="col-actions">
                 <a class="del btn btn-transparent pull-right" style="margin-left: 5px;"><i class="adf-icon-small-close" style="margin: -2px;"></i></a>
             </td>
+            <td class="col-row-end"></td>
         </tr>
         <% }); %>
     </tbody>

@@ -12,10 +12,10 @@
         template: _.template(dashboardListTemplate),
 
         events: {
+            'click .create': 'submitNewDashboard',
+            'click .click': 'handleClickAction',
+            'click .sortable': 'handleSortAction',
             'click .del': 'handleDeleteAction',
-            'click .dashboard-list-item>.gen': 'onGenerate',
-            'click .dashboard-list-item>.click': 'onClick',
-            'click .create': 'submitNewDashboard'
         },
 
         initialize: function () {
@@ -24,6 +24,8 @@
             }
             this.collection.on('remove', this.render, this);
             this.collection.on('fetch', this.render, this);
+
+            this.sortType = "initial";
         },
 
         render: function () {
@@ -72,9 +74,8 @@
                 className: "form"
             });
         },
-        //TODO: RENAME 
-        onClick: function (e) {
-            console.log(e);
+
+        handleClickAction: function (e) {
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("id");
@@ -83,10 +84,16 @@
             Backbone.history.navigate(routerUrl, true, true);
         },
 
+        handleSortAction: function(e) {
+            if ($(e.currentTarget).hasClass("col-title")) {
+                this._sortByTitle();
+            }
+        },
+
         handleDeleteAction: function (e) {
             e.preventDefault();
 
-            var id = $(e.currentTarget)[0].parentElement.id;
+            var id = parseInt($(e.currentTarget.parentElement.parentElement).attr("id"));
             var dashboard = this.collection.get(id);
 
             $.modal({
@@ -131,6 +138,31 @@
             this.render();
         },
 
+        _sortByTitle: function () {
+            if (this.sortType !== "nameAsc") {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                        function (item) {
+                            return item.Title;
+                        })
+                );
+                this.sortType = "nameAsc";
+                this.render();
+
+                this.$el.find("th.col-title").find(".sort-icon").removeClass('adf-icon-small-arrow-down');
+                this.$el.find("th.col-title").find(".sort-icon").addClass('adf-icon-small-arrow-up');
+            } else {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                    function (item) {
+                        return item.Title;
+                    }).reverse()
+                );
+                this.sortType = "nameDes";
+                this.render();
+
+                this.$el.find("th.col-title").find(".sort-icon").removeClass('adf-icon-small-arrow-up');
+                this.$el.find("th.col-title").find(".sort-icon").addClass('adf-icon-small-arrow-down');
+            }
+        },
     });
 
     return DashboardListView;
