@@ -38,10 +38,10 @@
                 from = this.startDate;
                 to = this.startDate;
             }
-            //            else {
-            //                from = $("#picker").find("input")[0].value;
-            //                to = $("#picker2").find("input")[0].value;
-            //            }
+            else {
+                from = $("#picker").find("input")[0].value;
+                to = $("#picker2").find("input")[0].value;
+            }
 
             this.$el.html(this.template({
                 Einstein: einstein,
