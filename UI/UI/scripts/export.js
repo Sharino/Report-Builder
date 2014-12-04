@@ -6,10 +6,20 @@
     'adform-notifications'
 ], function ($, _, Backbone, Config) {
     var Export = {
-        // Seip pamascius, reiktu tokius velnius sudet i Component modeli, kur butu Component.exportCsv(), Component.exportPdf()
-        // Kad automatiskai is modelio pasiimtu einsteinData ir pustu i CSV/PDF // Tony
-
-        // Butu gerai kad exportinti būt galima ir dashboard componentus ir report componentus, todėl į modelius kišti nepanorau // mikoloj
+        dashboardToCsv: function (data, opt) {
+            console.log(data);
+            $.ajax({
+                url: Config.ExportSettings.DashboardToCsv,
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                type: 'POST',
+                success: function (data, status, jqXHR) {
+                    if (opt.success != null) {
+                        opt.success(data, status, jqXHR);
+                    }
+                }
+            });
+        },
 
         exportCsv: function (data, opt) {
             $.ajax({

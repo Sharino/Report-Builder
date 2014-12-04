@@ -1,6 +1,16 @@
 ﻿<div style="margin: auto" class="">
     <div class="row" style="margin: auto;display: inline-block">
-        <h2 style="padding-left: 10px"><b><%= title %></b></h2>
+       <!-- <h2 style="padding-left: 10px"></h2>-->
+        <div class="btn-group" style="padding-left: 10px">
+            <a class="btn single-btn btn-tool" data-toggle="dropdown" href="#">
+                <h2><b><%= title %></b></h2>
+            </a>
+            <ul class="dropdown-menu" style="overflow: hidden">
+                <li class="csv"><a>CSV</a></li>
+                <li class="pdf"><a>PDF</a></li>
+                <li class="xls"><a>XLS</a></li>
+            </ul>
+        </div>
     </div>
     <div class="pull-right" id="date-filter"></div>
     <% for (var i = 0; i < ComponentCount; i++) { %>

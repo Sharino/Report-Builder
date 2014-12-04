@@ -16,7 +16,7 @@
 
         events: {
             'click #generateByDate': 'generateNewData',
-            'click .KpiEdit': 'edit',
+            //'click .KpiEdit': 'edit',
             'click .csv': 'csv',
             'click .pdf': 'pdf',
             'click .xls': 'xls',
@@ -37,10 +37,11 @@
                 einstein = 'garbage';
                 from = this.startDate;
                 to = this.startDate;
-            } else {
-                from = $("#picker").find("input")[0].value;
-                to = $("#picker2").find("input")[0].value;
             }
+            //            else {
+            //                from = $("#picker").find("input")[0].value;
+            //                to = $("#picker2").find("input")[0].value;
+            //            }
 
             this.$el.html(this.template({
                 Einstein: einstein,
@@ -117,15 +118,11 @@
                     self.einsteinData = response;
                     self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
-                error: function (error) {
-                }
             });
         },
 
         csv: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {
@@ -152,8 +149,6 @@
 
         pdf: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {
@@ -180,8 +175,6 @@
 
         xls: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {

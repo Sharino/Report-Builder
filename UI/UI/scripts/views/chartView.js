@@ -96,7 +96,7 @@
                 to: to
             }));
 
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position, this.model, this.originDashboard));
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.originDashboard));
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;

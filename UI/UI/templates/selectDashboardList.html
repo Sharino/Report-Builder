@@ -1,19 +1,13 @@
 ﻿<table class="table table-striped heading-separation table-hover selectable-rows">
     <thead>
         <tr>
-            <th>Id</th>
             <th>Title</th>
         </tr>
     </thead>
     <tbody>
         <% _.each(Dashboards, function(model) { %>
         <tr class="dashboard-list-item" id="<%= model.Id %>">
-            <td class=" click"><%= model.Id %></td>
             <td class="click"><%= model.Title %></td>
-            <!--<td id="<%= model.Id %>">
-            <i class="del adf-icon-small-close"></i>
-            <i class="create adf-icon-toolbar-publish"></i>
-        </td>-->
         </tr>
         <% }); %>
     </tbody>
