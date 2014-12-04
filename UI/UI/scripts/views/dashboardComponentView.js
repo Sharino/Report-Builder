@@ -106,7 +106,6 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    Backbone.history.navigate("list", { trigger: true });
                 },
                 error: function (model, response) {
                     if (response.responseJSON) {

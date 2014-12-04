@@ -9,10 +9,6 @@
             this.model = model;
             this.position = position - 1; 
             this.originDashboard = dashboard;
-
-            console.log("buttonview", this.model);
-            console.log("buttonview", this.position);
-            console.log("buttonview", this.originDashboard);
         },
 
         render: function () {

@@ -16,7 +16,7 @@
 
         events: {
             'click #generateByDate': 'generateNewData',
-            'click .KpiEdit': 'edit',
+            //'click .KpiEdit': 'edit',
             'click .csv': 'csv',
             'click .pdf': 'pdf',
             'click .xls': 'xls',
