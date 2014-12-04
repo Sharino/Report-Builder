@@ -26,7 +26,8 @@
 
         events: {
             'click .edit-form': 'edit',
-            'click .del': 'deleteDashboardComponent'
+            'click .del': 'deleteDashboardComponent',
+            'click .csv': 'csv'
         },
 
         initialize: function () {
@@ -53,9 +54,9 @@
                     {
                         title: "Yes",
                         cssClass: "btn-success",
-                        callback: function() {
+                        callback: function () {
                             comp.destroy({
-                                success: function() {
+                                success: function () {
                                     var compIds = self.model.get("ComponentIds");
                                     if (compIds.length > 0) {
                                         var idIndex = compIds.indexOf(id);
@@ -76,7 +77,7 @@
                                         }
                                     }
                                 },
-                                error: function(response) {
+                                error: function (response) {
                                     if (response.responseJSON) {
                                         response.responseJSON.forEach(function (entry) {
                                             $.notifications.display({
@@ -189,6 +190,40 @@
             }
 
             return this;
+        },
+
+        csv: function (e) {
+            e.preventDefault();
+            var dashboardData = [];
+            var compView = this.componentView;
+            for (var i = 0; i < compView.length; i++) {
+                var componentData = {
+                    Title: compView[i].model.get("Title"),
+                    Values: compView[i].einsteinData.get('ComponentValues')[0].MetricValues,
+                    GeneratedDate: moment().format('YYYY-MMM-DD hh:mm:ss a')
+                };
+                dashboardData.push(componentData);
+            }
+            Export.dashboardToCsv(dashboardData, {
+                success: function(data, status, jqXHR) {
+                    window.location.assign(data);
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    $.notifications.display({
+                        type: 'error',
+                        content: "Unable to export component data.", // TODO Move to config for multilanguage later
+                        timeout: Config.NotificationSettings.Timeout
+                    });
+                }
+            });
+        },
+
+        pdf: function (e) {
+
+        },
+
+        xls: function (e) {
+
         }
     });
 

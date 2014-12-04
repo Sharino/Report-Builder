@@ -36,7 +36,8 @@
         ExportSettings: {
             KpiToCSV: baseUrl + "Export/KpiToCsv",
             KpiToPDF: baseUrl + "Export/KpiToPdf",
-            KpiToXLS: baseUrl + "Export/KpiToXls"
+            KpiToXLS: baseUrl + "Export/KpiToXls",
+            DashboardToCsv: baseUrl + "Export/DashboardToCsv"
         },
 
 
