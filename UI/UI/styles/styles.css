@@ -1,5 +1,5 @@
 ﻿#app {
-    padding: 15px;
+    padding: 65px 15px 15px 15px;
 }
 /* centered columns styles */
 .row-centered {
@@ -39,11 +39,11 @@
 }
 
 #metric-list > .form-horizontal.well {
-    background: rgba(231,246,253,0.5);
+    background-color: #e7f5cc;
 }
 
 #dimension-list > .form-horizontal.well {
-    background: rgba(250,128,114,0.1);
+    background-color: #e0f8ff;
 }
 
 .form-horizontal.well {

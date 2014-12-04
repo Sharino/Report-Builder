@@ -1,113 +1,65 @@
 
-
-<header>
-    <table class="x--ph-l">
-        <thead>
-            <tr>
-                <th style="width: 10%;height: 65px;">
-                    <div id="basicName">
-                        <h2><%=model.Title%> <i style="margin-top: 3px;" class="adf-icon-small-edit"></i></h2>
-                    </div>
-                    <div class="control-group" id="editName" style="display: none; margin-top: 11px; ">
-                        <!--                                <label class="control-label">Title</label>-->
-                        <div class="controls">
-                            <input style="padding: 0px; max-width: 100px;" class="input-large" type="text" id="input" data-validate="required" value="<%=model.Title%>" required>
-
-                            <span data-msg="title"></span>
-                            <span class="help-inline"></span>
-                            <i style="margin-top: -2px;" class="adf-icon-small-edit"></i>
+<div class="grid 24 spacing-large">
+    <h1><b><%=model.Title%></b></h1> 
+    <div class="span-20 to-l" style="min-width: 627px">
+        <h3></h3>
+        <div class="form-horizontal well">
+            <div class="control-group">
+                <label class="control-label">Title</label>
+                <div class="controls">
+                    <input class="input-large" type="text" id="input" data-validate="required" value="<%=model.Title%>" required>
+                    <span data-msg="title"></span>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+            <div class="control-group">
+                <!--                                <label class="control-label">Type</label>-->
+                <div class="controls">
+                    <div class="radio-buttons horizontal">
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb1" value="1">
+                            <label for="rb1">KPI</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb2" value="2">
+                            <label for="rb2">Table</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb3" value="3">
+                            <label for="rb3">Timeline</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" name="type-options" id="rb4" value="4">
+                            <label for="rb4">Chart</label>
                         </div>
                     </div>
-                </th>
-                <th>
-                    <div class="control-group">
-                        <!--                                <label class="control-label">Type</label>-->
-                        <div class="controls">
-                            <div class="radio-buttons horizontal">
-                                <div class="radio-group">
-                                    <input type="radio" name="type-options" id="rb1" value="1">
-                                    <label for="rb1">KPI</label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" name="type-options" id="rb2" value="2">
-                                    <label for="rb2">Table</label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" name="type-options" id="rb3" value="3">
-                                    <label for="rb3">Timeline</label>
-                                </div>
-                                <div class="radio-group">
-                                    <input type="radio" name="type-options" id="rb4" value="4">
-                                    <label for="rb4">Chart</label>
-                                </div>
-                            </div>
-                            <span data-msg="type"></span>
-                            <span class="help-inline"></span>
-                        </div>
-                    </div>
-                </th>
-                <th>
-                    <div id="filtersPlaceholder" class="filter-panel grid 24 spacing-micro">
-                        <div class="filter-item span-4">
-                            <div class="adform-select-control" style="width: 100%;">
-                                <div class="label-holder adform-select-dropper-view324" name="type-options" id="rb1" value="1">
-                                    <label for="rb1" class="selection text-overflow value-holder std-tooltip" data-original-title="">KPI</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-item span-4">
-                            <div class="adform-select-control" style="width: 100%;">
-                                <div class="label-holder adform-select-dropper-view324" name="type-options" id="rb2" value="2">
-                                    <label for="rb2" class="selection text-overflow value-holder std-tooltip" data-original-title="">Table</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-item span-4">
-                            <div class="adform-select-control" style="width: 100%;">
-                                <div class="label-holder adform-select-dropper-view324" name="type-options" id="rb3" value="3">
-                                    <label for="rb3" class="selection text-overflow value-holder std-tooltip" data-original-title="">Timeline</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="filter-item span-4">
-                            <div class="adform-select-control" style="width: 100%;">
-                                <div class="label-holder adform-select-dropper-view324" name="type-options" id="rb4" value="4">
-                                    <label for="rb4" class="selection text-overflow value-holder std-tooltip" data-original-title="">Chart</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </th>
-                <th style="width: 10%"><button class="btn btn-primary pull-right" type="submit" id="component-submit">Save</button></th>
-            </tr>
-        </thead>
-    </table>
-</header>
+                    <span data-msg="type"></span>
+                    <span class="help-inline"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span-20 ">
 
-<div>
-    <section data-cols="2" data-fluid="true"></section>
-    <section data-cols="4" data-fluid="true">
+        <section data-cols="20" data-fluid="true">
+            <div id="metric-list"></div>
+        </section>
 
-        <div id="metric-list"></div>
+        <section data-cols="1" data-fluid="true"></section>
 
-    </section>
-    <section data-cols="2" data-fluid="true"></section>
-    <section data-cols="4" data-fluid="true">
-        <div id="dimension-list"></div>
-    </section>
-    <section data-cols="2" data-fluid="true"></section>
+        <section data-cols="20" data-fluid="true">
+            <div id="dimension-list"></div>
+        </section>
+
+
+    </div>
+    <div class="span-20">
+        <div class="button-group">
+            <button class="btn btn-success" type="submit" id="component-submit">Save</button>
+        </div>
+    </div>
 </div>
 
-<script>
-    $(document).ready(function () {
-        $(".adf-icon-small-edit").hover(function () {
-            $(".adf-icon-small-edit").addClass("blue-icon");
-        }, function () {
-            $(".adf-icon-small-edit").removeClass("blue-icon");
-        });
-    });
 
-
-</script>
 
 

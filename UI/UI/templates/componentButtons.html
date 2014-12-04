@@ -14,7 +14,9 @@
 <button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
 <% } %>
 
-<button class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
+<button style="margin-left: 3px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
 <% if (Dashboard === true) { %>
 <button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-delete white-icon"></i></button>
+<% } else { %>
+    <button style="margin-left: 3px" class="btn btn-success pull-right" type="submit" id="generate-submit">Add to Dashboard</button>
 <% } %>
