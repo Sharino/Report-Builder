@@ -117,15 +117,11 @@
                     self.einsteinData = response;
                     self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
-                error: function (error) {
-                }
             });
         },
 
         csv: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {
@@ -152,8 +148,6 @@
 
         pdf: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {
@@ -180,8 +174,6 @@
 
         xls: function (e) {
             e.preventDefault();
-            var id = parseInt($(e.currentTarget).attr('data-id'));
-
             var compValues = this.einsteinData.get('ComponentValues')[0].MetricValues;
 
             var request = {
