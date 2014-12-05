@@ -1,6 +1,11 @@
 ﻿<% if (Origin !== "preview") { %>
 <% if (Origin === "dashboard") { %>
     <div class="btn-group">
+        <button style="padding-right: 8px;" class="btn up" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-up"></i></button>
+        <button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
+    </div>
+
+    <div class="btn-group">
         <a class="btn single-btn" data-toggle="dropdown" href="#" style="padding: 4px 4px 4px 4px;">
             <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
         </a>
@@ -11,8 +16,6 @@
         </ul>
     </div>
 <% } else { %>
-<button style="padding-right: 8px;" class="btn up" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-up"></i></button>
-<button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
 <% } %>
 
 <button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
