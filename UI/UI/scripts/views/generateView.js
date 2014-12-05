@@ -100,18 +100,22 @@
                 var selectedDashboardId = parseInt(e.currentTarget.id);
 
                 $.ajax({
-                    url: "http://37.157.0.42:33895/api/DashboardComponent?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
+                    url: Config.DashboardComponentSettings + "?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
 
                     type: 'post',
                     success: function () {
                         $.notifications.display({
                             type: 'success',
-                            content: "Successfully added to dashboard",
+                            content: "Successfully added to Dashboard.",
                             timeout: Config.NotificationSettings.Timeout
                         });
                     },
                     error: function () {
-                        console.log('error!');
+                        $.notifications.display({
+                            type: 'error',
+                            content: "Could not add to Dashboard.",
+                            timeout: Config.NotificationSettings.Timeout
+                        });
                     }
                 });
 
