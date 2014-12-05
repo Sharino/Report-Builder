@@ -33,6 +33,9 @@ label.MetricDimensionTitles {
     min-height: 129px;
 }
     */
+.btn-width {
+    width: 150px;
+}
 .formated {
     min-width: 260px;
     max-width: 260px;

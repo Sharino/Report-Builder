@@ -1,9 +1,9 @@
 ﻿<% if (Dashboard === false) { %>
     <div class="btn-group">
-        <a class="btn single-btn" data-toggle="dropdown" href="#">
-            <i class="adf-icon-toolbar-export"></i>
+        <a class="btn single-btn" data-toggle="dropdown" href="#" style="padding: 4px 4px 4px 4px;">
+            <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
         </a>
-        <ul class="dropdown-menu" style="overflow: hidden">
+        <ul class="dropdown-menu" style="overflow: hidden;">
             <li class="csv"><a href="">CSV</a></li>
             <li class="pdf"><a href="">PDF</a></li>
             <li class="xls"><a href="">XLS</a></li>
@@ -14,9 +14,9 @@
 <button style="padding-right: 8px;" class="btn"><i class="adf-icon-small-arrow-down"></i></button>
 <% } %>
 
-<button style="margin-left: 3px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
+<button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
 <% if (Dashboard === true) { %>
-<button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-delete white-icon"></i></button>
+<button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-close white-icon"></i></button>
 <% } else { %>
     <button style="margin-left: 3px" class="btn btn-success pull-right" type="submit" id="generate-submit">Add to Dashboard</button>
 <% } %>

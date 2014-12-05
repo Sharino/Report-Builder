@@ -17,6 +17,7 @@
 
         events: {
             'click #component-submit': 'submit',
+            'click #component-cancel': 'cancel',
             'click .radio-group': 'toggleDimensionList',
             'click .adf-icon-small-edit': 'toggleComponentName'
         },
@@ -25,7 +26,7 @@
             MetricDimensionMap.getMap();
         },
 
-        render: function () {
+        render: function() {
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
@@ -33,7 +34,7 @@
 
             var self = this;
 
-            _.defer(function () {
+            _.defer(function() {
                 $("#metric-list").loader();
                 $("#dimension-list").loader();
             });
@@ -42,11 +43,11 @@
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
             allMetrics.fetch({
-                success: function (allMetrics) {
+                success: function(allMetrics) {
                     self.allMetrics = allMetrics;
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                 },
-                error: function (allMetrics, response) {
+                error: function(allMetrics, response) {
                     $.notifications.display({
                         type: 'error',
                         content: response.statusText,
@@ -56,12 +57,12 @@
             });
 
             allDimensions.fetch({
-                success: function (allDimensions) {
+                success: function(allDimensions) {
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
                     self.toggleDimensionList();
                 },
-                error: function (allDimensions, response) {
+                error: function(allDimensions, response) {
                     $.notifications.display({
                         type: 'error',
                         content: response.statusText,
@@ -71,7 +72,9 @@
             });
             return this;
         },
-
+        cancel: function (e) {
+            alert('Padaryk mane :*');
+        },
         submit: function () {
             if (this.inputType() == 1) {
                 this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
