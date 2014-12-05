@@ -77,11 +77,13 @@
     <Content Include="scripts\lib\adform\adform-range-selector.js" />
     <Content Include="scripts\lib\adform\adform-select-group.js" />
     <Content Include="scripts\lib\adform\adform-select.js" />
+    <Content Include="scripts\lib\adform\adform-side-panel.js" />
     <Content Include="scripts\lib\adform\adform-validation-2.0.js" />
     <Content Include="scripts\lib\backbone.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-dropdown.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-modal.js" />
     <Content Include="scripts\lib\bootstrap\bootstrap-tooltip.js" />
+    <Content Include="scripts\lib\bootstrap\bootstrap-transition.js" />
     <Content Include="scripts\lib\globalize.js" />
     <Content Include="scripts\lib\handlebars-tpl.js" />
     <Content Include="scripts\lib\handlebars.js" />
@@ -89,9 +91,11 @@
     <Content Include="scripts\lib\highcharts.js" />
     <Content Include="scripts\lib\jquery.js" />
     <Content Include="scripts\lib\jquery.sortable.js" />
+    <Content Include="scripts\lib\moment-2.8.4.js" />
     <Content Include="scripts\lib\moment.js" />
     <Content Include="scripts\lib\qunit.js" />
     <Content Include="scripts\lib\require.js" />
+    <Content Include="scripts\lib\sinon.js" />
     <Content Include="scripts\lib\spin.js" />
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
@@ -128,6 +132,7 @@
     <Content Include="scripts\lib\page-split.js" />
     <Content Include="scripts\views\tableView.js" />
     <Content Include="scripts\views\timelineView.js" />
+    <Content Include="styles\bootstrap.css" />
     <Content Include="styles\qunit.css" />
     <Content Include="styles\styles.css" />
     <Content Include="templates\chart.html" />
@@ -141,6 +146,7 @@
     <Content Include="templates\dateFilter.html" />
     <Content Include="templates\dimensionList.html" />
     <Content Include="templates\generate.html" />
+    <Content Include="templates\helpContent.html" />
     <Content Include="templates\kpi.html" />
     <Content Include="templates\menu.html" />
     <Content Include="templates\message.html" />
