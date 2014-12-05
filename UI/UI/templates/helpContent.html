@@ -3,13 +3,15 @@
 <p>In order to create your component you have to specify it's general information.</p>
 
 <h3>Title</h3>
-<p>Simple yet effective name to identify your component. <span class="label label-important">Required</span></p>
-<p><span class="label label-warning">Note</span> Component title should be no less than 3 and no more than 30 symbols in length.</p>
+<p>Simple yet effective name to identify your component.</p>
+<p><span class="label label-important">Required</span> Title must be specified.</p>
+<p><span class="label label-warning">Note</span> Title should be no less than 3 and no more than 30 symbols in length.</p>
 
 <h3>Type</h3>
-<p>The type of your component. <span class="label label-important">Required</span></p>
-
+<p>The type of your component. </p>
+<p><span class="label label-important">Required</span> Type must be specified.</p>
 <ul>
+    All component Types:
     <li><span class="label label-blue2">KPI</span> Displays selected Key Performance Indicators for selected metric values.</li>
     <li><span class="label label-green1">Table</span> Displays a table for selected metric and dimension values.</li>
     <li><span class="label label-orange2">Timeline</span> Displays a timeline for selected metric and dimension values.</li>
@@ -21,27 +23,34 @@
     <li><a><span class="number">2</span>Metrics</a></li>
 </ul>
 
+<p>Metrics are individual elements of a dimension that can be measured as a sum or a ratio.</p>
+<p><span class="label label-important">Required</span> At least one metric is required to create a component.</p>
+
 <h3>Adding a metric</h3>
+
 <p>To add metric simply click the <button type="button" class="btn btn-transparent btn-add centered"><i class="adf-icon-small-add-circle blue-icon "></i> Add Metric</button> button in the list. Then find your desired metric in dropdown list or use search to access it faster.</p>
 
 <h3>Repositioning a metric</h3>
 <p>To reposition a metric click on handle icon (<i class="handle adf-icon-alt-drag" style="height: 17px;"></i>) left to the metric element and drag and drop it to your desired position.</p>
-<p><span class="label label-warning">Note</span> A gray placeholder will appear in the position where your metric would go.</p>
+<p><span class="label label-warning">Note</span> While dragging a gray placeholder will appear in the position where your metric would go.</p>
 
 <h3>Removing a metric</h3>
 <p> To remove a selected metric click <i class="adf-icon-small-reset"></i> icon on the right of the metric.</p>
 
 <p style="height: 15px;"></p>
 <ul class="help-numbering">
-    <li><a><span class="number">3</span>Dimension</a></li>
+    <li><a><span class="number">3</span>Dimensions</a></li>
 </ul>
+
+<p>A dimension is a group of attributes that represent an area of interest.</p>
+<p><span class="label label-important">Required</span> At least one dimension is required for Table, Timeline and Chart Component types.</p>
 
 <h3>Adding a dimensions</h3>
 <p>To add dimension simply click the <button type="button" class="btn btn-transparent btn-add centered"><i class="adf-icon-small-add-circle blue-icon"></i> Add Dimension</button> button in the list. Then find your desired dimension in dropdown list or use search to access it faster.</p>
 
 <h3>Repositioning a dimension</h3>
 <p>To reposition a dimension click on handle icon (<i class="handle adf-icon-alt-drag" style="height: 17px;"></i>) left to the dimension element and drag and drop it to your desired position.</p>
-<p><span class="label label-warning">Note</span> A gray placeholder will appear in the position where your dimension would go.</p>
+<p><span class="label label-warning">Note</span> While dragging a gray placeholder will appear in the position where your dimension would go.</p>
 
 <h3>Removing a dimension</h3>
 <p> To remove a selected dimension click <i class="adf-icon-small-reset"></i> icon on the right of the dimension.</p>
@@ -53,6 +62,5 @@
 
 <p>To save a component click <button class="btn btn-success" type="submit">Save</button> button.</p>
 <p>To cancel and go back click <button class="btn btn-transparent">Cancel</button> button.</p>
-
-<p><span class="label label-warning">Note</span> Every type requires at least one metric selected.
-    Table, Timeline and Chart requires at least one additional dimension selected.</p>
+<p>To preview your component click <button class="btn btn-primary" style="margin-right: 0px;">Preview</button> button.<br/>
+    It will render an example of how your component might look.</p>

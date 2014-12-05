@@ -198,9 +198,9 @@
             _sortByTitle: function() {
                 if (this.sortType !== "nameAsc") {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
-                            function (item) {
-                                return item.Title;
-                            })
+                        function (item) {
+                            return item.Title.toLowerCase();
+                        })
                     );
                     this.sortType = "nameAsc";
                     this.render();
@@ -210,7 +210,7 @@
                 } else {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                         function (item) {
-                            return item.Title;
+                            return item.Title.toLowerCase();
                         }).reverse()
                     );
                     this.sortType = "nameDes";
@@ -260,10 +260,10 @@
                 } else {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                             function (item) {
-                                return item.SubmissionDate;
+                                return item.ModificationDate;
                             }).reverse()
                     );
-                    this.sortType = "createdDes";
+                    this.sortType = "modifiedDes";
                     this.render();
 
                     this.$el.find("th.col-edited").find(".sort-icon").removeClass('adf-icon-small-arrow-up');

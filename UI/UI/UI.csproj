@@ -133,6 +133,7 @@
     <Content Include="scripts\views\tableView.js" />
     <Content Include="scripts\views\timelineView.js" />
     <Content Include="styles\qunit.css" />
+    <Content Include="styles\site.css" />
     <Content Include="styles\styles.css" />
     <Content Include="templates\chart.html" />
     <Content Include="templates\component.html" />
