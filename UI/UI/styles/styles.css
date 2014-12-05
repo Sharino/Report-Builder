@@ -14,13 +14,16 @@
     /* inline-block space fix */
     margin-right: -4px;
 }
+
 .control-group {
     height: 30px;
     margin-bottom: 0px;
 }
+
 label.control-label {
     font-weight: bold;
 }
+
 label.MetricDimensionTitles {
     color: #000;
 }
@@ -36,25 +39,30 @@ label.MetricDimensionTitles {
 .btn-width {
     width: 150px;
 }
+
 .formated {
     min-width: 260px;
     max-width: 260px;
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
 .formated-main {
     min-width: 260px;
     max-width: 260px;
     margin-left: auto !important;
     margin-right: auto !important;
 }
+
 .centered {
     margin-left: auto !important;
     margin-right: auto !important;
 }
-.adform-ui-v2 .page-split>.page-split-row>section, .adform-ui-v2 .main-content>.page-split-row>section {
+
+.adform-ui-v2 .page-split > .page-split-row > section, .adform-ui-v2 .main-content > .page-split-row > section {
     overflow: visible;
 }
+
 .component {
     min-height: 129px;
 }
@@ -191,3 +199,39 @@ i[class*="adf-icon-alt"] {
     margin: 0 5px !important;
     background: white;
 }
+
+
+.help-numbering li {
+    display: block;
+    line-height: 26px;
+    margin: 0 1px 0 0;
+    border-bottom: 2px solid transparent;
+    font-weight: 600;
+}
+
+    .help-numbering li a {
+        outline: none;
+        color: #00aff0;
+        padding: 8px 12px 6px 12px;
+        display: block;
+        white-space: nowrap;
+    }
+
+        .help-numbering li a:hover {
+            text-decoration: none;
+        }
+
+        .help-numbering li a span.number {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid #00aff0;
+            background-color: #f1fbff;
+            text-align: center;
+            line-height: 20px;
+            margin-right: 10px;
+            font-size: 12px;
+            -webkit-border-radius: 999999px;
+            -moz-border-radius: 999999px;
+            border-radius: 999999px;
+        }
