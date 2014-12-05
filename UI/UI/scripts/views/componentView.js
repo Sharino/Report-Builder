@@ -10,9 +10,11 @@
     'MetricDimensionMap',
     'text!templates/component.html',
     'GenerateView',
+    'text!templates/helpContent.html',
     'Config',
-    'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, GenerateView, Config) {
+    'adform-notifications',
+    'adform-side-panel'
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, GenerateView, helpContent, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
@@ -21,7 +23,8 @@
             'click #component-cancel': 'cancel',
             'click #component-preview': 'preview',
             'click .radio-group': 'toggleDimensionList',
-            'click .adf-icon-small-edit': 'toggleComponentName'
+            'click .adf-icon-small-edit': 'toggleComponentName',
+            'click #component-help': 'handleHelpAction'
         },
 
         initialize: function () {
@@ -79,9 +82,11 @@
             this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
 
         },
+
         cancel: function (e) {
-            alert('Padaryk mane :*');
+            alert('Padaryk mane :*'); // WTF!?
         },
+
         submit: function () {
             if (this.inputType() == 1) {
                 this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
@@ -149,13 +154,28 @@
         toggleDimensionList: function () {
             if (this.inputType() === 1) {
                 this.$el.find('#dimension-list').hide();
+                this.$el.find('#gr').removeClass('col-md-4').addClass('col-md-6');
+                this.$el.find('#mr').removeClass('col-md-4').addClass('col-md-6');
             } else {
+                this.$el.find('#gr').removeClass('col-md-6').addClass('col-md-4');
+                this.$el.find('#mr').removeClass('col-md-6').addClass('col-md-4');
+
                 this.$el.find('#dimension-list').show();
             }
             this.model.set({ Type: this.inputType() });
 
+            var stooges = [
+                    this.$el.find("#gr").height(),
+                    this.$el.find("#mr").height(),
+                    this.$el.find("#dr").height()
+            ];
+
             Config.dimensionView.render();
+
+            var max = _.max(stooges, function (stooge) { return stooge; });
+            this.$el.find(".form-horizontal").height(max);
         },
+
         inputTitle: function () {
             return $('#input').val();
         },
@@ -167,7 +187,26 @@
             } else {
                 return 0;
             }
+        },
+
+        handleHelpAction: function () {
+
+            $.sidePanel({
+                body: helpContent,
+                header: {
+                    title: "Component Creation Help"
+                },
+                resize: false,
+                width: "650px",
+                buttons: [
+                    {
+                        title: "Close",
+                        cssClass: "btn-cancel"
+                    }
+                ]
+            });
         }
+
     });
 
     return ComponentView;
