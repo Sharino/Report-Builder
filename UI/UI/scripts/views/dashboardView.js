@@ -27,7 +27,9 @@
         events: {
             'click .edit-form': 'edit',
             'click .del': 'deleteDashboardComponent',
-            'click .csv': 'csv'
+            'click .csv': 'csv',
+            'click .up': 'moveDashboardComponentUp',
+            'click .down': 'moveDashboardComponentDown',
         },
 
         initialize: function () {
@@ -62,7 +64,7 @@
                                         var idIndex = compIds.indexOf(id);
                                         if (idIndex > -1) {
                                             compIds.splice(idIndex, 1);
-
+                                            self.model.save("ComponentIds", compIds);
                                             self.componentView.splice(idIndex, 1);
 
                                             for (var i = 0, len = self.subViews.length; i < len; i++) {
@@ -94,6 +96,71 @@
                     { title: "Cancel", cssClass: "btn-cancel" }
                 ]
             });
+        },
+
+        moveDashboardComponentUp: function(e) {
+            e.preventDefault();
+
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var compIds = this.model.get("ComponentIds");
+
+            if (compIds.length > 0) {
+                var idIndex = compIds.indexOf(id);
+                var prevIdIndex = idIndex - 1;
+
+                if (idIndex > 0) {
+                    this.model.save("ComponentIds", this.arraySwap(this.model.get("ComponentIds"), idIndex, prevIdIndex));
+                    
+                    this.componentView = this.arraySwap(this.componentView, idIndex, prevIdIndex);
+
+                    var allElements = $(this.el).find(".row").siblings(".row").andSelf();
+                    var currentElement = allElements[idIndex+1];
+                    var nextElement = allElements[prevIdIndex+1];
+                    
+                    this.elementSwap(currentElement, nextElement);
+                }
+            }
+        },
+
+        moveDashboardComponentDown: function (e) {
+            e.preventDefault();
+            var id = parseInt($(e.currentTarget).attr('data-id'));
+
+            var compIds = this.model.get("ComponentIds");
+
+            if (compIds.length > 0) {
+                var idIndex = compIds.indexOf(id);
+                var nextIdIndex = idIndex + 1;
+
+                if (idIndex > -1 && idIndex < compIds.length - 1) {
+                    this.componentView = this.arraySwap(this.componentView, idIndex, nextIdIndex);
+
+                    this.model.save("ComponentIds", this.arraySwap(this.model.get("ComponentIds"), idIndex, nextIdIndex));
+
+                    var allElements = $(this.el).find(".row").siblings(".row").andSelf();
+                    var currentElement = allElements[idIndex+1];
+                    var nextElement = allElements[nextIdIndex+1];
+                    
+                    this.elementSwap(currentElement, nextElement);
+                }
+            }
+        },
+
+        arraySwap: function (arr, fromIndex, toIndex) {
+            var temp = arr[fromIndex];
+            arr[fromIndex] = arr[toIndex];
+            arr[toIndex] = temp;
+
+            return arr;
+        },
+
+        elementSwap: function (a, b) {
+            a = $(a); b = $(b);
+            var tmp = $('<span>').hide();
+            a.before(tmp);
+            b.before(a);
+            tmp.replaceWith(b);
         },
 
         edit: function (e) {

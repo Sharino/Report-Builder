@@ -24,6 +24,7 @@
         'bootstrap-modal': 'scripts/lib/bootstrap/bootstrap-modal',
         'bootstrap-tooltip': 'scripts/lib/bootstrap/bootstrap-tooltip',
         'bootstrap-dropdown': 'scripts/lib/bootstrap/bootstrap-dropdown',
+        'bootstrap-transition': 'scripts/lib/bootstrap/bootstrap-transition',
 
         /* Adform dependencies */
         'adform-checkbox': 'scripts/lib/adform/adform-checkbox',
@@ -36,6 +37,8 @@
         'adform-date': 'scripts/lib/adform/adform-date',
         'adform-datepicker': 'scripts/lib/adform/adform-datepicker',
         'adform-range-selector': 'scripts/lib/adform/adform-range-selector',
+        'adform-side-panel': 'scripts/lib/adform/adform-side-panel',
+
 
         /* Config dependencies */
         'Config': 'scripts/config/config',
@@ -107,6 +110,10 @@
             exports: "moment"
         },
 
+        'bootstrap-transition': {
+            deps: ['jquery']
+        },
+
         'bootstrap-tooltip': {
             deps: ['jquery']
         },
@@ -161,6 +168,10 @@
 
         'adform-modal': {
             deps: ['bootstrap-modal', 'spin']
+        },
+
+        'adform-side-panel': {
+            deps: ['bootstrap-transition']
         },
 
         'adform-range-selector': {
