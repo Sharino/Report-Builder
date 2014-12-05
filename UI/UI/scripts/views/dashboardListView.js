@@ -142,7 +142,7 @@
             if (this.sortType !== "nameAsc") {
                 this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
                         function (item) {
-                            return item.Title;
+                            return item.Title.toLowerCase();
                         })
                 );
                 this.sortType = "nameAsc";
@@ -153,7 +153,7 @@
             } else {
                 this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
                     function (item) {
-                        return item.Title;
+                        return item.Title.toLowerCase();
                     }).reverse()
                 );
                 this.sortType = "nameDes";
