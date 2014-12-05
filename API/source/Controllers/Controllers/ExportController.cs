@@ -4,51 +4,54 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using Aspose.Pdf.Facades;
 using BussinessLogic.Handlers.ExportHandlers;
 using Models.Models;
 
 namespace Controllers.Controllers
 {
-	[EnableCors(origins: "*", headers: "*", methods: "*")]
-	public class ExportController : ApiController
-	{
-		[HttpPost]
-        public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ",")
-		{
-			if (request != null)
-				if (request.Values.Count > 0)
-				{
-				    var handler = new KpiToCsvHandler();
+    [EnableCors(origins: "*", headers: "*", methods: "*")]
+    public class ExportController : ApiController
+    {
+        [HttpPost]
+        public HttpResponseMessage KpiToCsv(ExportRequest request, string separator = ";")
+        {
+            if (request != null)
+                if (request.Values.Count > 0)
+                {
+                    var handler = new KpiToCsvHandler();
                     var fileName = handler.HandleCore(request, separator);
-
-				    if (handler.Errors != null && handler.Errors.Count > 0)
-				    {
-				        return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
-				    }
-				    return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
-				}
-			return Request.CreateResponse(HttpStatusCode.BadRequest);
-		}
-
-		[HttpPost]
-		public HttpResponseMessage KpiToPdf(ExportRequest request)
-		{
-			if (request != null)
-			{
-				if (request.Values.Count > 0)
-				{
-				    var handler = new KpiToPdfHandler();
-				    var fileName = handler.HandleCore(request);
 
                     if (handler.Errors != null && handler.Errors.Count > 0)
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
                     }
-					return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
-				}
-			}
-			return Request.CreateResponse(HttpStatusCode.BadRequest);
-		}
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+                }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
+
+        [HttpPost]
+        public HttpResponseMessage KpiToPdf(ExportRequest request)
+        {
+            if (request != null)
+            {
+                if (request.Values.Count > 0)
+                {
+                    var handler = new KpiToPdfHandler();
+                    var fileName = handler.HandleCore(request);
+
+                    if (handler.Errors != null && handler.Errors.Count > 0)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
 
         [HttpPost]
         public HttpResponseMessage KpiToXls(ExportRequest request)
@@ -64,18 +67,34 @@ namespace Controllers.Controllers
                     {
                         return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
                     }
-                    return Request.CreateResponse(HttpStatusCode.OK, ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        ConfigurationManager.AppSettings["exportsLocation"] + fileName);
                 }
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
-	    [HttpPost]
-	    public HttpResponseMessage DashboardtoCsv(List<ExportRequest> request)
-	    {
-	        return null;
-	    }
-	}
+        [HttpPost]
+        public HttpResponseMessage DashboardToCsv(List<ExportRequest> request, string separator = ";")
+        {
+            if (request != null)
+            {
+                if (request.Count > 0)
+                {
+                    var handler = new DashboardToCsvHandler();
+                    var fileName = handler.HandleCore(request, separator);
+
+                    if (handler.Errors != null && handler.Errors.Count > 0)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
+    }
 }
 
 

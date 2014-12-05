@@ -17,6 +17,11 @@
                     if (opt.success != null) {
                         opt.success(data, status, jqXHR);
                     }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    if (opt.error != null) {
+                        opt.error(xhr, ajaxOptions, thrownError);
+                    }
                 }
             });
         },
