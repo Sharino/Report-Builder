@@ -16,6 +16,8 @@
             'click .click': 'handleClickAction',
             'click .sortable': 'handleSortAction',
             'click .del': 'handleDeleteAction',
+            'keyup #dashboards-search': "handleSearchAction"
+
         },
 
         initialize: function () {
@@ -88,6 +90,33 @@
             if ($(e.currentTarget).hasClass("col-title")) {
                 this._sortByTitle();
             }
+        },
+
+        handleSearchAction: function (e) {
+            var temp = this.collection;
+            var value = $("#dashboards-search").val();
+            var query = value.toLowerCase();
+
+            this.collection = new DashboardCollection(_.filter(this.collection.toJSON(),
+                function (dashboard) {
+                    var patt = new RegExp(query);
+                    var res = patt.test(dashboard.Title.toLowerCase());
+
+                    return res;
+                })
+            );
+
+            this.render();
+            if (this.collection.length === 0) {
+                $("#dashboards-search-noresults").show();
+            } else {
+                $("#dashboards-search-noresults").hide();
+            }
+
+            $("#dashboards-search").val(value);
+            $("#dashboards-search").focus();
+
+            this.collection = temp;
         },
 
         handleDeleteAction: function (e) {

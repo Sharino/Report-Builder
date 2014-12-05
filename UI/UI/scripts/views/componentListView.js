@@ -155,7 +155,8 @@
                         }
 
                         return res;
-                    }));
+                    })
+                );
 
                 this.render();
                 if (this.collection.length === 0) {
