@@ -114,8 +114,8 @@
         workEinstein: function (stoneAlone) {
             var self = this;
 
-            stoneAlone.fetch({//TODO
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
+            stoneAlone.fetch({
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',

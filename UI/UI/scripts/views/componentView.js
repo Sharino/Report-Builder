@@ -84,7 +84,7 @@
         },
 
         cancel: function (e) {
-            alert('Padaryk mane :*'); // WTF!?
+            Backbone.history.history.back();
         },
 
         submit: function () {
