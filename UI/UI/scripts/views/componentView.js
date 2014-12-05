@@ -78,9 +78,21 @@
             return this;
         },
         preview: function (e) {
-       
-            this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
-
+            this.previewView = this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
+            $.sidePanel({
+                body: this.previewView.$el,
+                header: {
+                    title: "Component preview"
+                },
+                resize: false,
+                width: "650px",
+                buttons: [
+                    {
+                        title: "Close",
+                        cssClass: "btn-cancel"
+                    }
+                ]
+            });
         },
 
         cancel: function (e) {

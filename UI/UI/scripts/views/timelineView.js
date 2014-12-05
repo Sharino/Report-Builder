@@ -30,7 +30,7 @@
             this.origin = origin;
             this.model = parent;
             this.position = pos;
-            this.initEinstein(this.startDate, this.startDate);
+            this.initEinstein( moment().subtract('days', 7).format('YYYY-MM-DD'),this.startDate);
 
             this.selectedMetrics = [];
 
@@ -46,12 +46,24 @@
         render: function (einstein, dataFiler) {
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = this.startDate;
-                to = this.startDate;
+                if (this.origin === "preview") {
+                    from = this.startDate;
+                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                
+                } else {
+
+                    from = this.startDate;
+                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                }
             } else {
-                //                console.log(dataFiler);
-                from = $("#picker").find("input")[0].value;
-                to = $("#picker2").find("input")[0].value;
+                if (this.origin === "preview") {
+                    from = this.startDate;
+                    to = moment().add('days', 7).format('YYYY-MM-DD');
+               
+                } else {
+                    from = $("#picker").find("input")[0].value;
+                    to = $("#picker2").find("input")[0].value;
+                }
             }
 
             var metrics = this.model.get("Metrics");

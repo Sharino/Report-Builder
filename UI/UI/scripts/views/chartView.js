@@ -50,8 +50,13 @@
                 from = this.startDate;
                 to = this.startDate;
             } else {
-                from = $("#picker").find("input")[0].value;
-                to = $("#picker2").find("input")[0].value;
+                if (this.origin === "preview") {
+                    from = this.startDate;
+                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                } else {
+                    from = $("#picker").find("input")[0].value;
+                    to = $("#picker2").find("input")[0].value;
+                }
             }
 
             var metrics = this.model.get("Metrics");
