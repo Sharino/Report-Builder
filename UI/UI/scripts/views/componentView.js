@@ -154,26 +154,12 @@
         toggleDimensionList: function () {
             if (this.inputType() === 1) {
                 this.$el.find('#dimension-list').hide();
-                this.$el.find('#gr').removeClass('col-md-4').addClass('col-md-6');
-                this.$el.find('#mr').removeClass('col-md-4').addClass('col-md-6');
             } else {
-                this.$el.find('#gr').removeClass('col-md-6').addClass('col-md-4');
-                this.$el.find('#mr').removeClass('col-md-6').addClass('col-md-4');
-
                 this.$el.find('#dimension-list').show();
             }
             this.model.set({ Type: this.inputType() });
 
-            var stooges = [
-                    this.$el.find("#gr").height(),
-                    this.$el.find("#mr").height(),
-                    this.$el.find("#dr").height()
-            ];
-
             Config.dimensionView.render();
-
-            var max = _.max(stooges, function (stooge) { return stooge; });
-            this.$el.find(".form-horizontal").height(max);
         },
 
         inputTitle: function () {
