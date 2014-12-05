@@ -94,6 +94,27 @@ namespace Controllers.Controllers
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
+
+        public HttpResponseMessage DashboardToXls(List<ExportRequest> request)
+        {
+
+            if (request != null)
+            {
+                if (request.Count > 0)
+                {
+                    var handler = new DashboardToCsvHandler();
+                    var fileName = handler.HandleCore(request);
+
+                    if (handler.Errors != null && handler.Errors.Count > 0)
+                    {
+                        return Request.CreateResponse(HttpStatusCode.BadRequest, handler.Errors);
+                    }
+                    return Request.CreateResponse(HttpStatusCode.OK,
+                        ConfigurationManager.AppSettings["exportsLocation"] + fileName);
+                }
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
+        }
     }
 }
 

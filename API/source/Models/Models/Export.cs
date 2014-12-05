@@ -10,6 +10,7 @@ namespace Models.Models
 
     public class ExportRequest
     {
+        public int Type { get; set; }
         public string Title { get; set; }
         public string Language { get; set; }
         public string StartDate { get; set; }
