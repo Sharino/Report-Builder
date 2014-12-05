@@ -133,6 +133,7 @@
     <Content Include="templates\chart.html" />
     <Content Include="templates\component.html" />
     <Content Include="templates\componentList.html" />
+    <Content Include="templates\componentPreview.html" />
     <Content Include="templates\dashboard.html" />
     <Content Include="templates\dashboardComponent.html" />
     <Content Include="templates\componentButtons.html" />

@@ -23,7 +23,7 @@
         },
 
         initialize: function (parent, pos, origin) {
-            this.originDashboard = origin;
+            this.origin = origin;
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
@@ -51,12 +51,14 @@
                 ComponentID: this.model.id
             }));
 
-            this.renderSubview("#date-filter", new DateFilterView({
-                from: from,
-                to: to
-            }));
+            if (this.origin !== "preview") {
+                this.renderSubview("#date-filter", new DateFilterView({
+                    from: from,
+                    to: to
+                }));
+            }
 
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.originDashboard));
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
 
             return this;
         },

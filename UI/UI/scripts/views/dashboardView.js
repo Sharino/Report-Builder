@@ -153,22 +153,22 @@
                     switch (model.get("Type")) {
                         case 1:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard"));
                                 break;
                             }
                         case 2:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard"));
                                 break;
                             }
                         case 3:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard"));
                                 break;
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard"));
                                 break;
                             }
                     }

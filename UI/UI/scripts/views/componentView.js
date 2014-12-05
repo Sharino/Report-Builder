@@ -9,24 +9,26 @@
     'DimensionListView',
     'MetricDimensionMap',
     'text!templates/component.html',
+    'GenerateView',
     'Config',
     'adform-notifications'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, GenerateView, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
             'click #component-submit': 'submit',
             'click #component-cancel': 'cancel',
+            'click #component-preview': 'preview',
             'click .radio-group': 'toggleDimensionList',
             'click .adf-icon-small-edit': 'toggleComponentName'
         },
 
-        initialize: function() {
+        initialize: function () {
             MetricDimensionMap.getMap();
         },
 
-        render: function() {
+        render: function () {
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
@@ -34,7 +36,7 @@
 
             var self = this;
 
-            _.defer(function() {
+            _.defer(function () {
                 $("#metric-list").loader();
                 $("#dimension-list").loader();
             });
@@ -43,11 +45,11 @@
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 
             allMetrics.fetch({
-                success: function(allMetrics) {
+                success: function (allMetrics) {
                     self.allMetrics = allMetrics;
                     self.metricView = self.renderSubview('#metric-list', new MetricListView(self.model, self.allMetrics));
                 },
-                error: function(allMetrics, response) {
+                error: function (allMetrics, response) {
                     $.notifications.display({
                         type: 'error',
                         content: response.statusText,
@@ -57,12 +59,12 @@
             });
 
             allDimensions.fetch({
-                success: function(allDimensions) {
+                success: function (allDimensions) {
                     self.allDimensions = allDimensions;
                     self.dimensionView = self.renderSubview('#dimension-list', new DimensionListView(self.model, self.allDimensions));
                     self.toggleDimensionList();
                 },
-                error: function(allDimensions, response) {
+                error: function (allDimensions, response) {
                     $.notifications.display({
                         type: 'error',
                         content: response.statusText,
@@ -71,6 +73,11 @@
                 }
             });
             return this;
+        },
+        preview: function (e) {
+       
+            this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
+
         },
         cancel: function (e) {
             alert('Padaryk mane :*');

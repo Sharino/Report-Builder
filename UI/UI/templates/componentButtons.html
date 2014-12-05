@@ -1,4 +1,5 @@
-﻿<% if (Dashboard === false) { %>
+﻿<% if (Origin !== "preview") { %>
+<% if (Origin === "dashboard") { %>
     <div class="btn-group">
         <a class="btn single-btn" data-toggle="dropdown" href="#" style="padding: 4px 4px 4px 4px;">
             <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
@@ -15,8 +16,9 @@
 <% } %>
 
 <button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
-<% if (Dashboard === true) { %>
+<% if (Origin === "dashboard") { %>
 <button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-close white-icon"></i></button>
 <% } else { %>
     <button style="margin-left: 3px" class="btn btn-success pull-right" type="submit" id="generate-submit">Add to Dashboard</button>
+<% } %>
 <% } %>
