@@ -63,6 +63,7 @@
     <Compile Include="Handlers\DashboardComponentHandlers\DashboardComponentUpdateHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetAllHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetHandlers.cs" />
+    <Compile Include="Handlers\ExportHandlers\DashboardToCsvHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToCsvHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToPdfHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToXlsHandler.cs" />
