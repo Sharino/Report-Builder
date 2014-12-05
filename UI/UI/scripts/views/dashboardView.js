@@ -168,6 +168,9 @@
 
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
+            
+            var compIds = this.model.get("ComponentIds");
+
             if (!isNaN(id)) {
                 var currentModel = this.model.get("Components")[id];
                 this.editform = this.renderSubview(('#component-edit-' + id), new DashboardComponentView({ model: currentModel }));
@@ -189,6 +192,13 @@
                             cssClass: "btn-success",
                             callback: function () {
                                 self.submitEvent.trigger('submitEvent');
+                                if (compIds.length > 0) {
+                                    var componentId = parseInt($(e.currentTarget).attr('comp-id'));
+                                    var idIndex = compIds.indexOf(componentId);
+                                    self.componentView[idIndex].render();
+                                    console.log(self.componentView, "idIndex", idIndex);
+                                    console.log(compIds, componentId);
+                                }
                             }
                         },
                         {
@@ -220,22 +230,22 @@
                     switch (model.get("Type")) {
                         case 1:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard"));
                                 break;
                             }
                         case 2:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard"));
                                 break;
                             }
                         case 3:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard"));
                                 break;
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, true));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard"));
                                 break;
                             }
                     }

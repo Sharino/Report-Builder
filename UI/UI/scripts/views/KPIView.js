@@ -23,7 +23,7 @@
         },
 
         initialize: function (parent, pos, origin) {
-            this.originDashboard = origin;
+            this.origin = origin;
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
@@ -39,8 +39,13 @@
                 to = this.startDate;
             }
             else {
-                from = $("#picker").find("input")[0].value;
-                to = $("#picker2").find("input")[0].value;
+                if (this.origin === "preview") {
+                    from = this.startDate;
+                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                } else {
+                    from = $("#picker").find("input")[0].value;
+                    to = $("#picker2").find("input")[0].value;
+                }
             }
 
             this.$el.html(this.template({
@@ -51,12 +56,14 @@
                 ComponentID: this.model.id
             }));
 
-            this.renderSubview("#date-filter", new DateFilterView({
-                from: from,
-                to: to
-            }));
+            if (this.origin !== "preview") {
+                this.renderSubview("#date-filter", new DateFilterView({
+                    from: from,
+                    to: to
+                }));
+            }
 
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.originDashboard));
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
 
             return this;
         },
@@ -107,8 +114,8 @@
         workEinstein: function (stoneAlone) {
             var self = this;
 
-            stoneAlone.fetch({//TODO
-                url: 'http://37.157.0.42:33896/api/Einstein/Data',
+            stoneAlone.fetch({
+                url: Config.EinsteinSettings.URL,
                 data: JSON.stringify(stoneAlone),
                 contentType: 'application/json',
                 dataType: 'json',

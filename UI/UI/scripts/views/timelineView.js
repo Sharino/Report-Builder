@@ -27,7 +27,7 @@
         startDate: moment().format('YYYY-MM-DD'),
 
         initialize: function (parent, pos, origin) {
-            this.originDashboard = origin;
+            this.origin = origin;
             this.model = parent;
             this.position = pos;
             this.initEinstein(this.startDate, this.startDate);
@@ -91,13 +91,13 @@
                 selectedMetricsNames: selectedMetricsNames,
             }));
 
-
-            this.renderSubview("#date-filter", new DateFilterView({
-                from: from,
-                to: to
-            }));
-
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.originDashboard));
+            if (this.origin !== "preview") {
+                this.renderSubview("#date-filter", new DateFilterView({
+                    from: from,
+                    to: to
+                }));
+            }
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
 
             this.einstein = einstein;
             this.dataFilter = dataFiler;

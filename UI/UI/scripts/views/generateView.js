@@ -27,7 +27,8 @@
             'click #generate-submit': 'addToDashboard',
         },
 
-        initialize: function () {
+        initialize: function (model, origin) {
+            this.origin = origin;
             if (!this.collection) {
                 this.collection = new DashboardCollection();
 
@@ -56,27 +57,27 @@
             switch (this.model.get("Type")) {
                 case 0:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, this.origin));
                     break;
                 }
                 case 1:
                 {
-                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, false));
+                    this.renderSubview(("#component-by-type"), new KPIView(this.model, 0, this.origin));
                     break;
                 }
                 case 2:
                 {
-                    this.renderSubview(("#component-by-type"), new TableView(this.model, 0, false));
+                    this.renderSubview(("#component-by-type"), new TableView(this.model, 0, this.origin));
                     break;
                 }
                 case 3:
                 {
-                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0, false));
+                    this.renderSubview(("#component-by-type"), new TimelineView(this.model, 0, this.origin));
                     break;
                 }
                 case 4:
                 {
-                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0, false));
+                    this.renderSubview(("#component-by-type"), new ChartView(this.model, 0, this.origin));
                     break;
                 }
             }

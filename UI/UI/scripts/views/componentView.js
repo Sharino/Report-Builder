@@ -9,17 +9,19 @@
     'DimensionListView',
     'MetricDimensionMap',
     'text!templates/component.html',
+    'GenerateView',
     'text!templates/helpContent.html',
     'Config',
     'adform-notifications',
     'adform-side-panel'
-], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, helpContent, Config) {
+], function (BaseCompositeView, Component, DashboardComponent, MetricCollection, DimensionCollection, metricDimensionView, MetricListView, DimensionListView, MetricDimensionMap, componentTemplate, GenerateView, helpContent, Config) {
     var ComponentView = BaseCompositeView.extend({
         template: _.template(componentTemplate),
 
         events: {
             'click #component-submit': 'submit',
             'click #component-cancel': 'cancel',
+            'click #component-preview': 'preview',
             'click .radio-group': 'toggleDimensionList',
             'click .adf-icon-small-edit': 'toggleComponentName',
             'click #component-help': 'handleHelpAction'
@@ -74,6 +76,11 @@
                 }
             });
             return this;
+        },
+        preview: function (e) {
+       
+            this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
+
         },
 
         cancel: function (e) {

@@ -5,15 +5,15 @@
     var ComponentButtons = BaseCompositeView.extend({
         template: _.template(ButtonTemplate),
 
-        initialize: function (position, model, dashboard) {
+        initialize: function (position, model, origin) {
             this.model = model;
             this.position = position - 1; 
-            this.originDashboard = dashboard;
+            this.origin = origin;
         },
 
         render: function () {
             this.$el.html(this.template({
-                Dashboard: this.originDashboard,
+                Origin: this.origin,
                 Position: this.position,
                 model: this.model,
             }));
