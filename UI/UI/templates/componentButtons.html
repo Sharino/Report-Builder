@@ -10,8 +10,8 @@
         </ul>
     </div>
 <% } else { %>
-<button style="padding-right: 8px;" class="btn"><i class="adf-icon-small-arrow-up"></i></button>
-<button style="padding-right: 8px;" class="btn"><i class="adf-icon-small-arrow-down"></i></button>
+<button style="padding-right: 8px;" class="btn up" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-up"></i></button>
+<button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
 <% } %>
 
 <button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
