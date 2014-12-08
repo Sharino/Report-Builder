@@ -20,7 +20,7 @@ namespace BussinessLogic.Handlers.ExportHandlers
 
                 var cells = worksheet.Cells;
 
-                cells[0, 0].PutValue("Generated on");
+                cells[0, 0].PutValue("Generation");
                 cells[0, 1].PutValue(request.GeneratedDate);
 
                 if (!string.IsNullOrEmpty(request.Language))
@@ -29,10 +29,11 @@ namespace BussinessLogic.Handlers.ExportHandlers
                     cells[1, 1].PutValue(request.Language);
                 }
 
-                cells[2, 0].PutValue("From:");
-                cells[2, 1].PutValue(request.StartDate);
-                cells[3, 0].PutValue("To:");
-                cells[3, 1].PutValue(request.EndDate);
+                cells[2, 0].PutValue("Period:");
+                cells[2, 1].PutValue("From");
+                cells[2, 2].PutValue(request.StartDate);
+                cells[3, 1].PutValue("To");
+                cells[3, 2].PutValue(request.EndDate);
                 
                 var row = 5;
                 var col = 0;
