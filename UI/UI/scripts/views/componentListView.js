@@ -76,7 +76,7 @@
                         "Components": [],
                     }));
                 }
-
+                $("body").removeClass("component-edit");
                 return this;
             },
 
