@@ -29,9 +29,11 @@
 
         initialize: function () {
             MetricDimensionMap.getMap();
+
         },
 
         render: function () {
+        
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
@@ -46,7 +48,7 @@
 
             this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
-
+    
             allMetrics.fetch({
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
@@ -75,6 +77,7 @@
                     });
                 }
             });
+           $("body").addClass("component-edit");
             return this;
         },
         preview: function (e) {
@@ -93,6 +96,7 @@
                     }
                 ]
             });
+            this.$el.find(("#pre")).append("<div id='preview'></div>");
         },
 
         cancel: function (e) {
