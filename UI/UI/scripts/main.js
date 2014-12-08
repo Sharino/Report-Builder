@@ -87,6 +87,7 @@
         'DimensionListView': 'scripts/views/dimensionListView',
         'MetricDimensionView': 'scripts/views/metricDimensionView',
         'ComponentButtonView': 'scripts/views/componentButtonView',
+        'DashboardSelectionView': 'scripts/views/dashboardSelectionView',
 
         /* Router dependencies */
         'Router': 'scripts/routers/router'
@@ -136,7 +137,7 @@
         },
 
         'handlebars-tpl': {
-            exports: 'Handlebars'
+            deps:['handlebars']
         },
 
         'jquery-sortable': {
@@ -175,7 +176,7 @@
         },
 
         'adform-range-selector': {
-            deps: ['globalize', 'moment', 'adform-calendar', 'adform-date', 'handlebars'],
+            deps: ['handlebars-tpl', 'globalize', 'moment', 'adform-calendar', 'adform-date'],
             exports: 'Adform.RangeSelector'
         },
 

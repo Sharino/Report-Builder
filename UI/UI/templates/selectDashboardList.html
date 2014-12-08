@@ -1,14 +1,56 @@
-﻿<table class="table table-striped heading-separation table-hover selectable-rows">
-    <thead>
-        <tr>
-            <th>Title</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% _.each(Dashboards, function(model) { %>
-        <tr class="dashboard-list-item" id="<%= model.Id %>">
-            <td class="click"><%= model.Title %></td>
-        </tr>
-        <% }); %>
-    </tbody>
-</table>
+﻿<div id="table-container">
+    <div class="table-toolbar">
+        <div class="search-container pull-right" style="margin-bottom: 10px;">
+            <input id="dashboards-search" type="text" class="input-xlarge" placeholder="Search..." />
+            <span class="add-in"><i class="adf-icon-small-search"></i></span>
+        </div>
+    </div>
+
+    <table class="table heading-separation table-hover align-middle">
+        <thead>
+            <tr>
+                <th class="col-row-start"></th>
+                <th class="col-title sortable">
+                    Title
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-created sortable">
+                    Created
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-edited sortable">
+                    Edited
+                    <div class="icon-hidden"><a><i class="adf-icon-small-arrow-down sort-icon"></i></a></div>
+                </th>
+                <th class="col-row-end"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <% _.each(Dashboards, function(model) { %>
+            <tr class="dashboard-list-item" id="<%= model.Id %>">
+                <td class="col-row-start click"></td>
+                <td class="col-title click"><a><%= model.Title %></a></td>
+                <td class="col-created click">
+                    <div class="date-container">
+                        <%
+                            var dateOffset = new Date().getTimezoneOffset()*(-1);
+                            var creationDate = moment(new Date(model.CreationDate)).add(dateOffset, "m");
+                            var modificationDate = moment(new Date(model.ModificationDate)).add(dateOffset, "m");
+                        %>
+                        <div class="year"><%= creationDate.format("YYYY-MM-DD") %></div>
+                        <div class="time"><%= creationDate.format("HH:mm") %> </div>
+                    </div>
+                </td>
+                <td class="col-edited click">
+                    <div class="date-container">
+                        <div class="year"><%= modificationDate.format("YYYY-MM-DD") %></div>
+                        <div class="time"><%= modificationDate.format("HH:mm") %> </div>
+                    </div>
+                </td>
+                <td class="col-row-end"></td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <div id="dashboards-search-noresults" style="text-align: center; display: none; padding: 5px;">No results.</div>
+</div>

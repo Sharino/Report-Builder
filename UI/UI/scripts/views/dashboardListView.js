@@ -80,7 +80,7 @@
         handleClickAction: function (e) {
             e.preventDefault();
 
-            var id = $(e.currentTarget).attr("id");
+            var id = $(e.currentTarget.parentElement).attr("id");
             var routerUrl = "dashboard/".concat(id);
 
             Backbone.history.navigate(routerUrl, true, true);
@@ -89,6 +89,12 @@
         handleSortAction: function(e) {
             if ($(e.currentTarget).hasClass("col-title")) {
                 this._sortByTitle();
+            }
+            if ($(e.currentTarget).hasClass("col-created")) {
+                this._sortByCreationDate();
+            }
+            if ($(e.currentTarget).hasClass("col-edited")) {
+                this._sortByModificationDate();
             }
         },
 
@@ -192,6 +198,56 @@
                 this.$el.find("th.col-title").find(".sort-icon").addClass('adf-icon-small-arrow-down');
             }
         },
+        _sortByCreationDate: function () {
+            if (this.sortType !== "createdAsc") {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                        function (item) {
+                            return item.SubmissionDate;
+                        })
+                );
+                this.sortType = "createdAsc";
+                this.render();
+
+                this.$el.find("th.col-created").find(".sort-icon").removeClass('adf-icon-small-arrow-down');
+                this.$el.find("th.col-created").find(".sort-icon").addClass('adf-icon-small-arrow-up');
+            } else {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                        function (item) {
+                            return item.SubmissionDate;
+                        }).reverse()
+                );
+                this.sortType = "createdDes";
+                this.render();
+
+                this.$el.find("th.col-created").find(".sort-icon").removeClass('adf-icon-small-arrow-up');
+                this.$el.find("th.col-created").find(".sort-icon").addClass('adf-icon-small-arrow-down');
+            }
+        },
+        _sortByModificationDate: function () {
+            if (this.sortType !== "modifiedAsc") {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                        function (item) {
+                            return item.ModificationDate;
+                        })
+                );
+                this.sortType = "modifiedAsc";
+                this.render();
+
+                this.$el.find("th.col-edited").find(".sort-icon").removeClass('adf-icon-small-arrow-down');
+                this.$el.find("th.col-edited").find(".sort-icon").addClass('adf-icon-small-arrow-up');
+            } else {
+                this.collection = new DashboardCollection(_.sortBy(this.collection.toJSON(),
+                        function (item) {
+                            return item.ModificationDate;
+                        }).reverse()
+                );
+                this.sortType = "modifiedDes";
+                this.render();
+
+                this.$el.find("th.col-edited").find(".sort-icon").removeClass('adf-icon-small-arrow-up');
+                this.$el.find("th.col-edited").find(".sort-icon").addClass('adf-icon-small-arrow-down');
+            }
+        }
     });
 
     return DashboardListView;
