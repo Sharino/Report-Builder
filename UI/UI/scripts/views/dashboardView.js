@@ -115,8 +115,8 @@
                     this.componentView = this.arraySwap(this.componentView, idIndex, prevIdIndex);
 
                     var allElements = $(this.el).find(".row").siblings(".row").andSelf();
-                    var currentElement = allElements[idIndex+1];
-                    var nextElement = allElements[prevIdIndex+1];
+                    var currentElement = allElements[idIndex];
+                    var nextElement = allElements[prevIdIndex];
                     
                     this.elementSwap(currentElement, nextElement);
                 }
@@ -139,8 +139,8 @@
                     this.model.save("ComponentIds", this.arraySwap(this.model.get("ComponentIds"), idIndex, nextIdIndex));
 
                     var allElements = $(this.el).find(".row").siblings(".row").andSelf();
-                    var currentElement = allElements[idIndex+1];
-                    var nextElement = allElements[nextIdIndex+1];
+                    var currentElement = allElements[idIndex];
+                    var nextElement = allElements[nextIdIndex];
                     
                     this.elementSwap(currentElement, nextElement);
                 }
@@ -168,7 +168,6 @@
 
             var id = parseInt($(e.currentTarget).attr('data-id'));
 
-            
             var compIds = this.model.get("ComponentIds");
 
             if (!isNaN(id)) {
