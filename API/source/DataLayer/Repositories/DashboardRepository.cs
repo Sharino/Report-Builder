@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web.Script.Serialization;
-using System.Web.UI.WebControls;
 using Models.Models;
 
 namespace DataLayer.Repositories
@@ -52,6 +51,8 @@ namespace DataLayer.Repositories
                         item.Id = reader.GetInt32(0);
                         item.Title = reader.GetString(1);
                         item.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                        item.CreationDate = reader.GetString(3);
+                        item.ModificationDate = reader.GetString(4);
                         list.Add(item);
                     }
                     _connection.Close();
@@ -70,13 +71,14 @@ namespace DataLayer.Repositories
                 using (var reader = command.ExecuteReader())
                 {
                     reader.Read();
-                    var dashboard = new Dashboard();
-                    dashboard.Id = reader.GetInt32(0);
-                    dashboard.Title = reader.GetString(1);
-                    dashboard.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
-
+                    var item = new Dashboard();
+                    item.Id = reader.GetInt32(0);
+                    item.Title = reader.GetString(1);
+                    item.ComponentIds = _serializer.Deserialize<List<int>>(reader.GetString(2));
+                    item.CreationDate = reader.GetString(3);
+                    item.ModificationDate = reader.GetString(4);
                     _connection.Close();
-                    return dashboard;
+                    return item;
                 }
             }
         }
