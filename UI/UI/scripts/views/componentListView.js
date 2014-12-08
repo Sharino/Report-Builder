@@ -60,8 +60,7 @@
                     },
                     error: function () { }
                 });
-
-                
+                this.$el.find(("#pre")).append("<div id='preview'></div>");
             },
 
             render: function () {
