@@ -32,13 +32,14 @@ namespace BussinessLogic.Handlers.ExportHandlers
                     i += 3;
                 }
 
-                xls.KpiToXls();
+           //     xls.KpiToXls();
 
             }
             catch (Exception exception)
             {
                 Errors = new List<ErrorDto> { new ErrorDto("400", "Unable to export") };
             }
+            return "";
         }
     }
 }

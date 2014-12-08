@@ -8,6 +8,10 @@ namespace BussinessLogic.Handlers.ExportHandlers.Type_Specific_Logic
         {
             var worksheet = workbook.Worksheets[0];
             var cells = worksheet.Cells;
+
+            cells[0, 0].PutValue("Generated on");
+//            cells[0, 1].PutValue(request.GeneratedDate);
+
             return null;
         }
     }

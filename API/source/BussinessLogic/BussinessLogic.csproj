@@ -64,9 +64,11 @@
     <Compile Include="Handlers\DimensionHandlers\DimensionGetAllHandler.cs" />
     <Compile Include="Handlers\DimensionHandlers\DimensionGetHandlers.cs" />
     <Compile Include="Handlers\ExportHandlers\DashboardToCsvHandler.cs" />
+    <Compile Include="Handlers\ExportHandlers\DashboardToXlsHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToCsvHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToPdfHandler.cs" />
     <Compile Include="Handlers\ExportHandlers\KpiToXlsHandler.cs" />
+    <Compile Include="Handlers\ExportHandlers\Type Specific Logic\KpiToXls.cs" />
     <Compile Include="Handlers\MetricDimensionMapHandlers\MetricDimensionMapGetHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetAllHandler.cs" />
     <Compile Include="Handlers\MetricHandlers\MetricGetHandler.cs" />

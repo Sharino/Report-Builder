@@ -234,3 +234,7 @@ i[class*="adf-icon-alt"] {
             -moz-border-radius: 999999px;
             border-radius: 999999px;
         }
+
+body.component-edit {
+    background: url(http://i.imgur.com/lr5KvH2.png) no-repeat fixed right bottom ;
+}

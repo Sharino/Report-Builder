@@ -1,9 +1,7 @@
-<button class="btn btn-transparent pull-right" id="component-help">Help</button>
-
+<button class="btn btn-transparent pull-right" id="component-help"><i class="adf-icon-small-info blue-icon"></i></button>
 <div class="grid 24 spacing-large">
     <h1 ><b><%=model.Title%></b></h1>
-    <div class="span-24 to-l" style="min-width: 627px;padding-bottom: 0px; ">
-<!--        <h3></h3>-->
+    <div class="span-14 to-l" style="min-width: 627px;padding-bottom: 0px; ">
         <div class="form-horizontal well">
             <div class="control-group ">
                 <label class="control-label">Title</label>
@@ -40,7 +38,7 @@
             </div>
         </div>
     </div>
-    <div class="span-24 ">
+    <div class="span-14 ">
 
         <section data-cols="60" data-fluid="true">
             <div id="metric-list"></div>
@@ -51,19 +49,21 @@
         <section data-cols="60" data-fluid="true">
             <div id="dimension-list"></div>
         </section>
-
-
     </div>
-    <div class="span-24">
+    <div class="span-14">
         <div class="button-group">
-       
             <button class="btn btn-success" type="submit" id="component-submit">Save</button>
             <button class="btn btn-transparent" id="component-cancel">Cancel</button>
             <button class="btn btn-primary pull-right" id="component-preview" style="margin-right: 0px;">Preview</button>
         </div>
     </div>
 </div>
+<!--<div class="grid 12 spacing-large pull-right">-->
+<!--    <img src="http://i.imgur.com/lr5KvH2.png" />-->
+<!--</div>-->
 
 
-<div id="preview"></div>
+<div id="pre" class="back-pic">
+    <div id="preview"></div>
+</div>
 

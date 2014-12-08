@@ -16,8 +16,8 @@
             'click .click': 'handleClickAction',
             'click .sortable': 'handleSortAction',
             'click .del': 'handleDeleteAction',
-            'keyup #dashboards-search': "handleSearchAction"
-
+            'keyup #dashboards-search': "handleSearchAction",
+            'click .component-preview': 'preview',
         },
 
         initialize: function () {
@@ -30,9 +30,15 @@
             this.sortType = "initial";
         },
 
+        preview: function() {
+            alert("s");
+
+
+        },
+
         render: function () {
             this.$el.html(this.template({ "Dashboards": this.collection.toJSON() }));
-
+            $("body").removeClass("component-edit");
             return this;
         },
 

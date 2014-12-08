@@ -3,9 +3,10 @@
     'Component',
     'ComponentCollection',
     'MenuView',
+    'GenerateView',
     'text!templates/componentList.html',
     'moment-2.8.4',
-    'Config'], function (BaseCompositeView, Component, ComponentCollection, MenuView, componentListTemplate, moment, Config) {
+    'Config'], function (BaseCompositeView, Component, ComponentCollection, MenuView, GenerateView, componentListTemplate, moment, Config) {
         var ComponentListView = BaseCompositeView.extend({
             template: _.template(componentListTemplate),
 
@@ -15,7 +16,8 @@
                 'click .click': 'handleGenerateAction',
                 'click .create': 'submitNewComponent',
                 'click .sortable': 'handleSortAction',
-                'keyup #components-search': "handleSearchAction"
+                'keyup #components-search': "handleSearchAction",
+                'click .preview': 'preview',
             },
 
             initialize: function () {
@@ -27,6 +29,38 @@
                 this.collection.on('fetch', this.render, this);
 
                 this.sortType = "initial";
+            },
+
+            preview: function(e) {
+                e.preventDefault();
+
+                var id = parseInt($(e.currentTarget.parentElement.parentElement).attr("id"));
+
+                var self = this;
+
+                var previewModel = new Component({ Id: id });
+                previewModel.fetch({
+                    success: function (model) {
+                        self.previewView = self.renderSubview('#preview', new GenerateView({ model: model }, "preview"));
+                        console.log(model);
+                        $.sidePanel({
+                            body: self.previewView.$el,
+                            header: {
+                                title: "Component preview"
+                            },
+                            resize: false,
+                            width: "650px",
+                            buttons: [
+                                {
+                                    title: "Close",
+                                    cssClass: "btn-cancel"
+                                }
+                            ]
+                        });
+                    },
+                    error: function () { }
+                });
+                this.$el.find(("#pre")).append("<div id='preview'></div>");
             },
 
             render: function () {
@@ -41,7 +75,7 @@
                         "Components": [],
                     }));
                 }
-
+                $("body").removeClass("component-edit");
                 return this;
             },
 

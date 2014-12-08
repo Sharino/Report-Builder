@@ -102,7 +102,7 @@ namespace Controllers.Controllers
             {
                 if (request.Count > 0)
                 {
-                    var handler = new DashboardToCsvHandler();
+                    var handler = new DashboardToXlsHandler();
                     var fileName = handler.HandleCore(request);
 
                     if (handler.Errors != null && handler.Errors.Count > 0)

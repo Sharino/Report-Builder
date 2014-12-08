@@ -73,6 +73,8 @@ namespace BussinessLogic.Mappings
             dashboard.ComponentIds = dto.ComponentIds;
             dashboard.Id = dto.Id;
             dashboard.Title = dto.Title;
+            dashboard.CreationDate = dto.CreationDate;
+            dashboard.ModificationDate = dto.ModificationDate;
             return dashboard;
         }
 
@@ -82,6 +84,8 @@ namespace BussinessLogic.Mappings
             dto.ComponentIds = dashboard.ComponentIds;
             dto.Id = dashboard.Id;
             dto.Title = dashboard.Title;
+            dto.CreationDate = dashboard.CreationDate;
+            dto.ModificationDate = dashboard.ModificationDate;
             return dto;
         }
 
@@ -187,9 +191,6 @@ namespace BussinessLogic.Mappings
         {
             return components.Select(ReportComponentToDto).ToList();
         }
-
         #endregion
-
-    
     }
 }
