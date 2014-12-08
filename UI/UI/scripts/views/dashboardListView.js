@@ -16,8 +16,8 @@
             'click .click': 'handleClickAction',
             'click .sortable': 'handleSortAction',
             'click .del': 'handleDeleteAction',
-            'keyup #dashboards-search': "handleSearchAction"
-
+            'keyup #dashboards-search': "handleSearchAction",
+            'click .component-preview': 'preview',
         },
 
         initialize: function () {
@@ -28,6 +28,12 @@
             this.collection.on('fetch', this.render, this);
 
             this.sortType = "initial";
+        },
+
+        preview: function() {
+            alert("s");
+
+
         },
 
         render: function () {
