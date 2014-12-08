@@ -16,12 +16,12 @@ namespace BussinessLogic.Handlers.ExportHandlers
         {
             try
             {
-                var generatedDate = new StringBuilder("Generation: " + request.GeneratedDate);
+                var generatedDate = new StringBuilder("Generation" + separator + request.GeneratedDate);
                 if (!string.IsNullOrEmpty(request.Language))
                 {
                     generatedDate.Append(Environment.NewLine + "Language" + separator + request.Language);
                 }
-                var dates = new StringBuilder("Period: " + separator + request.StartDate + separator + request.EndDate);
+                var dates = new StringBuilder("Period" + separator + request.StartDate + separator + request.EndDate);
                 var header = new StringBuilder();
                 var content = new StringBuilder();
 
