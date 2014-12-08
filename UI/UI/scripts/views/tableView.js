@@ -17,7 +17,6 @@
 
         events: {
             'click #generateByDate': 'generateNewData',
-            'click .tableEdit': 'edit',
             'click .table-menu .selectedDimension': 'selectDimension',
             'click #table th': 'sortTable'
         },
@@ -154,16 +153,6 @@
                     console.log("error:",error);
                 }
             });
-
-        },
-
-        edit: function (e) {
-            e.preventDefault();
-
-            var id = $(e.currentTarget).attr("id");
-            var routerUrl = "create/".concat(id);
-
-            Backbone.history.navigate(routerUrl, true, true);
 
         },
 
