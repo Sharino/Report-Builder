@@ -34,13 +34,13 @@
 
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = this.startDate;
-                to = this.startDate;
+                from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                to = moment().subtract('days', 1).format('YYYY-MM-DD');
             }
             else {
                 if (this.origin === "preview") {
-                    from = this.startDate;
-                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
                 } else {
                     from = $("#picker").find("input")[0].value;
                     to = $("#picker2").find("input")[0].value;

@@ -259,3 +259,7 @@ div.placeholder table thead tr th.inactive {
 div.adform-calendar-v2.adform-calendar-small.popup {
     width: 246px;
 }
+div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inner div.side-panel-body div#preview{
+    pointer-events:none;
+}
+
