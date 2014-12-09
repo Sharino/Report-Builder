@@ -28,10 +28,7 @@
         },
 
         initialize: function () {
-
             MetricDimensionMap.getMap();
-
-
         },
 
         render: function () {
@@ -121,7 +118,8 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-                    Backbone.history.navigate("list", { trigger: true });
+//                    var routerUrl = "create";
+                    Backbone.history.history.back();
                 },
                 error: function (model, response) {
 

@@ -40,6 +40,27 @@
             this.render();
         },
 
+        render: function () {
+            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
+
+            var compIds = this.model.get('ComponentIds');
+            if (compIds.length === 0) {
+                this.componentView = [];
+                this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
+            }
+
+            from = moment().subtract('days', 7).format('YYYY-MM-DD');
+            to = moment().subtract('days', 1).format('YYYY-MM-DD');
+
+            this.renderSubview("#date-filter", new DateFilterView({
+                from: from,
+                to: to,
+                origin: "Dashboard"
+            }));
+
+            return this;
+        },
+
         deleteDashboardComponent: function (e) {
             e.preventDefault();
             var id = parseInt($(e.currentTarget).attr('data-id'));
@@ -260,18 +281,6 @@
                     return null;
                 }
             });
-        },
-
-        render: function () {
-            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
-
-            var compIds = this.model.get('ComponentIds');
-            if (compIds.length === 0) {
-                this.componentView = [];
-                this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
-            }
-
-            return this;
         },
 
         csv: function (e) {
