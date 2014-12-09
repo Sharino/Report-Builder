@@ -39,6 +39,7 @@
         render: function () {
             this.$el.html(this.template({ "Dashboards": this.collection.toJSON() }));
             $("body").removeClass("component-edit");
+//            $("body").addClass("bot-pic");
             return this;
         },
 
