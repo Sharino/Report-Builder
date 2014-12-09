@@ -42,8 +42,8 @@
                     from = this.startDate;
                     to = moment().add('days', 7).format('YYYY-MM-DD');
                 } else {
-//                    from = $("#picker").find("input")[0].value;
-//                    to = $("#picker2").find("input")[0].value;
+                    from = $("#picker").find("input")[0].value;
+                    to = $("#picker2").find("input")[0].value;
                 }
             }
 

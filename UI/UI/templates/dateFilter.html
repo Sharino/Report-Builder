@@ -1,31 +1,13 @@
-﻿<script id="rangeSelectorTemplate" type="text/x-handlebars-template">
-    <div id="rangeSelectorWrapper" class="tooltip info bottom-right range-comparator in" style="display: none">
-        <div class="tooltip-arrow"></div>
-        <div class="tooltip-arrow over"></div>
-        <div class="tooltip-inner">
-            <div class="scheduler filters-range-selector clearfix">
-                <div id="calendar" class="clearfix"></div>
-                <div class="setup form-horizontal">
-                    <div class="section transparent">
-                        <div class="control-group">
-                            <label class="control-label">From</label>
-                            <div class="controls">
-                                <input id="firstFrom" type="text" class="input-small right-align">
-                            </div>
-                        </div>
-                        <div class="control-group">
-                            <label class="control-label">To</label>
-                            <div class="controls">
-                                <input id="firstTo" type="text" class="input-small right-align">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+﻿
+    <div id="picker" class="input-append date" data-format="YYYY-MM-DD">
+        <input style="height: 21px;" type="text" value="<%= options.from %>" />
+        <a class="btn" style="font-size: 15px; height: 21px;"><i class="adf-icon-small-calendar"></i></a>
     </div>
-</script>
-
-<div id="range-selector">
-        <label>CHE</label>
-</div>
+    <span class="date-separator"> </span>
+    <div id="picker2" class="input-append date" data-format="YYYY-MM-DD">
+        <input style="height: 21px;" type="text" value="<%= options.to %>" />
+        <a class="btn" style="font-size: 15px; height: 21px; "><i class="adf-icon-small-calendar"></i></a>
+    </div>
+    <div style="margin-left: 5px;">
+        <button class="btn btn-success" id="generateByDate">Generate</button>
+    </div>
