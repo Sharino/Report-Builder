@@ -91,35 +91,7 @@
             return this;
         },
 
-        initEinstein: function (start, end) {
-            var metrics = this.model.get("Metrics");
-            var dimensions = this.model.get("Dimensions");
-
-            if (!this.selectedDimension) {
-                this.selectedDimension = new Dimension(dimensions[0]);
-                this.selectedDimension.fetch();
-            }
-
-            var metricMnemonics = [];
-            for (var i = 0, len = metrics.length; i < len; i++) {
-                var tempMetric = new Metric(metrics[i]);
-                metricMnemonics.push(tempMetric.get("Mnemonic"));
-            }
-
-            var einstein = new Einstein({
-                Metrics: metricMnemonics,
-                Dimensions: [this.selectedDimension.get("Mnemonic")],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-            this.workEinstein(einstein);
-
-        },
-
+       
         generateNewData: function () {
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
@@ -129,30 +101,6 @@
             } else {
                 alert('back to the future');
             }
-
-        },
-
-        workEinstein: function (stoneAlone) {
-
-            var self = this;
-
-            stoneAlone.fetch({
-                url: Config.EinsteinSettings.URL,
-                data: JSON.stringify(stoneAlone),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                success: function (response) {
-                    self.einstein = response.attributes.ComponentValues;
-                    self.dataFilter = response.attributes.Filters.DateFilter;
-                    self.render(self.einstein, self.dataFilter);
-                },
-                error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log("error:",error);
-                }
-            });
 
         },
 

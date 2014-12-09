@@ -18,26 +18,25 @@
         template: _.template(TimelineTemplate),
 
         events: {
-            'click #generateByDate': 'generateNewData',
             'click .timeline-menu .dropdown-menu li': 'selectMetric',
             'click .timeline-menu .selectedDimension': 'selectDimension'
         },
 
-        startDate: moment().format('YYYY-MM-DD'),
-
-        initialize: function (parent, pos, origin) {
+        initialize: function (parent, pos, origin, dateview) {
             this.origin = origin;
             this.model = parent;
             this.position = pos;
-            this.initEinstein(moment().subtract('days', 7).format('YYYY-MM-DD'), this.startDate);
+            this.dateView = dateview;
 
             this.selectedMetrics = [];
 
             var metrics = this.model.get("Metrics");
             var dimensions = this.model.get("Dimensions");
-            this.selectedMetrics.push(new Metric(metrics[0]));
+
+            this.selectedMetrics.push(metrics[0]);
+
             if (metrics.length > 1) {
-                this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
+                this.selectedMetrics.push(metrics[1]);
             }
             if (this.origin !== "preview") {
                 this.selectedDimension = new Dimension(dimensions[0]);
@@ -45,155 +44,68 @@
                 var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
                 this.selectedDimension = new Dimension(result[0]);
             }
-           
         },
 
-        render: function (einstein, dataFiler) {
-            if (!einstein && !dataFiler) {
-                einstein = 'garbage';
-                if (this.origin === "preview") {
-                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
-                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
-
-                } else {
-                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
-                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
-                }
-            } else {
-                if (this.origin === "preview") {
-                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
-                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
-
-                } else {
-                    from = $("#picker").find("input")[0].value;
-                    to = $("#picker2").find("input")[0].value;
-                }
-            }
+        render: function () {
+            var einstein = new Einstein({
+                Model: {
+                    Metrics: this.selectedMetrics,
+                    Dimensions: [this.selectedDimension.toJSON()]
+                },
+                Start: this.dateView.datePicker.getSelectedDate(),
+                End: this.dateView.datePicker2.getSelectedDate()
+            });
 
             var metrics = this.model.get("Metrics");
             var selectedMetricsNames = [];
-            selectedMetricsNames.push(this.selectedMetrics[0].get("DisplayName"));
+
+            selectedMetricsNames.push(this.selectedMetrics[0].DisplayName);
+
             if (metrics.length > 1) {
-                selectedMetricsNames.push(this.selectedMetrics[1].get("DisplayName"));
+                selectedMetricsNames.push(this.selectedMetrics[1].DisplayName);
             }
-
-            this.$el.html(this.template({
-                Einstein: einstein,
-                Metrics: this.model.get('Metrics'),
-                model: this.model.toJSON(),
-                Position: this.position || 0,
-                ComponentID: this.model.id,
-                selectedMetrics: selectedMetricsNames,
-                selectedDimension: this.selectedDimension.get("DisplayName"),
-            }));
-
-            var dimElement = "li#" + this.selectedDimension.get("DimensionId") + ".selectedDimension";
-            this.$el.find(dimElement).siblings('li').removeClass('active');
-            this.$el.find(dimElement).addClass('active');
-
-            var metrElement = "li#" + this.selectedMetrics[0].get("MetricId") + ".selectedMetric1";
-            this.$el.find(metrElement).siblings('li').removeClass('active');
-            this.$el.find(metrElement).addClass('active');
-
-            if (this.selectedMetrics.length > 1) {
-                metrElement = "li#" + this.selectedMetrics[1].get("MetricId") + ".selectedMetric2";
-                this.$el.find(metrElement).siblings('li').removeClass('active');
-                this.$el.find(metrElement).addClass('active');
-            }
-
-            this.renderSubview("#highcharts", new HighchartsTimelineView({
-                model: this.model,
-                einstein: einstein,
-                selectedMetricsNames: selectedMetricsNames,
-            }));
-
-            if (this.origin !== "preview") {
-                this.renderSubview("#date-filter", new DateFilterView({
-                    from: from,
-                    to: to
-                }));
-            }
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
-
-            this.einstein = einstein;
-            this.dataFilter = dataFiler;
-
-            return this;
-        },
-
-        initEinstein: function (start, end) {
-            if (!this.selectedDimension) {
-                var dimensions = this.model.get("Dimensions");
-                if (this.origin !== "preview") {
-                    this.selectedDimension = new Dimension(dimensions[0]);
-                } else {
-                    var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
-                    this.selectedDimension = new Dimension(result[0]);
-                }
-            }
-
-            if (!this.selectedMetrics) {
-                this.selectedMetrics = [];
-                var metrics = this.model.get("Metrics");
-                this.selectedMetrics.push(new Metric(metrics[0]));
-                if (metrics.length > 1) {
-                    this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
-                }
-            }
-
-            var metricMnemonics = [];
-            for (var i = 0, len = this.selectedMetrics.length; i < len; i++) {
-                metricMnemonics.push(this.selectedMetrics[i].get("Mnemonic"));
-            }
-
-            var einstein = new Einstein({
-                Metrics: metricMnemonics,
-                Dimensions: [this.selectedDimension.get("Mnemonic")],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-            this.workEinstein(einstein);
-
-        },
-
-        generateNewData: function () {
-            var startDate = $("#picker").find("input")[0].value;
-            var endDate = $("#picker2").find("input")[0].value;
-
-            if (startDate <= endDate) {
-                this.initEinstein(startDate, endDate);
-            } else {
-                alert('back to the future');
-            }
-
-        },
-
-        workEinstein: function (stoneAlone) {
 
             var self = this;
 
-            stoneAlone.fetch({
-                url: Config.EinsteinSettings.URL,
-                data: JSON.stringify(stoneAlone),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                success: function (response) {
-                    self.einstein = response.attributes.ComponentValues;
-                    self.dataFilter = response.attributes.Filters.DateFilter;
-                    self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
+            einstein.save({}, {
+                success: function() {
+                    self.$el.html(self.template({
+                        Metrics: self.model.get('Metrics'),
+                        model: self.model.toJSON(),
+                        Position: self.position || 0,
+                        ComponentID: self.model.id,
+                        selectedMetrics: selectedMetricsNames,
+                        selectedDimension: self.selectedDimension.get("DisplayName"),
+                    }));
+
+                    var dimElement = "li#" + self.selectedDimension.get("DimensionId") + ".selectedDimension";
+                    self.$el.find(dimElement).siblings('li').removeClass('active');
+                    self.$el.find(dimElement).addClass('active');
+
+                    var metrElement = "li#" + self.selectedMetrics[0].MetricId + ".selectedMetric1";
+                    self.$el.find(metrElement).siblings('li').removeClass('active');
+                    self.$el.find(metrElement).addClass('active');
+
+                    if (self.selectedMetrics.length > 1) {
+                        metrElement = "li#" + self.selectedMetrics[1].MetricId + ".selectedMetric2";
+                        self.$el.find(metrElement).siblings('li').removeClass('active');
+                        self.$el.find(metrElement).addClass('active');
+                    }
+
+                    self.renderSubview("#highcharts", new HighchartsTimelineView({
+                        model: self.model,
+                        einstein: einstein.toJSON(),
+                        selectedMetricsNames: selectedMetricsNames,
+                    }));
+
+                    self.renderSubview("#component-buttons", new ComponentButtonView(self.position + 1, self.model, self.origin));
                 },
-                error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
+                error: function(resp) {
+                    console.log("fail");
                 }
             });
 
+            return this;
         },
 
         selectMetric: function (e) {
@@ -211,10 +123,10 @@
 
             if ($(e.currentTarget).hasClass("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
-                this.generateNewData();
+                this.render();
             } else if ($(e.currentTarget).hasClass("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
-                this.generateNewData();
+                this.render();
             }
         },
 
@@ -233,9 +145,8 @@
             }
 
             this.selectedDimension = selectedDimension;
-            this.generateNewData();
-        },
-
+            this.render();
+        }
     });
 
     return timelineView;

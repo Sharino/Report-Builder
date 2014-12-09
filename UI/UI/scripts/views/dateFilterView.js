@@ -27,20 +27,20 @@
             this.$el.html(this.template({ options: date, position: this.position }));
 
             var self = this;
+            var pickerOptions = {
+                pickerControl: '#picker-' + self.position,
+            };
+
+            var pickerOptions2 = {
+                pickerControl: '#picker2-' + self.position
+            };
+
+            var AdformDatePicker = window.Adform.DatePicker;
             _.defer(function () {
-                var pickerOptions = {
-                    pickerControl: '#picker-' + self.position,
-                };
-
-                var pickerOptions2 = {
-                    pickerControl: '#picker2-' + self.position,
-                    optionalField: true
-                };
-
-                var AdformDatePicker = window.Adform.DatePicker;
                 self.datePicker = new AdformDatePicker(pickerOptions);
                 self.datePicker2 = new AdformDatePicker(pickerOptions2);
             });
+
             return this;
         }
     });

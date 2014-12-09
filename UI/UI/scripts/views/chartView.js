@@ -19,7 +19,6 @@
         template: _.template(ChartTemplate),
 
         events: {
-            'click #generateByDate': 'generateNewData',
             'click .chart-menu .dropdown-menu li': 'selectMetric',
             'click .chart-menu .selectedDimension': 'selectDimension'
         },
@@ -36,6 +35,7 @@
 
             var metrics = this.model.get("Metrics");
             var dimensions = this.model.get("Dimensions");
+
             this.selectedMetrics.push(new Metric(metrics[0]));
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
@@ -109,75 +109,7 @@
 
             return this;
         },
-
-        initEinstein: function (start, end) {
-            if (!this.selectedDimension) {
-                var dimensions = this.model.get("Dimensions");
-                this.selectedDimension = new Dimension(dimensions[0]);
-            }
-
-            if (!this.selectedMetrics) {
-                this.selectedMetrics = [];
-                var metrics = this.model.get("Metrics");
-                this.selectedMetrics.push(new Metric(metrics[0]));
-                if (metrics.length > 1) {
-                    this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
-                }
-            }
-
-            var metricMnemonics = [];
-            for (var i = 0, len = this.selectedMetrics.length; i < len; i++) {
-                metricMnemonics.push(this.selectedMetrics[i].get("Mnemonic"));
-            }
-
-            var einstein = new Einstein({
-                Metrics: metricMnemonics,
-                Dimensions: [this.selectedDimension.get("Mnemonic")],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-            this.workEinstein(einstein);
-
-        },
-
-        generateNewData: function () {
-            var startDate = $("#picker").find("input")[0].value;
-            var endDate = $("#picker2").find("input")[0].value;
-
-            if (startDate <= endDate) {
-                this.initEinstein(startDate, endDate);
-            } else {
-                alert('back to the future');
-            }
-
-        },
-
-        workEinstein: function (stoneAlone) {
-
-            var self = this;
-
-            stoneAlone.fetch({
-                url: Config.EinsteinSettings.URL,
-                data: JSON.stringify(stoneAlone),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                success: function (response) {
-                    self.einstein = response.attributes.ComponentValues;
-                    self.dataFilter = response.attributes.Filters.DateFilter;
-                    self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
-                },
-                error: function (error) {
-                }
-            });
-
-        },
-
+       
         selectMetric: function (e) {
             e.preventDefault();
             var selectedId = parseInt(e.currentTarget.id);
@@ -193,10 +125,10 @@
 
             if ($(e.currentTarget).hasClass("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
-                this.generateNewData();
+                this.render();
             } else if ($(e.currentTarget).hasClass("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
-                this.generateNewData();
+                this.render();
             }
         },
 
@@ -215,7 +147,7 @@
             }
 
             this.selectedDimension = selectedDimension;
-            this.generateNewData();
+            this.render();
         },
 
     });
