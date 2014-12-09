@@ -28,7 +28,9 @@
         },
 
         initialize: function () {
+
             MetricDimensionMap.getMap();
+
 
         },
 
@@ -77,6 +79,7 @@
                     });
                 }
             });
+            this.$el.find(("#metrics-dimensions")).addClass('page-split').pageSplit();
            $("body").addClass("component-edit");
             return this;
         },
