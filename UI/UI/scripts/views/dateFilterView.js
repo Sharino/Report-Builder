@@ -1,41 +1,51 @@
 ﻿define('DateFilterView', [
    'BaseCompositeView',
    'text!templates/dateFilter.html',
-   'adform-datepicker'
+   'adform-datepicker',
+   'adform-calendar',
+   'adform-date',
+   'adform-range-selector',
+   'handlebars-tpl'
 ], function (BaseCompositeView, dateFilterTemplate) {
     var DateFilterView = BaseCompositeView.extend({
         template: _.template(dateFilterTemplate),
 
         initialize: function (options) {
-            this.options = options;
 
-            _.defer(function () {
-                var pickerOptions = {
-                    pickerControl: '#picker',
-                };
-
-                var pickerOptions2 = {
-                    pickerControl: '#picker2',
-                    optionalField: true
-                };
-
-                var AdformDatePicker = window.Adform.DatePicker;
-                var datePicker = new AdformDatePicker(pickerOptions);
-                var datePicker2 = new AdformDatePicker(pickerOptions2);
-            });
-            this.render(options);
         },
 
         render: function (options) {
-            var date;
+            //            var date;
+            //
+            //            if (!options) {
+            //                date = this.options;
+            //            } else {
+            //                date = options;
+            //            }
+            //
+            //            this.$el.html(this.template({ options: date }));
 
-            if (!options) {
-                date = this.options;
-            } else {
-                date = options;
-            }
 
-            this.$el.html(this.template({ options: date }));
+            this.$el.html(this.template());
+
+            _.defer(function () {
+                var endDate = new Date();
+                endDate.dateAdd('+10 day');
+
+                var rangeSelectorOptions = {
+                    rangeControl: '#range-selector',
+                    rangeStart: new Date(),
+                    rangeEnd: endDate,
+                    minAllowedRangeDate: new Date(2012, 5, 5),
+                    maxAllowedRangeDate: new Date(2014, 5, 5),
+                    monthMode: false,
+                    dateFormat: "YYYY-MM-DD"
+                };
+
+                window.RangeSelectorInstance = new Adform.RangeSelector(rangeSelectorOptions);
+                var a = window.RangeSelectorInstance;
+                console.log(a.getRangeStartDate(), a.getRangeEndDate());
+            });
         }
 
     });

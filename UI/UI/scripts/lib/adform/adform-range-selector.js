@@ -283,9 +283,9 @@ var RangeSelectorControlsView = Backbone.View.extend({
     },
 
     render: function () {
-        this.$el.html(Handlebars.compile('<div id="rangeSelectorWrapper" class="tooltip info bottom-right range-comparator in" style="width: 800px; display: none"><div class="tooltip-arrow"></div><div class="tooltip-arrow over"></div><div class="tooltip-inner"><div class="scheduler filters-range-selector clearfix"><div id="calendar" class="clearfix"></div><div class="setup form-horizontal"><div class="section transparent"><div class="control-group"><label class="control-label">From</label><div class="controls"><input id="firstFrom" type="text" class="input-small right-align"></div></div><div class="control-group"><label class="control-label">To</label><div class="controls"><input id="firstTo" type="text" class="input-small right-align"></div></div></div></div></div></div></div>'));
+        this.$el.html(Handlebars.compile($('#rangeSelectorTemplate').html())({}));
 
-        $('#calendarView').prepend(this.$el);
+        $('body').prepend(this.$el);
 
         this._setPlaceholders();
 
@@ -422,7 +422,7 @@ var RangeSelectorControlsView = Backbone.View.extend({
             container: view.calendarPlaceholderId,
             popupAnchor: options.rangeControl,
             startDay: 1,
-            displayMonths: 2,
+            displayMonths: 1,
             scrollAmmount: 1,
             multiselect: true,
             deselectOnChange: false,
