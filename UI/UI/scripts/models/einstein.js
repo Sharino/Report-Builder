@@ -26,18 +26,9 @@
         initialize: function (data) {
             this._cleanUp();
 
-            this.set({ Filters: { DateFilter: { StartDate: data.Start, EndDate: data.End } } });
+            this.set({ Filters: { DateFilter: { From: data.Start, To: data.End } } });
             this.set({ Metrics: this._getMnemonics(data.Model.Metrics) });
             this.set({ Dimensions: this._getMnemonics(data.Model.Dimensions) });
-
-//            this.save({},{
-//                success: function(resp) {
-//                    console.log(resp);
-//                },
-//                error: function(resp) {
-//                    console.log(resp);
-//                }
-//            });
         },
 
         _cleanUp: function() {
