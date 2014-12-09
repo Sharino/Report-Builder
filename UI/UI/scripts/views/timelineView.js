@@ -122,10 +122,10 @@
             }
 
             if ($(e.currentTarget).hasClass("selectedMetric1")) {
-                this.selectedMetrics[0] = selectedMetric;
+                this.selectedMetrics[0] = selectedMetric.toJSON();
                 this.render();
             } else if ($(e.currentTarget).hasClass("selectedMetric2")) {
-                this.selectedMetrics[1] = selectedMetric;
+                this.selectedMetrics[1] = selectedMetric.toJSON();
                 this.render();
             }
         },
