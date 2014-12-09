@@ -19,8 +19,6 @@
 ], function (BaseCompositeView, DashboardComponent, ComponentView, DashboardComponentView, MetricCollection, MetricListView, dashboardTemplate,
              KPIView, TableView, TimelineView, ChartView, MessageView, Config, Export, DateFilterView) {
 
-    var startDate = moment().format('YYYY-MM-DD');
-
     var DashboardView = BaseCompositeView.extend({
         template: _.template(dashboardTemplate),
 
@@ -40,6 +38,27 @@
                 this.populate(id, i);
             }
             this.render();
+        },
+
+        render: function () {
+            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
+
+            var compIds = this.model.get('ComponentIds');
+            if (compIds.length === 0) {
+                this.componentView = [];
+                this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
+            }
+
+            from = moment().subtract('days', 7).format('YYYY-MM-DD');
+            to = moment().subtract('days', 1).format('YYYY-MM-DD');
+
+            this.renderSubview("#date-filter", new DateFilterView({
+                from: from,
+                to: to,
+                origin: "Dashboard"
+            }));
+
+            return this;
         },
 
         deleteDashboardComponent: function (e) {
@@ -219,6 +238,7 @@
         populate: function (id, position) {
             var self = this;
             this.componentView = [];
+            this.dateView = [];
             var dashboardComponent = new DashboardComponent({ Id: id });
             dashboardComponent.fetch({
                 success: function (model) {
@@ -226,25 +246,32 @@
 
                     self.model.get("Components")[position] = model;
 
+                    var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
+                    var endDate = moment().format('YYYY-MM-DD');
+
+                    self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
+
+                    console.log("dash pos",position);
+
                     switch (model.get("Type")) {
                         case 1:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard"));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard", self.dateView));
                                 break;
                             }
                         case 2:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard"));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard", self.dateView));
                                 break;
                             }
                         case 3:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard"));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard", self.dateView));
                                 break;
                             }
                         case 4:
                             {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard"));
+                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard", self.dateView));
                                 break;
                             }
                     }
@@ -254,18 +281,6 @@
                     return null;
                 }
             });
-        },
-
-        render: function () {
-            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
-
-            var compIds = this.model.get('ComponentIds');
-            if (compIds.length === 0) {
-                this.componentView = [];
-                this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
-            }
-
-            return this;
         },
 
         csv: function (e) {

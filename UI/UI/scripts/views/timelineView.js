@@ -29,7 +29,7 @@
             this.origin = origin;
             this.model = parent;
             this.position = pos;
-            this.initEinstein( moment().subtract('days', 7).format('YYYY-MM-DD'),this.startDate);
+            this.initEinstein(moment().subtract('days', 7).format('YYYY-MM-DD'), this.startDate);
 
             this.selectedMetrics = [];
 
@@ -39,26 +39,31 @@
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
             }
-            this.selectedDimension = new Dimension(dimensions[0]);
+            if (this.origin !== "preview") {
+                this.selectedDimension = new Dimension(dimensions[0]);
+            } else {
+                var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
+                this.selectedDimension = new Dimension(result[0]);
+            }
+           
         },
 
         render: function (einstein, dataFiler) {
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
                 if (this.origin === "preview") {
-                    from = this.startDate;
-                    to = moment().add('days', 7).format('YYYY-MM-DD');
-                
-                } else {
+                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
 
-                    from = this.startDate;
-                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                } else {
+                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
                 }
             } else {
                 if (this.origin === "preview") {
-                    from = this.startDate;
-                    to = moment().add('days', 7).format('YYYY-MM-DD');
-               
+                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
+
                 } else {
                     from = $("#picker").find("input")[0].value;
                     to = $("#picker2").find("input")[0].value;
@@ -71,7 +76,7 @@
             if (metrics.length > 1) {
                 selectedMetricsNames.push(this.selectedMetrics[1].get("DisplayName"));
             }
-            
+
             this.$el.html(this.template({
                 Einstein: einstein,
                 Metrics: this.model.get('Metrics'),
@@ -116,6 +121,12 @@
             return this;
         },
 
+                if (this.origin !== "preview") {
+                    this.selectedDimension = new Dimension(dimensions[0]);
+                } else {
+                    var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
+                    this.selectedDimension = new Dimension(result[0]);
+                }
        
         generateNewData: function () {
             var startDate = $("#picker").find("input")[0].value;
@@ -128,6 +139,7 @@
             }
 
         },
+
 
 
         selectMetric: function (e) {

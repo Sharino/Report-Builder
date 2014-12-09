@@ -21,8 +21,9 @@
             'click .xls': 'xls',
         },
 
-        initialize: function (parent, pos, origin) {
+        initialize: function (parent, pos, origin, dateview) {
             this.origin = origin;
+            this.dateView = dateview;
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
@@ -35,16 +36,16 @@
 
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = this.startDate;
-                to = this.startDate;
+                from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                to = moment().subtract('days', 1).format('YYYY-MM-DD');
             }
             else {
                 if (this.origin === "preview") {
-                    from = this.startDate;
-                    to = moment().add('days', 7).format('YYYY-MM-DD');
+                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
                 } else {
-                    from = $("#picker").find("input")[0].value;
-                    to = $("#picker2").find("input")[0].value;
+                    from = $("#picker-" + this.position).find("input")[0].value;
+                    to = $("#picker2-" + this.position).find("input")[0].value;
                 }
             }
 
@@ -56,14 +57,7 @@
                 ComponentID: this.model.id
             }));
 
-            if (this.origin !== "preview") {
-                this.renderSubview("#date-filter", new DateFilterView({
-                    from: from,
-                    to: to
-                }));
-            }
-
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));//TODO: Hack. Int 0 is interpreted as an empty object in subviews constructor
 
             return this;
         },

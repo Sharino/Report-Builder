@@ -236,14 +236,30 @@ i[class*="adf-icon-alt"] {
         }
 
 body.component-edit {
-    background: url(http://i.imgur.com/lr5KvH2.png) no-repeat fixed right bottom ;
+    background: url(http://i.imgur.com/lr5KvH2.png) no-repeat fixed right bottom;
 }
+
 div.modal-header button.close {
     margin-top: -15px;
 }
+
 body.bot-pic {
-    background: url(http://i.imgur.com/Ddm5Wed.png) no-repeat fixed bottom ;
+    background: url(http://i.imgur.com/Ddm5Wed.png) no-repeat fixed bottom;
 }
+
 div.placeholder table tbody tr td {
     padding: 0px;
 }
+
+div.placeholder table thead tr th.inactive {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 31px !important;
+}
+div.adform-calendar-v2.adform-calendar-small.popup {
+    width: 246px;
+}
+div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inner div.side-panel-body div#preview{
+    pointer-events:none;
+}
+

@@ -46,8 +46,8 @@
         render: function (einstein, dataFiler) {
             if (!einstein && !dataFiler) {
                 einstein = 'garbage';
-                from = this.startDate;
-                to = this.startDate;
+                from = moment().subtract('days', 7).format('YYYY-MM-DD');
+                to = moment().subtract('days', 1).format('YYYY-MM-DD');
             } else {
                 if (this.origin === "preview") {
                     from = this.startDate;
