@@ -65,9 +65,10 @@
        
         getXAxisData: function () {
             var xAxis = [];
+            var data = this.einstein.ComponentValues;
 
-            for (var i = 0, len = this.einstein.length; i < len && this.einstein != "garbage"; i++) {
-                xAxis.push(this.einstein[i].DimensionValues[0].Value);
+            for (var i = 0, len = data.length; i < len; i++) {
+                xAxis.push(data[i].DimensionValues[0].Value);
             }
             
             return xAxis;
@@ -75,15 +76,16 @@
 
         getYAxisData: function() {
             var yAxis = [];
+            var data = this.einstein.ComponentValues;
 
-            if (this.einstein != "garbage" && this.selectedMetricsNames) {
+            if (this.selectedMetricsNames) {
                 for (var i = 0, lenMetrics = this.selectedMetricsNames.length; i < lenMetrics; i++) {
                     var metricValues = [];
 
                     var name = this.selectedMetricsNames[i];
 
-                    for (var j = 0, lenEinst = this.einstein.length; j < lenEinst; j++) {
-                        metricValues.push(parseInt(this.einstein[j].MetricValues[i].Value));
+                    for (var j = 0, lenEinst = data.length; j < lenEinst; j++) {
+                        metricValues.push(parseInt(data[j].MetricValues[i].Value));
                     }
 
                     yAxis.push({

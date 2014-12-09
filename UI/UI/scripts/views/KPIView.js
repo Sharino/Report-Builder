@@ -15,7 +15,6 @@
         template: _.template(KPITemplate),
 
         events: {
-            'click #generateByDate': 'generateNewData',
             'click .csv': 'csv',
             'click .pdf': 'pdf',
             'click .xls': 'xls',
@@ -26,55 +25,32 @@
             this.dateView = dateview;
             this.model = parent;
             this.position = pos;
-            this.startDate = moment().format('YYYY-MM-DD');
         },
 
-        render: function (einstein, dataFiler) {
-            var einstein = new Einstein({Model: this.model.toJSON(), Start: new Date(), End: new Date()});
+        render: function () {
+            var einstein = new Einstein({ Model: this.model.toJSON(), Start: this.dateView.datePicker.getSelectedDate(), End: this.dateView.datePicker2.getSelectedDate() });
 
-            var from, to;
+            var self = this;
 
-            if (!einstein && !dataFiler) {
-                einstein = 'garbage';
-                from = moment().subtract('days', 7).format('YYYY-MM-DD');
-                to = moment().subtract('days', 1).format('YYYY-MM-DD');
-            }
-            else {
-                if (this.origin === "preview") {
-                    from = moment().subtract('days', 7).format('YYYY-MM-DD');
-                    to = moment().subtract('days', 1).format('YYYY-MM-DD');
-                } else {
-                    from = $("#picker-" + this.position).find("input")[0].value;
-                    to = $("#picker2-" + this.position).find("input")[0].value;
+            einstein.save({}, {
+                success: function(response) {
+                    self.$el.html(self.template({
+                        Einstein: response.toJSON().ComponentValues[0],
+                        Metrics: self.model.get('Metrics'),
+                        model: self.model.toJSON(),
+                        Position: self.position || 0,
+                        ComponentID: self.model.id
+                    }));
+
+                    self.renderSubview("#component-buttons", new ComponentButtonView(self.position + 1, self.model, self.origin));//TODO: Hack. Int 0 is interpreted as an empty object in subviews constructor
+
+                    return self;
+                },
+                error: function() {
+                    console.log("fail");
                 }
-            }
-
-            this.$el.html(this.template({
-                Einstein: einstein,
-                Metrics: this.model.get('Metrics'),
-                model: this.model.toJSON(),
-                Position: this.position || 0,
-                ComponentID: this.model.id
-            }));
-
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));//TODO: Hack. Int 0 is interpreted as an empty object in subviews constructor
-
-            return this;
-        },
-
-        generateNewData: function () {
-            var startDate = $("#picker").find("input")[0].value;
-            var endDate = $("#picker2").find("input")[0].value;
-
-            if (startDate <= endDate) {
-                this.initEinstein(startDate, endDate);
-            } else {
-                $.notifications.display({
-                    type: 'error',
-                    content: "End Date is earlier than Start Date.",
-                    timeout: Config.NotificationSettings.Timeout
-                });
-            }
+            });
+           
         },
 
         csv: function (e) {

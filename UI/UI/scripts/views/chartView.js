@@ -19,7 +19,6 @@
         template: _.template(ChartTemplate),
 
         events: {
-            'click #generateByDate': 'generateNewData',
             'click .chart-menu .dropdown-menu li': 'selectMetric',
             'click .chart-menu .selectedDimension': 'selectDimension'
         },
@@ -36,6 +35,7 @@
 
             var metrics = this.model.get("Metrics");
             var dimensions = this.model.get("Dimensions");
+
             this.selectedMetrics.push(new Metric(metrics[0]));
             if (metrics.length > 1) {
                 this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
@@ -109,21 +109,6 @@
 
             return this;
         },
-
-       
-
-        generateNewData: function () {
-            var startDate = $("#picker").find("input")[0].value;
-            var endDate = $("#picker2").find("input")[0].value;
-
-            if (startDate <= endDate) {
-                this.initEinstein(startDate, endDate);
-            } else {
-                alert('back to the future');
-            }
-
-        },
-
        
         selectMetric: function (e) {
             e.preventDefault();
@@ -140,10 +125,10 @@
 
             if ($(e.currentTarget).hasClass("selectedMetric1")) {
                 this.selectedMetrics[0] = selectedMetric;
-                this.generateNewData();
+                this.render();
             } else if ($(e.currentTarget).hasClass("selectedMetric2")) {
                 this.selectedMetrics[1] = selectedMetric;
-                this.generateNewData();
+                this.render();
             }
         },
 
@@ -162,7 +147,7 @@
             }
 
             this.selectedDimension = selectedDimension;
-            this.generateNewData();
+            this.render();
         },
 
     });

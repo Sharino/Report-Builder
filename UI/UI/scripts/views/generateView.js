@@ -25,6 +25,7 @@
         events: {
             'click .edit-form': 'edit',
             'click #generate-submit': 'addToDashboard',
+            'click #generateByDate': 'generateNewData'
         },
 
         initialize: function (model, origin) {
@@ -58,34 +59,34 @@
             var endDate = moment().format('YYYY-MM-DD');
 
             this.dateView = this.renderSubview("#date-filter", new DateFilterView({ from: startDate, to: endDate }, 1));
-            
-            switch (this.model.get("Type")) {
-                case 0:
-                    {
-                       // this.componentView = this.renderSubview("#component-by-type", new KPIView(this.model, 1, this.origin, this.dateView));
-                        break;
-                    }
-                case 1:
-                    {
-                        this.componentView = this.renderSubview(("#component-by-type"), new KPIView(this.model, 1, this.origin, this.dateView));
-                        break;
-                    }
-                case 2:
-                    {
-                        this.componentView = this.renderSubview(("#component-by-type"), new TableView(this.model, 1, this.origin, this.dateView));
-                        break;
-                    }
-                case 3:
-                    {
-                        this.componentView = this.renderSubview(("#component-by-type"), new TimelineView(this.model, 1, this.origin, this.dateView));
-                        break;
-                    }
-                case 4:
-                    {
-                        this.componentView = this.renderSubview(("#component-by-type"), new ChartView(this.model, 1, this.origin, this.dateView));
-                        break;
-                    }
-            }
+
+            var self = this;
+
+            _.defer(function () {
+                switch (self.model.get("Type")) {
+                    case 1:
+                        {
+                            self.componentView = self.renderSubview(("#component-by-type"), new KPIView(self.model, 1, self.origin, self.dateView));
+                            break;
+                        }
+                    case 2:
+                        {
+                            self.componentView = self.renderSubview(("#component-by-type"), new TableView(self.model, 1, self.origin, self.dateView));
+                            break;
+                        }
+                    case 3:
+                        {
+                            self.componentView = self.renderSubview(("#component-by-type"), new TimelineView(self.model, 1, self.origin, self.dateView));
+                            break;
+                        }
+                    case 4:
+                        {
+                            self.componentView = self.renderSubview(("#component-by-type"), new ChartView(self.model, 1, self.origin, self.dateView));
+                            break;
+                        }
+                }
+            });
+
             return this;
         },
 
@@ -128,6 +129,10 @@
             });
 
             return false;
+        },
+
+        generateNewData: function () {
+            this.componentView.render();
         }
     });
 

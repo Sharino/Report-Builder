@@ -6,18 +6,17 @@
     var DateFilterView = BaseCompositeView.extend({
         template: _.template(dateFilterTemplate),
 
-        initialize: function(options, pos) {
+        initialize: function (options, pos) {
             this.options = options;
             this.position = pos - 1;
-            console.log("dtf asd", this.position);
         },
 
-        beforeClose: function() {
+        beforeClose: function () {
             this.datePicker.destroy();
             this.datePicker2.destroy();
         },
 
-        render: function(options) {
+        render: function (options) {
             var date;
             if (!options) {
                 date = this.options;
@@ -28,23 +27,23 @@
             this.$el.html(this.template({ options: date, position: this.position }));
 
             var self = this;
-            _.defer(function() {
-                var pickerOptions = {
-                    pickerControl: '#picker-' + self.position,
-                };
+            var pickerOptions = {
+                pickerControl: '#picker-' + self.position,
+            };
 
-                var pickerOptions2 = {
-                    pickerControl: '#picker2-' + self.position,
-                    optionalField: true
-                };
+            var pickerOptions2 = {
+                pickerControl: '#picker2-' + self.position
+            };
 
-                var AdformDatePicker = window.Adform.DatePicker;
+            var AdformDatePicker = window.Adform.DatePicker;
+            _.defer(function () {
                 self.datePicker = new AdformDatePicker(pickerOptions);
                 self.datePicker2 = new AdformDatePicker(pickerOptions2);
             });
+
             return this;
         }
-   });
+    });
 
     return DateFilterView;
 });
