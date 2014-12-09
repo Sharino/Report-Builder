@@ -1,13 +1,13 @@
 ﻿
-    <div id="picker" class="input-append date" data-format="YYYY-MM-DD">
+    <div id="picker-<%= position %>" class="input-append date" data-format="YYYY-MM-DD">
         <input style="height: 21px;" type="text" value="<%= options.from %>" />
         <a class="btn" style="font-size: 15px; height: 21px;"><i class="adf-icon-small-calendar"></i></a>
     </div>
     <span class="date-separator"> </span>
-    <div id="picker2" class="input-append date" data-format="YYYY-MM-DD">
-        <input style="height: 21px;" type="text" value="<%= options.to %>" />
-        <a class="btn" style="font-size: 15px; height: 21px; "><i class="adf-icon-small-calendar"></i></a>
-    </div>
+    <div id="picker2-<%= position %>" class="input-append date" data-format="YYYY-MM-DD">
+    <input style="height: 21px;" type="text" value="<%= options.to %>" />
+    <a class="btn" style="font-size: 15px; height: 21px; "><i class="adf-icon-small-calendar"></i></a>
+</div>
     <div style="margin-left: 5px;">
         <button class="btn btn-success" id="generateByDate">Generate</button>
     </div>

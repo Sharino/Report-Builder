@@ -21,15 +21,17 @@
             'click .xls': 'xls',
         },
 
-        initialize: function (parent, pos, origin) {
+        initialize: function (parent, pos, origin, dateview) {
             this.origin = origin;
+            this.dateView = dateview;
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
-            this.initEinstein(this.startDate, this.startDate);
         },
 
         render: function (einstein, dataFiler) {
+            this.initEinstein(this.startDate, this.startDate);
+
             var from, to;
 
             if (!einstein && !dataFiler) {
@@ -42,8 +44,8 @@
                     from = this.startDate;
                     to = moment().add('days', 7).format('YYYY-MM-DD');
                 } else {
-                    from = $("#picker").find("input")[0].value;
-                    to = $("#picker2").find("input")[0].value;
+                    from = $("#picker-" + this.position).find("input")[0].value;
+                    to = $("#picker2-" + this.position).find("input")[0].value;
                 }
             }
 
@@ -55,20 +57,12 @@
                 ComponentID: this.model.id
             }));
 
-            if (this.origin !== "preview") {
-                this.renderSubview("#date-filter", new DateFilterView({
-                    from: from,
-                    to: to
-                }));
-            }
-
-            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));
+            this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));//TODO: Hack. Int 0 is interpreted as an empty object in subviews constructor
 
             return this;
         },
 
         initEinstein: function (start, end) {
-
             var einstein = new Einstein({
                 Metrics: this.getMnemonics(this.model.get("Metrics")),
                 Dimensions: [],
@@ -122,7 +116,7 @@
                 processData: false,
                 success: function (response) {
                     self.einsteinData = response;
-                    self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
+                    //self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
                 },
             });
         },

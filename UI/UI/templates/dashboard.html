@@ -19,6 +19,7 @@
     <% for (var i = 0; i < ComponentCount; i++) { %>
     <div class="row" style="margin:auto">
         <div class="editable" data-id="<%= i %>" id="dashboard-component-<%= i %>" style="list-style-type: none;">
+            <div id="date-filter-<%= i %>" class="pull-left" style="display: inline-flex;"></div>
             <div id="component-<%= i %>">
             </div>
         </div>

@@ -1,27 +1,27 @@
 ﻿<% if (Origin !== "preview") { %>
-<% if (Origin === "dashboard") { %>
-    <div class="btn-group">
-        <button style="padding-right: 8px;" class="btn up" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-up"></i></button>
-        <button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
-    </div>
+    <% if (Origin === "dashboard") { %>
+        <div class="btn-group">
+            <button style="padding-right: 8px;" class="btn up" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-up"></i></button>
+            <button style="padding-right: 8px;" class="btn down" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-arrow-down"></i></button>
+        </div>
 
-<% } else { %>
-<div class="btn-group">
-    <a class="btn single-btn" data-toggle="dropdown" href="#" style="padding: 4px 4px 4px 4px;">
-        <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
-    </a>
-    <ul class="dropdown-menu" style="overflow: hidden;">
-        <li class="csv"><a href="">CSV</a></li>
-        <li class="pdf"><a href="">PDF</a></li>
-        <li class="xls"><a href="">XLS</a></li>
-    </ul>
-</div>
-<% } %>
+    <% } else { %>
+        <div class="btn-group">
+            <a class="btn single-btn" data-toggle="dropdown" href="#" style="padding: 4px 4px 4px 4px;">
+                <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
+            </a>
+            <ul class="dropdown-menu" style="overflow: hidden;">
+                <li class="csv"><a href="">CSV</a></li>
+                <li class="pdf"><a href="">PDF</a></li>
+                <li class="xls"><a href="">XLS</a></li>
+            </ul>
+        </div>
+    <% } %>
 
-<button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
-<% if (Origin === "dashboard") { %>
-<button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-close white-icon"></i></button>
-<% } else { %>
-    <button style="margin-left: 3px" class="btn btn-success pull-right" type="submit" id="generate-submit">Add to Dashboard</button>
-<% } %>
+    <button style="margin-left: 1px" class="edit-form gen btn btn-primary" type="submit" data-id="<%= Position %>" comp-id="<%= model.id %>">Edit</button>
+    <% if (Origin === "dashboard") { %>
+        <button style="padding-right: 8px;" class="del btn btn-primary" data-id="<%= model.id %>" comp-id="<%= model.id %>"><i class="adf-icon-small-close white-icon"></i></button>
+    <% } else { %>
+        <button style="margin-left: 3px" class="btn btn-success pull-right" type="submit" id="generate-submit">Add to Dashboard</button>
+    <% } %>
 <% } %>
