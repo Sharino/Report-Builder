@@ -1,8 +1,8 @@
-﻿<div style="margin: auto" class="">
+﻿<div style="margin: auto">
     <div class="table-toolbar" style="height: 25px;">
         <h2 class="pull-left"><b><%= title %></b></h2>
-        
-        <div class="btn-group pull-right" style="padding-left: 10px">
+
+        <div class="btn-group pull-left" >
             <a class="btn single-btn btn-tool" data-toggle="dropdown" href="#">
                 <i class="adf-icon-toolbar-export" style="margin-top: -4px;"></i>
             </a>
@@ -12,10 +12,12 @@
                 <li class="xls"><a>XLS</a></li>
             </ul>
         </div>
+        
+        <div id="date-filter" class="pull-right" style="display: inline-flex; padding-left: 10px"></div>
     </div>
 
     
-    <div class="pull-right" id="date-filter"></div>
+   
     <% for (var i = 0; i < ComponentCount; i++) { %>
     <div class="row" style="margin:auto">
         <div class="editable" data-id="<%= i %>" id="dashboard-component-<%= i %>" style="list-style-type: none;">
