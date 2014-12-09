@@ -26,10 +26,11 @@
             this.model = parent;
             this.position = pos;
             this.startDate = moment().format('YYYY-MM-DD');
-            this.initEinstein(this.startDate, this.startDate);
         },
 
         render: function (einstein, dataFiler) {
+            var einstein = new Einstein({Model: this.model.toJSON(), Start: new Date(), End: new Date()});
+
             var from, to;
 
             if (!einstein && !dataFiler) {
@@ -67,22 +68,6 @@
             return this;
         },
 
-        initEinstein: function (start, end) {
-
-            var einstein = new Einstein({
-                Metrics: this.getMnemonics(this.model.get("Metrics")),
-                Dimensions: [],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-
-            this.workEinstein(einstein);
-        },
-
         generateNewData: function () {
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
@@ -96,35 +81,6 @@
                     timeout: Config.NotificationSettings.Timeout
                 });
             }
-        },
-
-        getMnemonics: function (metrics) {
-            var metricMnemonics = [];
-
-            _.each(metrics, function (metric) {
-                var newMetric = new Metric(metric);
-                metricMnemonics.push(newMetric.get("Mnemonic"));
-            });
-
-            return metricMnemonics;
-        },
-
-
-        workEinstein: function (stoneAlone) {
-            var self = this;
-
-            stoneAlone.fetch({
-                url: Config.EinsteinSettings.URL,
-                data: JSON.stringify(stoneAlone),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                success: function (response) {
-                    self.einsteinData = response;
-                    self.render(response.attributes.ComponentValues[0], response.attributes.Filters.DateFilter);
-                },
-            });
         },
 
         csv: function (e) {

@@ -116,40 +116,7 @@
             return this;
         },
 
-        initEinstein: function (start, end) {
-            if (!this.selectedDimension) {
-                var dimensions = this.model.get("Dimensions");
-                this.selectedDimension = new Dimension(dimensions[0]);
-            }
-
-            if (!this.selectedMetrics) {
-                this.selectedMetrics = [];
-                var metrics = this.model.get("Metrics");
-                this.selectedMetrics.push(new Metric(metrics[0]));
-                if (metrics.length > 1) {
-                    this.selectedMetrics.push(new Metric(metrics[Math.min(1, metrics.length - 1)]));
-                }
-            }
-
-            var metricMnemonics = [];
-            for (var i = 0, len = this.selectedMetrics.length; i < len; i++) {
-                metricMnemonics.push(this.selectedMetrics[i].get("Mnemonic"));
-            }
-
-            var einstein = new Einstein({
-                Metrics: metricMnemonics,
-                Dimensions: [this.selectedDimension.get("Mnemonic")],
-                Filters: {
-                    "DateFilter": {
-                        "From": start,
-                        "To": end
-                    }
-                }
-            });
-            this.workEinstein(einstein);
-
-        },
-
+       
         generateNewData: function () {
             var startDate = $("#picker").find("input")[0].value;
             var endDate = $("#picker2").find("input")[0].value;
@@ -157,34 +124,11 @@
             if (startDate <= endDate) {
                 this.initEinstein(startDate, endDate);
             } else {
-                alert('back to the future');
+                alert('back to the future'); // TODO: Clear
             }
 
         },
 
-        workEinstein: function (stoneAlone) {
-
-            var self = this;
-            
-            stoneAlone.fetch({
-                url: Config.EinsteinSettings.URL,
-                data: JSON.stringify(stoneAlone),
-                contentType: 'application/json',
-                dataType: 'json',
-                type: 'POST',
-                processData: false,
-                success: function (response) {
-                    self.einstein = response.attributes.ComponentValues;
-                    self.dataFilter = response.attributes.Filters.DateFilter;
-                    self.render(response.attributes.ComponentValues, response.attributes.Filters.DateFilter);
-                },
-                error: function (error) {
-                    console.log("Stone Alone FAIL");
-                    console.log(error);
-                }
-            });
-
-        },
 
         selectMetric: function (e) {
             e.preventDefault();
