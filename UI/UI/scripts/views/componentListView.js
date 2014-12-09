@@ -31,7 +31,7 @@
                 this.sortType = "initial";
             },
 
-            preview: function(e) {
+            preview: function (e) {
                 e.preventDefault();
 
                 var id = parseInt($(e.currentTarget.parentElement.parentElement).attr("id"));
@@ -42,7 +42,6 @@
                 previewModel.fetch({
                     success: function (model) {
                         self.previewView = self.renderSubview('#preview', new GenerateView({ model: model }, "preview"));
-                        console.log(model);
                         $.sidePanel({
                             body: self.previewView.$el,
                             header: {
@@ -166,12 +165,12 @@
                 }
             },
 
-            handleSearchAction: function(e) {
+            handleSearchAction: function (e) {
                 var temp = this.collection;
                 var query = $("#components-search").val().toLowerCase();
 
                 this.collection = new ComponentCollection(_.filter(this.collection.toJSON(),
-                    function(component) {
+                    function (component) {
                         var patt = new RegExp(query);
                         var res = patt.test(component.Title.toLowerCase());
 
@@ -205,7 +204,7 @@
                 this.collection = temp;
             },
 
-            _sortByType: function() {
+            _sortByType: function () {
                 if (this.sortType !== "typeAsc") {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                             function (item) {
@@ -230,7 +229,7 @@
                     this.$el.find("th.col-type").find(".sort-icon").addClass('adf-icon-small-arrow-down');
                 }
             },
-            _sortByTitle: function() {
+            _sortByTitle: function () {
                 if (this.sortType !== "nameAsc") {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                         function (item) {
@@ -255,7 +254,7 @@
                     this.$el.find("th.col-title").find(".sort-icon").addClass('adf-icon-small-arrow-down');
                 }
             },
-            _sortByCreationDate: function() {
+            _sortByCreationDate: function () {
                 if (this.sortType !== "createdAsc") {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                             function (item) {
@@ -280,7 +279,7 @@
                     this.$el.find("th.col-created").find(".sort-icon").addClass('adf-icon-small-arrow-down');
                 }
             },
-            _sortByModificationDate: function() {
+            _sortByModificationDate: function () {
                 if (this.sortType !== "modifiedAsc") {
                     this.collection = new ComponentCollection(_.sortBy(this.collection.toJSON(),
                             function (item) {

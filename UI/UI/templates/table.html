@@ -1,16 +1,15 @@
 ﻿<div class="form-horizontal well component" id="component-<%= Position %>">
-     <div class="table-toolbar">
-         <div id="date-filter" class="pull-left" style="display: inline-flex;"></div>
-         <div class="group-label pull-left x--ml-l " style="margin-top: 7px; margin-right: 15px;">
-             <b><label style="font-size: 20px;"><%= model.Title %></label></b>
-         </div>
-         <div class="pull-right">
-             <div id="component-buttons"></div>
-         </div>
-         <div id="component-edit-<%= Position %>"></div>
-         <br />
-         <hr />
-     </div>
+    <div class="table-toolbar" style="margin-top: -6px;">
+        <div class="group-label pull-left x--ml-l " style="margin-right: 15px; margin-top: 7px;">
+            <b><label style="font-size: 20px;"><%= model.Title %></label></b>
+        </div>
+        <div class="pull-right">
+            <div id="component-buttons"></div>
+        </div>
+        <div id="component-edit-<%= Position %>"></div>
+        <br />
+        <hr />
+    </div>
     <div id="table">
         <div class="table-menu">
             <ul class="wizard-nav">
@@ -39,16 +38,16 @@
                 <% _.each(Data, function(einstein, i) { %>
                 <tr>
                     <% _.each(_.values(einstein), function(value) { %>
-                        <td><%= value %></td>
+                    <td><%= value %></td>
                     <% }); %>
                 </tr>
                 <% }); %>
             </tbody>
             <tfoot>
                 <tr class="no-select">
-                    <td>TOTAL</td>    
+                    <td>TOTAL</td>
                     <% for (var i = 0, len = TotalValues.length; i < len; i++) { %>
-                        <td><%= TotalValues[i] %></td>
+                    <td><%= TotalValues[i] %></td>
                     <% }; %>
                 </tr>
             </tfoot>

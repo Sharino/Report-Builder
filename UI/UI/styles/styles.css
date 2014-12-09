@@ -252,14 +252,19 @@ div.placeholder table tbody tr td {
 }
 
 div.placeholder table thead tr th.inactive {
-    padding-left: 0px;
-    padding-right: 0px;
+    padding: 0px;
     width: 31px !important;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 10px;
+    position: relative;
+    
 }
+
 div.adform-calendar-v2.adform-calendar-small.popup {
     width: 246px;
 }
-div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inner div.side-panel-body div#preview{
-    pointer-events:none;
-}
 
+div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inner div.side-panel-body div#preview {
+    pointer-events: none;
+}

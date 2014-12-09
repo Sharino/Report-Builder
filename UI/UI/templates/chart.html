@@ -1,16 +1,15 @@
 ﻿<div class="form-horizontal well component" id="component-<%= Position %>">
-﻿   <div class="table-toolbar" style="margin-top: -25px;">
-    <div id="date-filter" class="pull-left" style="display: inline-flex;"></div>
-    <div class="group-label pull-left x--ml-l " style="margin-top: 7px; margin-right: 15px;">
-        <b><label style="font-size: 20px;"><%= model.Title %></label></b>
+    <div class="table-toolbar" style="margin-top: -6px;">
+        <div class="group-label pull-left x--ml-l " style="margin-right: 15px; margin-top: 7px;">
+            <b><label style="font-size: 20px;"><%= model.Title %></label></b>
+        </div>
+        <div class="pull-right">
+            <div id="component-buttons"></div>
+        </div>
+        <div id="component-edit-<%= Position %>"></div>
+        <br />
+        <hr />
     </div>
-    <div class="pull-right">
-        <div id="component-buttons"></div>
-    </div>
-    <div id="component-edit-<%= Position %>"></div>
-    <br />
-    <hr />
-</div>
     <div id="chart">
         <div class="chart-menu">
             <ul class="wizard-nav">
@@ -20,40 +19,38 @@
                 </li>
                 <% }); %>
             </ul>
+            <span class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="adf-helper-circle-blue">●</i>
+                    <%= selectedMetrics[0] %>
+                    <i class="adf-icon-small-dropdown"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <% _.each(model.Metrics, function(metric) { %>
+                    <li class="selectedMetric1" id="<%= metric.MetricId %>">
+                        <a><%= metric.DisplayName %></a>
+                    </li>
+                    <% }); %>
+                </ul>
+            </span>
 
-            <ul class="wizard-nav">
-                <span class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="adf-helper-circle-blue">●</i>
-                        <%= selectedMetrics[0] %>
-                        <i class="adf-icon-small-dropdown"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <% _.each(model.Metrics, function(metric) { %>
-                        <li class="selectedMetric1" id="<%= metric.MetricId %>">
-                            <a><%= metric.DisplayName %></a>
-                        </li>
-                        <% }); %>
-                    </ul>
-                </span>
+            <% if (model.Metrics.length > 1) { %>
+            <span class="dropdown">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <i class="adf-helper-circle-green">●</i>
+                    <%= selectedMetrics[1] %>
+                    <i class="adf-icon-small-dropdown"></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <% _.each(model.Metrics, function(metric) { %>
+                    <li class="selectedMetric2" id="<%= metric.MetricId %>">
+                        <a><%= metric.DisplayName %></a>
+                    </li>
+                    <% }); %>
+                </ul>
+            </span>
+            <% } %>
 
-                <% if (model.Metrics.length > 1) { %>
-                <span class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <i class="adf-helper-circle-green">●</i>
-                        <%= selectedMetrics[1] %>
-                        <i class="adf-icon-small-dropdown"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <% _.each(model.Metrics, function(metric) { %>
-                        <li class="selectedMetric2" id="<%= metric.MetricId %>">
-                            <a><%= metric.DisplayName %></a>
-                        </li>
-                        <% }); %>
-                    </ul>
-                </span>
-                <% } %>
-            </ul>
         </div>
 
         <div id="highcharts"></div>

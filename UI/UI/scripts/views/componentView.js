@@ -27,12 +27,12 @@
             'click #component-help': 'handleHelpAction'
         },
 
-        initialize: function () {
+        initialize: function (options) {
+            this.options = options;
             MetricDimensionMap.getMap();
         },
 
         render: function () {
-        
             $('#component').loader();
 
             var allMetrics = new MetricCollection();
@@ -47,7 +47,7 @@
 
             this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
-    
+
             allMetrics.fetch({
                 success: function (allMetrics) {
                     self.allMetrics = allMetrics;
@@ -77,11 +77,18 @@
                 }
             });
             this.$el.find(("#metrics-dimensions")).addClass('page-split').pageSplit();
-           $("body").addClass("component-edit");
+            $("body").addClass("component-edit");
             return this;
         },
         preview: function (e) {
-            this.previewView = this.renderSubview('#preview', new GenerateView({ model: this.model }, "preview"));
+            if (this.inputType() == 1) {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
+            }
+            else {
+                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
+            }
+
+            this.previewView = this.renderSubview('#preview', new GenerateView({ model: this.options.model }, "preview"));
             $.sidePanel({
                 body: this.previewView.$el,
                 header: {
@@ -118,7 +125,7 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
-//                    var routerUrl = "create";
+                    //                    var routerUrl = "create";
                     Backbone.history.history.back();
                 },
                 error: function (model, response) {

@@ -30,7 +30,7 @@
         },
 
         render: function (einstein, dataFiler) {
-            this.initEinstein(this.startDate, this.startDate);
+            this.initEinstein(moment().subtract('days', 7).format('YYYY-MM-DD'), moment().subtract('days', 1).format('YYYY-MM-DD'));
 
             var from, to;
 
@@ -58,7 +58,7 @@
             }));
 
             this.renderSubview("#component-buttons", new ComponentButtonView(this.position + 1, this.model, this.origin));//TODO: Hack. Int 0 is interpreted as an empty object in subviews constructor
-
+            
             return this;
         },
 

@@ -52,7 +52,9 @@
         },
 
         render: function () {
-            this.$el.html(this.template());
+            this.$el.html(this.template({
+                Origin: this.origin
+            }));
 
             var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
             var endDate = moment().format('YYYY-MM-DD');
@@ -62,7 +64,7 @@
             switch (this.model.get("Type")) {
                 case 0:
                     {
-                       // this.componentView = this.renderSubview("#component-by-type", new KPIView(this.model, 1, this.origin, this.dateView));
+//                        this.componentView = this.renderSubview("#component-by-type", new KPIView(this.model, 1, this.origin, this.dateView));
                         break;
                     }
                 case 1:

@@ -41,7 +41,10 @@
         },
 
         create: function () {
-            this.showView("#component", new ComponentView({ model: new Component() }));
+            this.showView("#component", new ComponentView({
+                model: new Component(),
+                origin: "create"
+            }));
         },
 
         showDashboard: function (id) {
