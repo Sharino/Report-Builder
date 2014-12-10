@@ -140,6 +140,7 @@
 
             if (!isNaN(selectedValue)) {
                 var dimension = this.allDimensions.get(selectedValue);
+                dimension.set({ Order: selectReferenceID });
 
                 this.dimensionArray[selectReferenceID] = dimension.toJSON();
                 delete this.dimensionArray[selectReferenceID].Placeholder;

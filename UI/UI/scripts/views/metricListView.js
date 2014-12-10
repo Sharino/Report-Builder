@@ -120,8 +120,8 @@
             var selectedValue = parseInt(reference.getValues());
 
             if (!isNaN(selectedValue)) {
-                var metric = this.allMetrics.get(selectedValue); 
-
+                var metric = this.allMetrics.get(selectedValue);
+                metric.set({ Order: selectReferenceID });
                 this.metricArray[selectReferenceID] = metric.toJSON();
                 delete this.metricArray[selectReferenceID].Placeholder;
             }
