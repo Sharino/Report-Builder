@@ -30,20 +30,19 @@
         initialize: function (model) {
             this.model = model;
 
-            if (!this.collection) {
-                this.collection = new DashboardCollection();
+            this.collection = new DashboardCollection();
 
-                var self = this;
+            var self = this;
 
-                this.collection.fetch({
-                    success: function () {
-                        self.render();
-                    },
-                    error: function () {
-                        console.log("Failed to load dashboard collection");
-                    }
-                });
-            }
+            this.collection.fetch({
+                success: function () {
+                    self.render();
+                },
+                error: function () {
+                    console.log("Failed to load dashboard collection");
+                }
+            });
+            
         },
 
         render: function () {
