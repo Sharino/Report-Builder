@@ -39,7 +39,7 @@
             }
 
             var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
-            if (!result) {
+            if (result.length !== 0) {
                 this.selectedDimension = new Dimension(result[0]);
             } else {
                 this.selectedDimension = new Dimension(dimensions[0]);
