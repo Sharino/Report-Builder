@@ -75,8 +75,6 @@
                 }
             }
 
-
-
 //            if (attrs.Filters.length === 0) {
 //                errors.push({ code: 527, name: 'Filters', message: 'At least one filter is required.' });
 //            }

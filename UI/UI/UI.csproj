@@ -118,6 +118,7 @@
     <Content Include="scripts\views\componentButtonView.js" />
     <Content Include="scripts\views\dashboardComponentView.js" />
     <Content Include="scripts\views\dashboardListView.js" />
+    <Content Include="scripts\views\dashboardSelectionView.js" />
     <Content Include="scripts\views\dashboardView.js" />
     <Content Include="scripts\views\dateFilterView.js" />
     <Content Include="scripts\views\dimensionListView.js" />

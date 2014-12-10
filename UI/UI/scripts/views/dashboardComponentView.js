@@ -91,13 +91,21 @@
             return this;
         },
 
-        submit: function () {
+        submit: function (callbacks) {
             if (this.inputType() == 1) {
                 this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
             }
             else {
                 this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
             }
+
+            var definition = JSON.stringify({
+                Metrics: this.model.get("Metrics"),
+                Dimensions: this.model.get("Dimensions"),
+                Filters: this.model.get("Filters")
+            });
+
+            this.model.set({ Definition: definition });
 
             var validationSuccess = this.model.save({}, {
                 success: function () {
@@ -106,6 +114,10 @@
                         content: 'Successfully saved!',
                         timeout: Config.NotificationSettings.Timeout
                     });
+
+                    if ($.isFunction(callbacks.success)) {
+                        callbacks.success();
+                    }
                 },
                 error: function (model, response) {
                     if (response.responseJSON) {
@@ -131,13 +143,17 @@
                             });
                         }
                     }
+
+                    if ($.isFunction(callbacks.error)) {
+                        callbacks.error();
+                    }
                 },
                 timeout: Config.NetworkSettings.Timeout
             });
 
             if (!validationSuccess) {
                 if (this.model.validationError) {
-                    this.model.validationError.forEach(function (error) {
+                    this.model.validationError.forEach(function(error) {
                         $.notifications.display({
                             type: 'error',
                             content: error.message,
@@ -145,6 +161,7 @@
                         });
                     });
                 }
+
             }
             return false;
         },
