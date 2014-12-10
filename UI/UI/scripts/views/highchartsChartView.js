@@ -23,9 +23,9 @@
             var xAxisData = this.getXAxisData();
 
             var yAxis = [];
-            yAxis.push(this.setYAxis(yAxisData.length, 0));
+            yAxis.push(this.setYAxis(0, yAxisData.length, this.getMaxValue(yAxisData[0])));
             if (yAxisData.length > 1) {
-                yAxis.push(this.setYAxis(yAxisData.length, 1));
+                yAxis.push(this.setYAxis(1, yAxisData.length, this.getMaxValue(yAxisData[1])));
             }
 
             this.$el.highcharts({
@@ -102,7 +102,7 @@
             return yAxis;
         },
 
-        setYAxis: function (dataLength, isSecondAxis) {
+        setYAxis: function (isSecondAxis, dataLength, maxValue) {
             var yAxis = {
                 title: {
                     text: null,
@@ -133,8 +133,21 @@
                     }
                 },
                 opposite: isSecondAxis,
+                max: maxValue
             };
             return yAxis;
+        },
+
+        getMaxValue: function (obj) {
+            var maxValue = 0;
+
+            for (var i = 0, len = obj.data.length; i < len; i++) {
+                if (obj.data[i] > maxValue) {
+                    maxValue = obj.data[i];
+                }
+            }
+
+            return maxValue;
         }
 
     });
