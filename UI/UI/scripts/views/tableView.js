@@ -9,7 +9,8 @@
     'Config',
     'spin',
     'adform-loader',
-    'bootstrap-dropdown'
+    'bootstrap-dropdown',
+    'stupidtable'
 ], function (BaseCompositeView, TableTemplate, DateFilterView, Einstein, Metric, Dimension, ComponentButtonView, Config) {
 
     var tableView = BaseCompositeView.extend({
@@ -35,6 +36,7 @@
                     return String.prototype.indexOf.apply(this, arguments) !== -1;
                 };
             }
+          
         },
 
         render: function () {
@@ -79,16 +81,15 @@
                     self.$el.find(dimElement).addClass('active');
 
                     self.renderSubview("#component-buttons", new ComponentButtonView(self.position + 1, self.model, self.origin));
-                    var comparisonKey = this.$el.find(e.currentTarget).attr('id');
-                    var sortableHeader = "th#" + comparisonKey + ".sortable";
-                    this.$el.find(sortableHeader).append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
+                    $("th").append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
+                    $("#simpleTable").stupidtable();
                 },
                 error: function (resp) {
                     console.log("fail");
                 }
             });
             //this.$el.find('#table th').append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
-
+        
             return this;
         },
 
@@ -110,29 +111,31 @@
         },
 
         sortTable: function (e) {
-            this.$el.find(e.currentTarget).addClass('active');
-            this.einstein = this.getProcessedEinsteinData();
+           
 
             var comparisonKey = this.$el.find(e.currentTarget).attr('id');
             var sortableHeader = "th#" + comparisonKey + ".sortable";
 
+            $("th").removeClass('active');
+            this.$el.find(e.currentTarget).addClass('active');
+
             if (!this.sortDirection || this.comparisonKey != comparisonKey) {
                 this.sortDirection = 1;
                 this.einstein.sort(this.compareOnKey(comparisonKey));
-                this.render(this.einstein, this.dataFilter);
-
+//                this.render(this.einstein, this.dataFilter);
+                this.$el.find(sortableHeader).find('div.icon-hidden').html('');
                 this.$el.find(sortableHeader).append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-up"></i></a></div>');
                 this.comparisonKey = comparisonKey;
             } else {
                 if (this.sortDirection === 1) {
                     this.einstein.reverse();
-                    this.render(this.einstein, this.dataFilter);
-
+//                    this.render(this.einstein, this.dataFilter);
+                    this.$el.find(sortableHeader).find('div.icon-hidden').html('');
                     this.$el.find(sortableHeader).append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
                 } else {
                     this.einstein.sort(this.compareOnKey(this.$el.find(e.currentTarget).attr('id')));
-                    this.render(this.einstein, this.dataFilter);
-
+//                    this.render(this.einstein, this.dataFilter);
+                    this.$el.find(sortableHeader).find('div.icon-hidden').html('');
                     this.$el.find(sortableHeader).append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-up"></i></a></div>');
 
                 }
@@ -140,7 +143,7 @@
             }
 
 
-            this.$el.find(sortableHeader).addClass('active');
+            this.$el.find(sortableHeader).siblings('th').find('div.icon-hidden').html('');
             this.$el.find(sortableHeader).siblings('th').append('<div class="icon-hidden"><a><i class="adf-icon-small-arrow-down"></i></a></div>');
 
         },

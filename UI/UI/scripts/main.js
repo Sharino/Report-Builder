@@ -19,7 +19,7 @@
         'Highcharts': 'scripts/lib/highcharts',
         'HighchartsTheme': 'scripts/lib/highcharts-theme',
         'page-split': 'scripts/lib/page-split',
-
+        'stupidtable': 'scripts/lib/stupidtable.min',
         /* Bootstrap components */
         'bootstrap-modal': 'scripts/lib/bootstrap/bootstrap-modal',
         'bootstrap-tooltip': 'scripts/lib/bootstrap/bootstrap-tooltip',
@@ -191,6 +191,11 @@
         },
 
         'page-split': {
+            deps: ['jquery'],
+            exports: "jquery"
+        },
+
+        'stupidtable': {
             deps: ['jquery'],
             exports: "jquery"
         },

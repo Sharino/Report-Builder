@@ -21,14 +21,14 @@
             </ul>
         </div>
 
-        <table class="table table-striped heading-separation table-condensed">
+        <table id="simpleTable" class="table table-striped heading-separation table-condensed">
             <thead>
                 <tr>
-                    <th class="sortable" id="<%= SelectedDimensionMnemonic %>">
+                    <th data-sort="string" class="sortable" id="<%= SelectedDimensionMnemonic %>">
                         <%= SelectedDimension %>
                     </th>
                     <% _.each(model.Metrics, function(metric) { %>
-                    <th class="sortable" id="<%= metric.Mnemonic %>">
+                    <th data-sort="int"  class="sortable" id="<%= metric.Mnemonic %>">
                         <%= metric.DisplayName %>
                     </th>
                     <% }); %>
@@ -36,7 +36,7 @@
             </thead>
             <tbody>
                 <% _.each(Data, function(einstein, i) { %>
-                <tr>
+                <tr >
                     <% _.each(_.values(einstein), function(value) { %>
                     <td><%= value %></td>
                     <% }); %>

@@ -97,6 +97,7 @@
     <Content Include="scripts\lib\require.js" />
     <Content Include="scripts\lib\sinon.js" />
     <Content Include="scripts\lib\spin.js" />
+    <Content Include="scripts\lib\stupidtable.min.js" />
     <Content Include="scripts\lib\text.js" />
     <Content Include="scripts\lib\underscore.js" />
     <Content Include="scripts\main.js" />
