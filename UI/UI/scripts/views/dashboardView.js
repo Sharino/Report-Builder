@@ -28,6 +28,7 @@
             'click .csv': 'csv',
             'click .up': 'moveDashboardComponentUp',
             'click .down': 'moveDashboardComponentDown',
+            'click #generateByDate': 'generateNewData'
         },
 
         initialize: function () {
@@ -40,8 +41,22 @@
             this.render();
         },
 
+        generateNewData: function (e) {
+            //var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('data-id'));
+            var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('comp-id'));
+            var compIds = this.model.get('ComponentIds');
+            if (compIds.length > 0) {
+                var idIndex = compIds.indexOf(pos);
+                this.componentView[idIndex].render();
+            }
+        },
+
         render: function () {
-            this.$el.html(this.template({ title: this.model.get('Title'), ComponentCount: this.model.get("ComponentIds").length }));
+            this.$el.html(this.template({
+                title: this.model.get('Title'),
+                ComponentCount: this.model.get("ComponentIds").length,
+                ComponentIds: this.model.get("ComponentIds")
+            }));
 
             var compIds = this.model.get('ComponentIds');
             if (compIds.length === 0) {
@@ -49,14 +64,14 @@
                 this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
             }
 
-            from = moment().subtract('days', 7).format('YYYY-MM-DD');
-            to = moment().subtract('days', 1).format('YYYY-MM-DD');
+            var from = moment().subtract('days', 7).format('YYYY-MM-DD');
+            var to = moment().subtract('days', 1).format('YYYY-MM-DD');
 
-            this.renderSubview("#date-filter", new DateFilterView({
-                from: from,
-                to: to,
-                origin: "Dashboard"
-            }));
+            //this.renderSubview("#date-filter", new DateFilterView({
+            //    from: from,
+            //    to: to,
+            //    origin: "Dashboard"
+            //}));
 
             return this;
         },
