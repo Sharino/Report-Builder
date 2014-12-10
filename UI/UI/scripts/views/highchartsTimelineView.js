@@ -7,7 +7,7 @@
 
         initialize: function (options) {
             this.options = options;
-
+            console.log(options);
             if (!options) {
                 this.einstein = this.options.einstein;
                 this.selectedMetricsNames = this.options.selectedMetricsNames;

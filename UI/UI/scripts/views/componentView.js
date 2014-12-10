@@ -82,12 +82,12 @@
         },
         preview: function (e) {
             if (this.inputType() == 1) {
-                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
+                this.options.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: [] });
             }
             else {
-                this.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
+                this.options.model.set({ Title: this.inputTitle(), Type: this.inputType(), Metrics: this.metricView.inputMetrics(), Dimensions: this.dimensionView.inputDimensions() });
             }
-
+            
             this.previewView = this.renderSubview('#preview', new GenerateView({ model: this.options.model }, "preview"));
             $.sidePanel({
                 body: this.previewView.$el,
