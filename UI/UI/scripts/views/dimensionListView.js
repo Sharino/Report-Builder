@@ -120,7 +120,7 @@
                         show: 300,
                         hide: 200
                     },
-                    template: '<div class="tooltip info" style="width: 100%;"><div class="tooltip-inner"></div></div>'
+                    template: '<div class="tooltip info" style="width: 100%; overflow: overlay;  z-index: 9999;"><div class="tooltip-inner"></div></div>'
                 });
             }
         },
