@@ -27,7 +27,7 @@
             this.model = parent;
             this.position = pos;
             this.dateView = dateview;
-
+            console.log('asdasd', this.dateView);
             this.selectedMetrics = [];
 
             var metrics = this.model.get("Metrics");
@@ -38,23 +38,36 @@
             if (metrics.length > 1) {
                 this.selectedMetrics.push(metrics[1]);
             }
-            if (this.origin !== "preview") {
-                this.selectedDimension = new Dimension(dimensions[0]);
-            } else {
-                var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
+
+            var result = $.grep(dimensions, function (e) { return e.DimensionId === 3; });
+            if (result) {
                 this.selectedDimension = new Dimension(result[0]);
+            } else {
+                this.selectedDimension = new Dimension(dimensions[0]);
             }
         },
 
         render: function () {
+
+            if (this.origin === 'preview') {
+                var start = moment().subtract(7, 'days').format('YYYY-MM-DD');
+                var end = moment().subtract(1, 'days').format('YYYY-MM-DD');
+
+            } else {
+                var start = this.dateView.datePicker.getSelectedDate();
+                var end = this.dateView.datePicker2.getSelectedDate();
+            }
+
             var einstein = new Einstein({
                 Model: {
                     Metrics: this.selectedMetrics,
                     Dimensions: [this.selectedDimension.toJSON()]
                 },
-                Start: this.dateView.datePicker.getSelectedDate(),
-                End: this.dateView.datePicker2.getSelectedDate()
+                Start: start,
+                End: end
             });
+
+
 
             var metrics = this.model.get("Metrics");
             var selectedMetricsNames = [];
@@ -68,7 +81,7 @@
             var self = this;
 
             einstein.save({}, {
-                success: function() {
+                success: function () {
                     self.$el.html(self.template({
                         Metrics: self.model.get('Metrics'),
                         model: self.model.toJSON(),
@@ -100,7 +113,7 @@
 
                     self.renderSubview("#component-buttons", new ComponentButtonView(self.position + 1, self.model, self.origin));
                 },
-                error: function(resp) {
+                error: function (resp) {
                     console.log("fail");
                 }
             });
@@ -143,7 +156,7 @@
                     break;
                 }
             }
-
+            console.log(selectedDimension);
             this.selectedDimension = selectedDimension;
             this.render();
         }

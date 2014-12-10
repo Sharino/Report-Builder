@@ -21,14 +21,18 @@
         },
 
         initialize: function (parent, pos, origin, dateview) {
-            this.origin = origin;
-            this.dateView = dateview;
             this.model = parent;
             this.position = pos;
+            this.origin = origin;
+            this.dateView = dateview;
         },
 
         render: function () {
-            var einstein = new Einstein({ Model: this.model.toJSON(), Start: this.dateView.datePicker.getSelectedDate(), End: this.dateView.datePicker2.getSelectedDate() });
+            var einstein = new Einstein({
+                Model: this.model.toJSON(),
+                Start: this.dateView.datePicker.getSelectedDate(),
+                End: this.dateView.datePicker2.getSelectedDate()
+            });
 
             var self = this;
 

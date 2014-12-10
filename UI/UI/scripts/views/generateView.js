@@ -56,12 +56,12 @@
             this.$el.html(this.template({
                 Origin: this.origin
             }));
-
+            $("body").removeClass("component-edit");
             var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
             var endDate = moment().format('YYYY-MM-DD');
 
             this.dateView = this.renderSubview("#date-filter", new DateFilterView({ from: startDate, to: endDate }, 1));
-
+            console.log('gener', this.dateView);
             var self = this;
 
             _.defer(function () {

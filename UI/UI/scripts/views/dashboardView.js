@@ -251,8 +251,6 @@
 
                     self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
 
-                    console.log("dash pos",position);
-
                     switch (model.get("Type")) {
                         case 1:
                             {
