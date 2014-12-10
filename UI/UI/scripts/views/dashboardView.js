@@ -28,7 +28,8 @@
             'click .csv': 'csv',
             'click .up': 'moveDashboardComponentUp',
             'click .down': 'moveDashboardComponentDown',
-            'click #generateByDate': 'generateNewData'
+            'click #generateByDate': 'generateNewData',
+            'click #masterGenerate': 'masterGenerate'
         },
 
         initialize: function () {
@@ -39,6 +40,12 @@
                 this.populate(id, i);
             }
             this.render();
+        },
+
+        masterGenerate: function () {
+            var a = this.componentView[0].dateView;
+            var compIds = this.model.get('ComponentIds');
+            console.log(compIds);
         },
 
         generateNewData: function (e) {
@@ -67,12 +74,7 @@
             var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
             var to = moment().subtract('days', 1).format('YYYY-MM-DD');
 
-            //            this.renderSubview("#date-filter", new DateFilterView({
-            //                from: from,
-            //                to: to,
-            //                origin: "Dashboard"
-            //            }));
-
+            this.dateView = this.renderSubview("#master-date-filter", new DateFilterView({ from: from, to: to }, 1, 'dashboard'));
             return this;
         },
 
@@ -270,7 +272,7 @@
 
                     self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
                     $("#date-filter-" + position).css("visibility", "hidden");
-                    _.defer(function() {
+                    _.defer(function () {
                         self._renderByType(model, position);
                     });
                     return model;
@@ -281,7 +283,7 @@
             });
         },
 
-        _renderByType: function(model, position) {
+        _renderByType: function (model, position) {
             switch (model.get("Type")) {
                 case 1:
                     {
@@ -304,7 +306,7 @@
                         break;
                     }
             }
-                        _.defer(function () { $("#date-filter-" + position).css("visibility", "visible"); });
+            _.defer(function () { $("#date-filter-" + position).css("visibility", "visible"); });
         },
 
         csv: function (e) {//Kpi Only ;(

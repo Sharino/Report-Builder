@@ -6,9 +6,10 @@
     var DateFilterView = BaseCompositeView.extend({
         template: _.template(dateFilterTemplate),
 
-        initialize: function (options, pos) {
+        initialize: function (options, pos, origin) {
             this.options = options;
             this.position = pos - 1;
+            this.origin = origin;
         },
 
         beforeClose: function () {
@@ -24,7 +25,7 @@
                 date = options;
             }
 
-            this.$el.html(this.template({ options: date, position: this.position }));
+            this.$el.html(this.template({ options: date, position: this.position, origin: this.origin }));
 
             var self = this;
             var pickerOptions = {

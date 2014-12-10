@@ -270,6 +270,6 @@ div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inn
     pointer-events: none;
 }
 
-.table-toolbar .btn {
+.table-toolbar a.btn.single-btn.btn-tool {
     margin-left: 10px;
 }
