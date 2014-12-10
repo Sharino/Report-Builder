@@ -183,7 +183,9 @@ i[class*="adf-icon-alt"] {
 }
 
 .notifications-container {
-    width: 220px !important;
+    width: 300px !important;
+    position: fixed;
+    top: 5px;
 }
 
 
@@ -266,4 +268,8 @@ div.adform-calendar-v2.adform-calendar-small.popup {
 
 div.side-panel.side-panel-v-0-2-1.with-compact-header.visible div.side-panel-inner div.side-panel-body div#preview {
     pointer-events: none;
+}
+
+.table-toolbar .btn {
+    margin-left: 10px;
 }
