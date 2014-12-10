@@ -58,8 +58,8 @@
             }));
 
             var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
-            var endDate = moment().format('YYYY-MM-DD');
-
+            var endDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
+            
             this.dateView = this.renderSubview("#date-filter", new DateFilterView({ from: startDate, to: endDate }, 1));
 
             var self = this;

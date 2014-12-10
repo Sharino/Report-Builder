@@ -137,7 +137,7 @@
             var dimensions = this.model.get("Dimensions");
             var selectedDimension = null;
             for (var i = 0, len = dimensions.length; i < len; i++) {
-                var tempDimension = new Metric(dimensions[i]);
+                var tempDimension = new Dimension(dimensions[i]);
                 if (tempDimension.get("DimensionId") === selectedId) {
                     selectedDimension = tempDimension;
                     break;
