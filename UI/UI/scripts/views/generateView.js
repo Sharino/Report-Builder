@@ -61,7 +61,6 @@
             var endDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
             
             this.dateView = this.renderSubview("#date-filter", new DateFilterView({ from: startDate, to: endDate }, 1));
-            console.log('gener', this.dateView);
             var self = this;
 
             _.defer(function () {

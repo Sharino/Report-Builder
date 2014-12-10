@@ -117,7 +117,7 @@
             });
         },
 
-        moveDashboardComponentUp: function(e) {
+        moveDashboardComponentUp: function (e) {
             e.preventDefault();
 
             var id = parseInt($(e.currentTarget).attr('data-id'));
@@ -130,13 +130,13 @@
 
                 if (idIndex > 0) {
                     this.model.save("ComponentIds", this.arraySwap(this.model.get("ComponentIds"), idIndex, prevIdIndex));
-                    
+
                     this.componentView = this.arraySwap(this.componentView, idIndex, prevIdIndex);
 
                     var allElements = $(this.el).find(".row").siblings(".row").andSelf();
                     var currentElement = allElements[idIndex];
                     var nextElement = allElements[prevIdIndex];
-                    
+
                     this.elementSwap(currentElement, nextElement);
                 }
             }
@@ -160,7 +160,7 @@
                     var allElements = $(this.el).find(".row").siblings(".row").andSelf();
                     var currentElement = allElements[idIndex];
                     var nextElement = allElements[nextIdIndex];
-                    
+
                     this.elementSwap(currentElement, nextElement);
                 }
             }
@@ -247,32 +247,33 @@
                     self.model.get("Components")[position] = model;
 
                     var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
-                    var endDate = moment().format('YYYY-MM-DD');
+                    var endDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
                     self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
-
-                    switch (model.get("Type")) {
-                        case 1:
-                            {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard", self.dateView));
-                                break;
-                            }
-                        case 2:
-                            {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard", self.dateView));
-                                break;
-                            }
-                        case 3:
-                            {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard", self.dateView));
-                                break;
-                            }
-                        case 4:
-                            {
-                                self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard", self.dateView));
-                                break;
-                            }
-                    }
+                    _.defer(function () {
+                        switch (model.get("Type")) {
+                            case 1:
+                                {
+                                    self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard", self.dateView[position]));
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard", self.dateView[position]));
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard", self.dateView[position]));
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard", self.dateView[position]));
+                                    break;
+                                }
+                        }
+                    });
                     return model;
                 },
                 error: function (model, response) {
@@ -281,7 +282,7 @@
             });
         },
 
-        csv: function (e) {
+        csv: function (e) {//Kpi Only ;(
             e.preventDefault();
             var dashboardData = [];
             var compView = this.componentView;
@@ -296,10 +297,10 @@
                 dashboardData.push(componentData);
             }
             Export.dashboardToCsv(dashboardData, {
-                success: function(data, status, jqXHR) {
+                success: function (data, status, jqXHR) {
                     window.location.assign(data);
                 },
-                error: function(xhr, ajaxOptions, thrownError) {
+                error: function (xhr, ajaxOptions, thrownError) {
                     $.notifications.display({
                         type: 'error',
                         content: "Unable to export component data.", // TODO Move to config for multilanguage later
@@ -308,14 +309,6 @@
                 }
             });
         },
-
-        pdf: function (e) {
-
-        },
-
-        xls: function (e) {
-
-        }
     });
 
     return DashboardView;

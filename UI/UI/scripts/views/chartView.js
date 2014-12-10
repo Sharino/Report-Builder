@@ -43,13 +43,22 @@
         },
 
         render: function () {
+            if (this.origin === 'preview') {
+                var start = moment().subtract(7, 'days').format('YYYY-MM-DD');
+                var end = moment().subtract(1, 'days').format('YYYY-MM-DD');
+
+            } else {
+                var start = this.dateView.datePicker.getSelectedDate();
+                var end = this.dateView.datePicker2.getSelectedDate();
+            }
+
             var einstein = new Einstein({
                 Model: {
                     Metrics: this.selectedMetrics,
                     Dimensions: [this.selectedDimension.toJSON()]
                 },
-                Start: this.dateView.datePicker.getSelectedDate(),
-                End: this.dateView.datePicker2.getSelectedDate()
+                Start: start,
+                End: end
             });
 
             var metrics = this.model.get("Metrics");
