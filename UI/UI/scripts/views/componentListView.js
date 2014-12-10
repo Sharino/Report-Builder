@@ -5,8 +5,9 @@
     'MenuView',
     'GenerateView',
     'text!templates/componentList.html',
+    'DashboardSelectionView',
     'moment-2.8.4',
-    'Config'], function (BaseCompositeView, Component, ComponentCollection, MenuView, GenerateView, componentListTemplate, moment, Config) {
+    'Config'], function (BaseCompositeView, Component, ComponentCollection, MenuView, GenerateView, componentListTemplate, DashboardSelectionView, moment, Config) {
         var ComponentListView = BaseCompositeView.extend({
             template: _.template(componentListTemplate),
 
@@ -16,8 +17,9 @@
                 'click .click': 'handleGenerateAction',
                 'click .create': 'submitNewComponent',
                 'click .sortable': 'handleSortAction',
-                'keyup #components-search': "handleSearchAction",
+                'keyup #components-search': 'handleSearchAction',
                 'click .preview': 'preview',
+                'click .add-to-dashboard': 'handleAddToDashboardAction'
             },
 
             initialize: function () {
@@ -96,6 +98,17 @@
                 if ($(e.currentTarget).hasClass("col-edited")) {
                     this._sortByModificationDate();
                 }
+            },
+
+            handleAddToDashboardAction: function (e) {
+                var id = parseInt($(e.currentTarget.parentElement.parentElement).attr("id"));
+
+                if (!isNaN(id)) {
+                    var model = this.collection.get(id);
+                    $("#table-container").append("<div id='dashboard-selection'></div>");
+                    this.renderSubview("#dashboard-selection", new DashboardSelectionView(model));
+                }
+                return false;
             },
 
             handleEditAction: function (e) {

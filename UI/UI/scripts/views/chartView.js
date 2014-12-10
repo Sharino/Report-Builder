@@ -44,8 +44,8 @@
 
         render: function () {
             if (this.origin === 'preview') {
-                var start = moment().subtract(7, 'days').format('YYYY-MM-DD');
-                var end = moment().subtract(1, 'days').format('YYYY-MM-DD');
+                var start = moment().subtract('days', 7).format('YYYY-MM-DD');
+                var end = moment().subtract('days', 1).format('YYYY-MM-DD');
 
             } else {
                 var start = this.dateView.datePicker.getSelectedDate();
