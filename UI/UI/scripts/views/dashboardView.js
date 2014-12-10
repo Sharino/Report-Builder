@@ -42,7 +42,6 @@
         },
 
         generateNewData: function (e) {
-            //var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('data-id'));
             var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('comp-id'));
             var compIds = this.model.get('ComponentIds');
             if (compIds.length > 0) {
@@ -229,8 +228,6 @@
                                     var componentId = parseInt($(e.currentTarget).attr('comp-id'));
                                     var idIndex = compIds.indexOf(componentId);
                                     self.componentView[idIndex].render();
-                                    console.log(self.componentView, "idIndex", idIndex);
-                                    console.log(compIds, componentId);
                                 }
                             }
                         },
