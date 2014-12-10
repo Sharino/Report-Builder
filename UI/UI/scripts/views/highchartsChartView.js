@@ -42,7 +42,6 @@
                     categories: xAxisData,
                     labels: {
                         staggerLines: 1,
-                        // y: 20,
                         style: {
                             'font-family': "Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif"
                         }
@@ -61,8 +60,6 @@
                     data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
                 }]*/
             });
-
-            //this.$el.highcharts.yAxis = yAxis;
 
         },
         getXAxisData: function () {

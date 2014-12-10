@@ -52,11 +52,6 @@
 
             var self = this;
 
-            _.defer(function () {
-                $("#metric-list").loader();
-                $("#dimension-list").loader();
-            });
-
             this.$el.html(this.template({ model: this.model.toJSON() }));
             this.$el.find("#rb" + this.model.get("Type")).prop("checked", true);
 

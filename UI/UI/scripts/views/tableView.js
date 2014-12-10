@@ -166,8 +166,9 @@
                         for (var j = 1, jLen = dimensionMetricsValues.length; j < jLen; j++) {
                             if (values.length >= jLen - 1) {
                                 values[j - 1] += parseFloat(dimensionMetricsValues[j]);
+                                values[j - 1] = Math.round(parseFloat(values[j - 1] * 100)) / 100;
                             } else {
-                                values.push(parseFloat(dimensionMetricsValues[j]));
+                                values.push(Math.round(parseFloat(dimensionMetricsValues[j] * 100)) / 100);
                             }
                         }
                     }
