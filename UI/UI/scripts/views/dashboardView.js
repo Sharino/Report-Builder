@@ -59,19 +59,20 @@
             }));
 
             var compIds = this.model.get('ComponentIds');
+
             if (compIds.length === 0) {
                 this.componentView = [];
                 this.renderSubview("#message", new MessageView("Dashboard is currently empty : ("));
             }
 
-            var from = moment().subtract('days', 7).format('YYYY-MM-DD');
+            var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
             var to = moment().subtract('days', 1).format('YYYY-MM-DD');
 
-            //this.renderSubview("#date-filter", new DateFilterView({
-            //    from: from,
-            //    to: to,
-            //    origin: "Dashboard"
-            //}));
+            //            this.renderSubview("#date-filter", new DateFilterView({
+            //                from: from,
+            //                to: to,
+            //                origin: "Dashboard"
+            //            }));
 
             return this;
         },
@@ -102,7 +103,8 @@
                                             self.componentView.splice(idIndex, 1);
 
                                             for (var i = 0, len = self.subViews.length; i < len; i++) {
-                                                if (self.subViews[i].id == id) {
+                                                if (self.subViews[i].id === id) {
+                                                    $("#date-filter-" + idIndex).remove();
                                                     self.destroySubView(i);
                                                     break;
                                                 }
@@ -265,29 +267,31 @@
                     var endDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
                     self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
-                    _.defer(function () {
+                    $("#date-filter-" + position).css("visibility", "hidden");
+                    _.defer(function() {
                         switch (model.get("Type")) {
-                            case 1:
-                                {
-                                    self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard", self.dateView[position]));
-                                    break;
-                                }
-                            case 2:
-                                {
-                                    self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard", self.dateView[position]));
-                                    break;
-                                }
-                            case 3:
-                                {
-                                    self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard", self.dateView[position]));
-                                    break;
-                                }
-                            case 4:
-                                {
-                                    self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard", self.dateView[position]));
-                                    break;
-                                }
+                        case 1:
+                        {
+                            self.componentView[position] = self.renderSubview(("#component-" + position), new KPIView(model, position, "dashboard", self.dateView[position]));
+                            break;
                         }
+                        case 2:
+                        {
+                            self.componentView[position] = self.renderSubview(("#component-" + position), new TableView(model, position, "dashboard", self.dateView[position]));
+                            break;
+                        }
+                        case 3:
+                        {
+                            self.componentView[position] = self.renderSubview(("#component-" + position), new TimelineView(model, position, "dashboard", self.dateView[position]));
+                            break;
+                        }
+                        case 4:
+                        {
+                            self.componentView[position] = self.renderSubview(("#component-" + position), new ChartView(model, position, "dashboard", self.dateView[position]));
+                            break;
+                        }
+                        }
+                        _.defer(function () { $("#date-filter-" + position).css("visibility", "visible"); });
                     });
                     return model;
                 },
