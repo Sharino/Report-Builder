@@ -27,7 +27,6 @@
             this.model = parent;
             this.position = pos;
             this.dateView = dateview;
-            console.log('asdasd', this.dateView);
             this.selectedMetrics = [];
 
             var metrics = this.model.get("Metrics");
@@ -48,7 +47,6 @@
         },
 
         render: function () {
-
             if (this.origin === 'preview') {
                 var start = moment().subtract(7, 'days').format('YYYY-MM-DD');
                 var end = moment().subtract(1, 'days').format('YYYY-MM-DD');
