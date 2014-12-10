@@ -12,19 +12,20 @@
     'text!templates/selectDashboardList.html',
     'DashboardCollection',
     'DashboardComponent',
+    'DashboardSelectionView',
     'MessageView',
     'Config',
     'adform-notifications',
     'adform-modal'
 ], function (BaseCompositeView, Component, MetricCollection, MetricListView, KPIView, TableView, TimelineView, ChartView,
-             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, MessageView, Config) {
+             generateTemplate, DateFilterView, selectDashboardListTemplate, DashboardCollection, DashboardComponent, DashboardSelectionView, MessageView, Config) {
     var GenerateView = BaseCompositeView.extend({
         template: _.template(generateTemplate),
         selectDashboardTemplate: _.template(selectDashboardListTemplate),
 
         events: {
-            'click .edit-form': 'edit',
-            'click #generate-submit': 'addToDashboard',
+            'click .edit-form': 'handleEditAction',
+            'click #generate-submit': 'handleAddToDashboardAction',
             'click #generateByDate': 'generateNewData'
         },
 
@@ -43,7 +44,7 @@
                 });
             }
         },
-        edit: function (e) {
+        handleEditAction: function (e) {
             e.preventDefault();
 
             var id = $(e.currentTarget).attr("comp-id");
@@ -91,44 +92,9 @@
             return this;
         },
 
-        addToDashboard: function () {
-            var modal = $.modal();
-
-            $.modal({
-                title: "Select Dashboard",
-                body: this.selectDashboardTemplate({ Dashboards: this.collection.toJSON() }),
-                className: "form"
-            });
-
-            var self = this;
-
-            $(".dashboard-list-item").bind("click", function (e) {
-                var reportComponentId = self.model.get("Id");
-                var selectedDashboardId = parseInt(e.currentTarget.id);
-
-                $.ajax({
-                    url: Config.DashboardComponentSettings + "?dashboardId=" + selectedDashboardId + "&reportComponentId=" + reportComponentId,
-
-                    type: 'post',
-                    success: function () {
-                        $.notifications.display({
-                            type: 'success',
-                            content: "Successfully added to Dashboard.",
-                            timeout: Config.NotificationSettings.Timeout
-                        });
-                    },
-                    error: function () {
-                        $.notifications.display({
-                            type: 'error',
-                            content: "Could not add to Dashboard.",
-                            timeout: Config.NotificationSettings.Timeout
-                        });
-                    }
-                });
-
-                modal.modal("hide");
-            });
-
+        handleAddToDashboardAction: function () {
+            $("#component-by-type").append("<div id='dashboard-selection'></div>");
+            this.renderSubview("#dashboard-selection", new DashboardSelectionView(this.model));
             return false;
         },
 
