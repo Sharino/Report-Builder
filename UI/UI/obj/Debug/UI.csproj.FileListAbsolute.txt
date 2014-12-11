@@ -46,3 +46,9 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\UI\UI\obj\Debug\UI.csprojRe
 C:\Users\Administrator\Desktop\deploy\Report-Builder\UI\UI\obj\Debug\UI.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\UI\UI\obj\Debug\UI.pdb
 C:\Users\Administrator\Desktop\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\bin\UI.dll.config
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\bin\UI.dll
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\bin\UI.pdb
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\obj\Debug\UI.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\obj\Debug\UI.dll
+C:\Users\Administrator\Desktop\release\Report-Builder\UI\UI\obj\Debug\UI.pdb

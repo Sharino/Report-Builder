@@ -29,7 +29,8 @@
             'click .up': 'moveDashboardComponentUp',
             'click .down': 'moveDashboardComponentDown',
             'click #generateByDate': 'generateNewData',
-            'click #masterGenerate': 'masterGenerate'
+            'click #masterGenerate': 'masterGenerate',
+            'AdformDatePicker:change': 'setDates'
         },
 
         initialize: function () {
@@ -43,13 +44,17 @@
         },
 
         masterGenerate: function () {
-            var a = this.componentView[0].dateView;
-            var compIds = this.model.get('ComponentIds');
-            console.log(compIds);
+            for (var i = 0; i < this.componentView.length; i++) {
+                this.componentView[i].render();
+            }
+        },
+
+        setDates: function () {
+            console.log("s");
         },
 
         generateNewData: function (e) {
-            var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('comp-id'));
+            var pos = parseInt($(e.currentTarget).parent().parent().parent().attr('comp-id'));//TODO - HACK
             var compIds = this.model.get('ComponentIds');
             if (compIds.length > 0) {
                 var idIndex = compIds.indexOf(pos);
@@ -74,7 +79,7 @@
             var from = moment().subtract(7, 'days').format('YYYY-MM-DD');
             var to = moment().subtract('days', 1).format('YYYY-MM-DD');
 
-            this.dateView = this.renderSubview("#master-date-filter", new DateFilterView({ from: from, to: to }, 1, 'dashboard'));
+            this.dateView = this.renderSubview("#master-date-filter", new DateFilterView({ from: from, to: to }, -1, 'masterDashboard'));
             return this;
         },
 
@@ -270,11 +275,12 @@
                     var startDate = moment().subtract(7, 'days').format('YYYY-MM-DD');
                     var endDate = moment().subtract(1, 'days').format('YYYY-MM-DD');
 
-                    self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1));
+                    self.dateView[position] = self.renderSubview("#date-filter-" + position, new DateFilterView({ from: startDate, to: endDate }, position + 1, "dashboard"));
                     $("#date-filter-" + position).css("visibility", "hidden");
                     _.defer(function () {
                         self._renderByType(model, position);
                     });
+
                     return model;
                 },
                 error: function (model, response) {

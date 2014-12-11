@@ -7,7 +7,7 @@
     <input style="height: 21px;" type="text" value="<%= options.to %>" />
     <a class="btn" style="font-size: 15px; height: 21px; "><i class="adf-icon-small-calendar"></i></a>
 </div>
-<% if(origin !== "dashboard") {%>
+<% if(origin === "dashboard") {%>
 <div style="margin-left: 5px;">
     <button class="btn btn-success" id="generateByDate">Generate</button>
 </div>
