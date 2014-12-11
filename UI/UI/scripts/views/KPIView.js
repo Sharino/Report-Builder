@@ -54,7 +54,8 @@
                     console.log("fail");
                 }
             });
-           
+            this.einsteinData = einstein;
+
         },
 
         csv: function (e) {
@@ -64,8 +65,8 @@
             var request = {
                 Title: this.model.get("Title"),
                 Values: compValues,
-                StartDate: $("#picker").find("input")[0].value,
-                EndDate: $("#picker2").find("input")[0].value,
+                StartDate: this.dateView.datePicker.getSelectedDate(),
+                EndDate: this.dateView.datePicker2.getSelectedDate(),
                 GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
@@ -90,8 +91,8 @@
             var request = {
                 Title: this.model.get("Title"),
                 Values: compValues,
-                StartDate: $("#picker").find("input")[0].value,
-                EndDate: $("#picker2").find("input")[0].value,
+                StartDate: this.dateView.datePicker.getSelectedDate(),
+                EndDate: this.dateView.datePicker2.getSelectedDate(),
                 GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 
@@ -116,8 +117,8 @@
             var request = {
                 Title: this.model.get("Title"),
                 Values: compValues,
-                StartDate: $("#picker").find("input")[0].value,
-                EndDate: $("#picker2").find("input")[0].value,
+                StartDate: this.dateView.datePicker.getSelectedDate(),
+                EndDate: this.dateView.datePicker2.getSelectedDate(),
                 GeneratedDate: moment().format('YYYY-MM-DD hh:mm:ss a')
             };
 

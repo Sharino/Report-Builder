@@ -5,13 +5,6 @@ C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contrac
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
 C:\Users\Administrator\Desktop\Report-Builder2\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Contracts.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Contracts.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Models.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Models.pdb
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
-C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb
 D:\git\Report-Builder\API\source\Contracts\bin\Release\Contracts.dll
 D:\git\Report-Builder\API\source\Contracts\bin\Release\Contracts.pdb
 D:\git\Report-Builder\API\source\Contracts\bin\Release\Models.dll
@@ -26,3 +19,10 @@ C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Contracts\bin\Re
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
 C:\Users\Administrator\Desktop\deploy\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Contracts.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Models.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\bin\Release\Models.pdb
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.csprojResolveAssemblyReference.cache
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.dll
+C:\Users\Administrator\Desktop\Report-Builder\API\source\Contracts\obj\Release\Contracts.pdb

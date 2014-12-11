@@ -323,8 +323,8 @@
                 var componentData = {
                     Title: compView[i].model.get("Title"),
                     Values: compView[i].einsteinData.get('ComponentValues')[0].MetricValues,
-                    StartDate: $("#dashboard-component-" + i).find("#picker").find("input")[0].value,
-                    EndDate: $("#dashboard-component-" + i).find("#picker2").find("input")[0].value,
+                    StartDate: compView[i].einsteinData.get('Filters').DateFilter.From,
+                    EndDate: compView[i].einsteinData.get('Filters').DateFilter.To,
                     GeneratedDate: moment().format('YYYY-MMM-DD hh:mm:ss a')
                 };
                 dashboardData.push(componentData);
